@@ -2,6 +2,8 @@
 #include "Actions\ActionAddRes.h"
 #include "Actions\ActionAddBul.h"
 #include "Actions/ActionAddSwi.h"
+#include "Actions\ActionAddBuz.h"
+#include "Actions\ActionAddFues.h"
 #include <iostream>
 using namespace std;
 
@@ -54,6 +56,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case ADD_BATTERY:
 			pAct = new ActionAddBat(this);
+			break;
+		case ADD_BUZZER:
+			pAct = new ActionAddBuz(this);
+			break;
+		case ADD_FUES:
+			pAct = new ActionAddFues(this);
 			break;
 		case EXIT:
 			///TODO: create ExitAction here

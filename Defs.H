@@ -14,6 +14,10 @@ enum ActionType
 	ADD_BULB,			//Add Bulb
 	ADD_GROUND,
 	ADD_BATTERY,
+	ADD_BUZZER,
+	ADD_FUES,
+
+
 
 	ADD_CONNECTION,		//Add Wire Connection
 

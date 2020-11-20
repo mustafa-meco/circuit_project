@@ -102,6 +102,8 @@ ActionType UI::GetUserAction() const
 			case ITM_SWI:	return ADD_SWITCH;
 			case ITM_BAT:   return ADD_BATTERY;
 			case ITM_GRO: return ADD_GROUND;
+			case ITM_BUZ:   return ADD_BUZZER;
+			case ITM_FUE:   return ADD_FUES;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -190,6 +192,8 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";
 	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg";
 	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
+	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
+	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -273,6 +277,39 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 	//Draw ground at Gfx_Info (1st corner)
 	pWind->DrawImage(GroImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
+void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string ResImage;
+	if (selected)
+	{
+		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of highlighted buzzer
+
+	}
+	else
+	{
+		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
+
+	}
+	//Draw Resistor at Gfx_Info (1st corner)
+	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string ResImage;
+	if (selected)
+	{
+		ResImage = "Images\\Comp\\Fues.jpg";	//use image of highlighted fues
+
+	}
+	else
+	{
+		ResImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
+
+	}
+	//Draw Resistor at Gfx_Info (1st corner)
+	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+
 void UI::DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected) const
 {
 	//TODO: Add code to draw connection

@@ -44,6 +44,8 @@ class UI
 		ITM_SWI,
 		ITM_BAT,
 		ITM_GRO,
+		ITM_BUZ,
+		ITM_FUE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -117,6 +119,10 @@ public:
 	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawGround(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	//Draws a buzzer
+	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	//Draws a fues
+	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected = false) const;

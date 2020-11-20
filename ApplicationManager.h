@@ -8,6 +8,7 @@
 #include "Actions/ActionAddGro.h"
 #include "Actions/ActionAddBat.h"
 
+
 //Main class that manages everything in the application.
 class ApplicationManager
 {

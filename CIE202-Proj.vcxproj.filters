@@ -168,6 +168,18 @@
     <ClCompile Include="Actions\ActionAddBat.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Fues.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Buzzer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionAddBuz.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionAddFues.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -269,6 +281,18 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionAddBat.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Buzzer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Fues.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAddBuz.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAddFues.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
