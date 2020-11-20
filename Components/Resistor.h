@@ -4,7 +4,7 @@
 class Resistor:public Component
 {
 public:
-	Resistor(GraphicsInfo *r_GfxInfo);
+	Resistor(GraphicsInfo *r_GfxInfo, UI* pUI);
 	virtual void Draw(UI*);	//Draws the resistor
 	virtual void Operate();
 };

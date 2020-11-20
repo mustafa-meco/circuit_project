@@ -1,5 +1,7 @@
 #include "ApplicationManager.h"
 #include "Actions\ActionAddRes.h"
+#include "Actions\ActionAddBul.h"
+#include "Actions/ActionAddSwi.h"
 #include <iostream>
 using namespace std;
 
@@ -41,7 +43,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct= new ActionAddRes(this);
 			break;
 		// TODO: Add remaining actions
-
+		case ADD_BULB:
+			pAct = new ActionAddBul(this);
+			break;
+		case ADD_SWITCH:
+			pAct = new ActionAddSwi(this);
+			break;
 		case EXIT:
 			///TODO: create ExitAction here
 			break;

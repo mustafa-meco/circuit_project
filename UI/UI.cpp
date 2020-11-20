@@ -98,6 +98,8 @@ ActionType UI::GetUserAction() const
 			switch (ClickedItemOrder)
 			{
 			case ITM_RES:	return ADD_RESISTOR;
+			case ITM_BULB:	return ADD_BULB;
+			case ITM_SWI:	return ADD_SWITCH;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -182,6 +184,8 @@ void UI::CreateDesignToolBar()
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
+	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
+	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -189,7 +193,7 @@ void UI::CreateDesignToolBar()
 	//Draw menu item one image at a time
 	for(int i=0; i<ITM_DSN_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i],i*ToolItemWidth,0,ToolItemWidth, ToolBarHeight);
-
+	
 	//Draw a line under the toolbar
 	pWind->SetPen(RED,3);
 	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);	
@@ -220,7 +224,29 @@ void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 }
 
 //TODO: Add similar functions to draw all other components
+void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string BulImage;
+	if (selected)
+		BulImage = "Images\\Comp\\Bulb_HI.jpg";	//use image of highlighted bulb
+	else
+		BulImage = "Images\\Comp\\Bulb.jpg";	//use image of the normal bulb
 
+	//Draw Bulb at Gfx_Info (1st corner)
+	pWind->DrawImage(BulImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+
+void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string SwiImage;
+	if (selected)
+		SwiImage = "Images\\Comp\\Resistor_HI.jpg";	//use image of highlighted bulb
+	else
+		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal bulb
+
+	//Draw Bulb at Gfx_Info (1st corner)
+	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
 
 void UI::DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected) const
 {

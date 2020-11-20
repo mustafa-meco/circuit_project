@@ -14,7 +14,7 @@ protected:
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
 	double resistance, sourceVoltage; // internal resistance and voltage jump introduced by source
-
+	bool status;
 	//Each terminal is connected to set of connections
 	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections
 	Connection *term2_conns[MAX_CONNS];

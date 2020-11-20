@@ -1,5 +1,6 @@
 #include "ActionAddRes.h"
-#include "..\ApplicationManager.h"
+#include "../ApplicationManager.h"
+
 
 ActionAddRes::ActionAddRes(ApplicationManager *pApp):Action(pApp)
 {
@@ -35,8 +36,8 @@ void ActionAddRes::Execute()
 	pGInfo->PointsList[0].y = Cy - compHeight/2;
 	pGInfo->PointsList[1].x = Cx + compWidth/2;
 	pGInfo->PointsList[1].y = Cy + compHeight/2;
-	 
-	Resistor* pR = new Resistor(pGInfo);
+
+	Resistor* pR = new Resistor(pGInfo, pUI);
 	pManager->AddComponent(pR);
 }
 

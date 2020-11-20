@@ -110,7 +110,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\ActionAddBul.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
+    <ClCompile Include="Actions\ActionAddSwi.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -147,15 +149,19 @@
     <ClCompile Include="CMUgraphicsLib\keyqueue.cpp" />
     <ClCompile Include="CMUgraphicsLib\mousequeue.cpp" />
     <ClCompile Include="CMUgraphicsLib\windowinput.cpp" />
+    <ClCompile Include="Components\Bulb.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Resistor.cpp" />
+    <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\ActionAddBul.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
+    <ClInclude Include="Actions\ActionAddSwi.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />
@@ -177,7 +183,9 @@
     <ClInclude Include="CMUgraphicsLib\version.h" />
     <ClInclude Include="CMUgraphicsLib\windowinput.h" />
     <ClInclude Include="Components\Component.h" />
+    <ClInclude Include="Components\Bulb.h" />
     <ClInclude Include="Components\Resistor.h" />
+    <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />
     <ClInclude Include="Defs.H" />
     <ClInclude Include="UI\UI.h" />

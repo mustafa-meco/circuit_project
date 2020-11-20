@@ -16,7 +16,7 @@ class ApplicationManager
 
 
 private:
-	bool IsSimulation; // true when in simulation mode
+	bool IsSimulation; // True when in simulation mode
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
 
