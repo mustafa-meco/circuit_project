@@ -5,6 +5,8 @@
 #include "UI\UI.h"
 #include "Actions\Action.h"
 #include "Components\Component.h"
+#include "Actions/ActionAddGro.h"
+#include "Actions/ActionAddBat.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager

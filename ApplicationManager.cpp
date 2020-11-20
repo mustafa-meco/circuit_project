@@ -49,6 +49,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_SWITCH:
 			pAct = new ActionAddSwi(this);
 			break;
+		case ADD_GROUND:
+			pAct = new ActionAddGro(this);
+			break;
+		case ADD_BATTERY:
+			pAct = new ActionAddBat(this);
+			break;
 		case EXIT:
 			///TODO: create ExitAction here
 			break;

@@ -110,7 +110,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\ActionAddBat.cpp" />
     <ClCompile Include="Actions\ActionAddBul.cpp" />
+    <ClCompile Include="Actions\ActionAddGro.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwi.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
@@ -149,8 +151,10 @@
     <ClCompile Include="CMUgraphicsLib\keyqueue.cpp" />
     <ClCompile Include="CMUgraphicsLib\mousequeue.cpp" />
     <ClCompile Include="CMUgraphicsLib\windowinput.cpp" />
+    <ClCompile Include="Components\Battery.cpp" />
     <ClCompile Include="Components\Bulb.cpp" />
     <ClCompile Include="Components\Component.cpp" />
+    <ClCompile Include="Components\Ground.cpp" />
     <ClCompile Include="Components\Resistor.cpp" />
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
@@ -159,7 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\ActionAddBat.h" />
     <ClInclude Include="Actions\ActionAddBul.h" />
+    <ClInclude Include="Actions\ActionAddGro.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwi.h" />
     <ClInclude Include="ApplicationManager.h" />
@@ -182,8 +188,10 @@
     <ClInclude Include="CMUgraphicsLib\mousequeue.h" />
     <ClInclude Include="CMUgraphicsLib\version.h" />
     <ClInclude Include="CMUgraphicsLib\windowinput.h" />
+    <ClInclude Include="Components\Battery.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Bulb.h" />
+    <ClInclude Include="Components\Ground.h" />
     <ClInclude Include="Components\Resistor.h" />
     <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />

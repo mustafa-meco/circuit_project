@@ -100,6 +100,8 @@ ActionType UI::GetUserAction() const
 			case ITM_RES:	return ADD_RESISTOR;
 			case ITM_BULB:	return ADD_BULB;
 			case ITM_SWI:	return ADD_SWITCH;
+			case ITM_BAT:   return ADD_BATTERY;
+			case ITM_GRO: return ADD_GROUND;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -186,6 +188,8 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
 	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
 	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";
+	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg";
+	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -247,7 +251,28 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 	//Draw Bulb at Gfx_Info (1st corner)
 	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
+void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string BatImage;
+	if (selected)
+		BatImage = "Images\\Comp\\Battery_HI.jpg";	//use image of highlighted battery
+	else
+		BatImage = "Images\\Comp\\Battery.jpg";	//use image of the normal battery
 
+	//Draw battery at Gfx_Info (1st corner)
+	pWind->DrawImage(BatImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string GroImage;
+	if (selected)
+		GroImage = "Images\\Comp\\Ground_HI.jpg";	//use image of highlighted ground
+	else
+		GroImage = "Images\\Comp\\Ground.jpg";	//use image of the normal 
+
+	//Draw ground at Gfx_Info (1st corner)
+	pWind->DrawImage(GroImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
 void UI::DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected) const
 {
 	//TODO: Add code to draw connection

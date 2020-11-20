@@ -42,6 +42,8 @@ class UI
 		//TODO: Add more items names here
 		ITM_BULB,
 		ITM_SWI,
+		ITM_BAT,
+		ITM_GRO,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -113,6 +115,8 @@ public:
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
 	void DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawGround(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
