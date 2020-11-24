@@ -22,7 +22,7 @@ void ActionAddSwi::Execute()
 	pUI->GetPointClicked(Cx, Cy);
 
 	//Clear Status Bar
-	pUI->ClearStatusBar();
+	pUI->ClearToolBar();
 
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp

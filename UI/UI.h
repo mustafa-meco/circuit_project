@@ -46,6 +46,7 @@ class UI
 		ITM_GRO,
 		ITM_BUZ,
 		ITM_FUE,
+		ITM_SIM,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -56,9 +57,11 @@ class UI
 	{
 		//Note: Items are ordered here as they appear in menu
 		ITM_CIRC_SIM,	//Circuit Simulate menu item
-	
+		
 		//TODO:Add more items names here
-	
+		ITM_AMM,
+		ITM_VOL,
+		ITM_DSN,
 		ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
 	
 	};
@@ -107,7 +110,7 @@ public:
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateStatusBar() const;	//Create Status bar
-
+	void ClearToolBar()const;
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
 

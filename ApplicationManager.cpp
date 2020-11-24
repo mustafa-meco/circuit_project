@@ -4,6 +4,7 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
+//#include "Actions/ActionSave.h"
 #include <iostream>
 using namespace std;
 
@@ -63,8 +64,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
+		case SIM_MODE:
+			ToSimulation();
+			break;
+		case DSN_MODE:
+			ToDesign();
+			break;
+		//case SAVE:
+			//pAct = new ActionSave(this);
+			//break;
+	//	case LOAD:
+			//pAct = new ActionLoad(this);
 		case EXIT:
-			///TODO: create ExitAction here
+			//TODO: create ExitAction here
 			break;
 	}
 	if(pAct)
@@ -96,6 +108,16 @@ bool ApplicationManager::ValidateCircuit() {
 }
 
 ////////////////////////////////////////////////////////////////////
+/*Component* GetComponentByCordinates(int x, int y) {
+
+}*/
+
+////////////////////////////////////////////////////////////////////
+/*int getCircuit() const {
+	re
+}*/
+
+////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
 	if (!ValidateCircuit()) {
 		// TODO
@@ -105,7 +127,13 @@ void ApplicationManager::ToSimulation() {
 		// Compute all needed voltages and current
 		double current = CalculateCurrent();
 		CalculateVoltages(current);
+		pUI->CreateSimulationToolBar();
 	}
+}
+void ApplicationManager::ToDesign() {
+	this->IsSimulation = false;
+	// Compute all needed voltages and current
+	pUI->CreateDesignToolBar();
 }
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit

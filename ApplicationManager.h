@@ -13,9 +13,10 @@
 class ApplicationManager
 {
 
-	enum { 
+	enum {
 		MaxCompCount = 200,
-		MaxConnCount = 1000	};	//Max no of components and connectors
+		MaxConnCount = 1000
+	};	//Max no of components and connectors
 
 
 private:
@@ -29,19 +30,21 @@ private:
 	UI* pUI; //pointer to the UI
 
 
-public:	
+public:
 	ApplicationManager(); //constructor
 
 	//Reads the required action from the user and returns the corresponding action type
 	ActionType GetUserAction();
-	
+
 	//Creates an action and executes it
 	void ExecuteAction(ActionType);
-	
+
 	void UpdateInterface();	//Redraws all the drawing window
 
 	//Gets a pointer to UI Object
 	UI* GetUI();
+
+	///int getCircuit() const;
 	
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
@@ -52,6 +55,7 @@ public:
 	// Simulation Mode Functions
 	bool ValidateCircuit();
 	void ToSimulation(); // Switches to simulation mode
+	void ToDesign();
 	double CalculateCurrent();
 	void CalculateVoltages(double current);
 
