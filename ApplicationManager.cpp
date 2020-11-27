@@ -44,6 +44,7 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y)
 		}
 		
 	}
+	return nullptr;
 }
 
 ActionType ApplicationManager::GetUserAction()

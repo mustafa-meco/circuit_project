@@ -15,16 +15,31 @@ ActionAddCon::~ActionAddCon(void)
 void ActionAddCon::Execute()
 {
 	
+
+	
+	
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
 	pUI->PrintMsg(" choose two points for connection : ");
-	pUI->GetPointClicked(Cx1, Cy1);
-	comp1=pManager->GetComponentByCordinates(Cx1, Cy1);
-	//comp1->addTerm1Connection();
-	pUI->PrintMsg(" You Choose the first point, now choose the second one : ");
+	do
+	{
+
+		pUI->GetPointClicked(Cx1, Cy1);
+		comp1 = pManager->GetComponentByCordinates(Cx1, Cy1);
+		//comp1->addTerm1Connection();
+	} while (comp1 == nullptr);
+
+	
+	do
+	{
+
+	
+	pUI->PrintMsg(" You Choose the first point, now choose the second one : "); 
+
 	pUI->GetPointClicked(Cx2, Cy2);
 	comp2=pManager->GetComponentByCordinates(Cx2, Cy2); 
 	pUI->ClearStatusBar(); 
+	} while (comp2 == nullptr || comp2==comp1);
 
 	
 
