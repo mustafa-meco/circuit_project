@@ -19,11 +19,10 @@ void ActionAddBul::Execute()
 	pUI->PrintMsg("Adding a new bulb: Click anywhere to add");
 
 	//Get Center point of the area where the Comp should be drawn
-	pUI->GetPointClicked(Cx, Cy);
+	pUI->GetPointClicked(Cx, Cy); 
 
 	//Clear Status Bar
 	pUI->ClearStatusBar();
-
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 

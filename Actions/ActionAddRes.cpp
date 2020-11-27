@@ -1,6 +1,6 @@
 #include "ActionAddRes.h"
 #include "../ApplicationManager.h"
-
+#include"..\Components\Component.h"
 
 ActionAddRes::ActionAddRes(ApplicationManager *pApp):Action(pApp)
 {

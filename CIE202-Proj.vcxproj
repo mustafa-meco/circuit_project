@@ -113,6 +113,7 @@
     <ClCompile Include="Actions\ActionAddBat.cpp" />
     <ClCompile Include="Actions\ActionAddBul.cpp" />
     <ClCompile Include="Actions\ActionAddBuz.cpp" />
+    <ClCompile Include="Actions\ActionAddCon.cpp" />
     <ClCompile Include="Actions\ActionAddFues.cpp" />
     <ClCompile Include="Actions\ActionAddGro.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Actions\ActionAddBat.h" />
     <ClInclude Include="Actions\ActionAddBul.h" />
     <ClInclude Include="Actions\ActionAddBuz.h" />
+    <ClInclude Include="Actions\ActionAddCon.h" />
     <ClInclude Include="Actions\ActionAddFues.h" />
     <ClInclude Include="Actions\ActionAddGro.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />

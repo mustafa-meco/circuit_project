@@ -16,6 +16,7 @@ void Resistor::Draw(UI* pUI)
 
 }
 
+
 void Resistor::Operate()
 {
 

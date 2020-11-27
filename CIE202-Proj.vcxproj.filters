@@ -180,11 +180,11 @@
     <ClCompile Include="Actions\ActionAddFues.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionAddCon.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actions\Action.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h">
       <Filter>CMUgrahpics Library</Filter>
     </ClInclude>
@@ -293,6 +293,12 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionAddFues.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Action.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAddCon.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

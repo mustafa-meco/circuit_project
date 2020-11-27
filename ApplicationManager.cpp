@@ -4,6 +4,7 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
+#include "Actions/ActionAddCon.h"
 #include <iostream>
 using namespace std;
 
@@ -26,7 +27,23 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
-	CompList[CompCount++] = pComp;		
+	CompList[CompCount++] = pComp;	
+}
+void ApplicationManager::AddConnection(Connection* pConn)
+{
+	ConnList[ConnCount++] = pConn;
+}
+Component* ApplicationManager::GetComponentByCordinates(int x, int y) 
+{
+	
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->isInRegion(x,y, pUI) == true)
+		{
+				return	CompList[i];
+		}
+		
+	}
 }
 
 ActionType ApplicationManager::GetUserAction()
@@ -63,6 +80,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
+	    case ADD_CONNECTION: 
+			pAct = new ActionAddCon(this);   
+			break; 
 		case EXIT:
 			///TODO: create ExitAction here
 			break;
