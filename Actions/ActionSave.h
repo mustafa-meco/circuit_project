@@ -1,4 +1,4 @@
-/* #pragma once
+#pragma once
 #include "Action.h"
 
 class ActionSave : public Action
@@ -14,18 +14,7 @@ public:
 
 private:
 	string folder;
-	enum comp_Type{
-		RES,
-		SWT,
-		BAT,
-		BLB,
-		GND,
-		FUS,
-		BZR,
-	};
-	
-	Component* compList[200];
-	Connection* conNList[1000];
-
+	int compCount, connCount;
+	string list;
 };
-*/
+
