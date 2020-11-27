@@ -105,8 +105,12 @@ ActionType UI::GetUserAction() const
 			case ITM_GRO:   return ADD_GROUND;
 			case ITM_BUZ:   return ADD_BUZZER;
 			case ITM_FUE:   return ADD_FUES;
+<<<<<<< HEAD
 			case ITM_CON:   return ADD_CONNECTION;
 
+=======
+			case ITM_SIM:	return SIM_MODE;
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -124,7 +128,31 @@ ActionType UI::GetUserAction() const
 	}
 	else	//Application is in Simulation mode
 	{
-		return SIM_MODE;	//This should be changed after creating the compelete simulation bar 
+		
+		if (y >= 0 && y < ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / ToolItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_DSN:	return DSN_MODE;
+
+			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= ToolBarHeight && y < height - StatusBarHeight)
+		{
+			return SELECT;	//user wants to select/unselect a component
+		}
+
+		//[3] User clicks on the status bar
+		return STATUS_BAR;	//This should be changed after creating the compelete simulation bar 
 	}
 
 }
@@ -159,6 +187,23 @@ void UI::PrintMsg(string msg) const
 	pWind->SetPen(MsgColor); 
 	pWind->DrawString(MsgX, height - MsgY, msg);
 }
+
+
+
+
+
+void UI::PrintLabel(string msg) const
+{
+	ClearStatusBar();	//Clear Status bar to print message on it
+	// Set the Message offset from the Status Bar
+	int MsgX = 1;
+	int MsgY = StatusBarHeight - 10;
+
+	// Print the Message
+	pWind->SetFont(200, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, height - MsgY, msg);
+}
 //////////////////////////////////////////////////////////////////////////////////
 void UI::ClearStatusBar()const
 {
@@ -170,6 +215,17 @@ void UI::ClearStatusBar()const
 	pWind->SetPen(BkGrndColor);
 	pWind->SetBrush(BkGrndColor);
 	pWind->DrawRectangle(MsgX, height - MsgY, width, height);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void UI::ClearToolBar()const
+{
+	// Set the Message offset from the Status Bar
+
+
+	//Overwrite using bachground color to erase the message
+	pWind->SetPen(BkGrndColor);
+	pWind->SetBrush(BkGrndColor);
+	pWind->DrawRectangle(0, 0, width, ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //Clears the drawing (degin) area
@@ -184,6 +240,7 @@ void UI::ClearDrawingArea() const
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
 {
+	ClearToolBar();
 	AppMode = DESIGN;	//Design Mode
 
 	//You can draw the tool bar icons in any way you want.
@@ -197,8 +254,12 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
 	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
 	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
+<<<<<<< HEAD
 	//MenuItemImages[ITM_CON1] = "Images\\Menu\\Menu_Connection.jpg";
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";
+=======
+	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -209,15 +270,27 @@ void UI::CreateDesignToolBar()
 	
 	//Draw a line under the toolbar
 	pWind->SetPen(RED,3);
-	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);	
+	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
+	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the simulation mode
 void UI::CreateSimulationToolBar()
 {
+	
+	ClearToolBar();
 	AppMode = SIMULATION;	//Simulation Mode
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
+	string MenuItemImages[ITM_SIM_CNT];
+	MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG";
+	MenuItemImages[ITM_AMM] = "images\\Menu\\ammeter.jpg";
+	MenuItemImages[ITM_VOL] = "images\\Menu\\voltmeter.jpg";
+	MenuItemImages[ITM_DSN] = "images\\Menu\\design.jpg";
 
+	for (int i = 0; i < ITM_SIM_CNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
+
+	
 }
 
 //======================================================================================//
@@ -285,16 +358,19 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string ResImage;
-	if (selected)
-	{
-		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of highlighted buzzer
+	
+	
+		if (selected)
+		{
+			ResImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
 
-	}
-	else
-	{
-		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
+		}
+		else
+		{
+			ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
 
-	}
+		}
+	
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
@@ -303,7 +379,7 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	string ResImage;
 	if (selected)
 	{
-		ResImage = "Images\\Comp\\Fues.jpg";	//use image of highlighted fues
+		ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
 
 	}
 	else

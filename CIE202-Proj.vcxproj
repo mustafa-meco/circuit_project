@@ -118,6 +118,8 @@
     <ClCompile Include="Actions\ActionAddGro.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwi.cpp" />
+    <ClCompile Include="Actions\ActionSave.cpp" />
+    <ClCompile Include="Actions\ActionSelect.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Fues.cpp" />
     <ClCompile Include="Components\Ground.cpp" />
+    <ClCompile Include="Components\Label.cpp" />
     <ClCompile Include="Components\Resistor.cpp" />
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
@@ -176,6 +179,8 @@
     <ClInclude Include="Actions\ActionAddGro.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwi.h" />
+    <ClInclude Include="Actions\ActionSave.h" />
+    <ClInclude Include="Actions\ActionSelect.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />

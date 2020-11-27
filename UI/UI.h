@@ -46,21 +46,31 @@ class UI
 		ITM_GRO,
 		ITM_BUZ,
 		ITM_FUE,
+<<<<<<< HEAD
 		//ITM_CON1,
 		ITM_CON, 
+=======
+		ITM_SIM,
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
 	};
+	enum Select 
+	{A
 
+
+	};
 
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in menu
 		ITM_CIRC_SIM,	//Circuit Simulate menu item
-	
+		
 		//TODO:Add more items names here
-	
+		ITM_AMM,
+		ITM_VOL,
+		ITM_DSN,
 		ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
 	
 	};
@@ -109,7 +119,7 @@ public:
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateStatusBar() const;	//Create Status bar
-
+	void ClearToolBar()const;
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
 
@@ -130,9 +140,13 @@ public:
 	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	//void DrawConnection1(const GraphicsInfo& r_GfxInfo, bool selected = false) const; 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
+<<<<<<< HEAD
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   //,bool selected
 
+=======
+	void PrintLabel(string msg) const;
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 	~UI();
 };
 

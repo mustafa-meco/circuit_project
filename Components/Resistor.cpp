@@ -12,7 +12,7 @@ Resistor::Resistor(GraphicsInfo *r_GfxInfo, UI* pUI):Component(r_GfxInfo)
 void Resistor::Draw(UI* pUI)
 {
 	//Call output class and pass resistor drawing info to it.
-	pUI->DrawResistor(*m_pGfxInfo); //update to draw resistor
+	pUI->DrawResistor(*m_pGfxInfo, pcomp == this); //update to draw resistor
 
 }
 

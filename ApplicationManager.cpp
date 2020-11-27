@@ -4,7 +4,13 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
+<<<<<<< HEAD
 #include "Actions/ActionAddCon.h"
+=======
+#include "Actions/ActionSave.h"
+//#include "Actions/ActionSave.h"
+#include "Actions/ActionSelect.h"
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 #include <iostream>
 using namespace std;
 
@@ -13,6 +19,8 @@ ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
 	ConnCount = 0;
+
+	lineCount = 0;	
 
 	IsSimulation = 0;
 
@@ -24,6 +32,24 @@ ApplicationManager::ApplicationManager()
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
 }
+////////////////////////////////////////////////////////////////////
+//void ApplicationManager::save(ActionType act) {
+//	string compType[] = { "RES","SWT","BLB","GND","BAT","BZR","FUS" };
+//	if (act <= 6) {
+//		if (CompCount < 10)
+//			compLineList[CompCount] = { compType[act] , char(CompCount)  , CompList[CompCount]->getResistance() };
+//		else if (CompCount < 100)
+//			compLineList[CompCount] = { compType[act] , char(CompCount / 10) + char(CompCount % 10) };
+//		else
+//			compLineList[CompCount] = { compType[act] , char(CompCount / 100) + char((CompCount % 100) / 10) + char(CompCount % 10) };
+//
+//	}
+//}
+//string* ApplicationManager::getSaved(int &m, int &n) {
+//	m = CompCount;
+//	n = ConnCount;
+//	return compLineList;
+//}
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
@@ -81,15 +107,33 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
+<<<<<<< HEAD
 	    case ADD_CONNECTION: 
 			pAct = new ActionAddCon(this);   
 			break; 
+=======
+		case SELECT:
+			pAct = new ActionSelect(this);
+			break;
+		/*case SAVE:
+			pAct = new ActionSave(this);
+			break;*/
+		case SIM_MODE:
+			ToSimulation();
+			break;
+		case DSN_MODE:
+			ToDesign();
+			break;
+	//	case LOAD:
+			//pAct = new ActionLoad(this);
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 		case EXIT:
-			///TODO: create ExitAction here
+			//TODO: create ExitAction here
 			break;
 	}
 	if(pAct)
 	{
+		//save(ActType);
 		pAct->Execute();
 		delete pAct;
 		pAct = nullptr;
@@ -117,6 +161,14 @@ bool ApplicationManager::ValidateCircuit() {
 }
 
 ////////////////////////////////////////////////////////////////////
+/*Component* GetComponentByCordinates(int x, int y) {
+
+}*/
+
+////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
 	if (!ValidateCircuit()) {
 		// TODO
@@ -126,7 +178,13 @@ void ApplicationManager::ToSimulation() {
 		// Compute all needed voltages and current
 		double current = CalculateCurrent();
 		CalculateVoltages(current);
+		pUI->CreateSimulationToolBar();
 	}
+}
+void ApplicationManager::ToDesign() {
+	this->IsSimulation = false;
+	// Compute all needed voltages and current
+	pUI->CreateDesignToolBar();
 }
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
@@ -145,3 +203,18 @@ ApplicationManager::~ApplicationManager()
 {
 	// TODO
 }
+<<<<<<< HEAD
+=======
+Component* ApplicationManager::GetComponentByCordinates(int x, int y)
+{
+
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->isInRegion(x, y, pUI) == true)
+		{
+			return	CompList[i];
+		}
+
+	}
+}
+>>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc

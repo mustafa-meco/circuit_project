@@ -1,8 +1,9 @@
 #include "ActionAddSwi.h"
 #include "../ApplicationManager.h"
 
-ActionAddSwi::ActionAddSwi(ApplicationManager* pApp) :Action(pApp)
+ActionAddSwi::ActionAddSwi(ApplicationManager* pApp) :Action(pApp) 
 {
+
 }
 
 ActionAddSwi::~ActionAddSwi(void)
@@ -20,9 +21,15 @@ void ActionAddSwi::Execute()
 
 	//Get Center point of the area where the Comp should be drawn
 	pUI->GetPointClicked(Cx, Cy);
-
+	while (!(Cy > 80 + 50 / 2 &&
+		Cy < 650 - 50 - 50 / 2 &&
+		Cx>50 / 2 &&
+		Cx < 1200 - 80 / 2))
+	{
+		pUI->GetPointClicked(Cx, Cy);
+	}
 	//Clear Status Bar
-	pUI->ClearStatusBar();
+	pUI->ClearToolBar();
 
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
