@@ -4,6 +4,7 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
+#include "Actions/ActionSave.h"
 //#include "Actions/ActionSave.h"
 #include "Actions/ActionSelect.h"
 #include <iostream>
@@ -15,6 +16,8 @@ ApplicationManager::ApplicationManager()
 	CompCount = 0;
 	ConnCount = 0;
 
+	lineCount = 0;	
+
 	IsSimulation = 0;
 
 	for(int i=0; i<MaxCompCount; i++)
@@ -25,6 +28,24 @@ ApplicationManager::ApplicationManager()
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
 }
+////////////////////////////////////////////////////////////////////
+//void ApplicationManager::save(ActionType act) {
+//	string compType[] = { "RES","SWT","BLB","GND","BAT","BZR","FUS" };
+//	if (act <= 6) {
+//		if (CompCount < 10)
+//			compLineList[CompCount] = { compType[act] , char(CompCount)  , CompList[CompCount]->getResistance() };
+//		else if (CompCount < 100)
+//			compLineList[CompCount] = { compType[act] , char(CompCount / 10) + char(CompCount % 10) };
+//		else
+//			compLineList[CompCount] = { compType[act] , char(CompCount / 100) + char((CompCount % 100) / 10) + char(CompCount % 10) };
+//
+//	}
+//}
+//string* ApplicationManager::getSaved(int &m, int &n) {
+//	m = CompCount;
+//	n = ConnCount;
+//	return compLineList;
+//}
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
@@ -68,15 +89,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SELECT:
 			pAct = new ActionSelect(this);
 			break;
+		/*case SAVE:
+			pAct = new ActionSave(this);
+			break;*/
 		case SIM_MODE:
 			ToSimulation();
 			break;
 		case DSN_MODE:
 			ToDesign();
 			break;
-		//case SAVE:
-			//pAct = new ActionSave(this);
-			//break;
 	//	case LOAD:
 			//pAct = new ActionLoad(this);
 		case EXIT:
@@ -85,6 +106,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 	if(pAct)
 	{
+		//save(ActType);
 		pAct->Execute();
 		delete pAct;
 		pAct = nullptr;
@@ -117,9 +139,7 @@ bool ApplicationManager::ValidateCircuit() {
 }*/
 
 ////////////////////////////////////////////////////////////////////
-/*int getCircuit() const {
-	re
-}*/
+
 
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {

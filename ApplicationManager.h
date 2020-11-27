@@ -20,12 +20,17 @@ class ApplicationManager
 
 
 private:
+	int lineCount;
+
 	bool IsSimulation; // True when in simulation mode
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
 
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
 	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
+
+	string compLineList[MaxCompCount + MaxConnCount + 3];
+	string connLineList[MaxCompCount + MaxConnCount + 3];
 
 	UI* pUI; //pointer to the UI
 
@@ -58,7 +63,8 @@ public:
 	void ToDesign();
 	double CalculateCurrent();
 	void CalculateVoltages(double current);
-
+	//void save(ActionType);
+	string* getSaved(int&,int&);
 	//destructor
 	~ApplicationManager();
 };
