@@ -4,6 +4,7 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
+#include "Actions/ActionAddCon.h"
 #include "Actions/ActionSave.h"
 //#include "Actions/ActionSave.h"
 #include "Actions/ActionSelect.h"
@@ -49,7 +50,24 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
-	CompList[CompCount++] = pComp;		
+	CompList[CompCount++] = pComp;	
+}
+void ApplicationManager::AddConnection(Connection* pConn)
+{
+	ConnList[ConnCount++] = pConn;
+}
+Component* ApplicationManager::GetComponentByCordinates(int x, int y) 
+{
+	
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->isInRegion(x,y, pUI) == true)
+		{
+				return	CompList[i];
+		}
+		
+	}
+	return nullptr;
 }
 
 ActionType ApplicationManager::GetUserAction()
@@ -86,6 +104,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
+	    case ADD_CONNECTION: 
+			pAct = new ActionAddCon(this);   
+			break; 
 		case SELECT:
 			pAct = new ActionSelect(this);
 			break;
@@ -175,16 +196,4 @@ void ApplicationManager::CalculateVoltages(double current) {
 ApplicationManager::~ApplicationManager()
 {
 	// TODO
-}
-Component* ApplicationManager::GetComponentByCordinates(int x, int y)
-{
-
-	for (int i = 0; i < CompCount; i++)
-	{
-		if (CompList[i]->isInRegion(x, y, pUI) == true)
-		{
-			return	CompList[i];
-		}
-
-	}
 }

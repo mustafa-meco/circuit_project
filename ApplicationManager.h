@@ -7,6 +7,8 @@
 #include "Components\Component.h"
 #include "Actions/ActionAddGro.h"
 #include "Actions/ActionAddBat.h"
+///#include "Actions/ActionAddCon1.h" 
+
 
 
 //Main class that manages everything in the application.
@@ -53,7 +55,7 @@ public:
 	
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
-	//void AddConnection(Connection* pConn);
+	void AddConnection(Connection* pConn);
 
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
 
