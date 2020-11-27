@@ -315,7 +315,7 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
 	if (selected)
-		SwiImage = "Images\\Comp\\Resistor_HI.jpg";	//use image of highlighted bulb
+		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted bulb
 	else
 		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal bulb
 
