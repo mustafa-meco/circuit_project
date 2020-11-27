@@ -5,6 +5,7 @@
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
 //#include "Actions/ActionSave.h"
+#include "Actions/ActionSelect.h"
 #include <iostream>
 using namespace std;
 
@@ -63,6 +64,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
+			break;
+		case SELECT:
+			pAct = new ActionSelect(this);
 			break;
 		case SIM_MODE:
 			ToSimulation();
@@ -151,4 +155,16 @@ void ApplicationManager::CalculateVoltages(double current) {
 ApplicationManager::~ApplicationManager()
 {
 	// TODO
+}
+Component* ApplicationManager::GetComponentByCordinates(int x, int y)
+{
+
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->isInRegion(x, y, pUI) == true)
+		{
+			return	CompList[i];
+		}
+
+	}
 }

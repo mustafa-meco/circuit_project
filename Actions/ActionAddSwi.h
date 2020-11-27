@@ -2,6 +2,7 @@
 
 #include "Action.h"
 #include "../Components/Switch.h"
+
 //Class responsible for adding a new resistor action
 class ActionAddSwi : public Action
 {
@@ -12,6 +13,7 @@ private:
 public:
 	ActionAddSwi(ApplicationManager* pApp);
 	virtual ~ActionAddSwi(void);
+
 
 	//Execute action (code depends on action type)
 	virtual void Execute();

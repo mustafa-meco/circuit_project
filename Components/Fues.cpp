@@ -9,7 +9,7 @@ Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 void Fues::Draw(UI* pUI)
 {
 	//Call output class and pass resistor drawing info to it.
-	pUI->DrawFues(*m_pGfxInfo); //update to draw Fues
+	pUI->DrawFues(*m_pGfxInfo, pcomp == this); //update to draw Fues
 
 }
 void Fues::Operate()

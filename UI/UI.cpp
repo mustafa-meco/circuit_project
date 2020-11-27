@@ -181,6 +181,23 @@ void UI::PrintMsg(string msg) const
 	pWind->SetPen(MsgColor); 
 	pWind->DrawString(MsgX, height - MsgY, msg);
 }
+
+
+
+
+
+void UI::PrintLabel(string msg) const
+{
+	ClearStatusBar();	//Clear Status bar to print message on it
+	// Set the Message offset from the Status Bar
+	int MsgX = 1;
+	int MsgY = StatusBarHeight - 10;
+
+	// Print the Message
+	pWind->SetFont(200, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, height - MsgY, msg);
+}
 //////////////////////////////////////////////////////////////////////////////////
 void UI::ClearStatusBar()const
 {
@@ -330,16 +347,19 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string ResImage;
-	if (selected)
-	{
-		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of highlighted buzzer
+	
+	
+		if (selected)
+		{
+			ResImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
 
-	}
-	else
-	{
-		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
+		}
+		else
+		{
+			ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
 
-	}
+		}
+	
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
@@ -348,7 +368,7 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	string ResImage;
 	if (selected)
 	{
-		ResImage = "Images\\Comp\\Fues.jpg";	//use image of highlighted fues
+		ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
 
 	}
 	else

@@ -23,7 +23,7 @@ protected:
 	int term2_conn_count;
 
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
-
+	static Component* pcomp;
 public:
 	Component(GraphicsInfo *r_GfxInfo);
 	Component();
@@ -48,7 +48,7 @@ public:
 
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
-	//bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
+	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
 	//void addTerm1Connection(Connection* pConn);
 	//void addTerm2Connection(Connection* pConn);
 
@@ -56,6 +56,10 @@ public:
 
 	//Destructor must be virtual
 	virtual ~Component();
+	
+	
+	//static void selection();
+	
 };
 
 #endif

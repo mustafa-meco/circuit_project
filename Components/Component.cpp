@@ -17,3 +17,14 @@ Component::Component()
 Component::~Component()
 {}
 
+bool Component::isInRegion(int x, int y, UI* pUI)
+{
+	if (m_pGfxInfo->PointsList[0].x < x && m_pGfxInfo->PointsList[1].x > x && m_pGfxInfo->PointsList[0].y < y && m_pGfxInfo->PointsList[1].y > y)
+	{
+		pcomp = this;
+		return true;
+	}
+	
+}
+
+Component* Component::pcomp = nullptr;

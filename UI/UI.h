@@ -51,7 +51,11 @@ class UI
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
 	};
+	enum Select 
+	{A
 
+
+	};
 
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
@@ -131,7 +135,7 @@ public:
 	void DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	
 	void PrintMsg(string msg) const;	//Print a message on Status bar
-
+	void PrintLabel(string msg) const;
 	~UI();
 };
 

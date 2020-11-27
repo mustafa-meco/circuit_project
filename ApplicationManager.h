@@ -50,7 +50,7 @@ public:
 	void AddComponent(Component* pComp);
 	//void AddConnection(Connection* pConn);
 
-	//Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
+	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
 
 	// Simulation Mode Functions
 	bool ValidateCircuit();
