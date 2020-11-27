@@ -46,12 +46,9 @@ class UI
 		ITM_GRO,
 		ITM_BUZ,
 		ITM_FUE,
-<<<<<<< HEAD
 		//ITM_CON1,
 		ITM_CON, 
-=======
 		ITM_SIM,
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -140,13 +137,10 @@ public:
 	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	//void DrawConnection1(const GraphicsInfo& r_GfxInfo, bool selected = false) const; 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
-<<<<<<< HEAD
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   //,bool selected
 
-=======
 	void PrintLabel(string msg) const;
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 	~UI();
 };
 

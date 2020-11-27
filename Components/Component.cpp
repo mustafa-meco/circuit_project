@@ -23,6 +23,7 @@ bool Component::isInRegion(int x, int y, UI* pUI)
 {
 	if (m_pGfxInfo->PointsList[0].x < x && m_pGfxInfo->PointsList[1].x > x&& m_pGfxInfo->PointsList[0].y < y && m_pGfxInfo->PointsList[1].y > y)
 	{
+		pcomp = this;
 		return true;
 	}
 }
@@ -55,20 +56,8 @@ int Component::getCompCentery(UI*)
 //
 //}
 
-<<<<<<< HEAD
 double Component::getResistance() {
 	return resistance;
 }
-=======
-bool Component::isInRegion(int x, int y, UI* pUI)
-{
-	if (m_pGfxInfo->PointsList[0].x < x && m_pGfxInfo->PointsList[1].x > x && m_pGfxInfo->PointsList[0].y < y && m_pGfxInfo->PointsList[1].y > y)
-	{
-		pcomp = this;
-		return true;
-	}
-	
-}
 
 Component* Component::pcomp = nullptr;
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc

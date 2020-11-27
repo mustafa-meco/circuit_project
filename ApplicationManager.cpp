@@ -4,13 +4,10 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
-<<<<<<< HEAD
 #include "Actions/ActionAddCon.h"
-=======
 #include "Actions/ActionSave.h"
 //#include "Actions/ActionSave.h"
 #include "Actions/ActionSelect.h"
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 #include <iostream>
 using namespace std;
 
@@ -107,11 +104,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
-<<<<<<< HEAD
 	    case ADD_CONNECTION: 
 			pAct = new ActionAddCon(this);   
 			break; 
-=======
 		case SELECT:
 			pAct = new ActionSelect(this);
 			break;
@@ -126,7 +121,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 	//	case LOAD:
 			//pAct = new ActionLoad(this);
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 		case EXIT:
 			//TODO: create ExitAction here
 			break;
@@ -203,18 +197,3 @@ ApplicationManager::~ApplicationManager()
 {
 	// TODO
 }
-<<<<<<< HEAD
-=======
-Component* ApplicationManager::GetComponentByCordinates(int x, int y)
-{
-
-	for (int i = 0; i < CompCount; i++)
-	{
-		if (CompList[i]->isInRegion(x, y, pUI) == true)
-		{
-			return	CompList[i];
-		}
-
-	}
-}
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc

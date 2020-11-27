@@ -19,10 +19,8 @@ void ActionAddBul::Execute()
 	pUI->PrintMsg("Adding a new bulb: Click anywhere to add");
 
 	//Get Center point of the area where the Comp should be drawn
-<<<<<<< HEAD
 	pUI->GetPointClicked(Cx, Cy); 
 
-=======
 	pUI->GetPointClicked(Cx, Cy);
 	while (!(Cy > 80 + 50 / 2 &&
 		Cy < 650 - 50 - 50 / 2 &&
@@ -31,7 +29,6 @@ void ActionAddBul::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 	//Clear Status Bar
 	pUI->ClearStatusBar();
 

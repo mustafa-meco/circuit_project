@@ -50,13 +50,10 @@ public:
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
-<<<<<<< HEAD
 	void addTerm1Connection(Connection* pConn); //musta
 	void addTerm2Connection(Connection* pConn);
-=======
 	//void addTerm1Connection(Connection* pConn);
 	//void addTerm2Connection(Connection* pConn);
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 
 	TerminalNum whichTerminal(Connection* Conn);
 	// returns the terminal to which a connection is connected

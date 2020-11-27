@@ -105,12 +105,8 @@ ActionType UI::GetUserAction() const
 			case ITM_GRO:   return ADD_GROUND;
 			case ITM_BUZ:   return ADD_BUZZER;
 			case ITM_FUE:   return ADD_FUES;
-<<<<<<< HEAD
 			case ITM_CON:   return ADD_CONNECTION;
-
-=======
 			case ITM_SIM:	return SIM_MODE;
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -254,12 +250,9 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
 	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
 	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
-<<<<<<< HEAD
 	//MenuItemImages[ITM_CON1] = "Images\\Menu\\Menu_Connection.jpg";
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";
-=======
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
