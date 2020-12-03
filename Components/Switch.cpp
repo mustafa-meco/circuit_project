@@ -7,6 +7,11 @@ Switch::Switch(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 	status = static_cast<bool>(stoi(pUI->GetSrting())); 
 	pUI->ClearStatusBar();
 	sourceVoltage = 0;
+
+	pUI->PrintMsg("Enter the label: ");
+	string label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;
 }
 
 void Switch::Draw(UI* pUI)

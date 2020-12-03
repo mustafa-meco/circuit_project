@@ -75,6 +75,7 @@ string UI::GetSrting()
 		};
 		
 		PrintMsg(userInput);
+		//PrintLabel(userInput);
 	}
 
 }
@@ -188,18 +189,18 @@ void UI::PrintMsg(string msg) const
 
 
 
-void UI::PrintLabel(string msg) const
+/*void UI::PrintLabel(string msg) const
 {
 	ClearStatusBar();	//Clear Status bar to print message on it
 	// Set the Message offset from the Status Bar
-	int MsgX = 1;
+	int MsgX = 25;
 	int MsgY = StatusBarHeight - 10;
 
 	// Print the Message
 	pWind->SetFont(200, BOLD | ITALICIZED, BY_NAME, "Arial");
 	pWind->SetPen(MsgColor);
 	pWind->DrawString(MsgX, height - MsgY, msg);
-}
+}*/
 //////////////////////////////////////////////////////////////////////////////////
 void UI::ClearStatusBar()const
 {

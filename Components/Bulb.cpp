@@ -6,6 +6,11 @@ Bulb::Bulb(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 	resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
 	pUI->ClearStatusBar();
 	sourceVoltage = 0;
+
+	pUI->PrintMsg("Enter the label: ");
+	string label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;
 }
 
 void Bulb::Draw(UI* pUI)

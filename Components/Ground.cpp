@@ -1,9 +1,13 @@
 #include "Ground.h"
 //#include "../Electric Circuit Simulator - Code Framework/Components/Component.h"
 
-Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
+Ground::Ground(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 {
-	resistance = 0; // TODO: Take resistance from user
+	resistance = 0; 
+	sourceVoltage = 0;
+	pUI->PrintMsg("Enter the label: ");
+	string label = pUI->GetSrting();
+	pUI->ClearStatusBar();
 	sourceVoltage = 0;
 }
 

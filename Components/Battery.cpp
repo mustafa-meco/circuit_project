@@ -11,6 +11,11 @@ Battery::Battery(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 	pUI->PrintMsg("Enter the value of the source voltage: ");
 	sourceVoltage = stod(pUI->GetSrting());
 	pUI->ClearStatusBar();
+
+	pUI->PrintMsg("Enter the label: ");
+	string label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;
 }
 
 void Battery::Draw(UI* pUI)

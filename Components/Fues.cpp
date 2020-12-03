@@ -1,8 +1,12 @@
 #include"Fues.h"
 
-Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
+Fues::Fues(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 {
-	resistance = 2; // TODO: Take resistance from user
+	resistance = 2; 
+	sourceVoltage = 0;
+	pUI->PrintMsg("Enter the label: ");
+	string label = pUI->GetSrting();
+	pUI->ClearStatusBar();
 	sourceVoltage = 0;
 }
 
