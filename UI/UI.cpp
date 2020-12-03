@@ -1,5 +1,6 @@
 #include "UI.h"
-
+#include "..\CMUgraphicsLib\CMUgraphics.h"
+#include "..\CMUgraphicsLib\auxil.h"
 UI::UI()
 {
 	AppMode = DESIGN;	//Design Mode is the startup mode
@@ -101,11 +102,12 @@ ActionType UI::GetUserAction() const
 			case ITM_BULB:	return ADD_BULB;
 			case ITM_SWI:	return ADD_SWITCH;
 			case ITM_BAT:   return ADD_BATTERY;
-			case ITM_GRO: return ADD_GROUND;
+			case ITM_GRO:   return ADD_GROUND;
 			case ITM_BUZ:   return ADD_BUZZER;
 			case ITM_FUE:   return ADD_FUES;
+			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
-			case ITM_EXIT:	return EXIT;	
+			case ITM_EXIT:	return SAVE;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
 			}
@@ -181,6 +183,23 @@ void UI::PrintMsg(string msg) const
 	pWind->SetPen(MsgColor); 
 	pWind->DrawString(MsgX, height - MsgY, msg);
 }
+
+
+
+
+
+void UI::PrintLabel(string msg) const
+{
+	ClearStatusBar();	//Clear Status bar to print message on it
+	// Set the Message offset from the Status Bar
+	int MsgX = 1;
+	int MsgY = StatusBarHeight - 10;
+
+	// Print the Message
+	pWind->SetFont(200, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, height - MsgY, msg);
+}
 //////////////////////////////////////////////////////////////////////////////////
 void UI::ClearStatusBar()const
 {
@@ -231,6 +250,8 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
 	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
 	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
+	//MenuItemImages[ITM_CON1] = "Images\\Menu\\Menu_Connection.jpg";
+	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
@@ -330,16 +351,19 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string ResImage;
-	if (selected)
-	{
-		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of highlighted buzzer
+	
+	
+		if (selected)
+		{
+			ResImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
 
-	}
-	else
-	{
-		ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
+		}
+		else
+		{
+			ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
 
-	}
+		}
+	
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
@@ -348,7 +372,7 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	string ResImage;
 	if (selected)
 	{
-		ResImage = "Images\\Comp\\Fues.jpg";	//use image of highlighted fues
+		ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
 
 	}
 	else
@@ -360,9 +384,40 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
-void UI::DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected) const
+//void UI::DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected) const
+//{
+//	string Con1Image;
+//	if (selected)
+//		Con1Image = "Images\\Comp\\Connection_HI.jpg";	//use image of highlighted resistor
+//	else
+//		Con1Image = "Images\\Comp\\Connection.jpg";	//use image of the normal resistor 
+//
+//	//Draw Resistor at Gfx_Info (1st corner)
+//	pWind->DrawImage(Con1Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT); 
+//	 
+//
+//	//TODO: Add code to draw connection
+//}
+void UI::DrawConnection(const GraphicsInfo& r_GfxInfo ) const //bool selected
 {
 	//TODO: Add code to draw connection
+	
+	//if (selected)
+	//{
+		//if (AppMode == DESIGN)	//application is in design mode
+		{
+
+			//if (r_GfxInfo.PointsList[0].y > ToolBarHeight && r_GfxInfo.PointsList[0].y < height - StatusBarHeight && r_GfxInfo.PointsList[1].y > ToolBarHeight && r_GfxInfo.PointsList[1].y < height - StatusBarHeight)
+			//{
+				pWind->SetPen(BLACK, 2);
+				pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+
+			//}
+
+
+		}
+	//}
+
 }
 
 

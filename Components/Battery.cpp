@@ -16,8 +16,7 @@ Battery::Battery(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 void Battery::Draw(UI* pUI)
 {
 	//Call output class and pass battery drawing info to it.
-	pUI->DrawBattery(*m_pGfxInfo); //update to draw battery
-
+	pUI->DrawBattery(*m_pGfxInfo, pcomp == this); //update to draw battery
 }
 
 void Battery::Operate()

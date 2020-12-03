@@ -46,12 +46,18 @@ class UI
 		ITM_GRO,
 		ITM_BUZ,
 		ITM_FUE,
+		//ITM_CON1,
+		ITM_CON, 
 		ITM_SIM,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
 	};
+	enum Select 
+	{A
 
+
+	};
 
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
@@ -128,10 +134,13 @@ public:
 	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	// Draws Connection
-	void DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
-	
+	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
+	//void DrawConnection1(const GraphicsInfo& r_GfxInfo, bool selected = false) const; 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
 
+	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   //,bool selected
+
+	void PrintLabel(string msg) const;
 	~UI();
 };
 

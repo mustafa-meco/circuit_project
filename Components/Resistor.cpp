@@ -12,11 +12,20 @@ Resistor::Resistor(GraphicsInfo *r_GfxInfo, UI* pUI):Component(r_GfxInfo)
 void Resistor::Draw(UI* pUI)
 {
 	//Call output class and pass resistor drawing info to it.
-	pUI->DrawResistor(*m_pGfxInfo); //update to draw resistor
+	pUI->DrawResistor(*m_pGfxInfo, pcomp == this); //update to draw resistor
 
 }
+
 
 void Resistor::Operate()
 {
 
+}
+
+string* Resistor::save() const {
+	Point p;
+	p.x = m_pGfxInfo->PointsList[0].x;
+	p.y = m_pGfxInfo->PointsList[0].y;
+	string row[] = { "BAT" ,m_Label,to_string(resistance),to_string(p.x),to_string(p.y) };
+	return row;
 }

@@ -25,7 +25,7 @@ protected:
 	string m_Label;
 
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
-
+	static Component* pcomp;
 public:
 	Component(GraphicsInfo *r_GfxInfo);
 	Component();
@@ -33,24 +33,26 @@ public:
 	//void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1
 	//double getTerm2Volt();				//returns the voltage at terminal2
-	//double getResistance();
+	double getResistance();
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
-	//Connection** getTermConnections(TerminalNum Term);
+	Connection** getTermConnections(TerminalNum Term); 
 
 	//double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
 	virtual void Operate() = 0; // activates components such as bulb and buzzer
 
 	virtual void Draw(UI*) = 0;	//for each component to Draw itself
 
-	//int getCompCenterX(UI*); // get horizontal/vertical centers of the component
-	//int getCompCenterY(UI*);
+	int getCompCenterx(UI*); // get horizontal/vertical centers of the component
+	int getCompCentery(UI*);
 	
 	//virtual int GetOutStatus()=0;	//returns status of output if BULB/BUZZER, return -1
 	//virtual int GetInputStatus()=0;	//returns status of SWITCH, return -1
 
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
-	//bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
+	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
+	void addTerm1Connection(Connection* pConn); //musta
+	void addTerm2Connection(Connection* pConn);
 	//void addTerm1Connection(Connection* pConn);
 	//void addTerm2Connection(Connection* pConn);
 
@@ -58,6 +60,10 @@ public:
 	virtual string* save() const;
 	//Destructor must be virtual
 	virtual ~Component();
+	
+	
+	//static void selection();
+	
 };
 
 #endif

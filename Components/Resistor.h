@@ -9,3 +9,4 @@ public:
 	virtual void Operate();
 	string* save() const;
 };
+

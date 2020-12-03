@@ -1,6 +1,6 @@
 #include "ActionAddRes.h"
 #include "../ApplicationManager.h"
-
+#include"..\Components\Component.h"
 
 ActionAddRes::ActionAddRes(ApplicationManager *pApp):Action(pApp)
 {
@@ -21,7 +21,13 @@ void ActionAddRes::Execute()
 
 	//Get Center point of the area where the Comp should be drawn
 	pUI->GetPointClicked(Cx, Cy);
-
+	while (!(Cy > 80 + 50 / 2 &&
+		Cy < 650 - 50 - 50 / 2 &&
+		Cx>50 / 2 &&
+		Cx < 1200 - 80 / 2))
+	{
+		pUI->GetPointClicked(Cx, Cy);
+	}
 	//Clear Status Bar
 	pUI->ClearStatusBar();	
 	

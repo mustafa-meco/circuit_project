@@ -19,11 +19,18 @@ void ActionAddBul::Execute()
 	pUI->PrintMsg("Adding a new bulb: Click anywhere to add");
 
 	//Get Center point of the area where the Comp should be drawn
-	pUI->GetPointClicked(Cx, Cy);
+	pUI->GetPointClicked(Cx, Cy); 
 
+	pUI->GetPointClicked(Cx, Cy);
+	while (!(Cy > 80 + 50 / 2 &&
+		Cy < 650 - 50 - 50 / 2 &&
+		Cx>50 / 2 &&
+		Cx < 1200 - 80 / 2))
+	{
+		pUI->GetPointClicked(Cx, Cy);
+	}
 	//Clear Status Bar
 	pUI->ClearStatusBar();
-
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 
@@ -35,8 +42,9 @@ void ActionAddBul::Execute()
 	pGInfo->PointsList[0].y = Cy - compHeight / 2;
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
-
+	
 	Bulb* pB = new Bulb(pGInfo, pUI);
+	
 	pManager->AddComponent(pB);
 }
 

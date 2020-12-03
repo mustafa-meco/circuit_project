@@ -1,5 +1,5 @@
 #include "Connection.h"
-
+ 
 Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2)
 {
 	pGfxInfo = r_GfxInfo;
@@ -8,5 +8,8 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 }
 void Connection::Draw(UI* pUI)
 {
-	pUI->DrawConnection(*pGfxInfo);
+	
+	
+		pUI->DrawConnection(*pGfxInfo );
 }
+  

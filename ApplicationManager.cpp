@@ -4,8 +4,10 @@
 #include "Actions/ActionAddSwi.h"
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
+#include "Actions/ActionAddCon.h"
 #include "Actions/ActionSave.h"
-//#include "Actions/ActionSave.h"
+#include "Actions/ActionSave.h"
+#include "Actions/ActionSelect.h"
 #include <iostream>
 using namespace std;
 
@@ -48,7 +50,24 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
-	CompList[CompCount++] = pComp;		
+	CompList[CompCount++] = pComp;	
+}
+void ApplicationManager::AddConnection(Connection* pConn)
+{
+	ConnList[ConnCount++] = pConn;
+}
+Component* ApplicationManager::GetComponentByCordinates(int x, int y) 
+{
+	
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->isInRegion(x,y, pUI) == true)
+		{
+				return	CompList[i];
+		}
+		
+	}
+	return nullptr;
 }
 
 ActionType ApplicationManager::GetUserAction()
@@ -85,9 +104,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
-		/*case SAVE:
+	    case ADD_CONNECTION: 
+			pAct = new ActionAddCon(this);   
+			break; 
+		case SELECT:
+			pAct = new ActionSelect(this);
+			break;
+		case SAVE:
 			pAct = new ActionSave(this);
-			break;*/
+			break;
 		case SIM_MODE:
 			ToSimulation();
 			break;
@@ -110,6 +135,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 }
 ////////////////////////////////////////////////////////////////////
 
+string** ApplicationManager::save(int& c) const {
+	c = CompCount;
+	string** compData = new string*[CompCount];
+	for (int i = 0; i < CompCount; i++)
+		compData[i] = CompList[i]->save();
+	//for (int i = 0; i < ConnCount; i++)
+		//ConnList[i]->save();
+	return compData;
+}
+
 void ApplicationManager::UpdateInterface()
 {
 	for(int i=0; i<CompCount; i++)
@@ -129,12 +164,6 @@ bool ApplicationManager::ValidateCircuit() {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////
-/*Component* GetComponentByCordinates(int x, int y) {
-
-}*/
-
-////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////

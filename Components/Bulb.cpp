@@ -11,7 +11,7 @@ Bulb::Bulb(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 void Bulb::Draw(UI* pUI)
 {
 	//Call output class and pass bulb drawing info to it.
-	pUI->DrawBulb(*m_pGfxInfo); //update to draw bulb
+	pUI->DrawBulb(*m_pGfxInfo, pcomp == this); //update to draw bulb
 
 }
 

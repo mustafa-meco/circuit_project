@@ -19,7 +19,7 @@ enum ActionType
 
 
 
-	ADD_CONNECTION,		//Add Wire Connection
+	ADD_CONNECTION,		//Add Wire Connection 
 
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection

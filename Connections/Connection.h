@@ -16,3 +16,4 @@ public:
 	//Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection
 
 };
+ 
