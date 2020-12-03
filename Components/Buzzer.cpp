@@ -18,3 +18,11 @@ void Buzzer::Operate()
 
 
 }
+
+string* Buzzer::save() const {
+	Point p;
+	p.x = m_pGfxInfo->PointsList[0].x;
+	p.y = m_pGfxInfo->PointsList[0].y;
+	string row[] = { "BAT" ,m_Label,to_string(sourceVoltage),to_string(p.x),to_string(p.y) };
+	return row;
+}

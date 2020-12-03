@@ -28,23 +28,23 @@ ApplicationManager::ApplicationManager()
 	pUI = new UI;
 }
 ////////////////////////////////////////////////////////////////////
-void ApplicationManager::save(ActionType act) {
-	string compType[] = { "RES","SWT","BLB","GND","BAT","BZR","FUS" };
-	if (act <= 6) {
-		if (CompCount < 10)
-			compLineList[CompCount] = { compType[act] , char(CompCount)  , CompList[CompCount]->getResistance() };
-		else if (CompCount < 100)
-			compLineList[CompCount] = { compType[act] , char(CompCount / 10) + char(CompCount % 10) };
-		else
-			compLineList[CompCount] = { compType[act] , char(CompCount / 100) + char((CompCount % 100) / 10) + char(CompCount % 10) };
-
-	}
-}
-string* ApplicationManager::getSaved(int &m, int &n) {
-	m = CompCount;
-	n = ConnCount;
-	return compLineList;
-}
+//void ApplicationManager::save(ActionType act) {
+//	string compType[] = { "RES","SWT","BLB","GND","BAT","BZR","FUS" };
+//	if (act <= 6) {
+//		if (CompCount < 10)
+//			compLineList[CompCount] = { compType[act] , char(CompCount)  , CompList[CompCount]->getResistance() };
+//		else if (CompCount < 100)
+//			compLineList[CompCount] = { compType[act] , char(CompCount / 10) + char(CompCount % 10) };
+//		else
+//			compLineList[CompCount] = { compType[act] , char(CompCount / 100) + char((CompCount % 100) / 10) + char(CompCount % 10) };
+//
+//	}
+//}
+//string* ApplicationManager::getSaved(int &m, int &n) {
+//	m = CompCount;
+//	n = ConnCount;
+//	return compLineList;
+//}
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
@@ -85,9 +85,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
-		case SAVE:
+		/*case SAVE:
 			pAct = new ActionSave(this);
-			break;
+			break;*/
 		case SIM_MODE:
 			ToSimulation();
 			break;
@@ -102,7 +102,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 	if(pAct)
 	{
-		save(ActType);
+		//save(ActType);
 		pAct->Execute();
 		delete pAct;
 		pAct = nullptr;

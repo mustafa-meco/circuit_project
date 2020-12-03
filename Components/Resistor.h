@@ -7,4 +7,5 @@ public:
 	Resistor(GraphicsInfo *r_GfxInfo, UI* pUI);
 	virtual void Draw(UI*);	//Draws the resistor
 	virtual void Operate();
+	string* save() const;
 };

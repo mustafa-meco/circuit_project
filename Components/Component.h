@@ -9,7 +9,7 @@
 class Component
 {
 private:
-	string m_Label;
+	
 protected:
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
@@ -21,6 +21,8 @@ protected:
 
 	int term1_conn_count;	//actual no. of connections to each terminal
 	int term2_conn_count;
+
+	string m_Label;
 
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 
@@ -53,7 +55,7 @@ public:
 	//void addTerm2Connection(Connection* pConn);
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
-
+	virtual string* save() const;
 	//Destructor must be virtual
 	virtual ~Component();
 };

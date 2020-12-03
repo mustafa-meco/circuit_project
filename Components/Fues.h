@@ -8,4 +8,5 @@ public:
 	Fues(GraphicsInfo* r_GfxInfo);
 	virtual void Draw(UI*);	//Drawsfues
 	virtual void Operate();
+	string* save() const;
 };

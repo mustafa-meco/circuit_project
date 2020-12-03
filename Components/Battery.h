@@ -8,4 +8,5 @@ public:
 	Battery(GraphicsInfo* r_GfxInfo, UI*);
 	virtual void Draw(UI*);	//Draws the battrey 
 	virtual void Operate();
+	string* save() const;
 };
