@@ -1,7 +1,7 @@
 
 #include "Buzzer.h"
 
-Buzzer::Buzzer(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
+Buzzer::Buzzer(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 {
 	resistance = 2; // TODO: Take resistance from user
 	sourceVoltage = 0;

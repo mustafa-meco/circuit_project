@@ -12,7 +12,7 @@ Switch::Switch(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 void Switch::Draw(UI* pUI)
 {
 	//Call output class and pass resistor drawing info to it.
-	pUI->DrawSwitch(*m_pGfxInfo, pcomp == this); //update to draw switch
+	pUI->DrawSwitch(*m_pGfxInfo, pcomp == this); //update to draw switchS
 
 }
 

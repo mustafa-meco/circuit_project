@@ -60,7 +60,7 @@ public:
 
 	//Destructor must be virtual
 	virtual ~Component();
-	
+	virtual void load( int, string, double ,GraphicsInfo); 
 	
 	//static void selection();
 	

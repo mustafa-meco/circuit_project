@@ -46,7 +46,7 @@ class UI
 		ITM_GRO,
 		ITM_BUZ,
 		ITM_FUE,
-		//ITM_CON1,
+		ITM_LOAD,
 		ITM_CON, 
 		ITM_SIM,
 		ITM_EXIT,		//Exit item

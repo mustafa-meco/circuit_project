@@ -5,7 +5,7 @@ Resistor::Resistor(GraphicsInfo *r_GfxInfo, UI* pUI):Component(r_GfxInfo)
 {
 	pUI->PrintMsg("Enter the value of the resistace: ");
 	resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
-	pUI->ClearStatusBar();
+	pUI->ClearStatusBar(); 
 	sourceVoltage = 0;
 }
 

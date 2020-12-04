@@ -1,332 +1,113 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Components">
-      <UniqueIdentifier>{b87b3f6d-e6dd-4b5d-8e06-6c9d3a633504}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actions">
-      <UniqueIdentifier>{cbb964ee-6c83-4056-b1d1-130ac2cb66c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CMUgrahpics Library">
-      <UniqueIdentifier>{3de8bf19-3360-4648-92be-aa0cf6650162}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{313e712a-b5b0-429f-8d17-c3cf963424db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Connections">
-      <UniqueIdentifier>{90417af7-b9ce-46ba-be0b-c99b03425221}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Components\Component.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\colors.cpp">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\image.cpp">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpegload.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\keyqueue.cpp">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\mousequeue.cpp">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\windowinput.cpp">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jcomapi.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jcparam.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdapimin.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdapistd.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdatasrc.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdcoefct.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdcolor.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jddctmgr.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdhuff.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdinput.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdmainct.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdmarker.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdmaster.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdmerge.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdphuff.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdpostct.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdsample.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jdtrans.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jerror.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jidctflt.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jidctfst.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jidctint.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jidctred.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jmemmgr.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jmemnobs.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\UI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
+    <ClCompile Include="Actions\ActionAddBat.cpp" />
+    <ClCompile Include="Actions\ActionAddBul.cpp" />
+    <ClCompile Include="Actions\ActionAddBuz.cpp" />
+    <ClCompile Include="Actions\ActionAddCon.cpp" />
+    <ClCompile Include="Actions\ActionAddFues.cpp" />
+    <ClCompile Include="Actions\ActionAddGro.cpp" />
+    <ClCompile Include="Actions\ActionAddRes.cpp" />
+    <ClCompile Include="Actions\ActionAddSwi.cpp" />
+    <ClCompile Include="Actions\ActionSave.cpp" />
+    <ClCompile Include="Actions\ActionSelect.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
+    <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
+    <ClCompile Include="CMUgraphicsLib\colors.cpp" />
+    <ClCompile Include="CMUgraphicsLib\image.cpp" />
+    <ClCompile Include="CMUgraphicsLib\jpegload.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jcomapi.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jcparam.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdapimin.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdapistd.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdatasrc.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdcoefct.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdcolor.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jddctmgr.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdhuff.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdinput.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmainct.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmarker.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmaster.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmerge.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdphuff.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdpostct.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdsample.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdtrans.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jerror.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctflt.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctfst.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctint.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctred.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jmemmgr.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jmemnobs.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
+    <ClCompile Include="CMUgraphicsLib\keyqueue.cpp" />
+    <ClCompile Include="CMUgraphicsLib\mousequeue.cpp" />
+    <ClCompile Include="CMUgraphicsLib\windowinput.cpp" />
+    <ClCompile Include="Components\Battery.cpp" />
+    <ClCompile Include="Components\Bulb.cpp" />
+    <ClCompile Include="Components\Buzzer.cpp" />
+    <ClCompile Include="Components\Component.cpp" />
+    <ClCompile Include="Components\Fues.cpp" />
+    <ClCompile Include="Components\Ground.cpp" />
+    <ClCompile Include="Components\Label.cpp" />
+    <ClCompile Include="Components\Resistor.cpp" />
+    <ClCompile Include="Components\Switch.cpp" />
+    <ClCompile Include="Connections\Connection.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Components\Resistor.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddRes.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Connections\Connection.cpp">
-      <Filter>Connections</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddBul.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Switch.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddSwi.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Bulb.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Ground.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Battery.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddGro.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddBat.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Fues.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Buzzer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddBuz.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionAddFues.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Actions\ActionAddCon.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-=======
-    <ClCompile Include="Actions\ActionSave.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ActionSelect.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Label.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
+    <ClCompile Include="UI\UI.cpp" />
+    <ClCompile Include="ActionLoad.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CMUgraphicsLib\CMUgraphics.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\colors.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\error.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\image.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpegload.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\keyqueue.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\mousequeue.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\version.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\windowinput.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jconfig.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jdct.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jdhuff.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jerror.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jinclude.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jmemsys.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jmorecfg.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h">
-      <Filter>CMUgrahpics Library</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\UI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
+    <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\ActionAddBat.h" />
+    <ClInclude Include="Actions\ActionAddBul.h" />
+    <ClInclude Include="Actions\ActionAddBuz.h" />
+    <ClInclude Include="Actions\ActionAddCon.h" />
+    <ClInclude Include="Actions\ActionAddFues.h" />
+    <ClInclude Include="Actions\ActionAddGro.h" />
+    <ClInclude Include="Actions\ActionAddRes.h" />
+    <ClInclude Include="Actions\ActionAddSwi.h" />
+    <ClInclude Include="Actions\ActionSave.h" />
+    <ClInclude Include="Actions\ActionSelect.h" />
     <ClInclude Include="ApplicationManager.h" />
+    <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
+    <ClInclude Include="CMUgraphicsLib\colors.h" />
+    <ClInclude Include="CMUgraphicsLib\error.h" />
+    <ClInclude Include="CMUgraphicsLib\image.h" />
+    <ClInclude Include="CMUgraphicsLib\jpegload.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jconfig.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jdct.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jdhuff.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jerror.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jinclude.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jmemsys.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jmorecfg.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
+    <ClInclude Include="CMUgraphicsLib\keyqueue.h" />
+    <ClInclude Include="CMUgraphicsLib\mousequeue.h" />
+    <ClInclude Include="CMUgraphicsLib\version.h" />
+    <ClInclude Include="CMUgraphicsLib\windowinput.h" />
+    <ClInclude Include="Components\Battery.h" />
+    <ClInclude Include="Components\Buzzer.h" />
+    <ClInclude Include="Components\Component.h" />
+    <ClInclude Include="Components\Bulb.h" />
+    <ClInclude Include="Components\Fues.h" />
+    <ClInclude Include="Components\Ground.h" />
+    <ClInclude Include="Components\Resistor.h" />
+    <ClInclude Include="Components\Switch.h" />
+    <ClInclude Include="Connections\Connection.h" />
     <ClInclude Include="Defs.H" />
-    <ClInclude Include="Components\Resistor.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddRes.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Component.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Connections\Connection.h">
-      <Filter>Connections</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddBul.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Bulb.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Switch.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddSwi.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Battery.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Ground.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddGro.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddBat.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Buzzer.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Fues.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddBuz.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddFues.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Actions\Action.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionAddCon.h">
-=======
-    <ClInclude Include="Actions\ActionSave.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ActionSelect.h">
->>>>>>> 5d071cea8a107f807d0ea9113e28a43418a987dc
-      <Filter>Actions</Filter>
-    </ClInclude>
+    <ClInclude Include="UI\UI.h" />
+    <ClInclude Include="ActionLoad.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CMUgraphicsLib\Manual.txt">
-      <Filter>CMUgrahpics Library</Filter>
-    </Text>
-    <Text Include="CMUgraphicsLib\Readme.txt">
-      <Filter>CMUgrahpics Library</Filter>
-    </Text>
+    <Text Include="CMUgraphicsLib\Manual.txt" />
+    <Text Include="CMUgraphicsLib\Readme.txt" />
   </ItemGroup>
 </Project>

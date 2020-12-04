@@ -69,6 +69,7 @@ public:
 	string* getSaved(int&,int&);
 	//destructor
 	~ApplicationManager();
+	void load(int*, string * , double *, GraphicsInfo *);   
 };
 
 #endif

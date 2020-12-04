@@ -6,6 +6,8 @@
 #include "Actions\ActionAddFues.h"
 #include "Actions/ActionAddCon.h"
 #include "Actions/ActionSave.h"
+#include "ActionLoad.h"
+#include "ActionLoad.h"
 //#include "Actions/ActionSave.h"
 #include "Actions/ActionSelect.h"
 #include <iostream>
@@ -119,8 +121,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DSN_MODE:
 			ToDesign();
 			break;
-	//	case LOAD:
-			//pAct = new ActionLoad(this);
+		case LOAD:
+			pAct = new ActionLoad(this);
 		case EXIT:
 			//TODO: create ExitAction here
 			break;
@@ -190,6 +192,10 @@ double ApplicationManager::CalculateCurrent() {
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
+}
+void ApplicationManager::load(int*, string*, double*, GraphicsInfo*)
+{
+
 }
 
 ////////////////////////////////////////////////////////////////////
