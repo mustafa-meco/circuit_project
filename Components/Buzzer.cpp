@@ -27,6 +27,6 @@ string Buzzer::save() const {
 	Point p;
 	p.x = m_pGfxInfo->PointsList[0].x;
 	p.y = m_pGfxInfo->PointsList[0].y;
-	string row =  "BUZ " +m_Label+" " +to_string((int)resistance)+" "+to_string(p.x)+" "+to_string(p.y) ;
+	string row =  "BUZ " + to_string(ID) + " " + m_Label+" " +to_string((int)resistance)+" "+to_string(p.x)+" "+to_string(p.y) ;
 	return row;
 }

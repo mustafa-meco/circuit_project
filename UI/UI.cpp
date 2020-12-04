@@ -108,7 +108,7 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
-			case ITM_EXIT:	return SAVE;	
+			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
 			}

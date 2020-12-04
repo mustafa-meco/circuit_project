@@ -22,6 +22,8 @@ protected:
 	int term1_conn_count;	//actual no. of connections to each terminal
 	int term2_conn_count;
 
+	int ID;
+	static int gID;
 	string m_Label;
 
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
@@ -60,6 +62,7 @@ public:
 	virtual string save() const;
 	//Destructor must be virtual
 	virtual ~Component();
+	
 	
 	
 	//static void selection();

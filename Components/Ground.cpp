@@ -27,6 +27,6 @@ string Ground::save() const {
 	Point p;
 	p.x = m_pGfxInfo->PointsList[0].x;
 	p.y = m_pGfxInfo->PointsList[0].y;
-	string row =  "GND " + m_Label + " " + to_string((int)sourceVoltage) + " " + to_string(p.x) + " " + to_string(p.y);
+	string row =  "GND " + to_string(ID) + " " + m_Label + " " + to_string((int)sourceVoltage) + " " + to_string(p.x) + " " + to_string(p.y);
 	return row;
 }
