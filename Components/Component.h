@@ -57,7 +57,7 @@ public:
 	//void addTerm2Connection(Connection* pConn);
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
-	virtual string* save() const;
+	virtual string save() const;
 	//Destructor must be virtual
 	virtual ~Component();
 	

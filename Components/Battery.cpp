@@ -11,6 +11,11 @@ Battery::Battery(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 	pUI->PrintMsg("Enter the value of the source voltage: ");
 	sourceVoltage = stod(pUI->GetSrting());
 	pUI->ClearStatusBar();
+
+	pUI->PrintMsg("Enter the label: ");
+	m_Label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;
 }
 
 void Battery::Draw(UI* pUI)
@@ -24,10 +29,10 @@ void Battery::Operate()
 
 }
 
-string* Battery::save() const {
+string Battery::save() const {
 	Point p;
 	p.x = m_pGfxInfo->PointsList[0].x;
 	p.y = m_pGfxInfo->PointsList[0].y;
-	string row[] = { "BAT" ,m_Label,to_string(sourceVoltage),to_string(p.x),to_string(p.y) };
+	string row = "BAT " + m_Label +" "+to_string((int)sourceVoltage)+" "+to_string(p.x)+" "+to_string(p.y);
 	return row;
 }

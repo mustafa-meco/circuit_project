@@ -15,8 +15,13 @@ void ActionAddFues::Execute()
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
 
+
 	//Print Action Message
 	pUI->PrintMsg("Adding a new Fues: Click anywhere to add");
+	//Get a Pointer to the user Interfaces
+	
+	//Print Message for label
+	//pUI->PrintLabel("kon");
 
 	//Get Center point of the area where the Comp should be drawn
 	pUI->GetPointClicked(Cx, Cy);
@@ -42,8 +47,9 @@ void ActionAddFues::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Fues* pR = new Fues(pGInfo);
+	Fues* pR = new Fues(pGInfo,  pUI);
 	pManager->AddComponent(pR);
+	
 }
 
 void ActionAddFues::Undo()

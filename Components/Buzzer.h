@@ -5,8 +5,8 @@
 class Buzzer :public Component
 {
 public:
-	Buzzer(GraphicsInfo* r_GfxInfo);
+	Buzzer(GraphicsInfo* r_GfxInfo, UI* pUI);
 	virtual void Draw(UI*);	//Draws buzzer
 	virtual void Operate();
-	string* save() const;
+	string save() const;
 };

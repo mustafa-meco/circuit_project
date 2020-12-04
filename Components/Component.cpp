@@ -60,8 +60,8 @@ double Component::getResistance() {
 	return resistance;
 }
 
-string* Component::save() const {
-	string row[] = { " "," " };
+string Component::save() const {
+	string row =  " ";
 	return row;
 }
 

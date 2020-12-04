@@ -6,6 +6,11 @@ Bulb::Bulb(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 	resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
 	pUI->ClearStatusBar();
 	sourceVoltage = 0;
+
+	pUI->PrintMsg("Enter the label: ");
+	m_Label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;
 }
 
 void Bulb::Draw(UI* pUI)
@@ -20,10 +25,10 @@ void Bulb::Operate()
 
 }
 
-string* Bulb::save() const {
+string Bulb::save() const {
 	Point p;
 	p.x = m_pGfxInfo->PointsList[0].x;
 	p.y = m_pGfxInfo->PointsList[0].y;
-	string row[] = { "BAT" ,m_Label,to_string(sourceVoltage),to_string(p.x),to_string(p.y) };
+	string row =  "BLB " +m_Label+ " "+to_string((int)resistance) + " "+to_string(p.x)+" "+ to_string(p.y) ;
 	return row;
 }

@@ -9,6 +9,7 @@ class Action
 {
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
+	ApplicationManager* plabel;
 public:
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
 	
