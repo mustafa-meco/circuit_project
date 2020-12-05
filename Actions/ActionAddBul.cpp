@@ -29,6 +29,10 @@ void ActionAddBul::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
+
+	pUI->PrintMsg("Enter the value of the resistace: ");
+	double R = stod(pUI->GetSrting());
+
 	//Clear Status Bar
 	pUI->ClearStatusBar();
 
@@ -43,7 +47,7 @@ void ActionAddBul::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 	
-	Bulb* pB = new Bulb(pGInfo, pUI);
+	Bulb* pB = new Bulb(pGInfo, R);
 	
 	pManager->AddComponent(pB);
 }

@@ -1,22 +1,21 @@
 #include "Battery.h"
 //#include "../Electric Circuit Simulator - Code Framework/Components/Component.h" 
 
-Battery::Battery(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
+Battery::Battery(GraphicsInfo* r_GfxInfo, double V) :Component(r_GfxInfo)
 {
 	if (!r_GfxInfo) {
 
 		//resistance = 2; // take battery from user
 		//sourcevoltage = 0;
-		pUI->PrintMsg("Enter the value of the internal resistance: ");
-		resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
-		pUI->ClearStatusBar();
-		pUI->PrintMsg("Enter the value of the source voltage: ");
-		sourceVoltage = stod(pUI->GetSrting());
-		pUI->ClearStatusBar();
+		//pUI->PrintMsg("Enter the value of the internal resistance: ");
+		//resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
+		//pUI->ClearStatusBar();
+		
+		//pUI->ClearStatusBar();
+		sourceVoltage = V;
 
-		pUI->PrintMsg("Enter the label: ");
-		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();
+		//pUI->PrintMsg("Enter the label: ");
+		//m_Label = pUI->GetSrting();
 		sourceVoltage = 0;
 	}
 }

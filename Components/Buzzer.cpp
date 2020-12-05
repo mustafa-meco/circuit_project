@@ -1,16 +1,16 @@
 
 #include "Buzzer.h"
 
-Buzzer::Buzzer(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
+Buzzer::Buzzer(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	if (!r_GfxInfo) {
-		// TODO: Take resistance from user
-		sourceVoltage = 0;
-		pUI->PrintMsg("Enter the label: ");
+		
+		//sourceVoltage = 0;
+		/*pUI->PrintMsg("Enter the label: ");
 		m_Label = pUI->GetSrting();
 		pUI->ClearStatusBar();
 		sourceVoltage = 0;
-	}
+	*/}
 }
 
 void Buzzer::Draw(UI* pUI)

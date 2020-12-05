@@ -1,12 +1,11 @@
 #include "Switch.h"
 #include <string>
 
-Switch::Switch(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
+Switch::Switch(GraphicsInfo* r_GfxInfo, bool S) :Component(r_GfxInfo)
 {
 	if (!r_GfxInfo){
-		pUI->PrintMsg("Enter the value of the switch (0: opened, 1: closed)");
-		status = static_cast<bool>(stoi(pUI->GetSrting()));
-		pUI->ClearStatusBar();
+		status = S;
+		
 
 		pUI->PrintMsg("Enter the label: ");
 		m_Label = pUI->GetSrting();

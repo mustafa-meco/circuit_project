@@ -28,6 +28,10 @@ void ActionAddRes::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
+
+	pUI->PrintMsg("Enter the value of the resistace: ");
+	double R = stod(pUI->GetSrting());
+
 	//Clear Status Bar
 	pUI->ClearStatusBar();	
 	
@@ -43,7 +47,7 @@ void ActionAddRes::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth/2;
 	pGInfo->PointsList[1].y = Cy + compHeight/2;
 
-	Resistor* pR = new Resistor(pGInfo, pUI);
+	Resistor* pR = new Resistor(pGInfo, R);
 	pManager->AddComponent(pR);
 }
 

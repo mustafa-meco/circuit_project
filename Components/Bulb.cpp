@@ -1,18 +1,16 @@
 #include "Bulb.h"
 
-Bulb::Bulb(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
+Bulb::Bulb(GraphicsInfo* r_GfxInfo, double R) :Component(r_GfxInfo)
 {
 	if (!r_GfxInfo) {
 
-		pUI->PrintMsg("Enter the value of the resistace: ");
-		resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
-		pUI->ClearStatusBar();
-		sourceVoltage = 0;
+		resistance = R;
+		//sourceVoltage = 0;
 
-		pUI->PrintMsg("Enter the label: ");
-		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();
-		sourceVoltage = 0;
+		/*pUI->PrintMsg("Enter the label: ");
+		m_Label = pUI->GetSrting();*/
+		
+		//sourceVoltage = 0;
 	}
 }
 

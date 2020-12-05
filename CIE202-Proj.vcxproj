@@ -118,6 +118,7 @@
     <ClCompile Include="Actions\ActionAddGro.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwi.cpp" />
+    <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
@@ -166,7 +167,6 @@
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ActionLoad.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +179,7 @@
     <ClInclude Include="Actions\ActionAddGro.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwi.h" />
+    <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
     <ClInclude Include="ApplicationManager.h" />
@@ -211,7 +212,6 @@
     <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />
     <ClInclude Include="Defs.H" />
-    <ClInclude Include="ActionLoad.h" />
     <ClInclude Include="UI\UI.h" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 class Fues :public Component
 {
 public:
-	Fues(GraphicsInfo* r_GfxInfo, UI* pUI);
+	Fues(GraphicsInfo* r_GfxInfo, double);
 	virtual void Draw(UI*);	//Drawsfues
 	virtual void Operate();
 	string save() const;

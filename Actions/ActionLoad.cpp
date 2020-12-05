@@ -95,66 +95,55 @@ void ActionLoad::Execute()
 
 		/*pGInfo->PointsList[0].x = stoi(arrCOORDINATES1[j]) + j;
 		pGInfo->PointsList[0].y = stoi(arrCOORDINATES2[j]) + j;*/
-
+		
+		GraphicsInfo* pGInfo5 = new GraphicsInfo(2);
+		pGInfo5->PointsList[0].x = stoi(arrCOORDINATES1[j]);
+		pGInfo5->PointsList[0].y = stoi(arrCOORDINATES2[j]);
+		pGInfo5->PointsList[1].x = pGInfo5->PointsList[0].x + pUI->getCompWidth();
+		pGInfo5->PointsList[1].y = pGInfo5->PointsList[0].y + pUI->getCompHeight();
 		if (arrName[j] == "RES")
 		{
-			GraphicsInfo* pGInfo1 = new GraphicsInfo(1);
-			pGInfo1->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo1->PointsList[0].y = stoi(arrCOORDINATES2[j]);
-			Resistor* pR = new Resistor(pGInfo1, pUI);
+		
+			Resistor* pR = new Resistor(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 		}
 		else if (arrName[j] == "SWT")
 		{
-			GraphicsInfo* pGInfo2 = new GraphicsInfo(1);
-			pGInfo2->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo2->PointsList[0].y = stoi(arrCOORDINATES2[j]);
-			Switch* pR = new Switch(pGInfo2, pUI);
+
+			Switch* pR = new Switch(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "BAT")
 		{
-			GraphicsInfo* pGInfo3 = new GraphicsInfo(1);
-			pGInfo3->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo3->PointsList[0].y = stoi(arrCOORDINATES2[j]);
-			Battery* pR = new Battery(pGInfo3, pUI);
+
+			Battery* pR = new Battery(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "BLB")
 		{
-			GraphicsInfo* pGInfo4 = new GraphicsInfo(1);
-			pGInfo4->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo4->PointsList[0].y = stoi(arrCOORDINATES2[j]);
-			Bulb* pR = new Bulb(pGInfo4, pUI);
+
+			Bulb* pR = new Bulb(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "GND")
 		{
-			GraphicsInfo* pGInfo5 = new GraphicsInfo(1);
-			pGInfo5->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo5->PointsList[0].y = stoi(arrCOORDINATES2[j]);
+
 			Ground* pR = new Ground(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "FUS")
 		{
-			GraphicsInfo* pGInfo6 = new GraphicsInfo(1);
-			pGInfo6->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo6->PointsList[0].y = stoi(arrCOORDINATES2[j]);
-			Fues* pR = new Fues(pGInfo6, pUI);
+			Fues* pR = new Fues(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 
 		}
 		else // (arrName[j] == "BUZ")
 		{
-			GraphicsInfo* pGInfo7 = new GraphicsInfo(1);
-			pGInfo7->PointsList[0].x = stoi(arrCOORDINATES1[j]);
-			pGInfo7->PointsList[0].y = stoi(arrCOORDINATES2[j]);
-			Buzzer* pR = new Buzzer(pGInfo7, pUI);
+			Buzzer* pR = new Buzzer(pGInfo5, pUI);
 			pManager->AddComponent(pR);
 		}
 		/*		 pUI->PrintMsg(arr[j]);

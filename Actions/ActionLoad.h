@@ -3,7 +3,7 @@
 using namespace std;
 #include <fstream>
 #include "Actions/Action.h"
-#include "..\circuit_project\ApplicationManager.h"
+#include "ApplicationManager.h"
 #include "ActionLoad.h"
 #include "UI/UI.h"
 #include <string>

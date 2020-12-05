@@ -8,7 +8,7 @@
 class Ground :public Component
 {
 public:
-	Ground(GraphicsInfo* r_GfxInfo, UI* pUI); 
+	Ground(GraphicsInfo* r_GfxInfo); 
 	virtual void Draw(UI*);	//Draws the ground
 	virtual void Operate();
 	string save() const;
