@@ -30,7 +30,7 @@ protected:
 	static Component* pcomp;
 public:
 	Component(GraphicsInfo *r_GfxInfo);
-	Component();
+	
 	//void setTerm1Volt(double v);		//sets the voltage at terminal1
 	//void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1
@@ -52,11 +52,12 @@ public:
 
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
+	int getID() const;  
+
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
 	void addTerm1Connection(Connection* pConn); //musta
 	void addTerm2Connection(Connection* pConn);
-	//void addTerm1Connection(Connection* pConn);
-	//void addTerm2Connection(Connection* pConn);
+
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 	virtual string save() const;

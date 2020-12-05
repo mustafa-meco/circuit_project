@@ -66,7 +66,7 @@ public:
 	double CalculateCurrent();
 	void CalculateVoltages(double current);
 	//void save(ActionType);
-	string* save(int&) const;
+	string* save(int&,int&) const;
 	//destructor
 	~ApplicationManager();
 };

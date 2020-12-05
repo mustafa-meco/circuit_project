@@ -47,8 +47,9 @@ class UI
 		ITM_BUZ,
 		ITM_FUE,
 		//ITM_CON1,
-		ITM_CON, 
+		ITM_CON,
 		ITM_SIM,
+		ITM_SAVE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum

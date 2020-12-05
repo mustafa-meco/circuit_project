@@ -10,12 +10,6 @@ Component::Component(GraphicsInfo *r_GfxInfo)
 	ID = ++gID;
 }
 
-Component::Component()
-{
-	m_pGfxInfo = nullptr;
-	term1_volt = term2_volt = 0;
-	term1_conn_count = term2_conn_count = 0;
-}
 
 Component::~Component()
 {
@@ -66,7 +60,9 @@ string Component::save() const {
 	return row;
 }
  
-
+int Component::getID() const {
+	return ID;
+}
 
 Component* Component::pcomp = nullptr;
 int Component::gID = 0;
