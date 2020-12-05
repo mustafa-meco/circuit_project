@@ -21,6 +21,8 @@ class ActionLoad : public Action
 	string filename;
 	int ComID;
 	string input;
+	Component* comp01; 
+	Component* comp02; 
 public :
 	ActionLoad(ApplicationManager* pApp);
 

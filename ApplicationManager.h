@@ -66,10 +66,10 @@ public:
 	double CalculateCurrent();
 	void CalculateVoltages(double current);
 	//void save(ActionType);
-	string* getSaved(int&,int&);
+	string* save(int&) const;
 	//destructor
 	~ApplicationManager();
-	void load(int*, string * , double *, GraphicsInfo *);   
+	void load( string * , double* , Component**, Component** );     
 };
 
 #endif

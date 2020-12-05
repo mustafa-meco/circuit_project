@@ -75,6 +75,7 @@ string UI::GetSrting()
 		};
 		
 		PrintMsg(userInput);
+		//PrintLabel(userInput);
 	}
 
 }
@@ -189,18 +190,18 @@ void UI::PrintMsg(string msg) const
 
 
 
-void UI::PrintLabel(string msg) const
+/*void UI::PrintLabel(string msg) const
 {
 	ClearStatusBar();	//Clear Status bar to print message on it
 	// Set the Message offset from the Status Bar
-	int MsgX = 1;
+	int MsgX = 25;
 	int MsgY = StatusBarHeight - 10;
 
 	// Print the Message
 	pWind->SetFont(200, BOLD | ITALICIZED, BY_NAME, "Arial");
 	pWind->SetPen(MsgColor);
 	pWind->DrawString(MsgX, height - MsgY, msg);
-}
+}*/
 //////////////////////////////////////////////////////////////////////////////////
 void UI::ClearStatusBar()const
 {
@@ -253,7 +254,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
 	//MenuItemImages[ITM_CON1] = "Images\\Menu\\Menu_Connection.jpg";
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";
-	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Load.jpg";
+	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
@@ -321,7 +322,7 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
 	if (selected)
-		SwiImage = "Images\\Comp\\Resistor_HI.jpg";	//use image of highlighted bulb
+		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted bulb
 	else
 		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal bulb
 

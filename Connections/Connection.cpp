@@ -8,8 +8,12 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 }
 void Connection::Draw(UI* pUI)
 {
-	
-	
-		pUI->DrawConnection(*pGfxInfo );
+		pUI->DrawConnection(*pGfxInfo ); 
 }
-  
+void Connection::load( Component* C1, Component* C2)
+{
+	Comp1 = C1;
+	Comp2 = C2;
+
+}
+

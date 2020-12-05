@@ -9,7 +9,6 @@
 class Component
 {
 private:
-	string m_Label;
 	
 protected:
 	//Each component has two ending terminals (term1, term2)
@@ -22,6 +21,10 @@ protected:
 
 	int term1_conn_count;	//actual no. of connections to each terminal
 	int term2_conn_count;
+
+	int ID;
+	static int gID;
+	string m_Label;
 
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 	static Component* pcomp;
@@ -55,12 +58,11 @@ public:
 	//void addTerm1Connection(Connection* pConn);
 	//void addTerm2Connection(Connection* pConn);
 
-	TerminalNum whichTerminal(Connection* Conn);
-	// returns the terminal to which a connection is connected
-
+	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
+	virtual string save() const;
 	//Destructor must be virtual
 	virtual ~Component();
-	virtual void load( int, string, double ,GraphicsInfo); 
+	virtual void load( int, string, double ); 
 	
 	//static void selection();
 	

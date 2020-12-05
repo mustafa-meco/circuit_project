@@ -162,7 +162,6 @@
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Fues.cpp" />
     <ClCompile Include="Components\Ground.cpp" />
-    <ClCompile Include="Components\Label.cpp" />
     <ClCompile Include="Components\Resistor.cpp" />
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />

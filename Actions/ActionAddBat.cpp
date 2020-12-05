@@ -17,7 +17,7 @@ void ActionAddBat::Execute()
 	UI* pUI = pManager->GetUI();
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new ground: Click anywhere to add");
+	pUI->PrintMsg("Adding a new battery: Click anywhere to add");
 
 	//Get Center point of the area where the Comp should be drawn
 	

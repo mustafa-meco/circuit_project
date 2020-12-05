@@ -112,9 +112,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SELECT:
 			pAct = new ActionSelect(this);
 			break;
-		/*case SAVE:
+		case SAVE:
 			pAct = new ActionSave(this);
-			break;*/
+			break;
 		case SIM_MODE:
 			ToSimulation();
 			break;
@@ -137,6 +137,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 }
 ////////////////////////////////////////////////////////////////////
 
+string* ApplicationManager::save(int& c) const {
+	c = CompCount;
+	string* compData = new string[CompCount];
+	for (int i = 0; i < CompCount; i++)
+		compData[i] = CompList[i]->save();
+	//for (int i = 0; i < ConnCount; i++)
+		//ConnList[i]->save();
+	return compData;
+}
+
 void ApplicationManager::UpdateInterface()
 {
 	for(int i=0; i<CompCount; i++)
@@ -156,12 +166,6 @@ bool ApplicationManager::ValidateCircuit() {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////
-/*Component* GetComponentByCordinates(int x, int y) {
-
-}*/
-
-////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////
@@ -193,9 +197,12 @@ double ApplicationManager::CalculateCurrent() {
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
 }
-void ApplicationManager::load(int*, string*, double*, GraphicsInfo*)
+void ApplicationManager::load( string* labeli , double* valueI, Component** comp001 , Component** comp002)
 {
-
+	for (int i = 0; i < CompCount; i++)
+		CompList[i]->load(i+1,labeli[i], valueI[i] );
+	for (int i = 0; i < ConnCount; i++)
+		ConnList[i]->load(comp001[i], comp002[i]);  
 }
 
 ////////////////////////////////////////////////////////////////////

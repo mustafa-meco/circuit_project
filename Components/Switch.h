@@ -7,6 +7,9 @@ public:
 	Switch(GraphicsInfo* r_GfxInfo, UI* pUI);
 	virtual void Draw(UI*);	//Draws the bulb
 	virtual void Operate();
+	string save() const;
+	void load(int id ,string, double);
+
 };
 
 

@@ -43,7 +43,7 @@ void ActionAddBuz::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Buzzer* pR = new Buzzer(pGInfo, pUI); 
+	Buzzer* pR = new Buzzer(pGInfo, pUI);
 	pManager->AddComponent(pR);
 }
 

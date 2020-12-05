@@ -81,11 +81,11 @@ void ActionAddCon::Execute()
 	//pGInfo->PointsList[1].x = Cx2;
 	//pGInfo->PointsList[1].y = Cy2;
 
-	Connection* pCON = new Connection(pGInfo, comp1, comp2);
+	Connection* pCON = new Connection(pGInfo, comp1, comp2); /////////////////////
 	//pUI->PrintMsg(to_string(comp1->getResistance()));
 
 	//pUI->DrawConnection(*pGInfo);
-	pManager->AddConnection(pCON);  
+	pManager->AddConnection(pCON);  ///////////////////////////////
 } 
 
 

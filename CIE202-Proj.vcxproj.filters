@@ -53,13 +53,19 @@
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Fues.cpp" />
     <ClCompile Include="Components\Ground.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Components\Label.cpp" />
+=======
+>>>>>>> 5e92744f9226b1830c4952d73bfe211477677d90
     <ClCompile Include="Components\Resistor.cpp" />
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\UI.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="ActionLoad.cpp" />
+=======
+>>>>>>> 5e92744f9226b1830c4952d73bfe211477677d90
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -104,7 +110,10 @@
     <ClInclude Include="Connections\Connection.h" />
     <ClInclude Include="Defs.H" />
     <ClInclude Include="UI\UI.h" />
+<<<<<<< HEAD
     <ClInclude Include="ActionLoad.h" />
+=======
+>>>>>>> 5e92744f9226b1830c4952d73bfe211477677d90
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

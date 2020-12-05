@@ -11,4 +11,6 @@ public:
 	Ground(GraphicsInfo* r_GfxInfo, UI* pUI); 
 	virtual void Draw(UI*);	//Draws the ground
 	virtual void Operate();
+	string save() const;
+	void load(int id, string LABELi, double VALUE);
 };

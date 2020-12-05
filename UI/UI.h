@@ -137,10 +137,11 @@ public:
 	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	//void DrawConnection1(const GraphicsInfo& r_GfxInfo, bool selected = false) const; 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
+	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   //,bool selected
 
-	void PrintLabel(string msg) const;
+	
 	~UI();
 };
 

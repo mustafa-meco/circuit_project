@@ -8,4 +8,6 @@ public:
 	Buzzer(GraphicsInfo* r_GfxInfo, UI* pUI);
 	virtual void Draw(UI*);	//Draws buzzer
 	virtual void Operate();
+	string save() const;
+	void load(int id,string LABELi, double VALUE);
 };
