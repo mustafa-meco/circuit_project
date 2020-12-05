@@ -12,8 +12,8 @@ ActionSave::~ActionSave()
 
 void ActionSave::Execute() {
 	UI* pUI = pManager->GetUI();
-	int CompCount;
-	string* data = pManager->save(CompCount);
+	int CompCount, ConnCount;
+	string* data = pManager->save(CompCount, ConnCount);
 
 	
 
@@ -21,12 +21,15 @@ void ActionSave::Execute() {
 	string folder = pUI->GetSrting();
 		
 	ofstream outFile;
-	outFile.open(folder + ".txt");
+	outFile.open(folder);
 
 	outFile << CompCount << endl;
 	for (int i = 0 ; i<CompCount;i++)
 		outFile << data[i] << endl;
 	outFile << "Connections" << endl;
+	outFile << ConnCount << endl;
+	for (int i = 0; i < CompCount; i++)
+		outFile << data[i+CompCount] << endl;
 
 	/*for (int i = 1; i <= CompCount; i++) {
 		outFile << data[i - 1][0] + " " + to_string(i);

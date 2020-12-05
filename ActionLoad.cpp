@@ -20,7 +20,7 @@ void ActionLoad::Execute()
 	pUI->PrintMsg("Enter the file name : ");
 	filename = pUI->GetSrting();
 	//inFile.open(filename);
-	inFile.open("D:\\" + filename);
+	inFile.open(filename);
 	while (!inFile)
 	{
 		pUI->PrintMsg("Enter the file name : ");

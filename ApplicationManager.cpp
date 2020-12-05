@@ -137,13 +137,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 }
 ////////////////////////////////////////////////////////////////////
 
-string* ApplicationManager::save(int& c) const {
-	c = CompCount;
-	string* compData = new string[CompCount];
+string* ApplicationManager::save(int& cp,int& cn) const {
+	cp = CompCount;
+	cn = ConnCount;
+	string* compData = new string[CompCount+ConnCount];
 	for (int i = 0; i < CompCount; i++)
 		compData[i] = CompList[i]->save();
-	//for (int i = 0; i < ConnCount; i++)
-		//ConnList[i]->save();
+	for (int i = 0; i < ConnCount; i++)
+		compData[i+CompCount] = ConnList[i]->save();
 	return compData;
 }
 

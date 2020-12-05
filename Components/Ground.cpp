@@ -3,16 +3,15 @@
 
 Ground::Ground(GraphicsInfo* r_GfxInfo, UI* pUI) :Component(r_GfxInfo)
 {
-	if (!r_GfxInfo) {
-		resistance = 0;
-		sourceVoltage = 0;
-		pUI->PrintMsg("Enter the label: ");
-		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();
-		sourceVoltage = 0;
-	}
-
+	resistance = 0; 
+	//sourceVoltage = 0;
+	pUI->PrintMsg("Enter the label: ");
+	m_Label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;
 }
+
+
 
 void Ground::Draw(UI* pUI)
 {
