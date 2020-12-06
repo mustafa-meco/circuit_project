@@ -3,6 +3,14 @@
 Bulb::Bulb(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	
+
+		resistance = 2;
+		//sourceVoltage = 0;
+
+		/*pUI->PrintMsg("Enter the label: ");
+		m_Label = pUI->GetSrting();*/
+		
+		//sourceVoltage = 0;
 }
 
 void Bulb::Draw(UI* pUI)

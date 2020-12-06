@@ -2,6 +2,20 @@
 
 Battery::Battery(GraphicsInfo* r_GfxInfo ) :Component(r_GfxInfo)
 {
+	//if (!r_GfxInfo) {
+
+		//resistance = 2; // take battery from user
+		//sourcevoltage = 0;
+		//pUI->PrintMsg("Enter the value of the internal resistance: ");
+		//resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
+		//pUI->ClearStatusBar();
+		
+		//pUI->ClearStatusBar();
+		sourceVoltage = 2;
+
+		//pUI->PrintMsg("Enter the label: ");
+		//m_Label = pUI->GetSrting();
+		
 	
 }
 
