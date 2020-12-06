@@ -1,17 +1,17 @@
 #include "Bulb.h"
 
-Bulb::Bulb(GraphicsInfo* r_GfxInfo, double R) :Component(r_GfxInfo)
+Bulb::Bulb(GraphicsInfo* r_GfxInfo/*, double R*/) :Component(r_GfxInfo)
 {
-	if (!r_GfxInfo) {
+	//if (!r_GfxInfo) {
 
-		resistance = R;
+		//resistance = R;
 		//sourceVoltage = 0;
 
 		/*pUI->PrintMsg("Enter the label: ");
 		m_Label = pUI->GetSrting();*/
 		
 		//sourceVoltage = 0;
-	}
+	//}
 }
 
 void Bulb::Draw(UI* pUI)

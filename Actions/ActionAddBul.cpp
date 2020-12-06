@@ -47,7 +47,7 @@ void ActionAddBul::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 	
-	Bulb* pB = new Bulb(pGInfo, R);
+	Bulb* pB = new Bulb(pGInfo/*, R*/);
 	
 	pManager->AddComponent(pB);
 }

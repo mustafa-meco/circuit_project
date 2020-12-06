@@ -104,46 +104,46 @@ void ActionLoad::Execute()
 		if (arrName[j] == "RES")
 		{
 		
-			Resistor* pR = new Resistor(pGInfo5, pUI);
+			Resistor* pR = new Resistor(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 		}
 		else if (arrName[j] == "SWT")
 		{
 
-			Switch* pR = new Switch(pGInfo5, pUI);
+			Switch* pR = new Switch(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "BAT")
 		{
 
-			Battery* pR = new Battery(pGInfo5, pUI);
+			Battery* pR = new Battery(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "BLB")
 		{
 
-			Bulb* pR = new Bulb(pGInfo5, pUI);
+			Bulb* pR = new Bulb(pGInfo5 /*, pUI*/);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "GND")
 		{
 
-			Ground* pR = new Ground(pGInfo5, pUI);
+			Ground* pR = new Ground(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "FUS")
 		{
-			Fues* pR = new Fues(pGInfo5, pUI);
+			Fues* pR = new Fues(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 
 		}
 		else // (arrName[j] == "BUZ")
 		{
-			Buzzer* pR = new Buzzer(pGInfo5, pUI);
+			Buzzer* pR = new Buzzer(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 		}
 		/*		 pUI->PrintMsg(arr[j]);
