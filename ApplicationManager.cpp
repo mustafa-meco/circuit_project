@@ -5,11 +5,14 @@
 #include "Actions\ActionAddBuz.h"
 #include "Actions\ActionAddFues.h"
 #include "Actions/ActionAddCon.h"
+#include "Actions/ActionEdit.h"
 #include "Actions/ActionSave.h"
 //#include "ActionLoad.h"
 #include "Actions/ActionLoad.h"
 //#include "Actions/ActionSave.h"
 #include "Actions/ActionSelect.h"
+#include "Actions/ActionExit.h"
+#include "Actions/ActionLabel.h"
 #include <iostream>
 using namespace std;
 
@@ -30,6 +33,7 @@ ApplicationManager::ApplicationManager()
 
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
+
 }
 ////////////////////////////////////////////////////////////////////
 //void ApplicationManager::save(ActionType act) {
@@ -72,6 +76,22 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y)
 	return nullptr;
 }
 
+/// //////////////////////////////////////////////////////////////////////////////
+
+Connection* ApplicationManager::GetConnectionByCordinates(int x, int y)
+{
+
+	for (int i = 0; i < ConnCount; i++)
+	{
+		if (ConnList[i]->IsInRegion(x, y, pUI) == true)
+		{
+			return	ConnList[i];
+		}
+
+	}
+	return nullptr;
+}
+
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
@@ -106,6 +126,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUES:
 			pAct = new ActionAddFues(this);
 			break;
+		case EDIT_Label:
+			pAct = new ActionEdit(this);
+			break;
+		case ADD_Label:
+			pAct = new  ActionLabel(this);
+			break;
 	    case ADD_CONNECTION: 
 			pAct = new ActionAddCon(this);   
 			break; 
@@ -123,8 +149,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case LOAD:
 			pAct = new ActionLoad(this);
+			break;
 		case EXIT:
-			//TODO: create ExitAction here
+			pAct = new ActionExit(this);           //TODO: create ExitAction here
 			break;
 	}
 	if(pAct)
@@ -150,10 +177,16 @@ string* ApplicationManager::save(int& cp,int& cn) const {
 
 void ApplicationManager::UpdateInterface()
 {
-	for(int i=0; i<CompCount; i++)
-		CompList[i]->Draw(pUI);
-	for (int i = 0; i < ConnCount; i++)
-		ConnList[i]->Draw(pUI);
+	//if (CompCount) 
+	//{
+		for (int i = 0; i < CompCount; i++)
+			CompList[i]->Draw(pUI);
+		for (int i = 0; i < ConnCount; i++)
+			ConnList[i]->Draw(pUI);
+		
+	//}
+	//else
+//Exit()
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -209,5 +242,43 @@ void ApplicationManager::load( string* labeli , double* valueI, Component** comp
 ////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()
 {
+	for (int i = 0; i < ConnCount; i++)
+		delete ConnList[i];
+	for (int i = 0; i < CompCount; i++)
+		delete CompList[i];
+
+	ConnCount = 0;
+	CompCount = 0;
+	pUI->ClearAll();
+
 	// TODO
 }
+///////////////////////////////////////////////////////////////////
+//void ApplicationManager::Exit()
+//{
+//	for (int i=0 ; i < ConnCount; i++)
+//		delete ConnList[i];
+//	for (int i=0 ; i < CompCount; i++)
+//		delete CompList[i];
+//	
+//	ConnCount = 0;
+//	CompCount = 0;
+//	
+//	pUI->ClearAll();
+//	pUI->Dra
+//
+//
+//
+//
+//	
+//    CompList = nullptr;
+//    delete GetUI();
+//	GetUI() = nullptr;
+//    /*delete pConn;
+//	pConn = nullptr;
+//	delete pComp;
+//	pComp = nullptr;*/
+//	/*delete GetConnectionByCordinates();
+//	delete GetComponentByCordinates();*/
+//
+//}

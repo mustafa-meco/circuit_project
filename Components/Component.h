@@ -5,12 +5,15 @@
 #include "..\UI\UI.h"
 #include "..\Connections\Connection.h"
 
+
 //Base class for all components (resistor, capacitor,....etc) .
 class Component
 {
 private:
+
 	
 protected:
+	
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
 	double resistance, sourceVoltage; // internal resistance and voltage jump introduced by source
@@ -25,7 +28,7 @@ protected:
 	int ID;
 	static int gID;
 	string m_Label;
-
+	int choose;
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 	static Component* pcomp;
 public:
@@ -57,6 +60,12 @@ public:
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
 	void addTerm1Connection(Connection* pConn); //musta
 	void addTerm2Connection(Connection* pConn);
+
+	//void addTerm1Connection(Connection* pConn);
+	//void addTerm2Connection(Connection* pConn);
+	
+	string Setlabel(string input);
+	string getlabel();
 
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected

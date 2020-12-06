@@ -59,6 +59,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\UI.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
+    <ClCompile Include="Actions\ActionExit.cpp" />
+    <ClCompile Include="Actions\ActionLabel.cpp" />
+    <ClCompile Include="Actions\ActionEdit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -104,6 +107,9 @@
     <ClInclude Include="Defs.H" />
     <ClInclude Include="UI\UI.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionExit.h" />
+    <ClInclude Include="Actions\ActionLabel.h" />
+    <ClInclude Include="Actions\ActionEdit.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

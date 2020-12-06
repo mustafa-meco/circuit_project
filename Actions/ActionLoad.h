@@ -10,12 +10,12 @@ using namespace std;
 #include "../Components/Battery.h"
 #include "../Components/Bulb.h"
 #include "../Components/Buzzer.h"
-#include  "../Components/Component.h"
+#include "../Components/Component.h"
 #include "../Components/Fues.h"
 #include "../Components/Ground.h"
 #include "../Components/Resistor.h"
-#include "../Components/Switch.h"
 
+#include "../Components/Switch.h"
 class ActionLoad : public Action
 {
 	string filename;

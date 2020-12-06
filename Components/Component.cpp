@@ -16,12 +16,20 @@ Component::~Component()
 }
 bool Component::isInRegion(int x, int y, UI* pUI)
 {
-	if (m_pGfxInfo->PointsList[0].x < x && m_pGfxInfo->PointsList[1].x > x&& m_pGfxInfo->PointsList[0].y < y && m_pGfxInfo->PointsList[1].y > y)
+	if (m_pGfxInfo->PointsList[0].x < x &&
+		m_pGfxInfo->PointsList[1].x > x &&
+		m_pGfxInfo->PointsList[0].y < y &&
+		m_pGfxInfo->PointsList[1].y > y)
 	{
 		pcomp = this;
 		return true;
 	}
+	else
+		pcomp = nullptr;
+		return false;
+	
 }
+Component* Component::pcomp = nullptr;
 //Connection** getTermConnections(TerminalNum Term)
 //{
 //
@@ -69,5 +77,17 @@ void Component::load(int ,string, double)
 }
 
 
-Component* Component::pcomp = nullptr;
+
+
+string Component :: getlabel()
+{
+	return m_Label;
+}
+string Component::Setlabel(string input)
+{
+	m_Label = input;
+	return m_Label;
+}
+
 int Component::gID = 0;
+

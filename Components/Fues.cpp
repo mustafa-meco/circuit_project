@@ -2,6 +2,14 @@
 
 Fues::Fues(GraphicsInfo* r_GfxInfo/*, double R*/) :Component(r_GfxInfo) 
 {
+
+	resistance = 2; 
+	sourceVoltage = 0;
+	//pUI->PrintMsg("Enter the label: ");
+	//m_Label = pUI->GetSrting();
+	//pUI->ClearStatusBar();
+	//sourceVoltage = 0;
+
 	//if (!r_GfxInfo) {
 	//	resistance = R;
 	//	//sourceVoltage = 0;
@@ -10,6 +18,7 @@ Fues::Fues(GraphicsInfo* r_GfxInfo/*, double R*/) :Component(r_GfxInfo)
 	//	//pUI->ClearStatusBar();
 	//	//sourceVoltage = 0;
 	//}
+
 }
 
 void Fues::Draw(UI* pUI)

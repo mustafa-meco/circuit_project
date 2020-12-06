@@ -118,6 +118,9 @@
     <ClCompile Include="Actions\ActionAddGro.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwi.cpp" />
+    <ClCompile Include="Actions\ActionEdit.cpp" />
+    <ClCompile Include="Actions\ActionExit.cpp" />
+    <ClCompile Include="Actions\ActionLabel.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
@@ -179,6 +182,9 @@
     <ClInclude Include="Actions\ActionAddGro.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwi.h" />
+    <ClInclude Include="Actions\ActionEdit.h" />
+    <ClInclude Include="Actions\ActionExit.h" />
+    <ClInclude Include="Actions\ActionLabel.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />

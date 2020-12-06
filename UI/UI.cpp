@@ -80,6 +80,9 @@ string UI::GetSrting()
 
 }
 
+
+
+
 //This function reads the position where the user clicks to determine the desired action
 ActionType UI::GetUserAction() const
 {	
@@ -108,8 +111,12 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
+
+			case ITM_EDIT:  return EDIT_Label;
+			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
+
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -235,6 +242,16 @@ void UI::ClearDrawingArea() const
 	pWind->DrawRectangle(0, ToolBarHeight, width, height - StatusBarHeight);
 	
 }
+///////////////////////////////////////////////////////////////////////////////////////////
+void UI::ClearAll()const
+{
+	ClearDrawingArea();
+	ClearToolBar();
+	ClearStatusBar();
+	pWind->SetPen(WHITE,1000000);
+	pWind->DrawLine(0, height - StatusBarHeight, width, height - StatusBarHeight);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -256,7 +273,12 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
+
+	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
+	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
+
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
+
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -402,27 +424,28 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 //
 //	//TODO: Add code to draw connection
 //}
-void UI::DrawConnection(const GraphicsInfo& r_GfxInfo ) const //bool selected
+void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const //bool selected
 {
-	//TODO: Add code to draw connection
-	
-	//if (selected)
-	//{
-		//if (AppMode == DESIGN)	//application is in design mode
-		{
-
-			//if (r_GfxInfo.PointsList[0].y > ToolBarHeight && r_GfxInfo.PointsList[0].y < height - StatusBarHeight && r_GfxInfo.PointsList[1].y > ToolBarHeight && r_GfxInfo.PointsList[1].y < height - StatusBarHeight)
-			//{
-				pWind->SetPen(BLACK, 2);
-				pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
-
-			//}
-
-
-		}
-	//}
-
+	if (selected==true)
+	//if (AppMode == DESIGN)	//application is in design mode
+	{
+		//if (r_GfxInfo.PointsList[0].y > ToolBarHeight && r_GfxInfo.PointsList[0].y < height - StatusBarHeight && r_GfxInfo.PointsList[1].y > ToolBarHeight && r_GfxInfo.PointsList[1].y < height - StatusBarHeight)
+		pWind->SetPen(PINK, 3);
+		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+	}
+	else
+	{
+		pWind->SetPen(BLACK, 3);
+		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+	}	
 }
+void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo) 
+{
+	pWind->SetPen(WHITE, 3);
+	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+}
+
+
 
 
 UI::~UI()

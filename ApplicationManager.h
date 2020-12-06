@@ -15,7 +15,8 @@
 class ApplicationManager
 {
 
-	enum {
+	enum 
+	{
 		MaxCompCount = 200,
 		MaxConnCount = 1000
 	};	//Max no of components and connectors
@@ -58,7 +59,7 @@ public:
 	void AddConnection(Connection* pConn);
 
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
-
+	Connection* GetConnectionByCordinates(int x, int y);
 	// Simulation Mode Functions
 	bool ValidateCircuit();
 	void ToSimulation(); // Switches to simulation mode
@@ -69,6 +70,7 @@ public:
 	string* save(int&,int&) const;
 	//destructor
 	~ApplicationManager();
+		void Exit();
 	void load( string * , double* , Component**, Component** );     
 };
 
