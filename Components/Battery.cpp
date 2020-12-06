@@ -1,9 +1,9 @@
 #include "Battery.h"
 //#include "../Electric Circuit Simulator - Code Framework/Components/Component.h" 
 
-Battery::Battery(GraphicsInfo* r_GfxInfo, double V) :Component(r_GfxInfo)
+Battery::Battery(GraphicsInfo* r_GfxInfo /*, double V*/) :Component(r_GfxInfo)
 {
-	if (!r_GfxInfo) {
+	//if (!r_GfxInfo) {
 
 		//resistance = 2; // take battery from user
 		//sourcevoltage = 0;
@@ -17,7 +17,7 @@ Battery::Battery(GraphicsInfo* r_GfxInfo, double V) :Component(r_GfxInfo)
 		//pUI->PrintMsg("Enter the label: ");
 		//m_Label = pUI->GetSrting();
 		
-	}
+	
 }
 
 void Battery::Draw(UI* pUI)

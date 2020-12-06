@@ -1,17 +1,17 @@
 #include "Resistor.h"
 #include <string>
 
-Resistor::Resistor(GraphicsInfo* r_GfxInfo,double R) :Component(r_GfxInfo)
+Resistor::Resistor(GraphicsInfo* r_GfxInfo/*,double R*/) :Component(r_GfxInfo)
 {
-	if (!r_GfxInfo) {
-		resistance = R;
+	//if (!r_GfxInfo) {
+	//	resistance = R;
 
 
-		/*pUI->PrintMsg("Enter the label: ");
-		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();
-		sourceVoltage = 0;*/
-	}
+	//	/*pUI->PrintMsg("Enter the label: ");
+	//	m_Label = pUI->GetSrting();
+	//	pUI->ClearStatusBar();
+	//	sourceVoltage = 0;*/
+	//}
 }
 
 void Resistor::Draw(UI* pUI)

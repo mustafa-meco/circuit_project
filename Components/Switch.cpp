@@ -1,15 +1,15 @@
 #include "Switch.h"
 #include <string>
 
-Switch::Switch(GraphicsInfo* r_GfxInfo, bool S) :Component(r_GfxInfo)
+Switch::Switch(GraphicsInfo* r_GfxInfo/*, bool S*/) :Component(r_GfxInfo)
 {
 	//if (!r_GfxInfo){
-		status = S;
-		
+	//	//status = S;
+	//	
 
-		/*pUI->PrintMsg("Enter the label: ");
-		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();*/
+	//	////pUI->PrintMsg("Enter the label: ");
+	//	//m_Label = pUI->GetSrting();
+	//	//pUI->ClearStatusBar();
 	//}
 	
 }

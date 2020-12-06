@@ -1,6 +1,6 @@
 #include "Bulb.h"
 
-Bulb::Bulb(GraphicsInfo* r_GfxInfo, double R) :Component(r_GfxInfo)
+Bulb::Bulb(GraphicsInfo* r_GfxInfo/*, double R*/) :Component(r_GfxInfo)
 {
 	
 
