@@ -31,12 +31,7 @@ void ActionSave::Execute() {
 	for (int i = 0; i < CompCount; i++)
 		outFile << data[i+CompCount] << endl;
 
-	/*for (int i = 1; i <= CompCount; i++) {
-		outFile << data[i - 1][0] + " " + to_string(i);
-		for (int j = 1; i < 5; j++)
-			outFile << " " + data[i - 1][j];
-		outFile << endl;
-	}*/
+	
 }
 
 void ActionSave::Undo()
