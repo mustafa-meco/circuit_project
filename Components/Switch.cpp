@@ -3,14 +3,14 @@
 
 Switch::Switch(GraphicsInfo* r_GfxInfo, bool S) :Component(r_GfxInfo)
 {
-	if (!r_GfxInfo){
+	//if (!r_GfxInfo){
 		status = S;
 		
 
-		pUI->PrintMsg("Enter the label: ");
+		/*pUI->PrintMsg("Enter the label: ");
 		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();
-	}
+		pUI->ClearStatusBar();*/
+	//}
 	
 }
 

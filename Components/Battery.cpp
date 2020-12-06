@@ -12,11 +12,11 @@ Battery::Battery(GraphicsInfo* r_GfxInfo, double V) :Component(r_GfxInfo)
 		//pUI->ClearStatusBar();
 		
 		//pUI->ClearStatusBar();
-		sourceVoltage = V;
+		sourceVoltage = 2;
 
 		//pUI->PrintMsg("Enter the label: ");
 		//m_Label = pUI->GetSrting();
-		sourceVoltage = 0;
+		
 	}
 }
 

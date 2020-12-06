@@ -3,7 +3,7 @@
 
 Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	resistance = -1; 
+	
 	//sourceVoltage = 0;
 	/*pUI->PrintMsg("Enter the label: ");
 	m_Label = pUI->GetSrting();

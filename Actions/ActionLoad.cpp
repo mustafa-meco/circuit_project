@@ -104,7 +104,7 @@ void ActionLoad::Execute()
 		if (arrName[j] == "RES")
 		{
 		
-			Resistor* pR = new Resistor(pGInfo5, pUI);
+			Resistor* pR = new Resistor(pGInfo5);
 			pManager->AddComponent(pR);
 		}
 		else if (arrName[j] == "SWT")
