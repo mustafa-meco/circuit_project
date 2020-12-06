@@ -265,13 +265,13 @@ void UI::CreateDesignToolBar()
 	string MenuItemImages[ITM_DSN_CNT];
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
 	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
-	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";
-	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg";
+	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";			 //Add image for switch
+	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg"; 			 //Add image for ground 
 	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
 	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
 	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
-	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";
-	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";
+	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
+	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
 
 	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
@@ -410,20 +410,7 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
-//void UI::DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected) const
-//{
-//	string Con1Image;
-//	if (selected)
-//		Con1Image = "Images\\Comp\\Connection_HI.jpg";	//use image of highlighted resistor
-//	else
-//		Con1Image = "Images\\Comp\\Connection.jpg";	//use image of the normal resistor 
-//
-//	//Draw Resistor at Gfx_Info (1st corner)
-//	pWind->DrawImage(Con1Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT); 
-//	 
-//
-//	//TODO: Add code to draw connection
-//}
+
 void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const //bool selected
 {
 	if (selected==true)
@@ -444,6 +431,9 @@ void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo)
 	pWind->SetPen(WHITE, 3);
 	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
 }
+
+
+
 
 
 

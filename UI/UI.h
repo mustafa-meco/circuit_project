@@ -41,13 +41,13 @@ class UI
 		ITM_RES,		//Resistor item in menu
 		//TODO: Add more items names here
 		ITM_BULB,
-		ITM_SWI,
+		ITM_SWI,           //Switch item in menu
 		ITM_BAT,
-		ITM_GRO,
+		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,
 		ITM_FUE,
-		ITM_LOAD,
-		ITM_CON, 
+		ITM_LOAD,        //Load item 
+		ITM_CON,         //connection item 
 		ITM_SIM,
 
 		ITM_EDIT,
@@ -129,13 +129,16 @@ public:
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
 	void DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	// Draw a switch
 	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	//Draw a ground 
 	void DrawGround(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	//Draws a buzzer
 	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	//Draws a fues
 	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+
 	//void DrawEdit(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	// Draws Connection
 	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
@@ -145,6 +148,17 @@ public:
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
 	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
+
+
+
+
+
+	//void PrintLabel(string msg)const;
+
+	// Draws Connection
+	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   
+
+
 	
 	~UI();
 };

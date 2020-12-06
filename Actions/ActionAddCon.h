@@ -20,13 +20,9 @@ public:
 	//Execute action (code depends on action type)
 	virtual void Execute();
 
-	
-	
-	
-	
-	
-	
-	
+	//void addTerm1Connection(Connection* pConn);
+	//void addTerm2Connection(Connection* pConn);
+
 	virtual void Undo();
 	virtual void Redo();
 };

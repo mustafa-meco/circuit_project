@@ -7,7 +7,6 @@
 #include "Components\Component.h"
 #include "Actions/ActionAddGro.h"
 #include "Actions/ActionAddBat.h"
-///#include "Actions/ActionAddCon1.h" 
 
 
 
@@ -70,8 +69,14 @@ public:
 	string* save(int&,int&) const;
 	//destructor
 	~ApplicationManager();
-		void Exit();
-	void load( string * , double* , Component**, Component** );     
+
+		//void Exit();
+
+	void load( string * , double* , Component**, Component** );     //load the connection
+
+	bool isAvalible();   // to check if the user create two components before connect them or not
+
+
 };
 
 #endif

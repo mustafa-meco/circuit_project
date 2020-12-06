@@ -1,21 +1,12 @@
 #include "Ground.h"
-//#include "../Electric Circuit Simulator - Code Framework/Components/Component.h"
 
 Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	resistance = 0; 
-	sourceVoltage = 0;
-	//pUI->PrintMsg("Enter the label: ");
-	//m_Label = pUI->GetSrting();
-	//pUI->ClearStatusBar();
-	//sourceVoltage = 0;
+
+	
 
 	resistance = -1; 
-	//sourceVoltage = 0;
-	/*pUI->PrintMsg("Enter the label: ");
-	m_Label = pUI->GetSrting();
-	pUI->ClearStatusBar();
-	sourceVoltage = 0;*/
+
 
 }
 
@@ -42,7 +33,7 @@ string Ground::save() const {
 }
 void Ground::load(int id,string LABELi, double VALUE)
 {
-	ID = id;
-	m_Label = LABELi; 
-	resistance = VALUE;
+	ID = id;               //id for the ground 
+	m_Label = LABELi;      // label for the ground 
+	resistance = VALUE;    // the value of the ground resistance 
 }

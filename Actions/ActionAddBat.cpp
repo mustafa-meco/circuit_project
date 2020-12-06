@@ -30,8 +30,19 @@ void ActionAddBat::Execute()
 		pUI->GetPointClicked(Cx, Cy);
 	}
 
-	pUI->PrintMsg("Enter the value of the source voltage: ");
-	double V = stod(pUI->GetSrting());
+	string sV;
+	bool isNumber;
+	do {
+		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
+		sV = pUI->GetSrting();
+		isNumber = true;
+		for (int i = 0; i < sV.length(); i++)
+			if (isdigit(sV[i]) == false)
+				isNumber = false;
+	} while (!isNumber);
+
+	double V = stod(sV);
+	
 
 	//Clear Status Bar
 	pUI->ClearStatusBar();
@@ -49,6 +60,7 @@ void ActionAddBat::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 	Battery* pR = new Battery(pGInfo/*, V*/);
+	pR->setSourceVoltage(V);
 	pManager->AddComponent(pR);
 }
 

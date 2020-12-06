@@ -17,7 +17,7 @@ public:
 
 	bool IsInRegion(int x, int y, UI* pUI);
 	string save() const;
-	virtual void load( Component * , Component * );
+	virtual void load( Component * , Component * );  //load connection
 
 	void EditConnection(Component* component1, Component* component2, GraphicsInfo* pGInfo,UI*);
 

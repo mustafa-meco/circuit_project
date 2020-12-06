@@ -5,6 +5,7 @@
  
 Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2)
 {
+
 	pGfxInfo = r_GfxInfo;
 	Comp1 = cmp1;
 	Comp2 = cmp2;
@@ -13,8 +14,8 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 }
 
 
+void Connection::Draw(UI* pUI) //draw the connection between two points 
 
-void Connection::Draw(UI* pUI)
 {
 	pUI->DrawConnection(*pGfxInfo, pconnection == this);
 	
@@ -66,6 +67,7 @@ bool Connection::IsInRegion(int x, int y, UI* pUI)
 		return false;
 	}
 }
+
 			
   Connection* Connection::pconnection = nullptr;
 
@@ -73,10 +75,13 @@ bool Connection::IsInRegion(int x, int y, UI* pUI)
 
 //		pUI->DrawConnection(*pGfxInfo ); 
 
-void Connection::load( Component* C1, Component* C2)
+
+
+void Connection::load( Component* C1, Component* C2)  //load connection
+
 {
-	Comp1 = C1;
-	Comp2 = C2;
+	Comp1 = C1;        // the first component which the loading connection will be connected with
+	Comp2 = C2;        // the second component which the loading connection will be connected with
 
 }
  

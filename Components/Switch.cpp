@@ -1,16 +1,9 @@
 #include "Switch.h"
 #include <string>
 
-Switch::Switch(GraphicsInfo* r_GfxInfo/*, bool S*/) :Component(r_GfxInfo)
+Switch::Switch(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	//if (!r_GfxInfo){
-	//	//status = S;
-	//	
-
-	//	////pUI->PrintMsg("Enter the label: ");
-	//	//m_Label = pUI->GetSrting();
-	//	//pUI->ClearStatusBar();
-	//}
+	
 	
 }
 
@@ -36,7 +29,7 @@ string Switch::save() const {
 }
 void Switch::load(int id,string LABELi , double VALUE)
 {
-	ID= id;
-	m_Label = LABELi;
-	status = VALUE;
+	ID= id;              // id for the switch 
+	m_Label = LABELi;    //label for the switch. 
+	status = VALUE;      //status for the switch 
 }

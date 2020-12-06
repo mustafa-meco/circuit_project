@@ -12,37 +12,24 @@ ActionLoad::~ActionLoad(void)
 }
 void ActionLoad::Execute()
 {
-	//int i=0;
 	UI* pUI = pManager->GetUI();
 	fstream inFile;
-	//pUI->PrintMsg("Enter the file name : "); 
-	//file = pUI->Getstring(); 
+	
 	pUI->PrintMsg("Enter the file name : ");
 	filename = pUI->GetSrting();
-	//inFile.open(filename);
+	
+
 	inFile.open(filename);
 	while (!inFile)
 	{
 		pUI->PrintMsg("Enter the file name : ");
 		filename = pUI->GetSrting();
 	}
-	//do
-	//{
-	   //  
-	   // pUI->PrintMsg("Enter the file name : ");
-	   // filename = pUI->GetSrting(); 
-	   // while (!inFile) 
-	   // {
-	   //	 pUI->PrintMsg("File open failure! ");
-	   //	 filename = pUI->GetSrting();
-	   // }
-	//} while (!inFile); 
+	
 	getline(inFile, input);
 	int x = stoi(input);
 
-	//int j ;
-	//char arrch[6];
-	 //getline(inFile, arr[i],' ');
+	
 	string* arr = new string[x];
 	string* arrName = new string[x];
 	string* arrID = new string[x];
@@ -57,44 +44,32 @@ void ActionLoad::Execute()
 
 	//GraphicsInfo** ARRpGInfo = new GraphicsInfo * [x];
 	int dump = 0; int dump2 = 0;
-	// for (int i = 0; i < 6; i++)
-	// {
+	
 
 	for (int j = 0; j < x; j++)
 	{
-		// for (int z = 0; z < 6; z++)
-		// {
+		
 
 
 		getline(inFile, arrName[j], ' ');
 
 
-
-
-		//pUI->PrintMsg(arrName[j]);
-		//pUI->GetPointClicked(dump, dump2); 
 		getline(inFile, arrID[j], ' ');
-		/*	pUI->PrintMsg(arrID[j]);
-			pUI->GetPointClicked(dump, dump2);*/
+		
 		getline(inFile, arrLABELS[j], ' ');
-		//pUI->PrintMsg(arrLABELS[j]);
-		//pUI->GetPointClicked(dump, dump2);
+		
 		getline(inFile, arrVALUE[j], ' ');
-		//pUI->PrintMsg(arrVALUE[j]);
-		//pUI->GetPointClicked(dump, dump2);
+	
 		getline(inFile, arrCOORDINATES1[j], ' ');
-		//pUI->PrintMsg(arrCOORDINATES1[j]);
-		//pUI->GetPointClicked(dump, dump2);
+	
 		getline(inFile, arrCOORDINATES2[j]);
-		/*	pUI->PrintMsg(arrCOORDINATES2[j]);
-			pUI->GetPointClicked(dump, dump2);*/
+		
 		arrIdCorr[j] = stoi(arrID[j]);
 		arrVALUEcorr[j] = stod(arrVALUE[j]);
 		arrCOORDINATES1corr[j] = stoi(arrCOORDINATES1[j]);
 		arrCOORDINATES2corr[j] = stoi(arrCOORDINATES2[j]);
 
-		/*pGInfo->PointsList[0].x = stoi(arrCOORDINATES1[j]) + j;
-		pGInfo->PointsList[0].y = stoi(arrCOORDINATES2[j]) + j;*/
+		
 		
 		GraphicsInfo* pGInfo5 = new GraphicsInfo(2);
 		pGInfo5->PointsList[0].x = stoi(arrCOORDINATES1[j]);
@@ -110,78 +85,46 @@ void ActionLoad::Execute()
 		else if (arrName[j] == "SWT")
 		{
 
-			Switch* pR = new Switch(pGInfo5/*, pUI*/);
+			Switch* pR = new Switch(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "BAT")
 		{
 
-			Battery* pR = new Battery(pGInfo5/*, pUI*/);
+			Battery* pR = new Battery(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "BLB")
 		{
 
-			Bulb* pR = new Bulb(pGInfo5 /*, pUI*/);
+			Bulb* pR = new Bulb(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "GND")
 		{
 
-			Ground* pR = new Ground(pGInfo5/*, pUI*/);
+			Ground* pR = new Ground(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
 		else if (arrName[j] == "FUS")
 		{
-			Fues* pR = new Fues(pGInfo5/*, pUI*/);
+			Fues* pR = new Fues(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
-		else // (arrName[j] == "BUZ")
+		else 
 		{
-			Buzzer* pR = new Buzzer(pGInfo5/*, pUI*/);
+			Buzzer* pR = new Buzzer(pGInfo5);
 			pManager->AddComponent(pR);
 		}
-		/*		 pUI->PrintMsg(arr[j]);
-				 pUI->GetPointClicked(dump, dump2);*/
-				 /*	 arrName[z] = arr[0];
-					  arrID[z] = stoi(arr[1]);
-					  arrLABELS[z] = arr[2];
-					  arrVALUE[z] = stoi(arr[3]);
-					  arrCOORDINATES1[z] = stoi( arr[4]);
-					  arrCOORDINATES2[z] = stoi(arr[5]);*/
-					  // }
+		
 	}
 
-	/*     pUI->PrintMsg(arr[i]);
-		 pUI->GetPointClicked(dump, dump2);*/
-		 //char * arr1 = new char[arr[i].size()+1];   
-		 //strcpy(arrch,arr[i].c_str()); 
-		 //arr1 =strtok(arrch, " ");
-	 //}
-	 //
-	 //string* arr = new string[x];
-	// int dump = 0; int dump2 = 0;
-	////for (int i=0; i<x; i++)
-	////{
-	////
-	////	 getline(inFile, arr[i]);  
-	////	 string* a = &arr[i];
-	////	 pUI->PrintMsg(a[i]);
-	////	pUI->GetPointClicked(dump, dump2);
-	////	 i++;
-	//// }
-		 ///////////////////////////////////////////////////////////
-		 ///////////////////////////////////////////////////////////
-		 //////////////////////////////////////////////////////////
-		 //////////////////////////////////////////////////////////
-		 //////////////////////////////////////////////////////////
-		 //////////////////////////////////////////////////////////
-		 // string* arr = new string[x];
+	
 	getline(inFile, input);
 	input = "";
 	getline(inFile, input);
@@ -198,68 +141,29 @@ void ActionLoad::Execute()
 	for (int j = 0; j < y; j++)
 	{
 
-		
-	/*	pUI->PrintMsg(to_string(j));
-		pUI->GetPointClicked(dump, dump2);*/
 		getline(inFile, input, ' ');
-	/*	pUI->PrintMsg(input);
-		pUI->GetPointClicked(dump, dump2);*/
-		/*if (j == 1) {
-			getline(inFile, input, ' ');
-			pUI->PrintMsg(input);
-			pUI->GetPointClicked(dump, dump2);
-			getline(inFile, input, ' ');
-			pUI->PrintMsg(input);
-			pUI->GetPointClicked(dump, dump2);
-			getline(inFile, input, ' ');
-			pUI->PrintMsg(input);
-			pUI->GetPointClicked(dump, dump2);
-			getline(inFile, input, ' ');
-			pUI->PrintMsg("mfe4");
-			pUI->GetPointClicked(dump, dump2);
-		}
-			*/
-		arr11[j] = stoi(input);
-		//pUI->PrintMsg(input);
-		//pUI->GetPointClicked(dump, dump2);
-
 	
+		arr11[j] = stoi(input);
 
 		getline(inFile, input, ' ');
 		arr22[j] = stoi(input);
-		/*pUI->PrintMsg(input);
-		pUI->GetPointClicked(dump, dump2);*/
-
-
-
-
 
 		getline(inFile, input, ' ');
 		arr33[j] = stoi(input);
-	/*	pUI->PrintMsg(input);
-		pUI->GetPointClicked(dump, dump2);
-
-	*/
+	
 
 		getline(inFile, input, ' ');
 		arr44[j] = stoi(input);
-		/*pUI->PrintMsg(input);
-		pUI->GetPointClicked(dump, dump2);*/
-
+		
 		
 
 		getline(inFile, input, ' ');
 		arr55[j] = stoi(input);
-		//pUI->PrintMsg(input);
-		//pUI->GetPointClicked(dump, dump2);
-
-
+		
 		getline(inFile, input);
 		arr66[j] = stoi(input);
 		
-		/*pUI->PrintMsg(input); 
-		pUI->GetPointClicked(dump, dump2);*/ 
-
+		
 
 		GraphicsInfo* pGInfo = new GraphicsInfo(2);
 		pGInfo->PointsList[0].x = arr33[j];
@@ -281,16 +185,6 @@ void ActionLoad::Execute()
 
 		arrCOMP1[j] = comp01;
 		arrCOMP2[j] = comp02; 
-
-
-
-		//pManager->load(arrLABELS, arrVALUEcorr);
-
-
-		
-
-
-
 
 	}
 	inFile.close();

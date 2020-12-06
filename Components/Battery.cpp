@@ -1,7 +1,6 @@
 #include "Battery.h"
-//#include "../Electric Circuit Simulator - Code Framework/Components/Component.h" 
 
-Battery::Battery(GraphicsInfo* r_GfxInfo /*, double V*/) :Component(r_GfxInfo)
+Battery::Battery(GraphicsInfo* r_GfxInfo ) :Component(r_GfxInfo)
 {
 	//if (!r_GfxInfo) {
 
@@ -45,10 +44,10 @@ string Battery::save() const {
 	string row = "BAT " +to_string(ID)+ " " +m_Label +" "+to_string((int)sourceVoltage)+" "+to_string(p.x)+" "+to_string(p.y);
 	return row;
 }
-void Battery::load(int id,string LABELi, double VALUE)
+void Battery::load(int id,string LABELi, double VALUE)    //load the battery
 {
-	ID = id;
-	m_Label = LABELi; 
-	resistance = VALUE;
+	ID = id;               //id for the battery
+	m_Label = LABELi;      //new label for the battery 
+	resistance = VALUE;    // the internal resistance of the battery
 	
 }

@@ -1,6 +1,6 @@
 #include "Bulb.h"
 
-Bulb::Bulb(GraphicsInfo* r_GfxInfo/*, double R*/) :Component(r_GfxInfo)
+Bulb::Bulb(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 
 	//pUI->PrintMsg("Enter the value of the resistace: ");
@@ -45,9 +45,9 @@ string Bulb::save() const {
 	string row =  "BLB " + to_string(ID) + " " + m_Label+ " "+to_string((int)resistance) + " "+to_string(p.x)+" "+ to_string(p.y) ;
 	return row;
 }
-void Bulb::load(int id,string LABELi, double VALUE)
+void Bulb::load(int id,string LABELi, double VALUE)  //load bulb
 {
-	ID = id;
-	m_Label = LABELi;
-	resistance = VALUE;
+	ID = id;                  //id for bulb 
+	m_Label = LABELi;         // new label for bulb
+	resistance = VALUE;       // the resistance of the bulb 
 }

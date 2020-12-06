@@ -41,7 +41,9 @@ public:
 	double getResistance();
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
 	Connection** getTermConnections(TerminalNum Term); 
-
+	void setResistance(double);
+	void setSourceVoltage(double);
+	void setStatus(bool);
 	//double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
 	virtual void Operate() = 0; // activates components such as bulb and buzzer
 
@@ -58,7 +60,7 @@ public:
 	int getID() const;  
 
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
-	void addTerm1Connection(Connection* pConn); //musta
+	void addTerm1Connection(Connection* pConn); 
 	void addTerm2Connection(Connection* pConn);
 
 	//void addTerm1Connection(Connection* pConn);

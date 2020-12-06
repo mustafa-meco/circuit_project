@@ -1,9 +1,7 @@
 #pragma once
 
 #include "Action.h"
-//#include "..\Ground.h"
 #include "..\Components\Ground.h"
-//#include "..\Components\Ground.h" 
 
 //Class responsible for adding a new resistor action
 class ActionAddGro : public Action

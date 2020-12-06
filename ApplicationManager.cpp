@@ -9,7 +9,6 @@
 #include "Actions/ActionSave.h"
 //#include "ActionLoad.h"
 #include "Actions/ActionLoad.h"
-//#include "Actions/ActionSave.h"
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionLabel.h"
@@ -231,7 +230,7 @@ double ApplicationManager::CalculateCurrent() {
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
 }
-void ApplicationManager::load( string* labeli , double* valueI, Component** comp001 , Component** comp002)
+void ApplicationManager::load( string* labeli , double* valueI, Component** comp001 , Component** comp002) //load the connection 
 {
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->load(i+1,labeli[i], valueI[i] );
@@ -253,6 +252,7 @@ ApplicationManager::~ApplicationManager()
 
 	// TODO
 }
+
 ///////////////////////////////////////////////////////////////////
 //void ApplicationManager::Exit()
 //{
@@ -282,3 +282,17 @@ ApplicationManager::~ApplicationManager()
 //	delete GetComponentByCordinates();*/
 //
 //}
+
+ bool ApplicationManager::isAvalible()
+ {
+	 
+		 if ( CompCount >= 2) 
+		 {
+			 return true;
+		 }
+		 
+		 return false;
+	 
+	
+ } 
+
