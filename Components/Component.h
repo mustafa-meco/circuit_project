@@ -55,7 +55,7 @@ public:
 	int getID() const;  
 
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
-	void addTerm1Connection(Connection* pConn); //musta
+	void addTerm1Connection(Connection* pConn); 
 	void addTerm2Connection(Connection* pConn);
 
 

@@ -1,15 +1,8 @@
 #include"Fues.h"
 
-Fues::Fues(GraphicsInfo* r_GfxInfo/*, double R*/) :Component(r_GfxInfo) 
+Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo) 
 {
-	//if (!r_GfxInfo) {
-	//	resistance = R;
-	//	//sourceVoltage = 0;
-	//	//pUI->PrintMsg("Enter the label: ");
-	//	//m_Label = pUI->GetSrting();
-	//	//pUI->ClearStatusBar();
-	//	//sourceVoltage = 0;
-	//}
+	
 }
 
 void Fues::Draw(UI* pUI)
@@ -33,7 +26,7 @@ string Fues::save() const {
 }
 void Fues::load(int id,string LABELi, double VALUE)
 {
-	ID=id;
-	m_Label = LABELi;
-	resistance = VALUE; 
+	ID=id;                //id for the fuse 
+	m_Label = LABELi;     //new label for the fuse
+	resistance = VALUE;   // the value of the fuse resistance
 }

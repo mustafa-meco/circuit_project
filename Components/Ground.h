@@ -3,7 +3,6 @@
 #include "..\UI\UI.h"
 #include "..\ApplicationManager.h"
 #include "../ApplicationManager.h"
-//#include "../Electric Circuit Simulator - Code Framework/Components/Component.h"
 
 class Ground :public Component
 {
@@ -12,5 +11,5 @@ public:
 	virtual void Draw(UI*);	//Draws the ground
 	virtual void Operate();
 	string save() const;
-	void load(int id, string LABELi, double VALUE);
+	void load(int id, string LABELi, double VALUE); // load ground component
 };

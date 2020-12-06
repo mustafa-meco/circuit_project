@@ -3,19 +3,19 @@
  
 Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2)
 {
-	pGfxInfo = r_GfxInfo;
-	Comp1 = cmp1;
-	Comp2 = cmp2;
+	pGfxInfo = r_GfxInfo;      // the coordinates of components
+	Comp1 = cmp1;              // the first component of the connection
+	Comp2 = cmp2;              // the second component of the connetion
 	
 }
-void Connection::Draw(UI* pUI)
+void Connection::Draw(UI* pUI) //draw the connection between two points 
 {
 		pUI->DrawConnection(*pGfxInfo ); 
 }
-void Connection::load( Component* C1, Component* C2)
+void Connection::load( Component* C1, Component* C2)  //load connection
 {
-	Comp1 = C1;
-	Comp2 = C2;
+	Comp1 = C1;        // the first component which the loading connection will be connected with
+	Comp2 = C2;        // the second component which the loading connection will be connected with
 
 }
  

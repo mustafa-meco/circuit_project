@@ -13,7 +13,7 @@ public:
 	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr);
 	virtual void Draw(UI*);	//for connection to Draw itself
 	string save() const;
-	virtual void load( Component * , Component * );
+	virtual void load( Component * , Component * );  //load connection
 
 
 	//Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection

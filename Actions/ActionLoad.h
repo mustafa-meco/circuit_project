@@ -14,7 +14,6 @@ using namespace std;
 #include "../Components/Fues.h"
 #include "../Components/Ground.h"
 #include "../Components/Resistor.h"
-
 #include "../Components/Switch.h"
 class ActionLoad : public Action
 {
