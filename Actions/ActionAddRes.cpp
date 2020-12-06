@@ -29,8 +29,19 @@ void ActionAddRes::Execute()
 		pUI->GetPointClicked(Cx, Cy);
 	}
 
-	pUI->PrintMsg("Enter the value of the resistace: ");
-	double R = stod(pUI->GetSrting());
+	string sR;
+	bool isNumber;
+	do {
+		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
+		sR = pUI->GetSrting();
+		isNumber = true;
+		for (int i = 0; i < sR.length(); i++)
+			if (isdigit(sR[i]) == false)
+				isNumber = false;
+	} while (!isNumber);
+
+
+	double R = stod(sR);
 
 	//Clear Status Bar
 	pUI->ClearStatusBar();	

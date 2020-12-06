@@ -123,6 +123,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case LOAD:
 			pAct = new ActionLoad(this);
+			break;
 		case EXIT:
 			//TODO: create ExitAction here
 			break;

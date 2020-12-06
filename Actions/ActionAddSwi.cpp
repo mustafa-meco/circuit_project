@@ -29,8 +29,18 @@ void ActionAddSwi::Execute()
 		pUI->GetPointClicked(Cx, Cy);
 	}
 
-	pUI->PrintMsg("Enter the value of the switch (0: opened, 1: closed)");
-	bool S = static_cast<bool>(stoi(pUI->GetSrting()));
+	string sS;
+	bool isBool;
+	bool S;
+	do {
+		pUI->PrintMsg("Enter the value of the switch (0: opened, 1: closed)");
+		sS = pUI->GetSrting();
+		isBool = false;
+		if (sS == "0" || sS == "1") {
+			isBool = true;
+			S = static_cast<bool>(stoi(sS));
+		}
+	} while (!isBool);
 
 	//Clear Status Bar
 	pUI->ClearStatusBar();
@@ -48,6 +58,7 @@ void ActionAddSwi::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 	Switch* pS = new Switch(pGInfo/*, S*/);
+	pS->setStatus(S);
 	pManager->AddComponent(pS);
 }
 

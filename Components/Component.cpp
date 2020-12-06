@@ -36,6 +36,16 @@ void Component::addTerm2Connection(Connection* pConn)
 	term2_conns[term2_conn_count++] = pConn; 
 }
 
+void Component::setResistance(double R) {
+	resistance = R;
+}
+void Component::setSourceVoltage(double V) {
+	sourceVoltage = V;
+}
+void Component::setStatus(bool S) {
+	status = S;
+}
+
 int Component::getCompCenterx(UI*)
 {
 	int Xcenter = ((m_pGfxInfo->PointsList[1].x + m_pGfxInfo->PointsList[0].x) / 2); 
