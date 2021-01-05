@@ -9,6 +9,10 @@ Component::Component(GraphicsInfo *r_GfxInfo)
 	term1_conn_count = term2_conn_count = 0;
 	ID = ++gID;
 }
+//Component::Component(Component& C)   TAYIL74
+//{
+//	//label = C.resistance;
+//}
 
 
 Component::~Component()
@@ -18,7 +22,7 @@ bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user click
 {
 	if (m_pGfxInfo->PointsList[0].x < x && m_pGfxInfo->PointsList[1].x > x&& m_pGfxInfo->PointsList[0].y < y && m_pGfxInfo->PointsList[1].y > y)
 	{
-		pcomp = this;
+		pcomp = this;   //????
 		return true;
 	}
 }
@@ -64,6 +68,10 @@ int Component::getCompCentery(UI*)         //get the center of the component are
 double Component::getResistance() {
 	return resistance;
 }
+double Component::getSourceVoltage()  //TAYIL74
+{
+	return sourceVoltage;
+}
 
 string Component::save() const {
 	string row =  " ";
@@ -81,3 +89,25 @@ void Component::load(int ,string, double)
 
 Component* Component::pcomp = nullptr;
 int Component::gID = 0;
+void Component::setGraficsInfo(int x11, int y11)        //new graphics info for cutting 
+{
+	m_pGfxInfo->PointsList[0].x = x11-25;
+	m_pGfxInfo->PointsList[1].x = x11 + 25;
+	m_pGfxInfo->PointsList[0].y = y11 - 25;
+	m_pGfxInfo->PointsList[1].y = y11 + 25;
+}
+
+void Component::getGraficsInfo(int& x1, int& y1, int& x2, int& y2)   //the old graphics info.
+{
+    	x1 = m_pGfxInfo->PointsList[0].x;
+		y1 = m_pGfxInfo->PointsList[1].x;
+		x2 = m_pGfxInfo->PointsList[0].y;
+		y2 = m_pGfxInfo->PointsList[1].y;
+}
+
+void Component::SetGinfo(GraphicsInfo* G)
+{
+	m_pGfxInfo = G; 
+}
+
+

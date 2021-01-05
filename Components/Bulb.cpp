@@ -38,3 +38,8 @@ void Bulb::load(int id,string LABELi, double VALUE)  //load bulb
 	m_Label = LABELi;         // new label for bulb
 	resistance = VALUE;       // the resistance of the bulb 
 }
+void Bulb::Copy(Component* B)
+{
+	B = new Bulb(m_pGfxInfo);
+	B->setResistance(this->resistance);
+}

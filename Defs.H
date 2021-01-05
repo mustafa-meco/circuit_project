@@ -16,7 +16,12 @@ enum ActionType
 	ADD_BATTERY,
 	ADD_BUZZER,
 	ADD_FUES,
+	
+	
+	ADD_COPY, 
+	ADD_CUT,
 
+	ADD_PASTE,
 
 
 	ADD_CONNECTION,		//Add Wire Connection 
@@ -51,6 +56,15 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
+
+//struct CompData
+//{
+//	string COMPNAME;                									//TAYIL74
+//	//string COMPLABEL; 
+//	int COMPvalueRESIS;
+//	int COMPvalueVOLT;
+//};
+
 
 //Maximum number of connections that can be connected to any output components
 #define MAX_CONNS 20

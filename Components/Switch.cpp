@@ -33,3 +33,7 @@ void Switch::load(int id,string LABELi , double VALUE)
 	m_Label = LABELi;    //label for the switch. 
 	status = VALUE;      //status for the switch 
 }
+void Switch::Copy(Component* B)
+{
+	B = new Switch(m_pGfxInfo);
+}

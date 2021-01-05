@@ -110,6 +110,9 @@ ActionType UI::GetUserAction() const
 			case ITM_SIM:	return SIM_MODE;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
+			case ITM_COPY:   return ADD_COPY; 
+			case ITM_CUT:   return ADD_CUT;
+			case ITM_PASTE:   return ADD_PASTE;  
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -257,6 +260,9 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
+	MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
+	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
+	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -396,6 +402,11 @@ void UI::DrawConnection(const GraphicsInfo& r_GfxInfo ) const //bool selected
 		pWind->SetPen(BLACK, 2);  // Pen colour and its thickness 
 		//Drawing line between two points. 
 		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+}
+void UI::drawWhiteRec(int x1, int y1, int x2, int y2)
+{
+	pWind->SetPen(WHITE);
+	pWind->DrawRectangle(x1, y1, x2, y2);
 }
 
 

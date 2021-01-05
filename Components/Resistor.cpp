@@ -32,3 +32,8 @@ void Resistor::load(int id,string LABELi, double VALUE)        // load the resis
 	m_Label = LABELi;                  //label for the resistance .
 	resistance = VALUE;                //the value of the resitance 
 }
+void Resistor::Copy(Component* B)
+{
+	B = new Resistor(m_pGfxInfo);
+	B->setResistance(resistance);
+}

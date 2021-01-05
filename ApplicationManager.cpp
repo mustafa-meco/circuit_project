@@ -6,9 +6,11 @@
 #include "Actions\ActionAddFues.h"
 #include "Actions/ActionAddCon.h"
 #include "Actions/ActionSave.h"
-//#include "ActionLoad.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSelect.h"
+#include "../circuit_project/ActionAddCopy.h"
+#include "Actions/ActionAddPaste.h"
+#include "ActionAddCut.h"
 #include <iostream>
 using namespace std;
 
@@ -108,6 +110,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	    case ADD_CONNECTION: 
 			pAct = new ActionAddCon(this);   
 			break; 
+		case ADD_COPY:
+			pAct = new ActionAddCopy(this);
+			break;
+		case ADD_CUT:
+			pAct = new ActionAddCut(this); 
+			break;
+		case ADD_PASTE: 
+			pAct = new ActionAddPaste(this);
+			break;
 		case SELECT:
 			pAct = new ActionSelect(this);
 			break;
@@ -223,3 +234,11 @@ ApplicationManager::~ApplicationManager()
 	 
 	
  } 
+ void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
+ {
+	 CopyComp = comp1;
+ }
+ Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
+ {
+	 return CopyComp;
+ }

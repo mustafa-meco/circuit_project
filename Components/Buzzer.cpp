@@ -37,3 +37,8 @@ void Buzzer::load(int id,string LABELi, double VALUE)  //load the buzzer
 	m_Label = LABELi;      //label for the Buzzer.
 	resistance = VALUE;  
 }
+void Buzzer::Copy(Component* B)
+{
+	B = new Buzzer(m_pGfxInfo);
+	
+}

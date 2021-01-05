@@ -9,5 +9,7 @@ public:
 	virtual void Operate();
 	string save() const;
 	void load(int id,string LABELi, double VALUE);
+	void Copy(Component* B);
+
 };
 

@@ -3,7 +3,6 @@
 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\Defs.h"
-
 #include <string>
 using namespace std;
 
@@ -50,6 +49,10 @@ class UI
 		ITM_CON,         //connection item 
 		ITM_SIM,
 		ITM_SAVE,
+		ITM_COPY,
+		ITM_CUT,
+		ITM_PASTE,
+
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -136,7 +139,7 @@ public:
 	//Draws a fues
 	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
-
+	void drawWhiteRec(int, int , int ,int );
 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
 	//void PrintLabel(string msg)const;

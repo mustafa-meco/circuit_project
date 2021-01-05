@@ -30,3 +30,8 @@ void Fues::load(int id,string LABELi, double VALUE)
 	m_Label = LABELi;     //new label for the fuse
 	resistance = VALUE;   // the value of the fuse resistance
 }
+void Fues::Copy(Component* B)
+{
+	B = new Fues(m_pGfxInfo);
+
+}
