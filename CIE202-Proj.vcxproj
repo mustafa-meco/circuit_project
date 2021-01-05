@@ -114,6 +114,8 @@
     <ClCompile Include="Actions\ActionAddBul.cpp" />
     <ClCompile Include="Actions\ActionAddBuz.cpp" />
     <ClCompile Include="Actions\ActionAddCon.cpp" />
+    <ClCompile Include="Actions\ActionAddCopy.cpp" />
+    <ClCompile Include="Actions\ActionAddCut.cpp" />
     <ClCompile Include="Actions\ActionAddFues.cpp" />
     <ClCompile Include="Actions\ActionAddGro.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
@@ -168,8 +170,6 @@
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ActionAddCopy.cpp" />
-    <ClCompile Include="ActionAddCut.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +178,8 @@
     <ClInclude Include="Actions\ActionAddBul.h" />
     <ClInclude Include="Actions\ActionAddBuz.h" />
     <ClInclude Include="Actions\ActionAddCon.h" />
+    <ClInclude Include="Actions\ActionAddCopy.h" />
+    <ClInclude Include="Actions\ActionAddCut.h" />
     <ClInclude Include="Actions\ActionAddFues.h" />
     <ClInclude Include="Actions\ActionAddGro.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
@@ -216,8 +218,6 @@
     <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />
     <ClInclude Include="Defs.H" />
-    <ClInclude Include="ActionAddCopy.h" />
-    <ClInclude Include="ActionAddCut.h" />
     <ClInclude Include="UI\UI.h" />
   </ItemGroup>
   <ItemGroup>

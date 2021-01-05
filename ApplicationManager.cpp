@@ -8,9 +8,10 @@
 #include "Actions/ActionSave.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSelect.h"
-#include "../circuit_project/ActionAddCopy.h"
+#include "Actions/ActionAddCopy.h"
+
 #include "Actions/ActionAddPaste.h"
-#include "ActionAddCut.h"
+#include "Actions/ActionAddCut.h"
 #include <iostream>
 using namespace std;
 

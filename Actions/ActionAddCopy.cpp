@@ -1,13 +1,23 @@
-#include "../circuit_project/ActionAddCopy.h"
-#include "Actions/Action.h"
-#include"Actions/ActionAddBat.h"
-#include "Actions/ActionAddBul.h"
-#include "Actions/ActionAddBuz.h"
-#include "Actions/ActionAddFues.h"
-#include "Actions/ActionAddGro.h"
-#include "Actions/ActionAddRes.h"
-#include "Actions/ActionAddSwi.h"
-#include "UI/UI.h"
+//#include "../circuit_project/ActionAddCopy.h"
+//#include "Actions/Action.h"
+//#include"Actions/ActionAddBat.h"
+//#include "Actions/ActionAddBul.h"
+//#include "Actions/ActionAddBuz.h"
+//#include "Actions/ActionAddFues.h"
+//#include "Actions/ActionAddGro.h"
+//#include "Actions/ActionAddRes.h"
+//#include "Actions/ActionAddSwi.h"
+//#include "UI/UI.h"
+#include "ActionAddCopy.h"
+#include "Action.h"
+#include "ActionAddBat.h"
+#include "ActionAddBuz.h" 
+#include "ActionAddBul.h"
+#include "ActionAddFues.h"
+#include "ActionAddGro.h"
+#include "ActionAddRes.h"
+#include "ActionAddSwi.h"
+#include "../UI/UI.h"
 
 ActionAddCopy::ActionAddCopy(ApplicationManager* pApp) : Action(pApp)
 {
@@ -51,8 +61,6 @@ void ActionAddCopy::Execute()
 	 else																			//TAYIL74
 	 {
 		pManager->SetCopyComp(ptrComp);
-
-
 	 }
 	 //ptrComp->Copy(ptrComp);
 	 //if (ptResistor!=NULL)

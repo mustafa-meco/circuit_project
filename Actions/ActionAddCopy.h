@@ -1,6 +1,8 @@
 #pragma once
-#include "../circuit_project/ApplicationManager.h"
-#include "../circuit_project/Actions/Action.h" 
+#include "../ApplicationManager.h"
+#include "Action.h"
+//#include "../circuit_project/ApplicationManager.h"
+//#include "../circuit_project/Actions/Action.h" 
 class ActionAddCopy : public Action
 {
 	int Cx;

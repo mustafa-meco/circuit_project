@@ -59,9 +59,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\UI.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
-    <ClCompile Include="ActionAddCopy.cpp" />
     <ClCompile Include="Actions\ActionAddPaste.cpp" />
-    <ClCompile Include="ActionAddCut.cpp" />
+    <ClCompile Include="Actions\ActionAddCopy.cpp" />
+    <ClCompile Include="Actions\ActionAddCut.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -107,9 +107,9 @@
     <ClInclude Include="Defs.H" />
     <ClInclude Include="UI\UI.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
-    <ClInclude Include="ActionAddCopy.h" />
     <ClInclude Include="Actions\ActionAddPaste.h" />
-    <ClInclude Include="ActionAddCut.h" />
+    <ClInclude Include="Actions\ActionAddCopy.h" />
+    <ClInclude Include="Actions\ActionAddCut.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />
