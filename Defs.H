@@ -17,10 +17,7 @@ enum ActionType
 	ADD_BUZZER,
 	ADD_FUES,
 
-
-
 	ADD_CONNECTION,		//Add Wire Connection 
-
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -36,6 +33,10 @@ enum ActionType
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 
+	CUT,
+	COPY,
+	PASTE,
+
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
 
@@ -44,6 +45,12 @@ enum ActionType
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 
+};
+
+
+enum ActionsToolBar
+{
+	Edit, Move, Load, Save, Undo, Redo, Copy, Cut, Paste, Delete, Num
 };
 
 enum  MODE	//Modes of operation

@@ -33,7 +33,8 @@ protected:
 	static Component* pcomp;
 public:
 	Component(GraphicsInfo *r_GfxInfo);
-	
+	void setm_pGfxInfo(int cx, int cy);
+
 	//void setTerm1Volt(double v);		//sets the voltage at terminal1
 	//void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1

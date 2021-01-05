@@ -23,39 +23,27 @@ void Connection::Draw(UI* pUI) //draw the connection between two points
 
 bool Connection::IsInRegion(int x, int y, UI* pUI)
 {
-	 /* int x1 = pGfxInfo->PointsList[0].x;
-	  int x2 = pGfxInfo->PointsList[1].x;
-	  int y1 = pGfxInfo->PointsList[0].y;
-	  int y2 = pGfxInfo->PointsList[1].y;
-	  double slope = (y2 - y1) / (x2 - x1);
-	  int Right;
-	  int Left;
 
-	  for (int r = -5; r <= 5; r++)
-	  {
-		  if ((x + r >= x2 && x + r <= x1) || (x + r >= x1 && x + r <= x2))
-		  {
-			  for (int i = -4; i <= 4; i++)
-			  {
-				  if (x1 != x2)
-				  {
-					  Right = slope * (x - (x1 + i));
-						  Left = y - (y1 + i);
-				  }
-				  else
-				  {
-					  Right = x - (x1 + i);
-					  Left = 0;
-				  }*/
+	int x1 = pGfxInfo->PointsList[0].x;
+	int x2 = pGfxInfo->PointsList[1].x;
+	int y1 = pGfxInfo->PointsList[0].y;
+	int y2 = pGfxInfo->PointsList[1].y;
 
-	if (pGfxInfo->PointsList[0].x <= x &&
-		pGfxInfo->PointsList[1].x >= x &&
-		pGfxInfo->PointsList[0].y <= y &&
-		pGfxInfo->PointsList[1].y >= y ||
-		pGfxInfo->PointsList[0].x == x ||
-		pGfxInfo->PointsList[1].x == x ||
-		pGfxInfo->PointsList[0].y == y ||
-		pGfxInfo->PointsList[1].y == y)
+	
+	double distance, slope, c, Y1, Y2, X1, X2;
+	X1 = static_cast<double>(x1);
+	X2 = static_cast<double>(x2);
+	Y1 = static_cast<double>(y1);
+	Y2 = static_cast<double>(y2);
+
+	slope = (Y2 - Y1) / (X2 - X1);
+
+	c = Y1 - slope * X1;
+
+	distance = (y - slope * x - c) / (pow(pow(slope, 2) + (1), 0.5));
+
+
+	if (distance > -10 && distance < 10)
 	{
 		pconnection = this;
 		return true;

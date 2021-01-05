@@ -46,13 +46,8 @@ class UI
 		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,
 		ITM_FUE,
-		ITM_LOAD,        //Load item 
 		ITM_CON,         //connection item 
 		ITM_SIM,
-
-		ITM_EDIT,
-		ITM_LABEL,
-		ITM_SAVE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -151,15 +146,20 @@ public:
 
 
 
-
+	void DrawActionBar() const;
 
 	//void PrintLabel(string msg)const;
 
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   
 
+	void DrawRec(int x11, int y11, int x22, int y22, int d) const;
 
+	buttonstate getbuttonstate(button b,int& x,int& y);
 	
+	void detectMouse(int&, int&);
+
+
 	~UI();
 };
 

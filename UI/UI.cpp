@@ -1,6 +1,7 @@
 #include "UI.h"
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\CMUgraphicsLib\auxil.h"
+
 UI::UI()
 {
 	AppMode = DESIGN;	//Design Mode is the startup mode
@@ -81,19 +82,18 @@ string UI::GetSrting()
 }
 
 
-
-
 //This function reads the position where the user clicks to determine the desired action
 ActionType UI::GetUserAction() const
 {	
 	int x,y;
-	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
-
-	if(AppMode == DESIGN )	//application is in design mode
+	//Get the coordinates of the user click
+	clicktype v;
+	v = pWind->WaitMouseClick(x, y);
+	if (AppMode == DESIGN)	//application is in design mode
 	{
 		//[1] If user clicks on the Toolbar
-		if ( y >= 0 && y < ToolBarHeight)
-		{	
+		if (y >= 0 && y < ToolBarHeight && v == 1)
+		{
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
 			int ClickedItemOrder = (x / ToolItemWidth);
@@ -111,26 +111,47 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
-
-			case ITM_EDIT:  return EDIT_Label;
-			case ITM_LABEL: return ADD_Label;
-			case ITM_SAVE:  return SAVE;
-			case ITM_LOAD:	return LOAD; 
-
-			case ITM_EXIT:	return EXIT;	
-			
+			case ITM_EXIT:	return EXIT;
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
 			}
 		}
-	
+
 		//[2] User clicks on the drawing area
-		if ( y >= ToolBarHeight && y < height - StatusBarHeight)
+		if (y >= ToolBarHeight && y < height - StatusBarHeight && v == 1)
 		{
 			return SELECT;	//user wants to select/unselect a component
 		}
-		
-		//[3] User clicks on the status bar
-		return STATUS_BAR;
+
+		if (y >= ToolBarHeight && y < height - StatusBarHeight && v == 2)
+		{
+			DrawActionBar();
+			int c, v;
+			PrintMsg("Click on action to execute");
+			pWind->WaitMouseClick(c, v);
+			pWind->SetPen(WHITE);
+			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
+			ClearStatusBar();
+			if (c > 1135 && c < 1185)
+			{
+				switch ((v - 80) / 50)
+				{
+				case 0:		return EDIT_Label;
+				case 1:		return MOVE;
+				case 2:		return LOAD;
+				case 3:		return SAVE;
+				case 4:		return UNDO;
+				case 5:		return REDO;
+				case 6:		return COPY;
+				case 7:		return CUT;
+				case 8:		return PASTE;
+				case 9:		return DEL;
+				default:	return SELECT;
+				}
+			}
+
+			//[3] User clicks on the status bar
+			return STATUS_BAR;
+		}
 	}
 	else	//Application is in Simulation mode
 	{
@@ -170,6 +191,8 @@ ActionType UI::GetUserAction() const
 //======================================================================================//
 
 //////////////////////////////////////////////////////////////////////////////////
+
+
 void UI::ChangeTitle(string Title) const
 {
 	pWind->ChangeTitle(Title);
@@ -264,26 +287,17 @@ void UI::CreateDesignToolBar()
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
-	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
-	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";			 //Add image for switch
-	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg"; 			 //Add image for ground 
-	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
+	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_bulb.jpg";
+	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpg";			 //Add image for switch
+	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_ground.jpg"; 			 //Add image for ground 
+	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_battery.jpg";
 	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
-	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
-	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
-	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
+	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_fuse.jpg";
+	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_connector.jpg";		 
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
-
-	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
-	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
-
-	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
-
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
+	
 
-	//TODO: Prepare image for each menu item and add it to the list
-
-	//Draw menu item one image at a time
 	for(int i=0; i<ITM_DSN_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i],i*ToolItemWidth,0,ToolItemWidth, ToolBarHeight);
 	
@@ -292,6 +306,33 @@ void UI::CreateDesignToolBar()
 	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
 	
 }
+
+
+void UI::DrawActionBar()const
+{
+	Delete, Num;
+	string ActionsImages[Num];
+	ActionsImages[Edit] = "images\\Choice\\Edit.jpg";
+	ActionsImages[Move] = "images\\Choice\\Move.jpg";
+	ActionsImages[Load] = "images\\Choice\\Load.jpg";
+	ActionsImages[Save] = "images\\Choice\\Save.jpg";
+	ActionsImages[Undo] = "images\\Choice\\Undo.jpg";
+	ActionsImages[Redo] = "images\\Choice\\Redo.jpg";
+	ActionsImages[Copy] = "images\\Choice\\Copy.jpg";
+	ActionsImages[Cut] = "images\\Choice\\Cut.jpg";
+	ActionsImages[Paste] = "images\\Choice\\Paste.jpg";
+	ActionsImages[Delete] = "images\\Choice\\Delete.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < Num; i++)
+		pWind->DrawImage(ActionsImages[i], 1135, i * 52 + 80, 50, 50);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(1134, 80, 1134, 600);
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the simulation mode
 void UI::CreateSimulationToolBar()
@@ -333,9 +374,9 @@ void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BulImage;
 	if (selected)
-		BulImage = "Images\\Comp\\Bulb_HI.jpg";	//use image of highlighted bulb
+		BulImage = "Images\\Comp\\bulb.HI.jpg";	//use image of highlighted bulb
 	else
-		BulImage = "Images\\Comp\\Bulb.jpg";	//use image of the normal bulb
+		BulImage = "Images\\Comp\\bulb.jpg";	//use image of the normal bulb
 
 	//Draw Bulb at Gfx_Info (1st corner)
 	pWind->DrawImage(BulImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -345,9 +386,9 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
 	if (selected)
-		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted bulb
+		SwiImage = "Images\\Comp\\switch.HI.jpg";	//use image of highlighted bulb
 	else
-		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal bulb
+		SwiImage = "Images\\Comp\\switch.jpg";	//use image of the normal bulb
 
 	//Draw Bulb at Gfx_Info (1st corner)
 	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -356,9 +397,9 @@ void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BatImage;
 	if (selected)
-		BatImage = "Images\\Comp\\Battery_HI.jpg";	//use image of highlighted battery
+		BatImage = "Images\\Comp\\battery.HI.jpg";	//use image of highlighted battery
 	else
-		BatImage = "Images\\Comp\\Battery.jpg";	//use image of the normal battery
+		BatImage = "Images\\Comp\\battery.jpg";	//use image of the normal battery
 
 	//Draw battery at Gfx_Info (1st corner)
 	pWind->DrawImage(BatImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -367,9 +408,9 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string GroImage;
 	if (selected)
-		GroImage = "Images\\Comp\\Ground_HI.jpg";	//use image of highlighted ground
+		GroImage = "Images\\Comp\\ground.HI.jpg";	//use image of highlighted ground
 	else
-		GroImage = "Images\\Comp\\Ground.jpg";	//use image of the normal 
+		GroImage = "Images\\Comp\\ground.jpg";	//use image of the normal 
 
 	//Draw ground at Gfx_Info (1st corner)
 	pWind->DrawImage(GroImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -381,7 +422,7 @@ void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 	
 		if (selected)
 		{
-			ResImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
+			ResImage = "Images\\Comp\\buzzer.HI.jpg";	//use image of highlighted buzzer
 
 		}
 		else
@@ -398,12 +439,12 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	string ResImage;
 	if (selected)
 	{
-		ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
+		ResImage = "Images\\Comp\\fuse.HI.jpg";	//use image of highlighted fues
 
 	}
 	else
 	{
-		ResImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
+		ResImage = "Images\\Comp\\fuse.jpg";	//use image of the normal fues
 
 	}
 	//Draw Resistor at Gfx_Info (1st corner)
@@ -416,9 +457,11 @@ void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const //bo
 	if (selected==true)
 	//if (AppMode == DESIGN)	//application is in design mode
 	{
-		//if (r_GfxInfo.PointsList[0].y > ToolBarHeight && r_GfxInfo.PointsList[0].y < height - StatusBarHeight && r_GfxInfo.PointsList[1].y > ToolBarHeight && r_GfxInfo.PointsList[1].y < height - StatusBarHeight)
-		pWind->SetPen(PINK, 3);
+		//pWind->SetPen(RED);
+		//DrawRec(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y, 10);
+		pWind->SetPen(RED, 3);
 		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+
 	}
 	else
 	{
@@ -434,6 +477,75 @@ void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo)
 
 
 
+//
+//void UI::DrawRec(int x11, int y11, int x22, int y22, int d) const
+//{
+//	double x1 = static_cast <double>(x11);
+//	double y1 = static_cast <double>(y11);
+//	double x2 = static_cast <double>(x22);
+//	double y2 = static_cast <double>(y22);
+//
+//	int a1 = 5, a2 = 7, a3 = 8, a4 = 10, b1 = 10, b2 = 52, b3 = 8, b4 = 50;
+//
+//	double  perb, c1, c2;
+//	perb = (x1 - x2) / (y2 - y1);
+//
+//
+//	if (((perb > -10) && (perb < 10)) && (((perb > 0.1) || (perb < -0.1))))
+//	{
+//		perb = (x1 - x2) / (y2 - y1);
+//		c1 = y1 - perb * x1;
+//		c2 = y2 - perb * x2;
+//
+//		double cos = 1 / (pow(1 + (pow(perb, 2)), 0.5));
+//		//for first equation
+//		a1 = static_cast <int>(x1 + d * cos);
+//		a2 = static_cast <int>(x1 - d * cos);
+//
+//		//for second equation
+//		a3 = static_cast <int>(x2 - d * cos);
+//		a4 = static_cast <int>(x2 + d * cos);
+//
+//		b1 = static_cast <int>(perb * a1 + c1);
+//		b2 = static_cast <int>(perb * a2 + c1);
+//		b3 = static_cast <int>(perb * a3 + c2);
+//		b4 = static_cast <int>(perb * a4 + c2);
+//	}
+//	else if ((perb > 10) || (perb < -10))
+//	{
+//		a1 = a2 = x1;
+//		a3 = a4 = x2;
+//		b1 = y1 + d;
+//		b2 = y1 - d;
+//		b3 = y2 - d;
+//		b4 = y2 + d;
+//	}
+//	else
+//	{
+//		b1 = b2 = y1;
+//		b3 = b4 = y2;
+//		a1 = x1 + d;
+//		a2 = x1 - d;
+//		a3 = x2 - d;
+//		a4 = x2 + d;
+//	}
+//
+//	pWind->DrawLine(a1, b1, a2, b2);
+//	pWind->DrawLine(a3, b3, a2, b2);
+//	pWind->DrawLine(a3, b3, a4, b4);
+//	pWind->DrawLine(a1, b1, a4, b4);
+//}
+
+buttonstate UI::getbuttonstate(button b,int& x, int& y)
+{
+	return	pWind->GetButtonState(b, x, y);
+}
+
+void UI::detectMouse(int& x, int& y)
+{
+	pWind->GetMouseCoord(x,y);
+	
+}
 
 
 

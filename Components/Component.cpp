@@ -101,3 +101,11 @@ string Component::Setlabel(string input)
 
 int Component::gID = 0;
 
+void Component::setm_pGfxInfo(int cx, int cy)
+{
+	m_pGfxInfo->PointsList[0].x = cx - 25;
+	m_pGfxInfo->PointsList[1].x = cx + 25;
+	m_pGfxInfo->PointsList[0].y = cy - 25;
+	m_pGfxInfo->PointsList[1].y = cy + 25;
+
+}

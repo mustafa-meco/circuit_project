@@ -13,6 +13,11 @@
 #include "Actions/ActionExit.h"
 #include "Actions/ActionLabel.h"
 #include <iostream>
+#include"Actions/ActionMove.h"
+#include<dos.h>
+#include<conio.h>
+#include<Windows.h>
+
 using namespace std;
 
 
@@ -128,6 +133,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case EDIT_Label:
 			pAct = new ActionEdit(this);
 			break;
+		case MOVE:
+			pAct = new ActionMove(this);
+			break;
 		case ADD_Label:
 			pAct = new  ActionLabel(this);
 			break;
@@ -176,16 +184,14 @@ string* ApplicationManager::save(int& cp,int& cn) const {
 
 void ApplicationManager::UpdateInterface()
 {
-	//if (CompCount) 
-	//{
+
+	pUI->ClearDrawingArea();
+
 		for (int i = 0; i < CompCount; i++)
 			CompList[i]->Draw(pUI);
 		for (int i = 0; i < ConnCount; i++)
 			ConnList[i]->Draw(pUI);
-		
-	//}
-	//else
-//Exit()
+		Sleep(50);
 }
 
 ////////////////////////////////////////////////////////////////////
