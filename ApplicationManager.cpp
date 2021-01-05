@@ -13,6 +13,8 @@
 #include "Actions/ActionExit.h"
 #include "Actions/ActionLabel.h"
 #include <iostream>
+#include <dos.h>
+#include "dos.h"
 using namespace std;
 
 
@@ -178,6 +180,7 @@ void ApplicationManager::UpdateInterface()
 {
 	//if (CompCount) 
 	//{
+
 		for (int i = 0; i < CompCount; i++)
 			CompList[i]->Draw(pUI);
 		for (int i = 0; i < ConnCount; i++)
@@ -196,6 +199,77 @@ UI* ApplicationManager::GetUI()
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
 bool ApplicationManager::ValidateCircuit() {
+	//Connection** term1;
+	//Connection** term2;
+	int i1 = 0, j1 = 0, er = 0;
+	Connection** conno;
+	Component** compolist = new Component * [CompCount + 1];
+	compolist[j1++] = CompList[i1];
+	if (CompCount < 3)
+		return false;
+
+	int cG = 0;
+	/*for (int i = 0; i < CompCount; i++) {
+		
+	}*/
+	
+	int c1, c2;
+	for (int i = 0; i < CompCount; i++) {
+		c1 = 0, c2 = 0;
+		if (dynamic_cast<Ground*>(CompList[i]))
+			cG++;
+		//pUI->PrintMsg(to_string(cG) + " " + to_string(CompCount));
+		c1 = CompList[i]->getTermConnCount(TERM1);
+		c2 = CompList[i]->getTermConnCount(TERM2);
+		//if (dynamic_cast<Ground*>(CompList[i])) {
+		//	if ((c1 != 1 && c2 != 1)) {
+		//		//pUI->PrintMsg(to_string(c1) + " aw " + to_string(c2));
+		//		return false;
+		//	}
+		//} else 
+		if (c1 != 1 || c2 != 1) {
+				pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
+				return false;
+		}
+		conno = nullptr;
+		conno = CompList[i1]->getTermConnections(TERM1);
+
+
+
+		compolist[j1] = conno[i1]->getOtherComponent(CompList[i1]);
+		if (compolist[j1] == compolist[j1 - 1]) {
+			conno = nullptr;
+			conno = CompList[i1]->getTermConnections(TERM2);
+			compolist[j1] = nullptr;
+			compolist[j1] = conno[i1]->getOtherComponent(CompList[i1]);
+
+		}
+		
+		for (int k = 0; k < CompCount; k++) {
+			if (compolist[j1] == CompList[k]) {
+				i1 = k;
+				++j1;
+				++er;
+				break;
+			}
+		}
+		if (er != 1) {
+			
+			return false;
+		}
+			
+		er = 0;
+		if (compolist[j1 - 1] == CompList[0] && (j1 - 1) != CompCount) {
+			
+			return false;
+		}
+			
+	}
+	if (cG != 1)
+		return false;
+	
+	if (compolist[j1 - 1] != CompList[0])
+		return false;
 	return true;
 }
 
@@ -204,7 +278,7 @@ bool ApplicationManager::ValidateCircuit() {
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
 	if (!ValidateCircuit()) {
-		// TODO
+		pUI->CreateErrorWind("error \n");
 	}
 	else {
 		this->IsSimulation = true;

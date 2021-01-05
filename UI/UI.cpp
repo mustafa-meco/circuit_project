@@ -21,7 +21,18 @@ UI::UI()
 	CreateDesignToolBar();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar
 }
-
+void UI::CreateErrorWind(string s) {
+	window* pErWind;
+	pErWind = new window(width/4, height/4, (wx+width/2)-width/8, (wy+height/2)-height/8);
+	//pErWind->SetBuffering(false);
+	pErWind->SetPen(BLACK);
+	pErWind->SetBrush(RED);
+	pErWind->DrawRectangle(0, 0, width /5, height/5);
+	char key;
+	pErWind->DrawString(width / 10, height / 10, s+"\npress any key");
+	pErWind->WaitKeyPress(key);
+	delete pErWind;
+}
 
 int UI::getCompWidth() const
 {
@@ -240,7 +251,6 @@ void UI::ClearDrawingArea() const
 	pWind->SetPen(RED, 1);
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, ToolBarHeight, width, height - StatusBarHeight);
-	
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 void UI::ClearAll()const

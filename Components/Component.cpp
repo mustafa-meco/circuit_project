@@ -82,12 +82,31 @@ int Component::getID() const {
 	return ID;
 }
 void Component::load(int ,string, double)
-{
+{}
+
+int Component::getTermConnCount(TerminalNum Term) const {
+	if (Term == TERM1)
+		return term1_conn_count;
+	if (Term == TERM2)
+		return term2_conn_count;
 	
 }
 
 
-
+Connection** Component::getTermConnections(TerminalNum Term) const{
+	if (Term == TERM1) {
+		Connection** term_conn = new Connection * [term1_conn_count];
+		for (int i = 0; i < term1_conn_count; i++)
+			term_conn[i] = term1_conns[i];
+		return term_conn;
+	}
+	if (Term == TERM2)	{
+		Connection** term_conn = new Connection * [term2_conn_count];
+		for (int i = 0; i < term2_conn_count; i++)
+			term_conn[i] = term2_conns[i];
+		return term_conn;
+	}
+}
 
 string Component :: getlabel()
 {

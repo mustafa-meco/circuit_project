@@ -115,7 +115,7 @@ public:
 	// Output Functions  ---------------------------
 	void ChangeTitle(string Title) const;
 
-	
+	void CreateErrorWind(string);
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode

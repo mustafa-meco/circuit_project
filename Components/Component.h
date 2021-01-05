@@ -40,7 +40,7 @@ public:
 	//double getTerm2Volt();				//returns the voltage at terminal2
 	double getResistance();
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
-	Connection** getTermConnections(TerminalNum Term); 
+	Connection** getTermConnections(TerminalNum Term) const; 
 	void setResistance(double);
 	void setSourceVoltage(double);
 	void setStatus(bool);
@@ -57,14 +57,14 @@ public:
 
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
+	int getTermConnCount(TerminalNum) const;
+
 	int getID() const;  
 
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
 	void addTerm1Connection(Connection* pConn); 
 	void addTerm2Connection(Connection* pConn);
 
-	//void addTerm1Connection(Connection* pConn);
-	//void addTerm2Connection(Connection* pConn);
 	
 	string Setlabel(string input);
 	string getlabel();
