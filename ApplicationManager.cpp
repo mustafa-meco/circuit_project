@@ -180,10 +180,12 @@ void ApplicationManager::UpdateInterface()
 {
 	//if (CompCount) 
 	//{
+
 		for (int i = 0; i < CompCount; i++)
 			CompList[i]->Draw(pUI);
 		for (int i = 0; i < ConnCount; i++)
 			ConnList[i]->Draw(pUI);
+		
 	//}
 	//else
 //Exit()
