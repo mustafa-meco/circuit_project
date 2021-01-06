@@ -36,9 +36,17 @@ void ActionAddPaste::Execute()
 	Component* ptrCOMP = pManager->GetCopyComp();					   	   //TAYIL74
 
 
-	ptrCOMP->SetGinfo(pGInfo);
-
-	pManager->AddComponent(ptrCOMP); 
+	if (ptrCOMP==NULL)
+	{
+		pUI->ClearStatusBar();
+		pUI->CreateErrorWind("error \n");
+	}
+	else
+	{
+		ptrCOMP->SetGinfo(pGInfo);
+		pManager->AddComponent(ptrCOMP);
+		pUI->ClearStatusBar();
+	}
 	
 	
 	

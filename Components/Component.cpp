@@ -82,7 +82,8 @@ int Component::getID() const {
 	return ID;
 }
 void Component::load(int ,string, double)
-{}
+{
+}
 
 int Component::getTermConnCount(TerminalNum Term) const {
 	if (Term == TERM1)

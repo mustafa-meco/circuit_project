@@ -122,14 +122,14 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
-
+			case ITM_COPY:   return ADD_COPY;
+			case ITM_CUT:   return ADD_CUT;
+			case ITM_PASTE:   return ADD_PASTE;
 			case ITM_EDIT:  return EDIT_Label;
 			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
-			case ITM_COPY:   return ADD_COPY;
-			case ITM_CUT:   return ADD_CUT;
-			case ITM_PASTE:   return ADD_PASTE;
+
 
 			case ITM_EXIT:	return EXIT;	
 			
@@ -286,14 +286,12 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
-
-	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
-	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
-
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
 	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
-	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";
+	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";	
+	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
+	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list

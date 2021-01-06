@@ -17,7 +17,7 @@ void ActionLoad::Execute()
 	
 	pUI->PrintMsg("Enter the file name : ");
 	filename = pUI->GetSrting();
-	
+	 
 
 	inFile.open(filename);
 	while (!inFile)

@@ -49,13 +49,13 @@ class UI
 		ITM_LOAD,        //Load item 
 		ITM_CON,         //connection item 
 		ITM_SIM,
-
-		ITM_EDIT,
-		ITM_LABEL,
-		ITM_SAVE,
 		ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
+		ITM_EDIT,
+		ITM_LABEL,
+		ITM_SAVE,
+		
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
