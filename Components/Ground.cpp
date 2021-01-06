@@ -37,7 +37,7 @@ void Ground::load(int id,string LABELi, double VALUE)
 	m_Label = LABELi;      // label for the ground 
 	resistance = VALUE;    // the value of the ground resistance 
 }
-void Ground::Copy(Component* B)
+void Ground::Copy(Component* &B)
 {
 	B = new Ground(m_pGfxInfo);
 	B->Setlabel(m_Label);

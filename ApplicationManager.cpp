@@ -390,3 +390,16 @@ ApplicationManager::~ApplicationManager()
 	 return CopyComp;
  }
 
+ ////if (CopyComp==nullptr)
+	//		//{
+	//		//	pUI->ClearStatusBar();
+	//		//	//delete pAct;
+	//		//	//pAct = nullptr;
+	//		//	pUI->CreateErrorWind("error \n");
+
+	//		//}
+	//		//else {
+ //pAct = new ActionAddPaste(this);
+
+ ///*	}*/
+ //break;
