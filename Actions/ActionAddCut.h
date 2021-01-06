@@ -1,9 +1,6 @@
 #pragma once
-//#include "../circuit_project/ApplicationManager.h"
-//#include "../circuit_project/Actions/Action.h" 
-//#include "../circuit_project/Components/Component.h"
 #include "../ApplicationManager.h"
-#include "Action.h"
+#include "Action.h" 
 #include "../Components/Component.h"
 class ActionAddCut : public Action
 {

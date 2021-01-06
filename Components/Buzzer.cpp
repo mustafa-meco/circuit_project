@@ -3,19 +3,30 @@
 
 Buzzer::Buzzer(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-		
-		//sourceVoltage = 0;
-		/*pUI->PrintMsg("Enter the label: ");
-		m_Label = pUI->GetSrting();
-		pUI->ClearStatusBar();
-		sourceVoltage = 0;
-	*/
+
+	resistance = 2; // TODO: Take resistance from user
+	sourceVoltage = 0;
+	//pUI->PrintMsg("Enter the label: ");
+	//m_Label = pUI->GetSrting();
+	//pUI->ClearStatusBar();
+	//sourceVoltage = 0;
+
+
+	//if (!r_GfxInfo) {
+	//	
+	//	sourceVoltage = 0;
+	//	/*pUI->PrintMsg("Enter the label: ");
+	//	m_Label = pUI->GetSrting();
+	//	pUI->ClearStatusBar();
+	//	sourceVoltage = 0;
+	//*/}
+
 }
 
 void Buzzer::Draw(UI* pUI)
 {
 	//Call output class and pass resistor drawing info to it.
-	pUI->DrawBuzzer(*m_pGfxInfo,pcomp==this ); //update to draw resistor
+	pUI->DrawBuzzer(*m_pGfxInfo,pcomp==this ); //update to draw buzzer
 	
 }
 void Buzzer::Operate()
@@ -36,9 +47,4 @@ void Buzzer::load(int id,string LABELi, double VALUE)  //load the buzzer
 	ID= id;                // id for the Buzzer
 	m_Label = LABELi;      //label for the Buzzer.
 	resistance = VALUE;  
-}
-void Buzzer::Copy(Component* B)
-{
-	B = new Buzzer(m_pGfxInfo);
-	
 }

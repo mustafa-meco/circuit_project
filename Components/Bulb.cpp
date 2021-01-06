@@ -2,15 +2,28 @@
 
 Bulb::Bulb(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	
 
-		resistance = 2;
+	//pUI->PrintMsg("Enter the value of the resistace: ");
+	//resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
+	//pUI->ClearStatusBar();
+	//sourceVoltage = 0;
+
+	/*pUI->PrintMsg("Enter the label: ");
+	m_Label = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	sourceVoltage = 0;*/
+
+	//if (!r_GfxInfo) {
+
+		//resistance = R;
 		//sourceVoltage = 0;
 
 		/*pUI->PrintMsg("Enter the label: ");
 		m_Label = pUI->GetSrting();*/
 		
 		//sourceVoltage = 0;
+	//}
+
 }
 
 void Bulb::Draw(UI* pUI)
@@ -37,9 +50,4 @@ void Bulb::load(int id,string LABELi, double VALUE)  //load bulb
 	ID = id;                  //id for bulb 
 	m_Label = LABELi;         // new label for bulb
 	resistance = VALUE;       // the resistance of the bulb 
-}
-void Bulb::Copy(Component* B)
-{
-	B = new Bulb(m_pGfxInfo);
-	B->setResistance(this->resistance);
 }

@@ -21,7 +21,18 @@ UI::UI()
 	CreateDesignToolBar();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar
 }
-
+void UI::CreateErrorWind(string s) {
+	window* pErWind;
+	pErWind = new window(width/4, height/4, (wx+width/2)-width/8, (wy+height/2)-height/8);
+	//pErWind->SetBuffering(false);
+	pErWind->SetPen(BLACK);
+	pErWind->SetBrush(RED);
+	pErWind->DrawRectangle(0, 0, width /5, height/5);
+	char key;
+	pErWind->DrawString(width / 10, height / 10, s+"\npress any key");
+	pErWind->WaitKeyPress(key);
+	delete pErWind;
+}
 
 int UI::getCompWidth() const
 {
@@ -80,6 +91,9 @@ string UI::GetSrting()
 
 }
 
+
+
+
 //This function reads the position where the user clicks to determine the desired action
 ActionType UI::GetUserAction() const
 {	
@@ -108,11 +122,15 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
+
+			case ITM_EDIT:  return EDIT_Label;
+			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
-			case ITM_COPY:   return ADD_COPY; 
+			case ITM_COPY:   return ADD_COPY;
 			case ITM_CUT:   return ADD_CUT;
-			case ITM_PASTE:   return ADD_PASTE;  
+			case ITM_PASTE:   return ADD_PASTE;
+
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -236,8 +254,17 @@ void UI::ClearDrawingArea() const
 	pWind->SetPen(RED, 1);
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, ToolBarHeight, width, height - StatusBarHeight);
-	
 }
+///////////////////////////////////////////////////////////////////////////////////////////
+void UI::ClearAll()const
+{
+	ClearDrawingArea();
+	ClearToolBar();
+	ClearStatusBar();
+	pWind->SetPen(WHITE,1000000);
+	pWind->DrawLine(0, height - StatusBarHeight, width, height - StatusBarHeight);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -259,6 +286,10 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
+
+	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
+	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
+
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
 	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
@@ -395,19 +426,31 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 }
 
 
-void UI::DrawConnection(const GraphicsInfo& r_GfxInfo ) const //bool selected
+void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const //bool selected
 {
-	//TODO: Add code to draw connection
-			
-		pWind->SetPen(BLACK, 2);  // Pen colour and its thickness 
-		//Drawing line between two points. 
+	if (selected==true)
+	//if (AppMode == DESIGN)	//application is in design mode
+	{
+		//if (r_GfxInfo.PointsList[0].y > ToolBarHeight && r_GfxInfo.PointsList[0].y < height - StatusBarHeight && r_GfxInfo.PointsList[1].y > ToolBarHeight && r_GfxInfo.PointsList[1].y < height - StatusBarHeight)
+		pWind->SetPen(PINK, 3);
 		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+	}
+	else
+	{
+		pWind->SetPen(BLACK, 3);
+		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+	}	
 }
-void UI::drawWhiteRec(int x1, int y1, int x2, int y2)
+void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo) 
 {
-	pWind->SetPen(WHITE);
-	pWind->DrawRectangle(x1, y1, x2, y2);
+	pWind->SetPen(WHITE, 3);
+	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
 }
+
+
+
+
+
 
 
 UI::~UI()

@@ -14,7 +14,8 @@
 class ApplicationManager
 {
 
-	enum {
+	enum 
+	{
 		MaxCompCount = 200,
 		MaxConnCount = 1000
 	};	//Max no of components and connectors
@@ -26,7 +27,7 @@ private:
 	bool IsSimulation; // True when in simulation mode
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
-	Component* CopyComp;											//TAYIL74
+	Component* CopyComp;   
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
 	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
 
@@ -37,9 +38,9 @@ private:
 
 
 public:
-	ApplicationManager(); //constructor 
-	//CompData ComponentData; 
-						  //Reads the required action from the user and returns the corresponding action type
+	ApplicationManager(); //constructor
+
+	//Reads the required action from the user and returns the corresponding action type
 	ActionType GetUserAction();
 
 	//Creates an action and executes it
@@ -55,10 +56,9 @@ public:
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
 	void AddConnection(Connection* pConn);
-	void SetCopyComp(Component * comp1); //TAYIL74 NEGMA????????
-	Component* GetCopyComp() const;  //TAYIL74 NEGMA????????
-	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
 
+	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
+	Connection* GetConnectionByCordinates(int x, int y);
 	// Simulation Mode Functions
 	bool ValidateCircuit();
 	void ToSimulation(); // Switches to simulation mode
@@ -69,9 +69,15 @@ public:
 	string* save(int&,int&) const;
 	//destructor
 	~ApplicationManager();
+
+		//void Exit();
+
 	void load( string * , double* , Component**, Component** );     //load the connection
 
 	bool isAvalible();   // to check if the user create two components before connect them or not
+	Component* GetCopyComp() const;		 	   //TAYIL74
+	void SetCopyComp(Component* comp1);        //TAYIL74
+
 
 };
 

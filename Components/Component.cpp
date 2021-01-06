@@ -9,10 +9,6 @@ Component::Component(GraphicsInfo *r_GfxInfo)
 	term1_conn_count = term2_conn_count = 0;
 	ID = ++gID;
 }
-//Component::Component(Component& C)   TAYIL74
-//{
-//	//label = C.resistance;
-//}
 
 
 Component::~Component()
@@ -20,12 +16,20 @@ Component::~Component()
 }
 bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user clicks in the area of the component or not
 {
-	if (m_pGfxInfo->PointsList[0].x < x && m_pGfxInfo->PointsList[1].x > x&& m_pGfxInfo->PointsList[0].y < y && m_pGfxInfo->PointsList[1].y > y)
+	if (m_pGfxInfo->PointsList[0].x < x &&
+		m_pGfxInfo->PointsList[1].x > x &&
+		m_pGfxInfo->PointsList[0].y < y &&
+		m_pGfxInfo->PointsList[1].y > y)
 	{
-		pcomp = this;   //????
+		pcomp = this;
 		return true;
 	}
+	else
+		pcomp = nullptr;
+		return false;
+	
 }
+Component* Component::pcomp = nullptr;
 //Connection** getTermConnections(TerminalNum Term)
 //{
 //
@@ -68,10 +72,6 @@ int Component::getCompCentery(UI*)         //get the center of the component are
 double Component::getResistance() {
 	return resistance;
 }
-double Component::getSourceVoltage()  //TAYIL74
-{
-	return sourceVoltage;
-}
 
 string Component::save() const {
 	string row =  " ";
@@ -82,32 +82,44 @@ int Component::getID() const {
 	return ID;
 }
 void Component::load(int ,string, double)
-{
+{}
+
+int Component::getTermConnCount(TerminalNum Term) const {
+	if (Term == TERM1)
+		return term1_conn_count;
+	if (Term == TERM2)
+		return term2_conn_count;
 	
 }
 
 
-Component* Component::pcomp = nullptr;
-int Component::gID = 0;
-void Component::setGraficsInfo(int x11, int y11)        //new graphics info for cutting 
-{
-	m_pGfxInfo->PointsList[0].x = x11-25;
-	m_pGfxInfo->PointsList[1].x = x11 + 25;
-	m_pGfxInfo->PointsList[0].y = y11 - 25;
-	m_pGfxInfo->PointsList[1].y = y11 + 25;
+Connection** Component::getTermConnections(TerminalNum Term) const{
+	if (Term == TERM1) {
+		Connection** term_conn = new Connection * [term1_conn_count];
+		for (int i = 0; i < term1_conn_count; i++)
+			term_conn[i] = term1_conns[i];
+		return term_conn;
+	}
+	if (Term == TERM2)	{
+		Connection** term_conn = new Connection * [term2_conn_count];
+		for (int i = 0; i < term2_conn_count; i++)
+			term_conn[i] = term2_conns[i];
+		return term_conn;
+	}
 }
 
-void Component::getGraficsInfo(int& x1, int& y1, int& x2, int& y2)   //the old graphics info.
+string Component :: getlabel()
 {
-    	x1 = m_pGfxInfo->PointsList[0].x;
-		y1 = m_pGfxInfo->PointsList[1].x;
-		x2 = m_pGfxInfo->PointsList[0].y;
-		y2 = m_pGfxInfo->PointsList[1].y;
+	return m_Label;
 }
-
+string Component::Setlabel(string input)
+{
+	m_Label = input;
+	return m_Label;
+}
 void Component::SetGinfo(GraphicsInfo* G)
 {
-	m_pGfxInfo = G; 
+	m_pGfxInfo = G;
 }
-
+int Component::gID = 0;
 

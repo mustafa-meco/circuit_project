@@ -9,16 +9,9 @@
 //#include "Actions/ActionAddSwi.h"
 //#include "ActionAddCut.h"
 //#include "UI/UI.h"
-#include "ActionAddCopy.h"
 #include "ActionAddCut.h"
 #include "Action.h"
-#include "ActionAddBat.h"
-#include "ActionAddBuz.h" 
-#include "ActionAddBul.h"
-#include "ActionAddFues.h"
-#include "ActionAddGro.h"
-#include "ActionAddRes.h"
-#include "ActionAddSwi.h"
+
 #include "../UI/UI.h"
 
 ActionAddCut::ActionAddCut(ApplicationManager* pApp) : Action(pApp)
@@ -60,7 +53,7 @@ void ActionAddCut::Execute()
 	}
 	else																			//TAYIL74
 	{
-		pManager->SetCopyComp(ptrComp);
+		pManager->SetCopyComp(ptrComp); 
 	}
 	//if (ptResistor != NULL)
 	//{

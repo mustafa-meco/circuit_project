@@ -5,12 +5,15 @@
 #include "..\UI\UI.h"
 #include "..\Connections\Connection.h"
 
+
 //Base class for all components (resistor, capacitor,....etc) .
 class Component
 {
 private:
+
 	
 protected:
+	
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
 	double resistance, sourceVoltage; // internal resistance and voltage jump introduced by source
@@ -25,23 +28,19 @@ protected:
 	int ID;
 	static int gID;
 	string m_Label;
-
-	//int resistance;
-	//int source 
-
+	int choose;
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 	static Component* pcomp;
 public:
 	Component(GraphicsInfo *r_GfxInfo);
-	Component(Component & C );
+	
 	//void setTerm1Volt(double v);		//sets the voltage at terminal1
 	//void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1
 	//double getTerm2Volt();				//returns the voltage at terminal2
 	double getResistance();
-	double getSourceVoltage();             //TAYIL74 
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
-	Connection** getTermConnections(TerminalNum Term); 
+	Connection** getTermConnections(TerminalNum Term) const; 
 	void setResistance(double);
 	void setSourceVoltage(double);
 	void setStatus(bool);
@@ -52,14 +51,13 @@ public:
 
 	int getCompCenterx(UI*); // get horizontal/vertical centers of the component
 	int getCompCentery(UI*);
-
-	void setGraficsInfo(int x11, int y11);
-	void getGraficsInfo(int& x1, int& y1, int& x2, int& y2);
 	
 	//virtual int GetOutStatus()=0;	//returns status of output if BULB/BUZZER, return -1
 	//virtual int GetInputStatus()=0;	//returns status of SWITCH, return -1
 
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
+
+	int getTermConnCount(TerminalNum) const;
 
 	int getID() const;  
 
@@ -67,6 +65,11 @@ public:
 	void addTerm1Connection(Connection* pConn); 
 	void addTerm2Connection(Connection* pConn);
 
+	
+	string Setlabel(string input);
+	string getlabel();
+
+	void SetGinfo(GraphicsInfo* G); 
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 	virtual string save() const;
@@ -75,8 +78,7 @@ public:
 	virtual void load( int, string, double ); 
 	
 	//static void selection();
-	virtual void Copy(Component* B) = 0;
-	void SetGinfo(GraphicsInfo* G);
+	
 };
 
 #endif

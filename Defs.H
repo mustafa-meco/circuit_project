@@ -16,9 +16,7 @@ enum ActionType
 	ADD_BATTERY,
 	ADD_BUZZER,
 	ADD_FUES,
-	
-	
-	ADD_COPY, 
+	ADD_COPY,
 	ADD_CUT,
 
 	ADD_PASTE,
@@ -40,7 +38,7 @@ enum ActionType
 
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
-
+	
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
 
@@ -56,15 +54,6 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
-
-//struct CompData
-//{
-//	string COMPNAME;                									//TAYIL74
-//	//string COMPLABEL; 
-//	int COMPvalueRESIS;
-//	int COMPvalueVOLT;
-//};
-
 
 //Maximum number of connections that can be connected to any output components
 #define MAX_CONNS 20

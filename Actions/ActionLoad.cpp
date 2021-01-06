@@ -24,6 +24,7 @@ void ActionLoad::Execute()
 	{
 		pUI->PrintMsg("Enter the file name : ");
 		filename = pUI->GetSrting();
+		inFile.open(filename);
 	}
 	
 	getline(inFile, input);
@@ -79,7 +80,7 @@ void ActionLoad::Execute()
 		if (arrName[j] == "RES")
 		{
 		
-			Resistor* pR = new Resistor(pGInfo5);
+			Resistor* pR = new Resistor(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
 		}
 		else if (arrName[j] == "SWT")

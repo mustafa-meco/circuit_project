@@ -9,6 +9,4 @@ public:
 	virtual void Operate();
 	string save() const;
 	void load(int id, string LABELi , double VALUE); //load Bulb
-	void Copy(Component* B);
-
 };

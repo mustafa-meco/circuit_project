@@ -29,6 +29,7 @@ void ActionAddBat::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
+
 	string sV;
 	bool isNumber;
 	do {

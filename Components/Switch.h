@@ -9,8 +9,6 @@ public:
 	virtual void Operate();
 	string save() const;
 	void load(int id ,string, double); //Load the resistor 
-	void Copy(Component* B);
-
 
 };
 

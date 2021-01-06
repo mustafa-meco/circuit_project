@@ -3,6 +3,7 @@
 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\Defs.h"
+
 #include <string>
 using namespace std;
 
@@ -48,11 +49,13 @@ class UI
 		ITM_LOAD,        //Load item 
 		ITM_CON,         //connection item 
 		ITM_SIM,
+
+		ITM_EDIT,
+		ITM_LABEL,
 		ITM_SAVE,
 		ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
-
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -115,7 +118,7 @@ public:
 	// Output Functions  ---------------------------
 	void ChangeTitle(string Title) const;
 
-	
+	void CreateErrorWind(string);
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
@@ -123,7 +126,7 @@ public:
 	void ClearToolBar()const;
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
-
+	void ClearAll()const;  //Clear all 
 		
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
@@ -139,13 +142,25 @@ public:
 	//Draws a fues
 	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
-	void drawWhiteRec(int, int , int ,int );
-
+	//void DrawEdit(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	// Draws Connection
+	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
+	//void DrawConnection1(const GraphicsInfo& r_GfxInfo, bool selected = false) const; 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
+	//void PrintLabel(string msg)const;
+
+	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
+	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
+
+
+
+
+
 	//void PrintLabel(string msg)const;
 
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   
+
 
 	
 	~UI();

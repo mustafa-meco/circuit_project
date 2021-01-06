@@ -2,8 +2,12 @@
 
 Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	resistance = -1; 
+
 	
+
+	resistance = -1; 
+
+
 }
 
 
@@ -32,9 +36,4 @@ void Ground::load(int id,string LABELi, double VALUE)
 	ID = id;               //id for the ground 
 	m_Label = LABELi;      // label for the ground 
 	resistance = VALUE;    // the value of the ground resistance 
-}
-void Ground::Copy(Component* B)
-{
-	B = new Ground(m_pGfxInfo);
-
 }

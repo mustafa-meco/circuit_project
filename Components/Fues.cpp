@@ -2,7 +2,10 @@
 
 Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo) 
 {
-	
+
+
+	resistance = 2; 
+
 }
 
 void Fues::Draw(UI* pUI)
@@ -29,9 +32,4 @@ void Fues::load(int id,string LABELi, double VALUE)
 	ID=id;                //id for the fuse 
 	m_Label = LABELi;     //new label for the fuse
 	resistance = VALUE;   // the value of the fuse resistance
-}
-void Fues::Copy(Component* B)
-{
-	B = new Fues(m_pGfxInfo);
-
 }
