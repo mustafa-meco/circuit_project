@@ -16,10 +16,10 @@ Component::~Component()
 }
 bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user clicks in the area of the component or not
 {
-	if (m_pGfxInfo->PointsList[0].x < x &&
-		m_pGfxInfo->PointsList[1].x > x &&
-		m_pGfxInfo->PointsList[0].y < y &&
-		m_pGfxInfo->PointsList[1].y > y)
+	if (m_pGfxInfo->PointsList[0].x-1 < x &&
+		m_pGfxInfo->PointsList[1].x+1 > x &&
+		m_pGfxInfo->PointsList[0].y-1 < y &&
+		m_pGfxInfo->PointsList[1].y+1 > y)
 	{
 		pcomp = this;
 		return true;
