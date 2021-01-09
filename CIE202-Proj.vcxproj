@@ -114,8 +114,12 @@
     <ClCompile Include="Actions\ActionAddBul.cpp" />
     <ClCompile Include="Actions\ActionAddBuz.cpp" />
     <ClCompile Include="Actions\ActionAddCon.cpp" />
+    <ClCompile Include="Actions\ActionAddCopy.cpp" />
+    <ClCompile Include="Actions\ActionAddCut.cpp" />
     <ClCompile Include="Actions\ActionAddFues.cpp" />
     <ClCompile Include="Actions\ActionAddGro.cpp" />
+    <ClCompile Include="Actions\ActionAddModule.cpp" />
+    <ClCompile Include="Actions\ActionAddPaste.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwi.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
@@ -123,8 +127,10 @@
     <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionLabel.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
+    <ClCompile Include="Actions\ActionMove.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
+    <ClCompile Include="Actions\ActionUndo.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -167,6 +173,7 @@
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Fues.cpp" />
     <ClCompile Include="Components\Ground.cpp" />
+    <ClCompile Include="Components\Module.cpp" />
     <ClCompile Include="Components\Resistor.cpp" />
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
@@ -179,8 +186,12 @@
     <ClInclude Include="Actions\ActionAddBul.h" />
     <ClInclude Include="Actions\ActionAddBuz.h" />
     <ClInclude Include="Actions\ActionAddCon.h" />
+    <ClInclude Include="Actions\ActionAddCopy.h" />
+    <ClInclude Include="Actions\ActionAddCut.h" />
     <ClInclude Include="Actions\ActionAddFues.h" />
     <ClInclude Include="Actions\ActionAddGro.h" />
+    <ClInclude Include="Actions\ActionAddModule.h" />
+    <ClInclude Include="Actions\ActionAddPaste.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwi.h" />
     <ClInclude Include="Actions\ActionDelete.h" />
@@ -188,8 +199,10 @@
     <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionLabel.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionMove.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
+    <ClInclude Include="Actions\ActionUndo.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />
@@ -216,6 +229,7 @@
     <ClInclude Include="Components\Bulb.h" />
     <ClInclude Include="Components\Fues.h" />
     <ClInclude Include="Components\Ground.h" />
+    <ClInclude Include="Components\Module.h" />
     <ClInclude Include="Components\Resistor.h" />
     <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />

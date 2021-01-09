@@ -16,7 +16,10 @@ enum ActionType
 	ADD_BATTERY,
 	ADD_BUZZER,
 	ADD_FUES,
+	ADD_COPY,
+	ADD_CUT,
 
+	ADD_PASTE,
 
 
 	ADD_CONNECTION,		//Add Wire Connection 
@@ -35,7 +38,7 @@ enum ActionType
 
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
-
+	
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
 

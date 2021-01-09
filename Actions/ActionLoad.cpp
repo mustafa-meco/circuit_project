@@ -17,13 +17,14 @@ void ActionLoad::Execute()
 	
 	pUI->PrintMsg("Enter the file name : ");
 	filename = pUI->GetSrting();
-	
+	 
 
 	inFile.open(filename);
 	while (!inFile)
 	{
 		pUI->PrintMsg("Enter the file name : ");
 		filename = pUI->GetSrting();
+		inFile.open(filename);
 	}
 	
 	getline(inFile, input);
@@ -173,20 +174,58 @@ void ActionLoad::Execute()
 		pGInfo->PointsList[1].y = arr66[j];
 
 
+		comp01 = pManager->GetComponentByCordinates(arr33[j] , arr44[j]);
+		comp02 = pManager->GetComponentByCordinates(arr55[j] , arr66[j]);
+		Connection* pR = new Connection(pGInfo, comp01, comp02);
+		pManager->AddConnection(pR);
+		
+
+		TerminalNum comp1conn, comp2conn;
+		if (arr33[j] < comp01->getCompCenterx(pUI))
+		{
+		
+
+			//comp1->addTerm1Connection();
+			comp1conn = TERM1;
+		}
+		else
+		{
+		
+			comp1conn = TERM2;
+		}
+		if (arr55[j] < comp02->getCompCenterx(pUI))
+		{
+			comp2conn = TERM1;
+			//comp2->addTerm1Connection();
+		}
+		else
+		{
+			comp2conn = TERM2;
+		}
+
+		Connection* pCON = new Connection(pGInfo, comp01, comp02);
+		if (comp1conn == TERM1)
+			comp01->addTerm1Connection(pCON);
+		else
+			comp01->addTerm2Connection(pCON);
+		if (comp2conn == TERM1)
+			comp02->addTerm1Connection(pCON);
+		else
+			comp02->addTerm2Connection(pCON);
+		
 
 
 
 
-
-		Connection* pR = new Connection(pGInfo, nullptr, nullptr); 
+		/*Connection* pR = new Connection(pGInfo, nullptr, nullptr); 
 		pManager->AddConnection(pR);
 		comp01 = pManager->GetComponentByCordinates(arr33[j], arr44[j]);
-		comp02 = pManager->GetComponentByCordinates(arr55[j], arr66[j]);
+		comp02 = pManager->GetComponentByCordinates(arr55[j], arr66[j]);*/
 
 		arrCOMP1[j] = comp01;
 		arrCOMP2[j] = comp02; 
 
-	}
+	} 
 	inFile.close();
 	pManager->load(arrLABELS, arrVALUEcorr, arrCOMP1, arrCOMP2);  
 

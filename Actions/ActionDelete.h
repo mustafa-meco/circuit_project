@@ -12,7 +12,7 @@ class ActionDelete : public Action
 private:
 
 	Component* comp;
-	Component* compDelete;
+	//Component* compDelete;
 	Connection* connection;
 	//Parameters for rectangular area to be occupied by the comp
 	int Cx, Cy;	//Center point of the comp
@@ -25,7 +25,7 @@ public:
 	
 	//Execute action (code depends on action type)
 	virtual void Execute();
-	//virtual void del();
+	
 	virtual void Undo();
 	virtual void Redo();
 	

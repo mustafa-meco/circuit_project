@@ -22,6 +22,11 @@ protected:
 	//Each terminal is connected to set of connections
 	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections
 	Connection *term2_conns[MAX_CONNS];
+	struct demo
+	{
+		//array declared inside structure
+		Connection* arr[MAX_CONNS];
+	};
 
 	int term1_conn_count;	//actual no. of connections to each terminal
 	int term2_conn_count;
@@ -37,7 +42,8 @@ public:
 	Component(GraphicsInfo *r_GfxInfo);
 	
 	//void setTerm1Volt(double v);		//sets the voltage at terminal1
-	//void setTerm2Volt(double v);		//sets the voltage at terminal2
+	//
+	void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1
 	//double getTerm2Volt();				//returns the voltage at terminal2
 	double getResistance();
@@ -60,6 +66,8 @@ public:
 
 	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
+	int getTermConnCount(TerminalNum) const;
+
 	int getID() const;  
 
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
@@ -72,17 +80,21 @@ public:
 	string Setlabel(string input);
 	string getlabel();
 
+	void SetGinfo(GraphicsInfo* G); 
+
+	void setm_pGfxInfo(int cx, int cy);
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 	virtual string save() const;
 	//Destructor must be virtual
 	virtual ~Component();
 	virtual void load( int, string, double ); 
+	virtual void Copy(Component* &B) = 0;
 	
 	//static void selection();
 	GraphicsInfo* getm_pGfxInfo() ;
 	//void DeleteImage(GraphicsInfo* m_pGfxInfo, UI*);
-	int getTermConnCount(TerminalNum Term) const;
+	
 
 };
 #endif

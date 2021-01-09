@@ -10,11 +10,16 @@
 //#include "ActionLoad.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSelect.h"
+#include "Actions/ActionAddCopy.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionLabel.h"
+#include "Actions/ActionAddPaste.h"
+#include "Actions/ActionAddCut.h"
+#include"Actions/ActionMove.h"
 #include "Actions/ActionDelete.h"
 #include<Windows.h>
 #include <iostream>
+
 using namespace std;
 
 
@@ -130,6 +135,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case EDIT_Label:
 			pAct = new ActionEdit(this);
 			break;
+		case MOVE:
+			pAct = new ActionMove(this);
+			break;
 		case ADD_Label:
 			pAct = new  ActionLabel(this);
 			break;
@@ -153,6 +161,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case LOAD:
 			pAct = new ActionLoad(this);
+			break;
+		case ADD_COPY: 
+			pAct = new ActionAddCopy(this);
+			break;
+		case ADD_CUT:
+			pAct = new ActionAddCut(this);
+			break;
+		case ADD_PASTE:
+			pAct = new ActionAddPaste(this);
 			break;
 		case EXIT:
 			pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -181,19 +198,22 @@ string* ApplicationManager::save(int& cp,int& cn) const {
 
 void ApplicationManager::UpdateInterface()
 {
+	//if (CompCount) 
+	//{
 	pUI->ClearDrawingArea();
-	for (int i = 0; i < CompCount; i++)
-	{
-		
-		
+		for (int i = 0; i < CompCount; i++)
 			CompList[i]->Draw(pUI);
 		
 		
 	
-	}
+	
 		for (int i = 0; i < ConnCount; i++)
 			ConnList[i]->Draw(pUI);
-		Sleep(50);
+		
+	Sleep(50);
+	//}
+	//else
+//Exit()
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -204,6 +224,92 @@ UI* ApplicationManager::GetUI()
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
 bool ApplicationManager::ValidateCircuit() {
+	//Connection** term1;
+	//Connection** term2;
+	int i1 = 0, j1 = 0, er = 0;
+	Connection** conno;
+	Component** compolist = new Component * [CompCount + 1];
+	compolist[j1++] = CompList[i1];
+	conno = CompList[i1]->getTermConnections(TERM1);
+	compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+	if (CompCount < 3)
+		return false;
+	int cG = 0, tkrar = 0;
+	/*for (int i = 0; i < CompCount; i++) {
+		
+	}*/
+	
+	int c1, c2;
+	for (int i = 0; i < CompCount; i++) {
+		c1 = 0, c2 = 0;
+		if (dynamic_cast<Ground*>(CompList[i]))
+			cG++;
+		//pUI->PrintMsg(to_string(cG) + " " + to_string(CompCount));
+		c1 = CompList[i]->getTermConnCount(TERM1);
+		c2 = CompList[i]->getTermConnCount(TERM2);
+		//if (dynamic_cast<Ground*>(CompList[i])) {
+		//	if ((c1 != 1 && c2 != 1)) {
+		//		//pUI->PrintMsg(to_string(c1) + " aw " + to_string(c2));
+		//		return false;
+		//	}
+		//} else 
+		if (c1 != 1 || c2 != 1) {
+				pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
+				return false;
+		}
+		if (i != 0) {
+			conno = CompList[i1]->getTermConnections(TERM1);
+			compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+			if (compolist[j1] == compolist[j1 - 1]) {
+				conno = CompList[i1]->getTermConnections(TERM2);
+				compolist[j1] = nullptr;
+				compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);	
+			}
+		}
+		for (int k = 0; k < CompCount; k++) {
+			if (compolist[j1] == compolist[k] && j1 != k)
+				tkrar++;
+			if (compolist[j1] == CompList[k]) {
+				i1 = k;
+				++j1;
+				++er;
+				break;
+			}
+		}
+		
+		if (er != 1) {
+			pUI->PrintMsg("er" + to_string(i)+ to_string(er));
+			return false;
+		}
+			
+		er = 0;
+	}
+	/*compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+	if (compolist[j1] == compolist[j1 - 1]) {
+
+		conno = CompList[i1]->getTermConnections(TERM2);
+
+		compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+
+	}
+
+	if (compolist[j1 -1] == CompList[0] && (j1 -1 ) != CompCount) {
+			pUI->PrintMsg(to_string(j1)+  " end " + to_string(CompCount) + " end " );
+			return false;
+	}*/
+
+	if (cG != 1 || tkrar > 2) {
+		pUI->PrintMsg(to_string(tkrar));
+		return false;
+	}
+		
+	
+	
+	/*if (compolist[j1] != CompList[0]) {
+		pUI->PrintMsg(compolist[j1]->getlabel());
+		return false;
+	}*/
+	pUI->PrintMsg(to_string(j1));
 	return true;
 }
 
@@ -212,7 +318,7 @@ bool ApplicationManager::ValidateCircuit() {
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
 	if (!ValidateCircuit()) {
-		// TODO
+		pUI->CreateErrorWind("error \n");
 	}
 	else {
 		this->IsSimulation = true;
@@ -303,96 +409,25 @@ ApplicationManager::~ApplicationManager()
 	 
 	
  } 
-
-void ApplicationManager::deleteCompounent(Component*delet)
+ void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
  {
-	int x1 = 0;
-	Component* T;
-		for (int i = 0; i < CompCount; i++)
-		{
-			if (CompList[i] == delet)
-			{
-				x1 = i;
-				for (int j = x1; j < CompCount; j++)
-				{
-					CompList[j] = CompList[j + 1];
-				}
-				CompCount--;
-
-				int C1, C2;
-				C1 = delet->getTermConnCount(TERM1);
-				C2 = delet->getTermConnCount(TERM2);
-				Connection** c1;
-				Connection** c2;
-				/* c1 = nullptr;
-				 c2 = nullptr;*/
-				c1 = delet->getTermConnections(TERM1);
-			
-				c2 = delet->getTermConnections(TERM2);
-		
-				for (int y = 0; y < C1; y++)
-				{
-					pUI->PrintMsg("FUCK THE WORLD");
-					delet->removeTerm1Connection(c1[y]);
-					pUI->ChangeTitle(c1[y]->getOtherComponent(delet)->getlabel());
-					deleteConnection(c1[y]);
-				}
-				for (int y = 0; y < C2; y++)
-				{
-					pUI->PrintMsg("FUCK THE WORLD");
-					delet->removeTerm2Connection(c2[y]);
-					pUI->ChangeTitle(c2[y]->getOtherComponent(delet)->getlabel());
-					deleteConnection(c2[y]);
-				}
-				delete	delet;
-
-			}
-		}
-	
+	 CopyComp = comp1;
  }
-void ApplicationManager::deleteConnection(Connection* delet) 
-{
-	int x1 = 0;
-	Component* T;
-	for (int i = 0; i < ConnCount; i++)
-	{
-		if (ConnList[i] == delet)
-		{
-			x1 = i;
-			for (int j = x1; j < ConnCount; j++)
-			{
-				ConnList[j] = ConnList[j + 1];
-			}
-			ConnCount--;
-			for (int zc = 0; zc < CompCount; zc++)
-			{
-				if(delet->getOtherComponent(CompList[i]))
-				{
+ Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
+ {
+	 return CopyComp;
+ }
 
-				}
-			}
-			delete	delet;
-		}
-	}
-}
-//int C1, C2;
-		//C1 = delet->getTermConnCount(TERM1);
-		//C2 = delet->getTermConnCount(TERM2);
-		//Connection** c1;
-		//Connection** c2;
-		//c1 = nullptr;
-		//c2 = nullptr;
-		//c1 = delet->getTermConnections(TERM1);
+ ////if (CopyComp==nullptr)
+	//		//{
+	//		//	pUI->ClearStatusBar();
+	//		//	//delete pAct;
+	//		//	//pAct = nullptr;
+	//		//	pUI->CreateErrorWind("error \n");
 
-		//c2 = delet->getTermConnections(TERM2);
+	//		//}
+	//		//else {
+ //pAct = new ActionAddPaste(this);
 
-		//for (int y = 0; y < C1; y++)
-		//{
-		//    //deletconnection(c1[y]);
-		//}
-		//for (int y = 0; y < C2; y++)
-		//{
-		//    //deletconnection(c2[y]);
-		//}
-
-
+ ///*	}*/
+ //break;

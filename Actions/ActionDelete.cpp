@@ -28,8 +28,8 @@ void ActionDelete::Execute()
 	//comp->removeTerm2Connection(connection);
 
 
-	pManager->deleteCompounent(comp);
-	pManager->deleteConnection(connection);
+//pManager->deleteCompounent(comp);
+	//pManager->deleteConnection(connection);
 	pUI->ClearStatusBar();
   
 }

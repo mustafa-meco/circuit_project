@@ -99,6 +99,9 @@ Component* Connection::getOtherComponent(Component* Cmpnt)
 	{
 		return Comp1;
 	}
+	else {
+		return nullptr;
+	}
 	
 	
 }

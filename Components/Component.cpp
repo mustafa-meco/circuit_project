@@ -16,18 +16,17 @@ Component::~Component()
 }
 bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user clicks in the area of the component or not
 {
-	while (this != NULL)
+	if (m_pGfxInfo->PointsList[0].x-1 < x &&
+		m_pGfxInfo->PointsList[1].x+1 > x &&
+		m_pGfxInfo->PointsList[0].y-1 < y &&
+		m_pGfxInfo->PointsList[1].y+1 > y)
 	{
-		if (m_pGfxInfo->PointsList[0].x < x &&
-			m_pGfxInfo->PointsList[1].x > x &&
-			m_pGfxInfo->PointsList[0].y < y &&
-			m_pGfxInfo->PointsList[1].y > y)
-		{
-			pcomp = this;
-			return true;
-		}
-		else
-			pcomp = nullptr;
+		pcomp = this;
+		return true;
+	}
+	else
+	{
+		pcomp = nullptr;
 		return false;
 	}
 }
@@ -45,16 +44,7 @@ void Component::addTerm2Connection(Connection* pConn)
 {
 	term2_conns[term2_conn_count++] = pConn; 
 }
-Connection** Component::getTermConnections(TerminalNum Term)  {
-	if (Term == TERM1) {
-		
-			return term1_conns;
-	}
-	else if (Term == TERM2) {
-	
-			return term2_conns;
-	}
-}
+
 
 
 void Component::removeTerm1Connection(Connection* pConn)
@@ -127,11 +117,31 @@ int Component::getID() const {
 }
 void Component::load(int ,string, double)
 {
+}
+
+int Component::getTermConnCount(TerminalNum Term) const {
+	if (Term == TERM1)
+		return term1_conn_count;
+	if (Term == TERM2)
+		return term2_conn_count;
 	
 }
 
 
-
+Connection** Component::getTermConnections(TerminalNum Term) {
+	if (Term == TERM1) {
+		/*Connection** term_conn = new Connection * [term1_conn_count];
+		for (int i = 0; i < term1_conn_count; i++)
+			term_conn[i] = term1_conns[i];*/
+		return term1_conns;
+	}
+	else if (Term == TERM2)	{
+		/*Connection** term_conn = new Connection * [term2_conn_count];
+		for (int i = 0; i < term2_conn_count; i++)
+			term_conn[i] = term2_conns[i];*/
+		return term2_conns;
+	}
+}
 
 string Component :: getlabel()
 {
@@ -142,23 +152,24 @@ string Component::Setlabel(string input)
 	m_Label = input;
 	return m_Label;
 }
-
+void Component::SetGinfo(GraphicsInfo* G)
+{
+	m_pGfxInfo = G;
+}
 int Component::gID = 0;
 
-GraphicsInfo* Component::getm_pGfxInfo()
+void Component::setm_pGfxInfo(int cx, int cy)
 {
-	return m_pGfxInfo;
+	m_pGfxInfo->PointsList[0].x = cx - 25;
+	m_pGfxInfo->PointsList[1].x = cx + 25;
+	m_pGfxInfo->PointsList[0].y = cy - 25;
+	m_pGfxInfo->PointsList[1].y = cy + 25;
 }
+
 //void Component::DeleteImage(GraphicsInfo* pGInfo, UI* pUI)
 //{
 //		pUI->DrawWhite(*m_pGfxInfo);
 //}
-int Component::getTermConnCount(TerminalNum Term) const 
-{
-	if (Term == TERM1)
-		return term1_conn_count;
-	if (Term == TERM2)
-		return term2_conn_count;
-}
+
 
 

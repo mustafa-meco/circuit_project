@@ -51,3 +51,10 @@ void Battery::load(int id,string LABELi, double VALUE)    //load the battery
 	resistance = VALUE;    // the internal resistance of the battery
 	
 }
+
+void Battery::Copy(Component* &B)
+{
+	B = new Battery(m_pGfxInfo);
+	B->setSourceVoltage(this->sourceVoltage);
+	B->Setlabel(m_Label);
+}

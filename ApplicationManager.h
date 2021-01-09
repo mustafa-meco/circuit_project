@@ -27,9 +27,9 @@ private:
 	bool IsSimulation; // True when in simulation mode
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
-
-	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
-	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
+	Component* CopyComp;   
+	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers) 
+	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers) 
 
 	string compLineList[MaxCompCount + MaxConnCount + 3];
 	string connLineList[MaxCompCount + MaxConnCount + 3];
@@ -75,6 +75,10 @@ public:
 	void load( string * , double* , Component**, Component** );     //load the connection
 
 	bool isAvalible();   // to check if the user create two components before connect them or not
+	Component* GetCopyComp() const;		 	   //TAYIL74
+	void SetCopyComp(Component* comp1);        //TAYIL74
+
+
 	void deleteCompounent(Component*);
 	void deleteConnection(Connection*);
 	
