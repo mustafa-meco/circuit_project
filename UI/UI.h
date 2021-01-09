@@ -57,7 +57,7 @@ class UI
 		ITM_LABEL,
 		ITM_LOAD,
 		ITM_SAVE,
-		ITM_DELETE,
+		/*ITM_DELETE,*/
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
