@@ -150,7 +150,7 @@ ActionType UI::GetUserAction() const
 			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
-			case ITM_DELETE:return DEL;
+			/*case ITM_DELETE:return DEL;*/
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -354,7 +354,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
-	MenuItemImages[ITM_DELETE] = "Images\\Menu\\Menu_Delete.jpg";
+	/*MenuItemImages[ITM_DELETE] = "Images\\Menu\\Menu_Delete.jpg";*/
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
