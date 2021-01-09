@@ -28,8 +28,8 @@ private:
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
 	Component* CopyComp;   
-	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
-	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
+	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers) 
+	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers) 
 
 	string compLineList[MaxCompCount + MaxConnCount + 3];
 	string connLineList[MaxCompCount + MaxConnCount + 3];
