@@ -176,8 +176,8 @@ void ActionLoad::Execute()
 
 		comp01 = pManager->GetComponentByCordinates(arr33[j] , arr44[j]);
 		comp02 = pManager->GetComponentByCordinates(arr55[j] , arr66[j]);
-		Connection* pR = new Connection(pGInfo, comp01, comp02);
-		pManager->AddConnection(pR);
+		Connection* pCON = new Connection(pGInfo, comp01, comp02);
+		pManager->AddConnection(pCON);
 		
 
 		TerminalNum comp1conn, comp2conn;
@@ -203,7 +203,7 @@ void ActionLoad::Execute()
 			comp2conn = TERM2;
 		}
 
-		Connection* pCON = new Connection(pGInfo, comp01, comp02);
+	/*	Connection* pCON = new Connection(pGInfo, comp01, comp02);*/
 		if (comp1conn == TERM1)
 			comp01->addTerm1Connection(pCON);
 		else
