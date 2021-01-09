@@ -52,7 +52,7 @@ void Battery::load(int id,string LABELi, double VALUE)    //load the battery
 	
 }
 
-void Battery::Copy(Component* B)
+void Battery::Copy(Component* &B)
 {
 	B = new Battery(m_pGfxInfo);
 	B->setSourceVoltage(this->sourceVoltage);

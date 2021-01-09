@@ -33,16 +33,20 @@ void ActionAddPaste::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Component* ptrCOMP = pManager->GetCopyComp();					   	   //TAYIL74
-
-
-	if (ptrCOMP==NULL)
+	Component* ptrCOMP=nullptr; 					   	   //TAYIL74
+	/*pManager->GetCopyComp()->Copy(ptrCOMP);*/
+//	ptrCOMP->SetGinfo(pGInfo);
+	
+	if (pManager->GetCopyComp() ==nullptr)
 	{
 		pUI->ClearStatusBar();
 		pUI->CreateErrorWind("error \n");
 	}
 	else
 	{
+		pManager->GetCopyComp()->Copy(ptrCOMP);
+		//Component* ptrCOMP=nullptr; 					   	   //TAYIL74
+        //pManager->GetCopyComp()->Copy(ptrCOMP);
 		ptrCOMP->SetGinfo(pGInfo);
 		pManager->AddComponent(ptrCOMP);
 		pUI->ClearStatusBar();
