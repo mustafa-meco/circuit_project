@@ -203,7 +203,7 @@ void ActionLoad::Execute()
 			comp2conn = TERM2;
 		}
 
-		//Connection* pCON = new Connection(pGInfo, comp01, comp02);
+
 		if (comp1conn == TERM1)
 			comp01->addTerm1Connection(pCON);
 		else

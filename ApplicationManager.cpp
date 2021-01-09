@@ -16,8 +16,10 @@
 #include "Actions/ActionAddPaste.h"
 #include "Actions/ActionAddCut.h"
 #include"Actions/ActionMove.h"
-#include <iostream>
+#include "Actions/ActionDelete.h"
 #include<Windows.h>
+#include <iostream>
+
 using namespace std;
 
 
@@ -145,6 +147,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SELECT:
 			pAct = new ActionSelect(this);
 			break;
+		case DEL:
+			pAct = new ActionDelete(this);
+			break;
 		case SAVE:
 			pAct = new ActionSave(this);
 			break;
@@ -198,9 +203,12 @@ void ApplicationManager::UpdateInterface()
 	pUI->ClearDrawingArea();
 		for (int i = 0; i < CompCount; i++)
 			CompList[i]->Draw(pUI);
+		
+		
+	
+	
 		for (int i = 0; i < ConnCount; i++)
 			ConnList[i]->Draw(pUI);
-		
 	Sleep(50);
 	//}
 	//else
@@ -434,3 +442,69 @@ ApplicationManager::~ApplicationManager()
 
  ///*	}*/
  //break;
+ void ApplicationManager::deleteCompounent(Component* delet)
+ {
+	 int x1 = 0;
+	 Component* T;
+	 for (int i = 0; i < CompCount; i++)
+	 {
+		 if (CompList[i] == delet)
+		 {
+			 x1 = i;
+			 for (int j = x1; j < CompCount; j++)
+			 {
+				 CompList[j] = CompList[j + 1];
+			 }
+			 CompCount--;
+
+			 int C1, C2;
+			 C1 = delet->getTermConnCount(TERM1);
+			 C2 = delet->getTermConnCount(TERM2);
+			 Connection** c1;
+			 Connection** c2;
+			 /* c1 = nullptr;
+			  c2 = nullptr;*/
+			 c1 = delet->getTermConnections(TERM1);
+
+			 c2 = delet->getTermConnections(TERM2);
+
+			 for (int y = 0; y < C1; y++)
+			 {
+				
+				 deleteConnection(c1[0]);
+			 }
+			 for (int y = 0; y < C2; y++)
+			 { 
+				 deleteConnection(c2[0]);
+			 }
+			 delete	delet;
+
+		 }
+	 }
+
+ }
+ void ApplicationManager::deleteConnection(Connection* delet)
+ {
+	 int x1 = 0;
+	 Component* T;
+	 for (int i = 0; i < ConnCount; i++)
+	 {
+		 if (ConnList[i] == delet)
+		 {
+			 x1 = i;
+			 for (int j = x1; j < ConnCount; j++)
+			 {
+				 ConnList[j] = ConnList[j + 1];
+			 }
+			 ConnCount--;
+			 for (int zc = 0; zc < CompCount; zc++)
+			 {
+				 if (delet->getOtherComponent(CompList[i]))
+				 {
+
+				 }
+			 }
+			 delete	delet;
+		 }
+	 }
+ }

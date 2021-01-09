@@ -25,9 +25,10 @@ bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user click
 		return true;
 	}
 	else
+	{
 		pcomp = nullptr;
 		return false;
-	
+	}
 }
 Component* Component::pcomp = nullptr;
 //Connection** getTermConnections(TerminalNum Term)
@@ -44,6 +45,39 @@ void Component::addTerm2Connection(Connection* pConn)
 	term2_conns[term2_conn_count++] = pConn; 
 }
 
+
+
+void Component::removeTerm1Connection(Connection* pConn)
+{       
+	for (int i = 0; i < term1_conn_count; i++)
+	{
+		if (pConn == term1_conns[i])
+		{
+			for (int j = i; j < term1_conn_count; j++)
+			{
+				term1_conns[j] = term1_conns[j + 1];
+			}
+			term1_conn_count--;
+			
+		}
+	}
+}
+void Component::removeTerm2Connection(Connection* pConn)
+{
+	for (int i = 0; i < term2_conn_count; i++)
+	{
+		if (pConn == term2_conns[i])
+		{
+
+			for (int j = i; j < term2_conn_count; j++)
+			{
+				term2_conns[j] = term2_conns[j + 1];
+			}
+			term2_conn_count--;
+		}
+	}
+}
+
 void Component::setResistance(double R) {
 	resistance = R;
 }
@@ -54,15 +88,15 @@ void Component::setStatus(bool S) {
 	status = S;
 }
 
-int Component::getCompCenterx(UI*)
+int Component::getCompCenterx(UI*)         //get the center of the component area on the x axis 
 {
-	int Xcenter = ((m_pGfxInfo->PointsList[1].x + m_pGfxInfo->PointsList[0].x) / 2); 
-	return Xcenter;
+		int Xcenter = ((m_pGfxInfo->PointsList[1].x + m_pGfxInfo->PointsList[0].x) / 2);
+		return Xcenter;
 }
 int Component::getCompCentery(UI*)         //get the center of the component area on the y axis 
-{
-	int Ycenter = ((m_pGfxInfo->PointsList[1].y + m_pGfxInfo->PointsList[0].y) / 2); 
-	return Ycenter;
+{	
+		int Ycenter = ((m_pGfxInfo->PointsList[1].y + m_pGfxInfo->PointsList[0].y) / 2);
+		return Ycenter;	
 }
 //TerminalNum Component::whichTerminal(Connection* Conn)
 //{
@@ -134,8 +168,16 @@ void Component::setm_pGfxInfo(int cx, int cy)
 	m_pGfxInfo->PointsList[1].x = cx + 25;
 	m_pGfxInfo->PointsList[0].y = cy - 25;
 	m_pGfxInfo->PointsList[1].y = cy + 25;
-
 }
+
+//void Component::DeleteImage(GraphicsInfo* pGInfo, UI* pUI)
+//{
+//		pUI->DrawWhite(*m_pGfxInfo);
+//}
+
+
+
+
 void Component::setTerm1Volt(double v)
 {
 	term1_volt = v;
