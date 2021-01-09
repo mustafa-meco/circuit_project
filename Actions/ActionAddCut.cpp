@@ -54,6 +54,8 @@ void ActionAddCut::Execute()
 	else																			//TAYIL74
 	{
 		pManager->SetCopyComp(ptrComp); 
+
+		pManager->deleteCompounent(ptrComp);
 	}
 	//if (ptResistor != NULL)
 	//{

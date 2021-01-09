@@ -90,7 +90,7 @@ public:
 	//Destructor must be virtual
 	virtual ~Component();
 	virtual void load( int, string, double ); 
-	virtual void Copy(Component* &B) = 0;
+	virtual Component* Copy() = 0;
 	
 	//static void selection();
 	GraphicsInfo* getm_pGfxInfo() ;

@@ -422,7 +422,7 @@ ApplicationManager::~ApplicationManager()
  } 
  void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
  {
-	 CopyComp = comp1;
+	 CopyComp = comp1->Copy();
  }
  Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
  {

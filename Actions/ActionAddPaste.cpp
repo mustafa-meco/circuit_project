@@ -44,7 +44,7 @@ void ActionAddPaste::Execute()
 	}
 	else
 	{
-		pManager->GetCopyComp()->Copy(ptrCOMP);
+		ptrCOMP = pManager->GetCopyComp()/*->Copy(ptrCOMP)*/;
 		//Component* ptrCOMP=nullptr; 					   	   //TAYIL74
         //pManager->GetCopyComp()->Copy(ptrCOMP);
 		ptrCOMP->SetGinfo(pGInfo);
