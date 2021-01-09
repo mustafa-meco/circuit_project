@@ -149,7 +149,6 @@ ActionType UI::GetUserAction() const
 	
 		if (y >= ToolBarHeight && y < height - StatusBarHeight )
 		{
-			
 			int x1, y1;
 			PrintMsg("Click on action to execute");
 			pWind->WaitMouseClick(x1, y1);

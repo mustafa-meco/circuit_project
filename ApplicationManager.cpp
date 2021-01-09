@@ -200,7 +200,6 @@ void ApplicationManager::UpdateInterface()
 			CompList[i]->Draw(pUI);
 		for (int i = 0; i < ConnCount; i++)
 			ConnList[i]->Draw(pUI);
-		
 	Sleep(50);
 	//}
 	//else

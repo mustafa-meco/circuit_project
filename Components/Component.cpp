@@ -132,3 +132,11 @@ void Component::setm_pGfxInfo(int cx, int cy)
 	m_pGfxInfo->PointsList[1].y = cy + 25;
 
 }
+
+void Component::setTerm1Volt(double v) {
+	term
+}
+
+void setTerm2Volt(double v)
+double getTerm1Volt()
+double getTerm2Volt()
