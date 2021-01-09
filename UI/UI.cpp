@@ -139,15 +139,17 @@ ActionType UI::GetUserAction() const
 		}
 	
 		//[2] User clicks on the drawing area
-		if ( y >= ToolBarHeight && y < height - StatusBarHeight && v == 1)
+		if ( y >= ToolBarHeight && y < height - StatusBarHeight )
 		{
-			
-			return SELECT;	//user wants to select/unselect a component
+			if (v == 2)
+				DrawActionBar();
+			else
+				return SELECT;	//user wants to select/unselect a component
 		}
 	
-		if (y >= ToolBarHeight && y < height - StatusBarHeight && v == 2)
+		if (y >= ToolBarHeight && y < height - StatusBarHeight )
 		{
-			DrawActionBar();
+			
 			int x1, y1;
 			PrintMsg("Click on action to execute");
 			pWind->WaitMouseClick(x1, y1);
