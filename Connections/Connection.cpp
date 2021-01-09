@@ -91,13 +91,16 @@ string Connection::save() const {
 }
 Component* Connection::getOtherComponent(Component* Cmpnt)
 {
-	if (this->Comp1 == Cmpnt)
+	if (Comp1 == Cmpnt)
 	{
 		return Comp2;
 	}
 	else if (Comp2 == Cmpnt)
 	{
 		return Comp1;
+	}
+	else {
+		return nullptr;
 	}
 	
 	

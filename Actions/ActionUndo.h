@@ -4,9 +4,12 @@ class ActionUndo :
     public Action
 {
 private:
-    Action list;
+    Action* list[5];
 
+    virtual void Execute();
 
+    virtual void Undo();
+    virtual void Redo();
 
 
 

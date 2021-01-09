@@ -59,9 +59,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\UI.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
-    <ClCompile Include="ActionAddCopy.cpp" />
     <ClCompile Include="Actions\ActionAddPaste.cpp" />
-    <ClCompile Include="ActionAddCut.cpp" />
+    <ClCompile Include="Actions\ActionAddCopy.cpp" />
+    <ClCompile Include="Actions\ActionAddCut.cpp" />
+    <ClCompile Include="Actions\ActionAddModule.cpp" />
+    <ClCompile Include="Actions\ActionEdit.cpp" />
+    <ClCompile Include="Actions\ActionExit.cpp" />
+    <ClCompile Include="Actions\ActionLabel.cpp" />
+    <ClCompile Include="Components\Module.cpp" />
+    <ClCompile Include="Actions\ActionMove.cpp" />
+    <ClCompile Include="Actions\ActionUndo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -107,9 +114,16 @@
     <ClInclude Include="Defs.H" />
     <ClInclude Include="UI\UI.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
-    <ClInclude Include="ActionAddCopy.h" />
     <ClInclude Include="Actions\ActionAddPaste.h" />
-    <ClInclude Include="ActionAddCut.h" />
+    <ClInclude Include="Actions\ActionAddCopy.h" />
+    <ClInclude Include="Actions\ActionAddCut.h" />
+    <ClInclude Include="Actions\ActionAddModule.h" />
+    <ClInclude Include="Actions\ActionEdit.h" />
+    <ClInclude Include="Actions\ActionExit.h" />
+    <ClInclude Include="Actions\ActionLabel.h" />
+    <ClInclude Include="Components\Module.h" />
+    <ClInclude Include="Actions\ActionMove.h" />
+    <ClInclude Include="Actions\ActionUndo.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

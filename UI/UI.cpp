@@ -98,12 +98,13 @@ string UI::GetSrting()
 ActionType UI::GetUserAction() const
 {	
 	int x,y;
-	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+	clicktype v;
+	v = pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if(AppMode == DESIGN )	//application is in design mode
 	{
 		//[1] If user clicks on the Toolbar
-		if ( y >= 0 && y < ToolBarHeight)
+		if ( y >= 0 && y < ToolBarHeight && v == 1)
 		{	
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
@@ -122,10 +123,10 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
-			case ITM_COPY:   return ADD_COPY;
+			/*case ITM_COPY:   return ADD_COPY;
 			case ITM_CUT:   return ADD_CUT;
 			case ITM_PASTE:   return ADD_PASTE;
-			case ITM_EDIT:  return EDIT_Label;
+			case ITM_EDIT:  return EDIT_Label;*/
 			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
@@ -138,11 +139,40 @@ ActionType UI::GetUserAction() const
 		}
 	
 		//[2] User clicks on the drawing area
-		if ( y >= ToolBarHeight && y < height - StatusBarHeight)
+		if ( y >= ToolBarHeight && y < height - StatusBarHeight && v == 1)
 		{
+			
 			return SELECT;	//user wants to select/unselect a component
 		}
-		
+	
+		if (y >= ToolBarHeight && y < height - StatusBarHeight && v == 2)
+		{
+			DrawActionBar();
+			int x1, y1;
+			PrintMsg("Click on action to execute");
+			pWind->WaitMouseClick(x1, y1);
+			pWind->SetPen(WHITE);
+			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
+			ClearStatusBar();
+			int ClickedItemOrder = (y1 - 80) / 50;
+			if (x1 > width - ActionBarWidth && x1 < width)
+			{
+				switch (ClickedItemOrder)
+				{
+				case ITMA_Edit:		return EDIT_Label;
+				case ITMA_Move:		return MOVE;
+				case ITMA_Load:		return LOAD;
+				case ITMA_Save:		return SAVE;
+				case ITMA_Undo:		return UNDO;
+				case ITMA_Redo:		return REDO;
+				case ITMA_Copy:		return ADD_COPY;
+				case ITMA_Cut:		return ADD_CUT;
+				case ITMA_Paste:	return ADD_PASTE;
+				case ITMA_Delete:	return DEL;
+				default:			return DSN_TOOL;
+				}
+			}
+		}
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
@@ -151,6 +181,7 @@ ActionType UI::GetUserAction() const
 		
 		if (y >= 0 && y < ToolBarHeight)
 		{
+			
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
 			int ClickedItemOrder = (x / ToolItemWidth);
@@ -177,7 +208,16 @@ ActionType UI::GetUserAction() const
 
 }
 
+buttonstate UI::getbuttonstate(button b, int& x, int& y)
+{
+	return	pWind->GetButtonState(b, x, y);
+}
 
+void UI::detectMouse(int& x, int& y)
+{
+	pWind->GetMouseCoord(x, y);
+
+}
 
 //======================================================================================//
 //								Output Functions										//
@@ -287,10 +327,10 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
-	MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
+	/*MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
 	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
 	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";	
-	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
+	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";*/
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
@@ -323,6 +363,29 @@ void UI::CreateSimulationToolBar()
 		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
 
 	
+}
+void UI::DrawActionBar()const
+{
+	//Delete, Num;
+	string ActionsImages[Itm_ACT_Num];
+	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";
+	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";
+	ActionsImages[ITMA_Load] = "images\\Choice\\Load.jpg";
+	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";
+	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";
+	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";
+	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";
+	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";
+	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";
+	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < Itm_ACT_Num; i++)
+		pWind->DrawImage(ActionsImages[i], width-ActionBarWidth, i * 52 + 80, 50, 50);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(1134, 80, 1134, 600);
 }
 
 //======================================================================================//

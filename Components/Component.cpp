@@ -94,18 +94,18 @@ int Component::getTermConnCount(TerminalNum Term) const {
 }
 
 
-Connection** Component::getTermConnections(TerminalNum Term) const{
+Connection** Component::getTermConnections(TerminalNum Term) {
 	if (Term == TERM1) {
-		Connection** term_conn = new Connection * [term1_conn_count];
+		/*Connection** term_conn = new Connection * [term1_conn_count];
 		for (int i = 0; i < term1_conn_count; i++)
-			term_conn[i] = term1_conns[i];
-		return term_conn;
+			term_conn[i] = term1_conns[i];*/
+		return term1_conns;
 	}
-	if (Term == TERM2)	{
-		Connection** term_conn = new Connection * [term2_conn_count];
+	else if (Term == TERM2)	{
+		/*Connection** term_conn = new Connection * [term2_conn_count];
 		for (int i = 0; i < term2_conn_count; i++)
-			term_conn[i] = term2_conns[i];
-		return term_conn;
+			term_conn[i] = term2_conns[i];*/
+		return term2_conns;
 	}
 }
 
@@ -124,3 +124,11 @@ void Component::SetGinfo(GraphicsInfo* G)
 }
 int Component::gID = 0;
 
+void Component::setm_pGfxInfo(int cx, int cy)
+{
+	m_pGfxInfo->PointsList[0].x = cx - 25;
+	m_pGfxInfo->PointsList[1].x = cx + 25;
+	m_pGfxInfo->PointsList[0].y = cy - 25;
+	m_pGfxInfo->PointsList[1].y = cy + 25;
+
+}

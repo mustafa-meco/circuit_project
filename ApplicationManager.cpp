@@ -15,9 +15,9 @@
 #include "Actions/ActionLabel.h"
 #include "Actions/ActionAddPaste.h"
 #include "Actions/ActionAddCut.h"
+#include"Actions/ActionMove.h"
 #include <iostream>
-#include <dos.h>
-#include "dos.h"
+#include<Windows.h>
 using namespace std;
 
 
@@ -133,6 +133,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case EDIT_Label:
 			pAct = new ActionEdit(this);
 			break;
+		case MOVE:
+			pAct = new ActionMove(this);
+			break;
 		case ADD_Label:
 			pAct = new  ActionLabel(this);
 			break;
@@ -192,12 +195,13 @@ void ApplicationManager::UpdateInterface()
 {
 	//if (CompCount) 
 	//{
-
+	pUI->ClearDrawingArea();
 		for (int i = 0; i < CompCount; i++)
 			CompList[i]->Draw(pUI);
 		for (int i = 0; i < ConnCount; i++)
 			ConnList[i]->Draw(pUI);
 		
+	Sleep(50);
 	//}
 	//else
 //Exit()
@@ -217,10 +221,11 @@ bool ApplicationManager::ValidateCircuit() {
 	Connection** conno;
 	Component** compolist = new Component * [CompCount + 1];
 	compolist[j1++] = CompList[i1];
+	conno = CompList[i1]->getTermConnections(TERM1);
+	compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
 	if (CompCount < 3)
 		return false;
-
-	int cG = 0;
+	int cG = 0, tkrar = 0;
 	/*for (int i = 0; i < CompCount; i++) {
 		
 	}*/
@@ -243,21 +248,18 @@ bool ApplicationManager::ValidateCircuit() {
 				pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
 				return false;
 		}
-		conno = nullptr;
-		conno = CompList[i1]->getTermConnections(TERM1);
-
-
-
-		compolist[j1] = conno[i1]->getOtherComponent(CompList[i1]);
-		if (compolist[j1] == compolist[j1 - 1]) {
-			conno = nullptr;
-			conno = CompList[i1]->getTermConnections(TERM2);
-			compolist[j1] = nullptr;
-			compolist[j1] = conno[i1]->getOtherComponent(CompList[i1]);
-
+		if (i != 0) {
+			conno = CompList[i1]->getTermConnections(TERM1);
+			compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+			if (compolist[j1] == compolist[j1 - 1]) {
+				conno = CompList[i1]->getTermConnections(TERM2);
+				compolist[j1] = nullptr;
+				compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);	
+			}
 		}
-		
 		for (int k = 0; k < CompCount; k++) {
+			if (compolist[j1] == compolist[k] && j1 != k)
+				tkrar++;
 			if (compolist[j1] == CompList[k]) {
 				i1 = k;
 				++j1;
@@ -265,23 +267,40 @@ bool ApplicationManager::ValidateCircuit() {
 				break;
 			}
 		}
+		
 		if (er != 1) {
-			
+			pUI->PrintMsg("er" + to_string(i)+ to_string(er));
 			return false;
 		}
 			
 		er = 0;
-		if (compolist[j1 - 1] == CompList[0] && (j1 - 1) != CompCount) {
-			
-			return false;
-		}
-			
 	}
-	if (cG != 1)
+	/*compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+	if (compolist[j1] == compolist[j1 - 1]) {
+
+		conno = CompList[i1]->getTermConnections(TERM2);
+
+		compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+
+	}
+
+	if (compolist[j1 -1] == CompList[0] && (j1 -1 ) != CompCount) {
+			pUI->PrintMsg(to_string(j1)+  " end " + to_string(CompCount) + " end " );
+			return false;
+	}*/
+
+	if (cG != 1 || tkrar > 2) {
+		pUI->PrintMsg(to_string(tkrar));
 		return false;
+	}
+		
 	
-	if (compolist[j1 - 1] != CompList[0])
+	
+	/*if (compolist[j1] != CompList[0]) {
+		pUI->PrintMsg(compolist[j1]->getlabel());
 		return false;
+	}*/
+	pUI->PrintMsg(to_string(j1));
 	return true;
 }
 

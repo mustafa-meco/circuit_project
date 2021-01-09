@@ -46,24 +46,34 @@ class UI
 		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,
 		ITM_FUE,
-		ITM_LOAD,        //Load item 
+		       //Load item 
 		ITM_CON,         //connection item 
 		ITM_SIM,
-		ITM_COPY,
+		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
-		ITM_EDIT,
+		ITM_EDIT,*/
 		ITM_LABEL,
+		ITM_LOAD,
 		ITM_SAVE,
 		
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
 	};
-	enum Select 
-	{A
-
-
+	enum ActionsToolBarItem
+	{
+		ITMA_Edit, 
+		ITMA_Move, 
+		ITMA_Load, 
+		ITMA_Save, 
+		ITMA_Undo, 
+		ITMA_Redo, 
+		ITMA_Copy,
+		ITMA_Cut,
+		ITMA_Paste, 
+		ITMA_Delete, 
+		Itm_ACT_Num
 	};
 
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
@@ -87,6 +97,10 @@ class UI
 						StatusBarHeight = 50,	//Status Bar Height
 						ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 						ToolItemWidth = 80,		//Width of each item in toolbar menu
+						
+						
+						ActionBarWidth = 65,
+						
 
 						//Arbitrary values, you can change as you wish
 						COMP_WIDTH = 50,		//Component Image width
@@ -108,17 +122,20 @@ public:
 	int getCompHeight() const;	//returns Component height
 	
 	
+
+	
 	// Input Functions  ---------------------------
 	void GetPointClicked(int &, int &);	//Get coordinate where user clicks
 	string GetSrting();		//Returns a string entered by the user
 
 	ActionType GetUserAction() const; //Reads the user click and maps it to an action
-
-	
+	void detectMouse(int&, int&);
+	buttonstate getbuttonstate(button b, int& x, int& y);
 	// Output Functions  ---------------------------
 	void ChangeTitle(string Title) const;
 
 	void CreateErrorWind(string);
+	void DrawActionBar() const;
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
@@ -127,7 +144,7 @@ public:
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
 	void ClearAll()const;  //Clear all 
-		
+	
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	///TODO: Make similar functions for drawing all other components, connections, .. etc

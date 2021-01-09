@@ -21,6 +21,11 @@ protected:
 	//Each terminal is connected to set of connections
 	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections
 	Connection *term2_conns[MAX_CONNS];
+	struct demo
+	{
+		//array declared inside structure
+		Connection* arr[MAX_CONNS];
+	};
 
 	int term1_conn_count;	//actual no. of connections to each terminal
 	int term2_conn_count;
@@ -40,7 +45,7 @@ public:
 	//double getTerm2Volt();				//returns the voltage at terminal2
 	double getResistance();
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
-	Connection** getTermConnections(TerminalNum Term) const; 
+	Connection** getTermConnections(TerminalNum Term); 
 	void setResistance(double);
 	void setSourceVoltage(double);
 	void setStatus(bool);
@@ -70,6 +75,8 @@ public:
 	string getlabel();
 
 	void SetGinfo(GraphicsInfo* G); 
+
+	void setm_pGfxInfo(int cx, int cy);
 
 	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 	virtual string save() const;
