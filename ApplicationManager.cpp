@@ -327,8 +327,20 @@ void ApplicationManager::ToDesign() {
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {
-	// TODO
-	return 0;
+	double SumResistance=0;
+	double SumVoltage=0;
+	for (int i = 0; i < CompCount ; i++)
+	{
+		if (CompList[i]->getResistance() != -1)
+		{
+			SumResistance = SumResistance + CompList[i]->getResistance();
+		}
+		if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
+		{
+			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
+		}
+	}
+	return (SumVoltage / SumResistance);
 }
 
 // Calculates voltage at each component terminal

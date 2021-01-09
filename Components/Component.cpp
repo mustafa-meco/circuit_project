@@ -72,6 +72,10 @@ int Component::getCompCentery(UI*)         //get the center of the component are
 double Component::getResistance() {
 	return resistance;
 }
+double Component::getSourceVoltage() {
+	return sourceVoltage;
+}
+
 
 string Component::save() const {
 	string row =  " ";
@@ -131,4 +135,20 @@ void Component::setm_pGfxInfo(int cx, int cy)
 	m_pGfxInfo->PointsList[0].y = cy - 25;
 	m_pGfxInfo->PointsList[1].y = cy + 25;
 
+}
+void Component::setTerm1Volt(double v)
+{
+	term1_volt = v;
+}
+void Component::setTerm2Volt(double v)
+{
+	term2_volt = v;
+}
+double Component::getTerm1Volt()
+{
+	return term1_volt;
+}
+double Component::getTerm2Volt()
+{
+	return term2_volt;
 }
