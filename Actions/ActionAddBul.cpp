@@ -22,10 +22,10 @@ void ActionAddBul::Execute()
 	pUI->GetPointClicked(Cx, Cy); 
 
 	pUI->GetPointClicked(Cx, Cy);
-	while (!(Cy > 80 + 50 / 2 &&
-		Cy < 650 - 50 - 50 / 2 &&
-		Cx>50 / 2 &&
-		Cx < 1200 - 80 / 2))
+	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
+		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
+		&& Cx>pUI->getCompWidth() / 2
+		&& Cx < pUI->getWidth() - pUI->getToolItemWidth() / 2))
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}

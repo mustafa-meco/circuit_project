@@ -22,13 +22,34 @@ void ActionAddBat::Execute()
 	//Get Center point of the area where the Comp should be drawn
 	
 	pUI->GetPointClicked(Cx, Cy);
-	while (!(Cy > 80 + 50 / 2 &&
-		Cy < 650 - 50 - 50 / 2 &&
-		Cx>50 / 2 &&
-		Cx < 1200 - 80 / 2))
+	//pManager->GetComponentByCordinates(Cx, Cy);
+	
+	/*int compWidth = pUI->getCompWidth();
+	int compHeight = pUI->getCompHeight();*/
+	//pGInfo->PointsList[0].y = comp->getCompCentery(pUI);
+	//pGInfo->PointsList[1].y = comp->getCompCentery(pUI);
+
+	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
+		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
+		&& Cx>pUI->getCompWidth() / 2
+		&& Cx < pUI->getWidth() - pUI->getToolItemWidth() / 2)
+		)
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
+	//pManager->GetComponentByCordinates(Cx, Cy);
+
+	/*	for (int i = 0; i < ; i++)
+		{
+			if ()
+			{
+			}
+		}*/
+
+	 
+
+
+
 
 	string sV;
 	bool isNumber;

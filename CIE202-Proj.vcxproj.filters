@@ -69,6 +69,8 @@
     <ClCompile Include="Components\Module.cpp" />
     <ClCompile Include="Actions\ActionMove.cpp" />
     <ClCompile Include="Actions\ActionUndo.cpp" />
+    <ClCompile Include="Actions\ActionEdit.cpp" />
+    <ClCompile Include="Actions\ActionDelete.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -124,6 +126,8 @@
     <ClInclude Include="Components\Module.h" />
     <ClInclude Include="Actions\ActionMove.h" />
     <ClInclude Include="Actions\ActionUndo.h" />
+    <ClInclude Include="Actions\ActionEdit.h" />
+    <ClInclude Include="Actions\ActionDelete.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

@@ -7,7 +7,7 @@
 #include "Components\Component.h"
 #include "Actions/ActionAddGro.h"
 #include "Actions/ActionAddBat.h"
-
+#include<vector>
 
 
 //Main class that manages everything in the application.
@@ -23,7 +23,7 @@ class ApplicationManager
 
 private:
 	int lineCount;
-
+	
 	bool IsSimulation; // True when in simulation mode
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
@@ -79,6 +79,10 @@ public:
 	void SetCopyComp(Component* comp1);        //TAYIL74
 
 
+	void deleteCompounent(Component*);
+	void deleteConnection(Connection*);
+	
+	
 };
 
 #endif

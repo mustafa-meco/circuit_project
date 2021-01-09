@@ -13,6 +13,7 @@ private:
 
 	
 protected:
+
 	
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
@@ -37,6 +38,7 @@ protected:
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 	static Component* pcomp;
 public:
+	
 	Component(GraphicsInfo *r_GfxInfo);
 	
 	void setTerm1Volt(double v);		//sets the voltage at terminal1
@@ -46,6 +48,7 @@ public:
 	double getResistance();
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
 	Connection** getTermConnections(TerminalNum Term); 
+	
 	void setResistance(double);
 	void setSourceVoltage(double);
 	void setStatus(bool);
@@ -70,6 +73,8 @@ public:
 	void addTerm1Connection(Connection* pConn); 
 	void addTerm2Connection(Connection* pConn);
 
+	void removeTerm1Connection(Connection* pConn);
+	void removeTerm2Connection(Connection* pConn);
 	
 	string Setlabel(string input);
 	string getlabel();
@@ -86,7 +91,9 @@ public:
 	virtual void Copy(Component* &B) = 0;
 	
 	//static void selection();
+	GraphicsInfo* getm_pGfxInfo() ;
+	//void DeleteImage(GraphicsInfo* m_pGfxInfo, UI*);
 	
-};
 
+};
 #endif

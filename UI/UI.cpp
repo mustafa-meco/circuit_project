@@ -43,6 +43,26 @@ int UI::getCompHeight() const
 {
 	return COMP_HEIGHT;
 }
+int UI::getStatusBarHeight() const
+{
+	return StatusBarHeight;
+}
+int UI::getToolBarHeight() const
+{
+	return ToolBarHeight;
+}
+int UI::getToolItemWidth() const
+{
+	return ToolItemWidth;
+}
+int UI::getWidth() const
+{
+	return width;
+}
+int UI::getHeight() const
+{
+	return height;
+}
 
 //======================================================================================//
 //								Input Functions 										//
@@ -130,8 +150,7 @@ ActionType UI::GetUserAction() const
 			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
-
-
+			case ITM_DELETE:return DEL;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -333,6 +352,9 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";	
 	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";*/
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
+
+	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
+	MenuItemImages[ITM_DELETE] = "Images\\Menu\\Menu_Delete.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -509,6 +531,11 @@ void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo)
 	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
 }
 
+void UI::DrawWhite(const GraphicsInfo& r_GfxInfo)
+{
+	pWind->SetPen(WHITE);
+	pWind->DrawRectangle(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[0].x+ COMP_WIDTH, r_GfxInfo.PointsList[0].y+ COMP_HEIGHT);
+}
 
 
 

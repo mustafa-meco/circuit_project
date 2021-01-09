@@ -127,3 +127,17 @@ void Connection::EditConnection(Component* component1, Component* component2, Gr
 	
 
 }
+Connection::~Connection()
+{
+	if (Comp1 != nullptr)
+	{
+		Comp1->removeTerm1Connection(this);
+		Comp1->removeTerm2Connection(this);
+	}
+	if (Comp2 != nullptr)
+	{
+		Comp2->removeTerm1Connection(this);
+		Comp2->removeTerm2Connection(this);
+	}
+}
+/* Deletes the component */

@@ -122,6 +122,7 @@
     <ClCompile Include="Actions\ActionAddPaste.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwi.cpp" />
+    <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
     <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionLabel.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Actions\ActionAddPaste.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwi.h" />
+    <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionLabel.h" />
