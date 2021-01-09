@@ -5,6 +5,7 @@
 #include "..\Defs.h"
 
 #include <string>
+#include <vector>
 using namespace std;
 
 struct Point
@@ -53,6 +54,7 @@ class UI
 		ITM_EDIT,
 		ITM_LABEL,
 		ITM_SAVE,
+		ITM_DELETE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -101,9 +103,13 @@ class UI
 public:
 	
 	UI();
+	int getWidth()const;
+	int getHeight()const;
 	int getCompWidth() const;	//returns Component width
 	int getCompHeight() const;	//returns Component height
-	
+	int getStatusBarHeight() const;
+	int getToolBarHeight() const;
+	int getToolItemWidth() const;
 	
 	// Input Functions  ---------------------------
 	void GetPointClicked(int &, int &);	//Get coordinate where user clicks
@@ -148,8 +154,8 @@ public:
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
 	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
-
-
+	
+	void DrawWhite(const GraphicsInfo& r_GfxInfo);
 
 
 
@@ -158,8 +164,6 @@ public:
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   
 
-
-	
 	~UI();
 };
 

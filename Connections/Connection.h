@@ -22,8 +22,9 @@ public:
 	void EditConnection(Component* component1, Component* component2, GraphicsInfo* pGInfo,UI*);
 
 
-	Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection
-
+	Component* getOtherComponent(Component* Cmpnt);// Get component connected to the other end of the connection
+	
+	~Connection();
 
 };
  

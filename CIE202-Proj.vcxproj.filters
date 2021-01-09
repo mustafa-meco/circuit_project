@@ -62,6 +62,7 @@
     <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionLabel.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
+    <ClCompile Include="Actions\ActionDelete.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionLabel.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
+    <ClInclude Include="Actions\ActionDelete.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />
