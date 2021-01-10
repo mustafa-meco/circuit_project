@@ -28,13 +28,13 @@ ApplicationManager::ApplicationManager()
 	CompCount = 0;
 	ConnCount = 0;
 
-	lineCount = 0;	
+	lineCount = 0;
 
 	IsSimulation = 0;
 
-	for(int i=0; i<MaxCompCount; i++)
+	for (int i = 0; i < MaxCompCount; i++)
 		CompList[i] = nullptr;
-	for (int i = 0; i<MaxCompCount; i++)
+	for (int i = 0; i < MaxCompCount; i++)
 		ConnList[i] = nullptr;
 
 	//Creates the UI Object & Initialize the UI
@@ -62,22 +62,22 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
-	CompList[CompCount++] = pComp;	
+	CompList[CompCount++] = pComp;
 }
 void ApplicationManager::AddConnection(Connection* pConn)
 {
 	ConnList[ConnCount++] = pConn;
 }
-Component* ApplicationManager::GetComponentByCordinates(int x, int y) 
+Component* ApplicationManager::GetComponentByCordinates(int x, int y)
 {
-	
+
 	for (int i = 0; i < CompCount; i++)
 	{
-		if (CompList[i]->isInRegion(x,y, pUI) == true)
+		if (CompList[i]->isInRegion(x, y, pUI) == true)
 		{
-				return	CompList[i];
+			return	CompList[i];
 		}
-		
+
 	}
 	return nullptr;
 }
@@ -101,7 +101,7 @@ Connection* ApplicationManager::GetConnectionByCordinates(int x, int y)
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
-	return pUI->GetUserAction(); 	
+	return pUI->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -110,72 +110,72 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	Action* pAct = nullptr;
 	switch (ActType)
 	{
-		case ADD_RESISTOR:
-			pAct= new ActionAddRes(this);
-			break;
+	case ADD_RESISTOR:
+		pAct = new ActionAddRes(this);
+		break;
 		// TODO: Add remaining actions
-		case ADD_BULB:
-			pAct = new ActionAddBul(this);
-			break;
-		case ADD_SWITCH:
-			pAct = new ActionAddSwi(this);
-			break;
-		case ADD_GROUND:
-			pAct = new ActionAddGro(this);
-			break;
-		case ADD_BATTERY:
-			pAct = new ActionAddBat(this);
-			break;
-		case ADD_BUZZER:
-			pAct = new ActionAddBuz(this);
-			break;
-		case ADD_FUES:
-			pAct = new ActionAddFues(this);
-			break;
-		case EDIT_Label:
-			pAct = new ActionEdit(this);
-			break;
-		case MOVE:
-			pAct = new ActionMove(this);
-			break;
-		case ADD_Label:
-			pAct = new  ActionLabel(this);
-			break;
-	    case ADD_CONNECTION: 
-			pAct = new ActionAddCon(this);   
-			break; 
-		case SELECT:
-			pAct = new ActionSelect(this);
-			break;
-		case DEL:
-			pAct = new ActionDelete(this);
-			break;
-		case SAVE:
-			pAct = new ActionSave(this);
-			break;
-		case SIM_MODE:
-			ToSimulation();
-			break;
-		case DSN_MODE:
-			ToDesign();
-			break;
-		case LOAD:
-			pAct = new ActionLoad(this);
-			break;
-		case ADD_COPY: 
-			pAct = new ActionAddCopy(this);
-			break;
-		case ADD_CUT:
-			pAct = new ActionAddCut(this);
-			break;
-		case ADD_PASTE:
-			pAct = new ActionAddPaste(this);
-			break;
-		case EXIT:
-			pAct = new ActionExit(this);           //TODO: create ExitAction here
-			break;
+	case ADD_BULB:
+		pAct = new ActionAddBul(this);
+		break;
+	case ADD_SWITCH:
+		pAct = new ActionAddSwi(this);
+		break;
+	case ADD_GROUND:
+		pAct = new ActionAddGro(this);
+		break;
+	case ADD_BATTERY:
+		pAct = new ActionAddBat(this);
+		break;
+	case ADD_BUZZER:
+		pAct = new ActionAddBuz(this);
+		break;
+	case ADD_FUES:
+		pAct = new ActionAddFues(this);
+		break;
+	case EDIT_Label:
+		pAct = new ActionEdit(this);
+		break;
+	case MOVE:
+		pAct = new ActionMove(this);
+		break;
+	case ADD_Label:
+		pAct = new  ActionLabel(this);
+		break;
+	case ADD_CONNECTION:
+		pAct = new ActionAddCon(this);
+		break;
+	case SELECT:
+		pAct = new ActionSelect(this);
+		break;
+	case DEL:
+		pAct = new ActionDelete(this);
+		break;
+	case SAVE:
+		pAct = new ActionSave(this);
+		break;
+	case SIM_MODE:
+		ToSimulation();
+		break;
+	case DSN_MODE:
+		ToDesign();
+		break;
+	case LOAD:
+		pAct = new ActionLoad(this);
+		break;
+	case ADD_COPY:
+		pAct = new ActionAddCopy(this);
+		break;
+	case ADD_CUT:
+		pAct = new ActionAddCut(this);
+		break;
+	case ADD_PASTE:
+		pAct = new ActionAddPaste(this);
+		break;
+	case EXIT:
+		pAct = new ActionExit(this);           //TODO: create ExitAction here
+		break;
 	}
-	if(pAct)
+	if (pAct)
 	{
 		//save(ActType);
 		pAct->Execute();
@@ -185,14 +185,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 }
 ////////////////////////////////////////////////////////////////////
 
-string* ApplicationManager::save(int& cp,int& cn) const {
+string* ApplicationManager::save(int& cp, int& cn) const {
 	cp = CompCount;
 	cn = ConnCount;
-	string* compData = new string[CompCount+ConnCount];
+	string* compData = new string[CompCount + ConnCount];
 	for (int i = 0; i < CompCount; i++)
 		compData[i] = CompList[i]->save();
 	for (int i = 0; i < ConnCount; i++)
-		compData[i+CompCount] = ConnList[i]->save();
+		compData[i + CompCount] = ConnList[i]->save();
 	return compData;
 }
 
@@ -201,14 +201,14 @@ void ApplicationManager::UpdateInterface()
 	//if (CompCount) 
 	//{
 	pUI->ClearDrawingArea();
-		for (int i = 0; i < CompCount; i++)
-			CompList[i]->Draw(pUI);
-		
-		
-	
-	
-		for (int i = 0; i < ConnCount; i++)
-			ConnList[i]->Draw(pUI);
+	for (int i = 0; i < CompCount; i++)
+		CompList[i]->Draw(pUI);
+
+
+
+
+	for (int i = 0; i < ConnCount; i++)
+		ConnList[i]->Draw(pUI);
 	Sleep(50);
 	//}
 	//else
@@ -235,9 +235,9 @@ bool ApplicationManager::ValidateCircuit() {
 		return false;
 	int cG = 0, tkrar = 0;
 	/*for (int i = 0; i < CompCount; i++) {
-		
+
 	}*/
-	
+
 	int c1, c2;
 	for (int i = 0; i < CompCount; i++) {
 		c1 = 0, c2 = 0;
@@ -253,8 +253,8 @@ bool ApplicationManager::ValidateCircuit() {
 		//	}
 		//} else 
 		if (c1 != 1 || c2 != 1) {
-				pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
-				return false;
+			pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
+			return false;
 		}
 		if (i != 0) {
 			conno = CompList[i1]->getTermConnections(TERM1);
@@ -262,7 +262,7 @@ bool ApplicationManager::ValidateCircuit() {
 			if (compolist[j1] == compolist[j1 - 1]) {
 				conno = CompList[i1]->getTermConnections(TERM2);
 				compolist[j1] = nullptr;
-				compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);	
+				compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
 			}
 		}
 		for (int k = 0; k < CompCount; k++) {
@@ -275,12 +275,12 @@ bool ApplicationManager::ValidateCircuit() {
 				break;
 			}
 		}
-		
+
 		if (er != 1) {
-			pUI->PrintMsg("er" + to_string(i)+ to_string(er));
+			pUI->PrintMsg("er" + to_string(i) + to_string(er));
 			return false;
 		}
-			
+
 		er = 0;
 	}
 	/*compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
@@ -301,9 +301,9 @@ bool ApplicationManager::ValidateCircuit() {
 		pUI->PrintMsg(to_string(tkrar));
 		return false;
 	}
-		
-	
-	
+
+
+
 	/*if (compolist[j1] != CompList[0]) {
 		pUI->PrintMsg(compolist[j1]->getlabel());
 		return false;
@@ -335,9 +335,9 @@ void ApplicationManager::ToDesign() {
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {
-	double SumResistance=0;
-	double SumVoltage=0;
-	for (int i = 0; i < CompCount ; i++)
+	double SumResistance = 0;
+	double SumVoltage = 0;
+	for (int i = 0; i < CompCount; i++)
 	{
 		if (CompList[i]->getResistance() != -1)
 		{
@@ -355,12 +355,12 @@ double ApplicationManager::CalculateCurrent() {
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
 }
-void ApplicationManager::load( string* labeli , double* valueI, Component** comp001 , Component** comp002) //load the connection 
+void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the connection 
 {
 	for (int i = 0; i < CompCount; i++)
-		CompList[i]->load(i+1,labeli[i], valueI[i] );
+		CompList[i]->load(i + 1, labeli[i], valueI[i]);
 	for (int i = 0; i < ConnCount; i++)
-		ConnList[i]->load(comp001[i], comp002[i]);  
+		ConnList[i]->load(comp001[i], comp002[i]);
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -408,103 +408,103 @@ ApplicationManager::~ApplicationManager()
 //
 //}
 
- bool ApplicationManager::isAvalible()
- {
-	 
-		 if ( CompCount >= 2) 
-		 {
-			 return true;
-		 }
-		 
-		 return false;
-	 
-	
- } 
- void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
- {
-	 CopyComp = comp1;
- }
- Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
- {
-	 return CopyComp;
- }
+bool ApplicationManager::isAvalible()
+{
 
- ////if (CopyComp==nullptr)
-	//		//{
-	//		//	pUI->ClearStatusBar();
-	//		//	//delete pAct;
-	//		//	//pAct = nullptr;
-	//		//	pUI->CreateErrorWind("error \n");
+	if (CompCount >= 2)
+	{
+		return true;
+	}
 
-	//		//}
-	//		//else {
- //pAct = new ActionAddPaste(this);
+	return false;
 
- ///*	}*/
- //break;
- void ApplicationManager::deleteCompounent(Component* delet)
- {
-	 int x1 = 0;
-	 Component* T;
-	 for (int i = 0; i < CompCount; i++)
-	 {
-		 if (CompList[i] == delet)
-		 {
-			 x1 = i;
-			 for (int j = x1; j < CompCount; j++)
-			 {
-				 CompList[j] = CompList[j + 1];
-			 }
-			 CompCount--;
 
-			 int C1, C2;
-			 C1 = delet->getTermConnCount(TERM1);
-			 C2 = delet->getTermConnCount(TERM2);
-			 Connection** c1;
-			 Connection** c2;
-			 /* c1 = nullptr;
-			  c2 = nullptr;*/
-			 c1 = delet->getTermConnections(TERM1);
+}
+void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
+{
+	CopyComp = comp1->Copy();
+}
+Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
+{
+	return CopyComp;
+}
 
-			 c2 = delet->getTermConnections(TERM2);
+////if (CopyComp==nullptr)
+   //		//{
+   //		//	pUI->ClearStatusBar();
+   //		//	//delete pAct;
+   //		//	//pAct = nullptr;
+   //		//	pUI->CreateErrorWind("error \n");
 
-			 for (int y = 0; y < C1; y++)
-			 {
-				
-				 deleteConnection(c1[0]);
-			 }
-			 for (int y = 0; y < C2; y++)
-			 { 
-				 deleteConnection(c2[0]);
-			 }
-			 delete	delet;
+   //		//}
+   //		//else {
+//pAct = new ActionAddPaste(this);
 
-		 }
-	 }
+///*	}*/
+//break;
+void ApplicationManager::deleteCompounent(Component* delet)
+{
+	int x1 = 0;
+	Component* T;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i] == delet)
+		{
+			x1 = i;
+			for (int j = x1; j < CompCount; j++)
+			{
+				CompList[j] = CompList[j + 1];
+			}
+			CompCount--;
 
- }
- void ApplicationManager::deleteConnection(Connection* delet)
- {
-	 int x1 = 0;
-	 Component* T;
-	 for (int i = 0; i < ConnCount; i++)
-	 {
-		 if (ConnList[i] == delet)
-		 {
-			 x1 = i;
-			 for (int j = x1; j < ConnCount; j++)
-			 {
-				 ConnList[j] = ConnList[j + 1];
-			 }
-			 ConnCount--;
-			 for (int zc = 0; zc < CompCount; zc++)
-			 {
-				 if (delet->getOtherComponent(CompList[i]))
-				 {
+			int C1, C2;
+			C1 = delet->getTermConnCount(TERM1);
+			C2 = delet->getTermConnCount(TERM2);
+			Connection** c1;
+			Connection** c2;
+			/* c1 = nullptr;
+			 c2 = nullptr;*/
+			c1 = delet->getTermConnections(TERM1);
 
-				 }
-			 }
-			 delete	delet;
-		 }
-	 }
- }
+			c2 = delet->getTermConnections(TERM2);
+
+			for (int y = 0; y < C1; y++)
+			{
+
+				deleteConnection(c1[0]);
+			}
+			for (int y = 0; y < C2; y++)
+			{
+				deleteConnection(c2[0]);
+			}
+			delete	delet;
+
+		}
+	}
+
+}
+void ApplicationManager::deleteConnection(Connection* delet)
+{
+	int x1 = 0;
+	Component* T;
+	for (int i = 0; i < ConnCount; i++)
+	{
+		if (ConnList[i] == delet)
+		{
+			x1 = i;
+			for (int j = x1; j < ConnCount; j++)
+			{
+				ConnList[j] = ConnList[j + 1];
+			}
+			ConnCount--;
+			for (int zc = 0; zc < CompCount; zc++)
+			{
+				if (delet->getOtherComponent(CompList[i]))
+				{
+
+				}
+			}
+			delete	delet;
+		}
+	}
+}

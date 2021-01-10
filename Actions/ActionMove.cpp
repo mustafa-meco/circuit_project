@@ -1,6 +1,4 @@
 #include "ActionMove.h"
-
-#include "ActionAddSwi.h"
 #include "../ApplicationManager.h"
 #include<iostream>
 using namespace std;
