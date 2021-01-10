@@ -408,26 +408,26 @@ ApplicationManager::~ApplicationManager()
 //
 //}
 
-bool ApplicationManager::isAvalible()
-{
-
-	if (CompCount >= 2)
-	{
-		return true;
-	}
-
-	return false;
-
-
-}
-void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
-{
-	CopyComp = comp1->Copy();
-}
-Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
-{
-	return CopyComp;
-}
+ bool ApplicationManager::isAvalible()
+ {
+	 
+		 if ( CompCount >= 2) 
+		 {
+			 return true;
+		 }
+		 
+		 return false;
+	 
+	
+ } 
+ void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
+ {
+	 CopyComp = comp1->Copy();
+ }
+ Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
+ {
+	 return CopyComp;
+ }
 
 ////if (CopyComp==nullptr)
    //		//{
