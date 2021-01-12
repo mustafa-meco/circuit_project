@@ -77,17 +77,22 @@ void ActionAddCut::Execute() //Execute action
 		undo1[i] = nullptr;
 		undo2[i] = nullptr;
 	}
-	
 	for (int i = 0; i < C1; i++)
 	{
-		undo1[i] = ptrComp->getTermConnections(TERM1)[i]->copyconnection();;
+		undo1[i] = ptrComp->getTermConnections(TERM1)[i]->copyconnectionAndChange(comp2);
+		//the terminal of the other component is
+		tt1[i] = ptrComp->getTermConnections(TERM1)[i]->getOtherComponent(ptrComp)->whichTerminal(ptrComp->getTermConnections(TERM1)[i]);
 	}
 
 	for (int i = 0; i < C2; i++)
 	{
-		undo2[i] = ptrComp->getTermConnections(TERM2)[i]->copyconnection();
+		undo2[i] = ptrComp->getTermConnections(TERM2)[i]->copyconnectionAndChange(comp2);
+		//the terminal of the other component is
+		tt2[i] = ptrComp->getTermConnections(TERM2)[i]->getOtherComponent(ptrComp)->whichTerminal(ptrComp->getTermConnections(TERM2)[i]);
 	}
+
 	pManager->deleteCompounent(ptrComp);
+
 
 	//if (ptResistor != NULL)
 	//{
@@ -147,13 +152,25 @@ void ActionAddCut::Undo()
 	if (comp2 != nullptr)
 	{
 		pManager->AddComponent(comp2);
+
 		for (int y = 0; y < C1; y++)
 		{
+			comp2->addTerm1Connection(undo1[y]);
+
+			if (tt1[y] == TERM1)
+				undo1[y]->getOtherComponent(comp2)->addTerm1Connection(undo1[y]);
+			if (tt1[y] == TERM2)
+				undo1[y]->getOtherComponent(comp2)->addTerm2Connection(undo1[y]);
 
 			pManager->AddConnection(undo1[y]);
 		}
 		for (int y = 0; y < C2; y++)
 		{
+			comp2->addTerm2Connection(undo2[y]);
+			if (tt2[y] == TERM1)
+				undo2[y]->getOtherComponent(comp2)->addTerm1Connection(undo2[y]);
+			if (tt2[y] == TERM2)
+				undo2[y]->getOtherComponent(comp2)->addTerm2Connection(undo2[y]);
 			pManager->AddConnection(undo2[y]);
 		}
 	}
@@ -161,7 +178,28 @@ void ActionAddCut::Undo()
 void  ActionAddCut::Redo() 
 {
 	if (comp2 != nullptr)
+	{
+
 		temp1 = comp2->Copy();
-	pManager->deleteCompounent(comp2);
-	comp2 = temp1;
+		for (int i = 0; i < C1; i++)
+		{
+			temp3[i] = comp2->getTermConnections(TERM1)[i]->copyconnectionAndChange(temp1);
+		}
+		for (int i = 0; i < C2; i++)
+		{
+			temp4[i] = comp2->getTermConnections(TERM2)[i]->copyconnectionAndChange(temp1);
+		}
+
+		pManager->deleteCompounent(comp2);
+
+		comp2 = temp1;
+
+		for (int i = 0; i < 10; i++)
+		{
+			undo1[i] = temp3[i];
+			undo2[i] = temp4[i];
+		}
+
+
+	}
 }

@@ -50,6 +50,7 @@ class UI
 		ITM_MOD,       
 		ITM_CON,           //Connection item in menu
 		ITM_SIM,
+		ITM_REAL,
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
@@ -113,7 +114,7 @@ class UI
 	color MsgColor;			//Messages color
 	color BkGrndColor;		//Back ground color
 
-
+	bool IsRealV;
 	window *pWind;
 	
 public:
@@ -176,13 +177,11 @@ public:
 	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
 	
 	void DrawWhite(const GraphicsInfo& r_GfxInfo);
-
-
-
 	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
 	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	bool IsReal();
 	~UI();
 };
 

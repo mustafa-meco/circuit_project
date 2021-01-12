@@ -33,10 +33,14 @@ void ActionDelete::Execute()
 		for (int i = 0; i < C1; i++)
 		{
 			undo1[i] = comp->getTermConnections(TERM1)[i]->copyconnectionAndChange(comp2);
+			//the terminal of the other component is
+			tt1[i] = comp->getTermConnections(TERM1)[i]->getOtherComponent(comp)->whichTerminal(comp->getTermConnections(TERM1)[i]);
 		}
 		for (int i = 0; i < C2; i++)
 		{
 			undo2[i] = comp->getTermConnections(TERM2)[i]->copyconnectionAndChange(comp2);
+			//the terminal of the other component is
+			tt2[i] = comp->getTermConnections(TERM2)[i]->getOtherComponent(comp)->whichTerminal(comp->getTermConnections(TERM2)[i]);
 		}
 		pManager->deleteCompounent(comp);
 	}
@@ -45,6 +49,10 @@ void ActionDelete::Execute()
 	if (connection != nullptr)
 	{
 		connection2 = connection->copyconnection();
+		Comp1 = pManager->getOne(connection2);
+		Comp2 = connection2->getOtherComponent(Comp1);
+		t1=Comp1->whichTerminal(connection);
+		t2 = Comp2->whichTerminal(connection);
 		pManager->deleteConnection(connection);
 	}
 
@@ -54,10 +62,22 @@ void ActionDelete::Execute()
 }
 
 
+
 void ActionDelete::Undo() 
 {
 	if (connection2 != nullptr)
+	{
+		if (t1== TERM1)
+			Comp1->addTerm1Connection(connection2);
+		if (t1 == TERM2)
+			Comp1->addTerm2Connection(connection2);
+		if (t2 == TERM1)
+			Comp2->addTerm1Connection(connection2);
+		if (t2 == TERM2)
+			Comp2->addTerm2Connection(connection2);
+
 		pManager->AddConnection(connection2);
+	}
 	if (comp2 != nullptr)
 	{
 		pManager->AddComponent(comp2);
@@ -65,9 +85,10 @@ void ActionDelete::Undo()
 		for (int y = 0; y < C1; y++)
 		{
 			comp2->addTerm1Connection(undo1[y]);
-			if (undo1[y]->getOtherComponent(comp2)->whichTerminal(undo1[y]) == TERM1)
+
+			if (tt1[y] == TERM1)
 				undo1[y]->getOtherComponent(comp2)->addTerm1Connection(undo1[y]);
-			if (undo1[y]->getOtherComponent(comp2)->whichTerminal(undo1[y]) == TERM2)
+			else if (tt1[y] == TERM2)
 				undo1[y]->getOtherComponent(comp2)->addTerm2Connection(undo1[y]);
 
 			pManager->AddConnection(undo1[y]);
@@ -75,9 +96,9 @@ void ActionDelete::Undo()
 		for (int y = 0; y < C2; y++)
 		{
 			comp2->addTerm2Connection(undo2[y]);
-			if (undo2[y]->getOtherComponent(comp2)->whichTerminal(undo2[y]) == TERM1)
+			if (tt2[y] == TERM1)
 				undo2[y]->getOtherComponent(comp2)->addTerm1Connection(undo2[y]);
-			if (undo2[y]->getOtherComponent(comp2)->whichTerminal(undo2[y]) == TERM2)
+			else if (tt2[y] == TERM2)
 				undo2[y]->getOtherComponent(comp2)->addTerm2Connection(undo2[y]);
 			pManager->AddConnection(undo2[y]);
 		}

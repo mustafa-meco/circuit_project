@@ -75,6 +75,7 @@
     <ClCompile Include="Actions\ActionRedo.cpp" />
     <ClCompile Include="Actions\ActionAddDesignedModule.cpp" />
     <ClCompile Include="Actions\ActionSaveDesignedModule.cpp" />
+    <ClCompile Include="Actions\ActionRealistic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />

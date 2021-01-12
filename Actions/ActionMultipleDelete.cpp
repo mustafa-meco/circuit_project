@@ -11,7 +11,6 @@ void ActionMultipleDelete::Execute()
 {
 
 
-
 	int cx = 0;
 	int cy = 0;
 	UI* pUI = pManager->GetUI();

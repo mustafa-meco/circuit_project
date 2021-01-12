@@ -20,6 +20,7 @@ UI::UI()
 
 	CreateDesignToolBar();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar
+	bool IsRealV = false;
 }
 void UI::CreateErrorWind(string s) {
 	window* pErWind;
@@ -32,6 +33,7 @@ void UI::CreateErrorWind(string s) {
 	pErWind->DrawString(width / 10, height / 10, s+"\npress any key");
 	pErWind->WaitKeyPress(key);
 	delete pErWind;
+
 }
 
 int UI::getCompWidth() const
@@ -143,6 +145,7 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
+			case ITM_REAL:  return ADD_REALISTIC;
 			/*case ITM_COPY:   return ADD_COPY;
 			case ITM_CUT:   return ADD_CUT;
 			case ITM_PASTE:   return ADD_PASTE;
@@ -436,6 +439,10 @@ void UI::DrawActionBar()const
 void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 {
 	string ResImage;
+	if (IsRealV)
+	{
+		ResImage = "Images\\realistic\\resistor.jpeg";
+	}
 	if(selected)	
 		ResImage ="Images\\Comp\\Resistor_HI.jpg";	//use image of highlighted resistor
 	else  
@@ -449,6 +456,10 @@ void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BulImage;
+	if (IsRealV)
+	{
+		BulImage = "Images\\realistic\\bulb.jpg";
+	}
 	if (selected)
 		BulImage = "Images\\Comp\\Bulb_HI.jpg";	//use image of highlighted bulb
 	else
@@ -461,6 +472,10 @@ void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
+	if (IsRealV)
+	{
+		SwiImage = "Images\\realistic\\switch.jpg";
+	}
 	if (selected)
 		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted switch
 	else
@@ -472,6 +487,10 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BatImage;
+	if (IsRealV)
+	{
+		BatImage = "Images\\realistic\\battery.jpg";
+	}
 	if (selected)
 		BatImage = "Images\\Comp\\Battery_HI.jpg";	//use image of highlighted battery
 	else
@@ -483,6 +502,7 @@ void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string GroImage;
+	
 	if (selected)
 		GroImage = "Images\\Comp\\Ground_HI.jpg";	//use image of highlighted ground
 	else
@@ -493,26 +513,32 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 }
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
-	string ResImage;
-	
+	string BuzImage;
+	    if (IsRealV)
+	    {
+			BuzImage = "Images\\realistic\\buzzer.jpg";
+	    }
 	
 		if (selected)
 		{
-			ResImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
-
+			BuzImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
 		}
 		else
 		{
-			ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
-
+			BuzImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
 		}
 	
 	//Draw Resistor at Gfx_Info (1st corner)
-	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+	pWind->DrawImage(BuzImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string ResImage;
+	if (IsRealV)
+	{
+		ResImage = "Images\\realistic\\Fues.jpg";
+
+	}
 	if (selected)
 	{
 		ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
@@ -566,7 +592,22 @@ void UI::DrawModule(const GraphicsInfo& r_GfxInfo, bool selected) const {
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
-
+bool UI::IsReal()
+{
+	int x = 0;
+	int y = 0;
+	GetPointClicked(x, y);
+		/*if ()
+		{
+			IsRealV = true;
+			rutern true;
+		}
+		else
+		{
+			IsRealV = false;
+			rutern false;
+		}*/
+}
 
 
 UI::~UI()

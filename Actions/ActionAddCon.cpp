@@ -55,7 +55,7 @@ void ActionAddCon::Execute()
 		int compHeight = pUI->getCompHeight();
 		pGInfo->PointsList[0].y = comp1->getCompCentery(pUI);
 		pGInfo->PointsList[1].y = comp2->getCompCentery(pUI);
-		TerminalNum comp1conn, comp2conn;
+
 		if (Cx1 < comp1->getCompCenterx(pUI))                                        //checks from where the connection will start
 		{
 			pGInfo->PointsList[0].x = comp1->getCompCenterx(pUI) - compWidth / 2;
@@ -90,12 +90,12 @@ void ActionAddCon::Execute()
 			comp2->addTerm1Connection(pCON);
 		else
 			comp2->addTerm2Connection(pCON);
-		//pUI->DrawConnection(*pGInfo);
+		
 		pManager->AddConnection(pCON);
 
 		con = pCON;
 		compA = comp1;
-		comp2 = comp2;
+		compB = comp2;
 		undo1 = pGInfo;
 	}
 }
@@ -108,5 +108,14 @@ void ActionAddCon::Undo()
 void ActionAddCon::Redo()
 {
 	Connection* pCON = new Connection(undo1, compA, compB);
+	if (comp1conn == TERM1)
+		comp1->addTerm1Connection(pCON);
+	else
+		comp1->addTerm2Connection(pCON);
+	if (comp2conn == TERM1)
+		comp2->addTerm1Connection(pCON);
+	else
+		comp2->addTerm2Connection(pCON);
+
 	pManager->AddConnection(pCON);
 }

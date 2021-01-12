@@ -10,7 +10,7 @@
 class ActionDelete : public Action
 {
 private:
-	int C1, C2;
+
 	Component* comp;
 	Connection* connection;
 	//Parameters for rectangular area to be occupied by the comp
@@ -19,13 +19,22 @@ private:
 	Component* comp2;
 	Connection* connection2;
 
+	//undo redo for componnents
+	int C1, C2;
+	Component* Comp1;
+	Component* Comp2;
 	Component* temp1;
-	Connection* temp2;
 	Connection* temp3[10];
 	Connection* temp4[10];
 	Connection* undo1[10];
 	Connection* undo2[10];
-	TerminalNum t[10];
+	TerminalNum tt1[10];
+	TerminalNum tt2[10];
+	//undo redo for connections
+
+	TerminalNum t1;
+	TerminalNum t2;
+	Connection* temp2;
 public:
 
 

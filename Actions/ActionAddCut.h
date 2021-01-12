@@ -7,10 +7,18 @@ class ActionAddCut : public Action
 	int C1, C2;
 	int Cx;
 	int Cy;
-	Component* comp2;
+
+	//undo redo for componnents
 	Component* temp1;
+	Connection* temp3[10];
+	Connection* temp4[10];
 	Connection* undo1[10];
 	Connection* undo2[10];
+	TerminalNum tt1[10];
+	TerminalNum tt2[10];
+
+	Component* comp2;
+
 public:
 	ActionAddCut(ApplicationManager* pApp);
 

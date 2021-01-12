@@ -17,7 +17,7 @@ void ActionAddFues::Execute()
 
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new Fues: to add");
+	pUI->PrintMsg("Adding a new Fues: Click anywhere to add");
 	//Get a Pointer to the user Interfaces
 	
 	//Get Center point of the area where the Comp should be drawn

@@ -104,6 +104,9 @@ public:
 	void ToModulation();
 	double saveModule();
 	bool ValidateClear();
+	void DispCurrent() ;
+	Component* getOne(Connection*);
+
 };
 
 #endif
