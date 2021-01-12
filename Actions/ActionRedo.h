@@ -4,8 +4,10 @@ class ActionRedo :
     public Action
 {
 public:
-    ActionRedo(ApplicationManager* pApp);
-    virtual ~ActionRedo(void);
+    ActionRedo(ApplicationManager* pApp);//constructor
+
+    virtual ~ActionRedo(void);//destructor
+
     virtual void Execute();
 
     virtual void Undo();

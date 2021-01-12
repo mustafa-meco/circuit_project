@@ -443,6 +443,8 @@ void ApplicationManager::CalculateVoltages(double current) {
 		}
 		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
 	}
+
+
 }
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {

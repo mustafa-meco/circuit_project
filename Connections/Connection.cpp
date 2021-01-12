@@ -13,7 +13,7 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 
 void Connection::Draw(UI* pUI) //draw the connection between two points 
 {
-	pUI->DrawConnection(*pGfxInfo, pconnection == this);
+	pUI->DrawConnection(*pGfxInfo, pconnection == this); 
 	
 }
 
@@ -102,7 +102,7 @@ Component* Connection::getOtherComponent(Component* Cmpnt)
 
 void Connection::EditConnection(Component* component1, Component* component2, GraphicsInfo* pGInfo,UI* pUI)
 {
-	pUI->DeleteConnection(*pGfxInfo);
+	/*pUI->DeleteConnection(*pGfxInfo);*/
 	 if (Comp1 == this->getOtherComponent(component1))
 	 {
 		 

@@ -5,7 +5,7 @@
 class ActionAddCut : public Action
 {
 	int C1, C2;
-	int Cx;
+	int Cx; // points of centre
 	int Cy;
 
 	//undo redo for componnents
@@ -20,11 +20,14 @@ class ActionAddCut : public Action
 	Component* comp2;
 
 public:
-	ActionAddCut(ApplicationManager* pApp);
+	ActionAddCut(ApplicationManager* pApp);//constructor
 
-	~ActionAddCut(void);
+
+	~ActionAddCut(void);//destructor 
+
 	virtual void Execute(); //Execute action
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for cut 
+
+	virtual void Redo();//Redo for cut
 };

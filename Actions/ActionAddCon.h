@@ -19,8 +19,10 @@ private:
 	GraphicsInfo* undo1;
 	TerminalNum comp1conn, comp2conn;
 public:
-	ActionAddCon(ApplicationManager* pApp);
-	virtual ~ActionAddCon(void);
+	ActionAddCon(ApplicationManager* pApp);//constructor
+
+	virtual ~ActionAddCon(void);//destructor 
+
 
 	//Execute action (code depends on action type)
 	virtual void Execute();
@@ -28,7 +30,9 @@ public:
 	//void addTerm1Connection(Connection* pConn);
 	//void addTerm2Connection(Connection* pConn);
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for the connection
+
+	virtual void Redo(); //Redo for the connection 
+
 };
 

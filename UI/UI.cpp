@@ -376,27 +376,29 @@ void UI::CreateDesignToolBar()
 
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
-	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
-	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
+	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";         //Add image for Resistor
+	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";            //Add image for Bulb
 	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";			 //Add image for switch
 	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg"; 			 //Add image for ground 
-	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
-	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
-	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
-	MenuItemImages[ITM_MOD] = "Images\\Menu\\Menu_Module.jpg";
+	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";          //Add image for Battery
+	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";           //Add image for buzzer
+	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";            //Add image for Fues
+	MenuItemImages[ITM_MOD] = "Images\\Menu\\Menu_Module.jpg";          //Add image for Module
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
-	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
+	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";                  //Add image for simulation
+	MenuItemImages[ITM_MODU] = "Images\\Menu\\Menu_mod.jpg";             //Add image for modulation
+	//MenuItemImages[ITM_ADD_MOD] = "Images\\Menu\\Menu_Edit.jpg";
 	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	/*MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
 	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
 	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";	
 	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";*/
-	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
-	MenuItemImages[ITM_MODU] = "Images\\Menu\\Menu_mod.jpg";
+	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg"; //Add image for label
+
 	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	//MenuItemImages[ITM_MDELETE] = "Images\\Menu\\Menu_MultipleDelete.jpeg";
-	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg"; //Add image for exit
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -418,17 +420,16 @@ void UI::CreateSimulationToolBar()
 	AppMode = SIMULATION;	//Simulation Mode
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
 	string MenuItemImages[ITM_SIM_CNT];
-	MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG";
-	MenuItemImages[ITM_AMM] = "images\\Menu\\ammeter.jpg";
-	MenuItemImages[ITM_VOL] = "images\\Menu\\voltmeter.jpg";
-	MenuItemImages[ITM_DSN] = "images\\Menu\\design.jpg";
+	MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG"; //Add image for simulatation
+	MenuItemImages[ITM_AMM] = "images\\Menu\\ammeter.jpg";       //Add image for ammeter
+	MenuItemImages[ITM_VOL] = "images\\Menu\\voltmeter.jpg";      //Add image for voltmeter
+	MenuItemImages[ITM_DSN] = "images\\Menu\\design.jpg";          //Add image for design
 
 	for (int i = 0; i < ITM_SIM_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
 
 	
 }
-
 void UI::CreateModulationToolBar()
 {
 
@@ -436,36 +437,35 @@ void UI::CreateModulationToolBar()
 	AppMode = MODULATION;	//Modulation Mode
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
 	string MenuItemImages[ITM_MOD_CNT];
-	MenuItemImages[MITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
-	MenuItemImages[MITM_MOD] = "Images\\Menu\\Menu_Module.jpg";
+	MenuItemImages[MITM_RES] = "images\\Menu\\Menu_Resistor.jpg";	 //Add image for Resistor
+	MenuItemImages[MITM_MOD] = "Images\\Menu\\Menu_Module.jpg";	 //Add image for Module
 	MenuItemImages[MITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[MITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
-	MenuItemImages[MITM_DSN] = "images\\Menu\\design.jpg";
-	MenuItemImages[MITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
-	MenuItemImages[MITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
-	MenuItemImages[MITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
-	MenuItemImages[MITM_ADD_MOD] = "Images\\Menu\\Menu_Edit.jpg";
+	MenuItemImages[MITM_DSN] = "images\\Menu\\design.jpg";	 //Add image for design
+	MenuItemImages[MITM_BULB] = "images\\Menu\\Menu_Bulb.jpg"; //Add image for Bulb
+	MenuItemImages[MITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";	 //Add image for buzzer
+	MenuItemImages[MITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";	 //Add image for Fues
+	MenuItemImages[MITM_ADD_MOD] = "Images\\Menu\\Menu_Edit.jpg";	 //Add image for Edit
 
 	for (int i = 0; i < ITM_MOD_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
 
 
 }
-
 void UI::DrawActionBar()const
 {
 	//Delete, Num;
 	string ActionsImages[Itm_ACT_Num];
-	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";
-	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";
-	ActionsImages[ITMA_MDel] = "images\\Choice\\Menu_MultipleDelete.jpg";        //Add image for load
-	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";
-	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";
-	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";
+	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";        //Add image for edit
+	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";        //Add image for move
+	ActionsImages[ITMA_MDel] = "images\\Choice\\Menu_MultipleDelete.jpg";        //Add image for multipledelete
+	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";        //Add image for save
+	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";        //Add image for undo
+	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";        //Add image for redo
 	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";         //Add image for copy
 	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";           //Add image for cut 
 	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";       //Add image for paste
-	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";
+	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";        //Add image for delete
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Itm_ACT_Num; i++)
@@ -625,11 +625,11 @@ void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const //bo
 		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
 	}	
 }
-void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo) 
-{
-	pWind->SetPen(WHITE, 3);
-	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
-}
+//void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo) 
+//{
+//	pWind->SetPen(WHITE, 3);
+//	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+//}
 
 void UI::DrawWhite(const GraphicsInfo& r_GfxInfo)
 {
