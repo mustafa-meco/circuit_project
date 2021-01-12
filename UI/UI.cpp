@@ -148,9 +148,10 @@ ActionType UI::GetUserAction() const
 			case ITM_PASTE:   return ADD_PASTE;
 			case ITM_EDIT:  return EDIT_Label;*/
 			case ITM_LABEL: return ADD_Label;
-			case ITM_SAVE:  return SAVE;
-			case ITM_LOAD:	return LOAD; 
-			case ITM_MDELETE:return MDEL;
+			//case ITM_SAVE:  return SAVE;
+			case ITM_LOAD:	return LOAD;
+			case ITM_MOD:	return ADD_MOD;
+			//case ITM_MDELETE:return MDEL;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -174,14 +175,14 @@ ActionType UI::GetUserAction() const
 			pWind->SetPen(WHITE);
 			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
 			ClearStatusBar();
-			int ClickedItemOrder = (y1 - ToolBarHeight) / 50;
+			int ClickedItemOrder = (y1 - ToolBarHeight) / 52;
 			if (x1 > width - ActionBarWidth && x1 < width)
 			{
 				switch (ClickedItemOrder)
 				{
 				case ITMA_Edit:		return EDIT_Label;
 				case ITMA_Move:		return MOVE;
-				case ITMA_Load:		return LOAD;
+				case ITMA_MDel:		return MDEL;
 				case ITMA_Save:		return SAVE;
 				case ITMA_Undo:		return UNDO;
 				case ITMA_Redo:		return REDO;
@@ -350,18 +351,19 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
 	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
 	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
+	MenuItemImages[ITM_MOD] = "Images\\Menu\\Menu_Module.jpg";
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
 	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
-	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
+	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	/*MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
 	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
 	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";	
 	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";*/
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 
-	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
-	MenuItemImages[ITM_MDELETE] = "Images\\Menu\\Menu_MultipleDelete.jpeg";
+	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
+	//MenuItemImages[ITM_MDELETE] = "Images\\Menu\\Menu_MultipleDelete.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -400,7 +402,7 @@ void UI::DrawActionBar()const
 	string ActionsImages[Itm_ACT_Num];
 	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";
 	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";
-	ActionsImages[ITMA_Load] = "images\\Choice\\Load.jpg";        //Add image for load
+	ActionsImages[ITMA_MDel] = "images\\Choice\\Menu_MultipleDelete.jpg";        //Add image for load
 	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";
 	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";
 	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";
@@ -545,7 +547,16 @@ void UI::DrawWhite(const GraphicsInfo& r_GfxInfo)
 }
 
 
+void UI::DrawModule(const GraphicsInfo& r_GfxInfo, bool selected) const {
+	string ResImage;
+	if (selected)
+		ResImage = "Images\\Comp\\Module_HI.jpg";	//use image of highlighted resistor
+	else
+		ResImage = "Images\\Comp\\Module.jpg";	//use image of the normal resistor
 
+	//Draw Resistor at Gfx_Info (1st corner)
+	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
 
 
 

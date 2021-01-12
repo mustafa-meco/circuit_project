@@ -1,21 +1,21 @@
 #pragma once
 #include "Action.h"
-#include "..\Components\Module.h"
-class ActionAddModule :
+#include"../Components/Module.h"
+#include "../ApplicationManager.h"
+#include <fstream>
+class ActionAddDesignedModule :
     public Action
 {
 private:
-	//Parameters for rectangular area to be occupied by the comp
 	int Cx, Cy;	//Center point of the comp
 	int x1, y1, x2, y2;	//Two corners of the rectangluar area
 	Component* comp;
 	GraphicsInfo* undo1;
 	double undo2;
 public:
-	ActionAddModule(ApplicationManager* pApp);
-	virtual ~ActionAddModule(void);
+	ActionAddDesignedModule(ApplicationManager* pApp);
 
-	//Execute action (code depends on action type)
+	~ActionAddDesignedModule(void);
 	virtual void Execute();
 
 	virtual void Undo();
