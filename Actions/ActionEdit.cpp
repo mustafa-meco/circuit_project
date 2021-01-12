@@ -30,7 +30,7 @@ void ActionEdit::Execute()
 		if (r == ("1"))
 		{
 			pUI->PrintMsg("enter the new label");
-			comp->SetComponentlabel(pUI->GetSrting());
+			comp->Setlabel(pUI->GetSrting());
 
 			pUI->ClearStatusBar();
 

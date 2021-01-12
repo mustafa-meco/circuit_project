@@ -19,6 +19,10 @@
 #include "Actions/ActionUndo.h"
 #include "Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
+
+#include "Actions/ActionAddModule.h"
+#include<Windows.h>
+
 #include <iostream>
 
 using namespace std;
@@ -32,6 +36,7 @@ ApplicationManager::ApplicationManager()
 	lineCount = 0;
 
 	IsSimulation = 0;
+	IsModulation = 0;
 	undoNum = 0;
 	redoNum = 0;
 
@@ -147,12 +152,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionAddFues(this);
 		AddToUndoList(pAct);
 		break;
+	case ADD_MOD:
+		pAct = new ActionAddModule(this);
+		break;
 	case UNDO:
 		pAct = new  ActionUndo(this);
-	break;
+		break;
 	case REDO:
 		pAct = new ActionRedo(this);
-	break;
+		break;
 	case EDIT_Label:
 		pAct = new ActionEdit(this);
 		break;
@@ -178,7 +186,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionMultipleDelete(this);
 		break;
 	case SAVE:
-		pAct = new ActionSave(this);
+		if (IsModulation)
+			saveModule();
+		else
+			pAct = new ActionSave(this);
 		break;
 	case SIM_MODE:
 		ToSimulation();
@@ -348,6 +359,7 @@ void ApplicationManager::ToSimulation() {
 }
 void ApplicationManager::ToDesign() {
 	this->IsSimulation = false;
+	this->IsModulation = false;
 	// Compute all needed voltages and current
 	pUI->CreateDesignToolBar();
 }
@@ -615,4 +627,62 @@ void ApplicationManager::ExcuteRedo()
 	}
 	if (redoNum < 0)
 		redoNum = 0;
+}
+
+bool ApplicationManager::ValidateClear() {
+	if (CompCount != 0 || ConnCount != 0)
+		return false;
+	for (int i = 0; i < MaxCompCount; i++) {
+		if (CompList[i])
+			return false;
+	}
+	for (int i = 0; i < MaxConnCount; i++) {
+		if (ConnList[i])
+			return false;
+	}
+}
+
+bool ApplicationManager::ValidateModule() {
+	int c1, c2, cc = 0;
+	for (int i = 0; i < CompCount; i++) {
+		if (!dynamic_cast<Resistor*>(CompList[i]))
+			return false;
+		c1 = 0, c2 = 0;
+		c1 = CompList[i]->getTermConnCount(TERM1);
+		c2 = CompList[i]->getTermConnCount(TERM2);
+		if (c1 != 1 && c2 != 1) 
+			return false;
+		if (c1 != 1 || c2 != 1) 
+			cc++;
+		if (cc > 2)
+			return false;
+	}
+	return true;
+}
+
+
+double ApplicationManager::saveModule() {
+	if (!ValidateModule()) {
+		pUI->CreateErrorWind("error \n");
+	}
+	else {
+		double SumResistance=0;
+		
+		for (int i = 0; i < CompCount; i++)
+		{
+			SumResistance = SumResistance + CompList[i]->getResistance();
+		}
+		return SumResistance;
+		// Compute all needed voltages and current
+		
+
+		//pUI->CreateSimulationToolBar();
+	}
+}
+
+void ApplicationManager::ToModulation() {
+	if (!(CompCount ==0 || CompCount == 0))
+	this->IsModulation = true;
+
+	
 }

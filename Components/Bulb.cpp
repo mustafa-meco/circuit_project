@@ -57,6 +57,6 @@ Component* Bulb::Copy()
 	Component* B;
 	B = new Bulb(m_pGfxInfo); 
 	B->setResistance(this->resistance);
-	B->SetComponentlabel(m_Label);
+	B->Setlabel(m_Label);
 	return B;
 }

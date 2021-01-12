@@ -60,7 +60,7 @@ Component* Battery::Copy()
 	Component* B;
 	B = new Battery(m_pGfxInfo);
 	B->setSourceVoltage(this->sourceVoltage);
-	B->SetComponentlabel(m_Label);
+	B->Setlabel(m_Label);
 	return B;
 }
 //void Battery::setPolarity(BatPolarity p)

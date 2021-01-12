@@ -19,14 +19,14 @@ void ActionLabel::Execute()
 	pUI->PrintMsg("Choose the components or connections to Label ");
 	pUI->GetPointClicked(x, y);
 	Component* comp = pManager->GetComponentByCordinates(x, y);
-	Connection* connection = pManager->GetConnectionByCordinates(x, y);
+	//Connection* connection = pManager->GetConnectionByCordinates(x, y);
 	pUI->ClearStatusBar();
 
 	if (comp != nullptr)
 	{	//comp->selection();
 		pUI->PrintMsg("enter the label");
-		comp->SetComponentlabel(pUI->GetSrting());
-		connection->SetConnectionlabel(pUI->GetSrting());
+		comp->Setlabel(pUI->GetSrting());
+		//connection->SetConnectionlabel(pUI->GetSrting());
 		pUI->ClearStatusBar();
 
 	}

@@ -153,7 +153,7 @@ string Component :: getlabel()
 {
 	return m_Label;
 }
-string Component::SetComponentlabel(string input)
+string Component::Setlabel(string input)
 {
 	m_Label = input;
 	return m_Label;

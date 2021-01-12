@@ -18,6 +18,7 @@ enum ActionType
 	ADD_FUES,
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
+	ADD_MOD,
 
  	ADD_PASTE,          //Add Paste 
 

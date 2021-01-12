@@ -38,7 +38,7 @@ Component* Ground::Copy()                                    //Copy the componen
 {
 	Component* B;
 	B = new Ground(m_pGfxInfo);                  // create a new Component and save the previous info in the new one
-	B->SetComponentlabel(m_Label);
+	B->Setlabel(m_Label);
 	return B;
 
 }
