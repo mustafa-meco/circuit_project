@@ -78,10 +78,10 @@ void Component::removeTerm2Connection(Connection* pConn)
 	}
 }
 
-void Component::setResistance(double R) {
+void Component::setResistance(double R) {            //set a value for the resistance  
 	resistance = R;
 }
-void Component::setSourceVoltage(double V) {
+void Component::setSourceVoltage(double V) {         //set a voltage value  
 	sourceVoltage = V;
 }
 void Component::setStatus(bool S) {
@@ -103,10 +103,10 @@ int Component::getCompCentery(UI*)         //get the center of the component are
 //
 //}
 
-double Component::getResistance() {
+double Component::getResistance() {                 //Get a value for the resistance
 	return resistance;
 }
-double Component::getSourceVoltage() {
+double Component::getSourceVoltage() {              //Get a voltage value
 	return sourceVoltage;
 }
 
@@ -119,7 +119,7 @@ string Component::save() const {
 int Component::getID() const {
 	return ID;
 }
-void Component::load(int ,string, double)
+void Component::load(int ,string, double)   // load function
 {
 }
 

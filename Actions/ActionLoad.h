@@ -18,9 +18,9 @@ using namespace std;
 #include "../Components/Switch.h"
 class ActionLoad : public Action
 {
-	string filename;
-	int ComID;
-	string input;
+	string filename;    // name of the file which will be loaded
+	int ComID;          // id for the component 
+	string input; 
 	Component* comp01; 
 	Component* comp02; 
 public :

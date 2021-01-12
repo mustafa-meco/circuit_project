@@ -26,16 +26,16 @@ string Resistor::save() const {
 	string row =  "RES " + to_string(ID) + " " + m_Label + " " +to_string((int)resistance)+" "+to_string(p.x)+" "+to_string(p.y) ;
 	return row;
 }
-void Resistor::load(int id,string LABELi, double VALUE)        // load the resistance 
+void Resistor::load(int id,string LABELi, double VALUE)        //load if there is a Resistor in the saved file 
 {
 	ID= id,                             // id for the resistance
 	m_Label = LABELi;                  //label for the resistance .
 	resistance = VALUE;                //the value of the resitance 
 }
-Component* Resistor::Copy()
+Component* Resistor::Copy()                                    //Copy the component information 
 {
 	Component* B;
-	B = new Resistor(m_pGfxInfo);
+	B = new Resistor(m_pGfxInfo);                 // create a new Component and save the previous info in the new one
 	B->setResistance(resistance);
 	B->Setlabel(m_Label);
 	return B;

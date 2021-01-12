@@ -54,7 +54,7 @@ void Bulb::load(int id,string LABELi, double VALUE)  //load bulb
 Component* Bulb::Copy()
 {
 	Component* B;
-	B = new Bulb(m_pGfxInfo);
+	B = new Bulb(m_pGfxInfo); 
 	B->setResistance(this->resistance);
 	B->Setlabel(m_Label);
 	return B;

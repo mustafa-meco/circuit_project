@@ -11,8 +11,8 @@ public:
 	ActionAddCopy(ApplicationManager* pApp);
 	
 
-	~ActionAddCopy(void);
-	virtual void Execute();
+	~ActionAddCopy(void); 
+	virtual void Execute();              //Execute action
 
 	virtual void Undo();
 	virtual void Redo();

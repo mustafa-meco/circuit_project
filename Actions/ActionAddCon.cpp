@@ -14,7 +14,7 @@ ActionAddCon::~ActionAddCon(void)
 void ActionAddCon::Execute()
 {
 	UI* pUI = pManager->GetUI();
-	if (!pManager->isAvalible())
+	if (!pManager->isAvalible())              // No connection is created if there is no components 
 	{
 		pUI->PrintMsg("  You should have two components to connect them : ");
 
@@ -26,8 +26,8 @@ void ActionAddCon::Execute()
 
 		//Get a Pointer to the user Interfaces
 
-		pUI->PrintMsg(" choose two points for connection : ");
-		do
+		pUI->PrintMsg(" choose two points for connection : "); 
+		do                         // loop to make the user choose the first term 
 		{
 
 			pUI->GetPointClicked(Cx1, Cy1);
@@ -36,7 +36,7 @@ void ActionAddCon::Execute()
 		} while (comp1 == nullptr);
 
 
-		do
+		do                        // loop to make the user choose the second term 
 		{
 
 
@@ -52,15 +52,15 @@ void ActionAddCon::Execute()
 
 
 
-		GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
+		GraphicsInfo* pGInfo = new GraphicsInfo(2);      //Gfx info to be used to construct the Comp
 
-		//Calculate the rectangle Corners
+		                                           //Calculate the rectangle Corners
 		int compWidth = pUI->getCompWidth();
 		int compHeight = pUI->getCompHeight();
 		pGInfo->PointsList[0].y = comp1->getCompCentery(pUI);
 		pGInfo->PointsList[1].y = comp2->getCompCentery(pUI);
 		TerminalNum comp1conn, comp2conn;
-		if (Cx1 < comp1->getCompCenterx(pUI))
+		if (Cx1 < comp1->getCompCenterx(pUI))                                        //checks from where the connection will start
 		{
 			pGInfo->PointsList[0].x = comp1->getCompCenterx(pUI) - compWidth / 2;
 
@@ -85,7 +85,7 @@ void ActionAddCon::Execute()
 		}
 
 
-		Connection* pCON = new Connection(pGInfo, comp1, comp2);
+		Connection* pCON = new Connection(pGInfo, comp1, comp2);         //increase the number of terms 
 		if (comp1conn == TERM1)
 			comp1->addTerm1Connection(pCON);
 		else

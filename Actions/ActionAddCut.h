@@ -10,7 +10,7 @@ public:
 	ActionAddCut(ApplicationManager* pApp);
 
 	~ActionAddCut(void);
-	virtual void Execute();
+	virtual void Execute(); //Execute action
 
 	virtual void Undo();
 	virtual void Redo();

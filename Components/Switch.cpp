@@ -27,16 +27,16 @@ string Switch::save() const {
 	return row;
 	
 }
-void Switch::load(int id,string LABELi , double VALUE)
+void Switch::load(int id,string LABELi , double VALUE)       //load if there is a switch in the saved file 
 {
 	ID= id;              // id for the switch 
 	m_Label = LABELi;    //label for the switch. 
 	status = VALUE;      //status for the switch 
 }
-Component* Switch::Copy()   
+Component* Switch::Copy()    //Copy the component information 
 {
-	Component* B;
-	B = new Switch(m_pGfxInfo); 
+	Component* B;       
+	B = new Switch(m_pGfxInfo);      // create a new Component and save the previous info in the new one
 	B->Setlabel(m_Label);
 	return B;
 }

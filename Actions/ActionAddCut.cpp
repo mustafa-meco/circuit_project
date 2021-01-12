@@ -23,16 +23,16 @@ ActionAddCut::~ActionAddCut(void)
 {
 
 }
-void ActionAddCut::Execute()
+void ActionAddCut::Execute() //Execute action 
 {
 	UI* pUI = pManager->GetUI();
-	pUI->PrintMsg("Select component for cutting : ");
+	pUI->PrintMsg("Select component for cutting : "); 
 
-	pUI->GetPointClicked(Cx, Cy);
-	pUI->ClearStatusBar();															//TAYIL74
- 	Component* ptrComp = pManager->GetComponentByCordinates(Cx, Cy);
+	pUI->GetPointClicked(Cx, Cy);                                              // indicate where  the user clicks
+	pUI->ClearStatusBar();															
+ 	Component* ptrComp = pManager->GetComponentByCordinates(Cx, Cy);            //knowing the comp type
 
-	Connection* ptConnection = dynamic_cast<Connection*>(ptrComp);                 //TAYIL74
+	Connection* ptConnection = dynamic_cast<Connection*>(ptrComp);              //check if the user select a connection 
 	
 	/*Resistor* ptResistor = dynamic_cast<Resistor*>(ptrComp);
 	Bulb* ptBulb = dynamic_cast<Bulb*>(ptrComp);
@@ -42,16 +42,17 @@ void ActionAddCut::Execute()
 	Ground* ptGround = dynamic_cast<Ground*>(ptrComp);
 	Fues* ptFues = dynamic_cast<Fues*>(ptrComp);*/
 
-	if (ptrComp == NULL)															//TAYIL74
+	if (ptConnection != NULL)              // showing a message to prevent the user from cutting the connection
+	{
+		pUI->PrintMsg("It is not allowed to cut a connection : ");
+		
+	}
+
+	if (ptrComp == NULL)                   // showing a message to tell the user that no comp is selected 
 	{
 		pUI->PrintMsg("NO component is selected: ");
 	}
-
-	if (ptConnection != NULL)
-	{
-		pUI->PrintMsg("It is not allowed to cut a connection : ");					//TAYIL74
-	}
-	else																			//TAYIL74
+	else								  // Cut the component 										
 	{
 		pManager->SetCopyComp(ptrComp); 
 

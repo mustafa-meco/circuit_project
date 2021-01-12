@@ -60,3 +60,11 @@ Component* Battery::Copy()
 	B->Setlabel(m_Label);
 	return B;
 }
+//void Battery::setPolarity(BatPolarity p)
+//{
+//	polarity = p;
+//} 
+//BatPolarity Battery::GetPolarity()
+//{
+//	return static_cast<BatPolarity>(polarity);
+//}

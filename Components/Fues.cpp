@@ -4,7 +4,7 @@ Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 
 
-	resistance = 2; 
+	//resistance = 2; 
 
 }
 

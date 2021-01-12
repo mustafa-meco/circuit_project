@@ -27,7 +27,7 @@ private:
 	bool IsSimulation; // True when in simulation mode
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
-	Component* CopyComp;   
+	Component* CopyComp;                // variable to save the component type
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers) 
 	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers) 
 
@@ -57,13 +57,15 @@ public:
 	void AddComponent(Component* pComp);
 	void AddConnection(Connection* pConn);
 
-	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
+	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region  
+                                                       //through this function you can know the component type. 
+
 	Connection* GetConnectionByCordinates(int x, int y);
 	// Simulation Mode Functions
 	bool ValidateCircuit();
 	void ToSimulation(); // Switches to simulation mode
 	void ToDesign();
-	double CalculateCurrent();
+	double CalculateCurrent();                         // Mustafa Mahmoud Tayil 
 	void CalculateVoltages(double current);
 	//void save(ActionType);
 	string* save(int&,int&) const;
@@ -72,11 +74,11 @@ public:
 
 		//void Exit();
 
-	void load( string * , double* , Component**, Component** );     //load the connection
+	void load( string * , double* , Component**, Component** );     //load the	Circuit. 
 
 	bool isAvalible();   // to check if the user create two components before connect them or not
-	Component* GetCopyComp() const;		 	   //TAYIL74
-	void SetCopyComp(Component* comp1);        //TAYIL74
+	Component* GetCopyComp() const;		 	   //Getter for the component after coping or cutting the component.
+	void SetCopyComp(Component* comp1);        //Setter for the component   
 
 
 	void deleteCompounent(Component*);

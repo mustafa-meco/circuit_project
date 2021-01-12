@@ -393,13 +393,13 @@ void UI::DrawActionBar()const
 	string ActionsImages[Itm_ACT_Num];
 	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";
 	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";
-	ActionsImages[ITMA_Load] = "images\\Choice\\Load.jpg";
+	ActionsImages[ITMA_Load] = "images\\Choice\\Load.jpg";        //Add image for load
 	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";
 	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";
 	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";
-	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";
-	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";
-	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";
+	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";         //Add image for copy
+	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";           //Add image for cut 
+	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";       //Add image for paste
 	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";
 
 	//Draw menu item one image at a time
@@ -444,12 +444,12 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
 	if (selected)
-		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted bulb
+		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted switch
 	else
-		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal bulb
+		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal switch
 
-	//Draw Bulb at Gfx_Info (1st corner)
-	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+	//Draw switch at Gfx_Info (1st corner)        // Draw the image of the switch after adding the width and the height
+	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT); 
 }
 void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
@@ -470,7 +470,7 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 	else
 		GroImage = "Images\\Comp\\Ground.jpg";	//use image of the normal 
 
-	//Draw ground at Gfx_Info (1st corner)
+	//Draw ground at Gfx_Info (1st corner)       // Draw the image of the ground after adding the width and the height
 	pWind->DrawImage(GroImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const

@@ -16,10 +16,10 @@ enum ActionType
 	ADD_BATTERY,
 	ADD_BUZZER,
 	ADD_FUES,
-	ADD_COPY,
-	ADD_CUT,
+	ADD_COPY,           //Add Copy
+	ADD_CUT,            //Add Cut
 
-	ADD_PASTE,
+ 	ADD_PASTE,          //Add Paste 
 
 
 	ADD_CONNECTION,		//Add Wire Connection 
@@ -54,7 +54,10 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
-
+enum BatPolarity 
+{
+	RTL, LTR
+};
 	
 
 
