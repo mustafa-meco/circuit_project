@@ -20,6 +20,9 @@
 #include"Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
 #include "Actions/ActionAddModule.h"
+#include "Actions/ActionAddDesignedModule.h"
+#include "Actions/ActionSaveDesignedModule.h"
+#include "Actions/ActionAmmeter.h"
 #include<Windows.h>
 #include <iostream>
 
@@ -185,7 +188,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SAVE:
 		if (IsModulation)
-			saveModule();
+			pAct = new ActionSaveDesignedModule(this);
 		else
 			pAct = new ActionSave(this);
 		break;
@@ -196,7 +199,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ToDesign();
 		break;
 	case MOD_MODE:
-		ToModulation();
+		pAct = new ActionAddDesignedModule(this);
 		break;
 	case LOAD:
 		pAct = new ActionLoad(this);
@@ -213,10 +216,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		AddToUndoList(pAct);
 		break;
 	case AMM:
-		DispCurrent();
+		pAct = new ActionAmmeter(this);
 		break;
 	case VOL:
-		
+		//pAct = new ActionVotlmeter(this);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -374,6 +377,7 @@ void ApplicationManager::ToSimulation() {
 	}
 }
 void ApplicationManager::ToDesign() {
+	CalculateVoltages(0);
 	this->IsSimulation = false;
 	this->IsModulation = false;
 	// Compute all needed voltages and current
@@ -402,7 +406,44 @@ double ApplicationManager::CalculateCurrent() {
 
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
-	// TODO
+	Component* G = nullptr;
+	Component** TemComp = new Component * [CompCount];
+	Connection* TempConn;
+	TerminalNum TM;
+	int z = 0;
+	double TotalV = 0;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (dynamic_cast<Ground*>(CompList[i]))
+		{
+			G = dynamic_cast<Ground*>(CompList[i]);
+			break;
+		}
+	}
+	TempConn = G->getTermConnections(TERM1)[0];
+	TemComp[0] = TempConn->getOtherComponent(G);
+	while (!dynamic_cast<Ground*>(CompList[z]))
+	{
+
+		TM = TemComp[z]->whichTerminal(TempConn);
+
+		if (TM == TERM1)
+		{
+			TemComp[z]->setTerm1Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() - TemComp[z]->getSourceVoltage();
+
+			TemComp[z]->setTerm2Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM2)[0];
+		}
+		else
+		{
+			TemComp[z]->setTerm2Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() + TemComp[z]->getSourceVoltage();
+			TemComp[z]->setTerm1Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM1)[0];
+		}
+		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
+	}
 }
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
@@ -735,14 +776,7 @@ void ApplicationManager::ToModulation() {
 	}
 }
 
-void ApplicationManager::DispCurrent()  {
-	int ax=0, ay=0;
-	pUI->PrintMsg("Choose Component to show its current");
-	do {
-		pUI->GetPointClicked(ax, ay);	
-	} while (!GetComponentByCordinates(ax, ay));
-	pUI->PrintMsg("the current: " + to_string(CalculateCurrent()));
-}
+
 
 Component* ApplicationManager::getOne(Connection* con)
 {

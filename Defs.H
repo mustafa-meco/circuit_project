@@ -42,7 +42,7 @@ enum ActionType
 	AMM,
 	VOL,
 
-	DSN_MODE,	//Switch to Design mode
+	DSN_MODE,	//Switc	h to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
 	MOD_MODE,
 

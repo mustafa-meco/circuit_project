@@ -10,7 +10,7 @@ public:
 
 	void Undo();
 
-	void Redo();
+	void Redo();	
 
 };
 

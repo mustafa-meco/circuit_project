@@ -501,7 +501,7 @@ void UI::DrawActionBar()const
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Itm_ACT_Num; i++)
-		pWind->DrawImage(ActionsImages[i], width-ActionBarWidth, i * 52 + 80, 50, 50);
+		pWind->DrawImage(ActionsImages[i], width-ActionBarWidth , i * 52 + 80, 50, 50);
 
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
