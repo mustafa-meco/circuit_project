@@ -50,7 +50,7 @@ class UI
 		ITM_MOD,       
 		ITM_CON,           //Connection item in menu
 		ITM_SIM,
-		ITM_REAL,
+		//ITM_REAL,
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
@@ -59,6 +59,7 @@ class UI
 		ITM_LOAD,           //Load item in menu
 		//ITM_SAVE,
 		//ITM_MDELETE,
+		//ITM_MODU,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -143,7 +144,8 @@ public:
 	void CreateErrorWind(string);
 	void DrawActionBar() const;
 	void DrawConfirm() const;
-	void DrawRealistic() const;
+	void DrawReal() const;
+	void DrawRealistic() ;
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateStatusBar() const;	//Create Status bar

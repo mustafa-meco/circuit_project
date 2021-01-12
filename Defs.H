@@ -19,7 +19,8 @@ enum ActionType
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
 	ADD_MOD,
-
+	//MOD_MODE,
+	
  	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 

@@ -211,6 +211,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionAddPaste(this);
 		AddToUndoList(pAct);
 		break;
+	case ADD_REALISTIC:
+		pUI->DrawRealistic();
+		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
 		break;
@@ -241,14 +244,20 @@ void ApplicationManager::UpdateInterface()
 	cout << CompCount<<endl;
 	//if (CompCount) 
 	//{
+
+
 	pUI->ClearDrawingArea();
+	pUI->DrawReal();
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->Draw(pUI);
 
 	for (int i = 0; i < ConnCount; i++)
 		ConnList[i]->Draw(pUI);
+
 	Sleep(100);
+
 	//}
+
 	//else
 //Exit()
 }
@@ -685,4 +694,14 @@ void ApplicationManager::ToModulation() {
 	this->IsModulation = true;
 
 	
+}
+Component* ApplicationManager::getOne(Connection* con)
+{
+	for (int zc = 0; zc < CompCount; zc++)
+	{
+		if (con->getOtherComponent(CompList[zc]) != nullptr)
+		{
+			return CompList[zc];
+		}
+	}
 }
