@@ -8,6 +8,7 @@ Component::Component(GraphicsInfo *r_GfxInfo)
 	term1_volt = term2_volt = 0;
 	term1_conn_count = term2_conn_count = 0;
 	ID = ++gID;
+	
 }
 
 
@@ -193,4 +194,15 @@ double Component::getTerm1Volt()
 double Component::getTerm2Volt()
 {
 	return term2_volt;
+}
+
+TerminalNum Component::whichTerminal(Connection* Conn) {
+	for (int i = 0; i < term1_conn_count; i++) {
+		if (Conn == term1_conns[i])
+			return TERM1;
+	}
+	for (int i = 0; i < term2_conn_count; i++) {
+		if (Conn == term2_conns[i])
+			return TERM2;
+	}
 }

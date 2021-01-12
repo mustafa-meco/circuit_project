@@ -174,7 +174,7 @@ ActionType UI::GetUserAction() const
 			pWind->SetPen(WHITE);
 			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
 			ClearStatusBar();
-			int ClickedItemOrder = (y1 - 80) / 50;
+			int ClickedItemOrder = (y1 - ToolBarHeight) / 50;
 			if (x1 > width - ActionBarWidth && x1 < width)
 			{
 				switch (ClickedItemOrder)
