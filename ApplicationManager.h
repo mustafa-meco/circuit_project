@@ -98,6 +98,8 @@ public:
 	void AddToRedoList(Action*);
 	void ExcuteUndo();
 	void ExcuteRedo();
+	Component* getOne(Connection*);
+
 };
 
 #endif

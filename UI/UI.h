@@ -173,7 +173,7 @@ public:
 	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
-	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
+	void DeleteConnection(const GraphicsInfo& r_GfxInfo); 
 	
 	void DrawWhite(const GraphicsInfo& r_GfxInfo);
 

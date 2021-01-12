@@ -640,7 +640,7 @@ void ApplicationManager::ExcuteUndo()
 }
 void ApplicationManager::ExcuteRedo()
 {
-	if (redoNum > 0 )
+	if (redoNum > 0)
 	{
 		redoNum--;
 		RedoList[redoNum]->Redo();
@@ -649,4 +649,15 @@ void ApplicationManager::ExcuteRedo()
 	}
 	if (redoNum < 0)
 		redoNum = 0;
+}
+
+Component* ApplicationManager::getOne(Connection* con)
+{
+	for (int zc = 0; zc < CompCount; zc++)
+	{
+		if (con->getOtherComponent(CompList[zc]) != nullptr)
+		{
+			return CompList[zc];
+		}
+	}
 }

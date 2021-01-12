@@ -96,6 +96,7 @@ public:
 	
 	//static void selection();
 	GraphicsInfo* getm_pGfxInfo() ;
+
 	//void DeleteImage(GraphicsInfo* m_pGfxInfo, UI*);
 	//virtual void setPolarity(BatPolarity p)= 0 ;
 	//virtual BatPolarity GetPolarity() = 0;

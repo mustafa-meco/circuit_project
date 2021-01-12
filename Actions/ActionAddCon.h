@@ -17,6 +17,7 @@ private:
 	Component* compA;
 	Component* compB;
 	GraphicsInfo* undo1;
+	TerminalNum comp1conn, comp2conn;
 public:
 	ActionAddCon(ApplicationManager* pApp);
 	virtual ~ActionAddCon(void);
