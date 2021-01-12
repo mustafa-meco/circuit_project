@@ -24,7 +24,7 @@ enum ActionType
  	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
-
+	ADD_REALISTIC,
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -45,12 +45,11 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-	MOD_MODE,
 
 	EXIT,		//Exit the application
 
 	STATUS_BAR,		//A click on the status bar
-	DSN_TOOL,	//A click on an empty place in the design tool bar
+	DSN_TOOL	//A click on an empty place in the design tool bar
 
 };
 
@@ -58,7 +57,7 @@ enum  MODE	//Modes of operation
 {
 	DESIGN,
 	SIMULATION,
-	MODULATION
+	MODULATION 
 };
 enum BatPolarity  //direction of the battery which will used to calculate the voltage   
 {

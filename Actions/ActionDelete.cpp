@@ -14,19 +14,12 @@ void ActionDelete::Execute()
 	int cy = 0;
 	UI* pUI = pManager->GetUI();
 	pUI->PrintMsg("choose the compounent that you want to delete");
-	
 	do
-	{
-		pUI->GetPointClicked(cx, cy);
+	{   pUI->GetPointClicked(cx, cy);
 		comp = pManager->GetComponentByCordinates(cx, cy);
 		connection = pManager->GetConnectionByCordinates(cx, cy);
-
 	} while (connection == nullptr && comp == nullptr);
 
-	//GraphicsInfo* pGInfo = new GraphicsInfo(1);
-	//comp->DeleteImage(pGInfo, pUI);
-	//comp->removeTerm1Connection(connection);
-	//comp->removeTerm2Connection(connection);
 	if (comp != nullptr)
 	{
 		comp2 = comp->Copy();
@@ -43,17 +36,13 @@ void ActionDelete::Execute()
 			//the terminal of the other component is
 			tt1[i] = comp->getTermConnections(TERM1)[i]->getOtherComponent(comp)->whichTerminal(comp->getTermConnections(TERM1)[i]);
 		}
-
 		for (int i = 0; i < C2; i++)
 		{
 			undo2[i] = comp->getTermConnections(TERM2)[i]->copyconnectionAndChange(comp2);
 			//the terminal of the other component is
 			tt2[i] = comp->getTermConnections(TERM2)[i]->getOtherComponent(comp)->whichTerminal(comp->getTermConnections(TERM2)[i]);
 		}
-
 		pManager->deleteCompounent(comp);
-
-
 	}
 
 

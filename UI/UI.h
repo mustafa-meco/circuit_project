@@ -34,6 +34,7 @@ struct GraphicsInfo
 
 class UI
 {
+	
 
 	enum DsgnMenuItem //The items of the design menu (you should add more items)
 	{
@@ -59,7 +60,8 @@ class UI
 		ITM_LOAD,          //Load item
 		//ITM_SAVE,
 		//ITM_MDELETE,
-		ITM_EXIT,		  //Exit item
+		//ITM_MODU,
+		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT	    //no. of design menu items ==> This should be the last line in this enum
 	};
@@ -90,7 +92,6 @@ class UI
 		ITM_SIM_CNT		 //no. of simulation menu items ==> This should be the last line in this enum
 	
 	};
-	
 	enum ModMenuItem {
 		MITM_RES,
 		MITM_BULB,
@@ -99,13 +100,12 @@ class UI
 		MITM_MOD,
 		MITM_ADD_MOD,
 		MITM_CON,
-		
+
 		MITM_LOAD,
 		MITM_DSN,
 		ITM_MOD_CNT
 
 	};
-
 
 	MODE AppMode;		//Application Mode (design or simulation)
 	
@@ -129,7 +129,7 @@ class UI
 	color MsgColor;			//Messages color
 	color BkGrndColor;		//Back ground color
 
-
+	bool IsRealV;
 	window *pWind;
 	
 public:
@@ -167,6 +167,8 @@ public:
 	void ClearDrawingArea() const;	       //Clears the drawing area
 	void ClearAll()const;                  //Clear all 
 	void CreateModulationToolBar();
+	void DrawReal() const;
+	void DrawRealistic();
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	//Draw a Bulb
@@ -189,19 +191,16 @@ public:
 	//void PrintLabel(string msg)const;
 	//Draw A connection
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
-	//Delete the connection
-	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
-	//Draw a white rectangle
+ 
+	
 	void DrawWhite(const GraphicsInfo& r_GfxInfo);
-
-
-
 	//void PrintLabel(string msg)const;
     // Draws Connection
 	//void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;      //Mustafa Mahmoud Tayel 
     //void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
 	//Draw a Module 
 	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	bool IsReal();
 	~UI();
 };
 

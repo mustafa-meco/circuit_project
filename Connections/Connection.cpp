@@ -102,7 +102,7 @@ Component* Connection::getOtherComponent(Component* Cmpnt)
 
 void Connection::EditConnection(Component* component1, Component* component2, GraphicsInfo* pGInfo,UI* pUI)
 {
-	pUI->DeleteConnection(*pGfxInfo);
+	/*pUI->DeleteConnection(*pGfxInfo);*/
 	 if (Comp1 == this->getOtherComponent(component1))
 	 {
 		 
@@ -176,5 +176,9 @@ Connection* Connection::copyconnectionAndChange(Component* com)
 	
 	return nullptr;
 }
-
+string Connection::SetConnectionlabel(string input)
+{
+	connLabel = input;
+	return connLabel;
+}
 /* Deletes the component */

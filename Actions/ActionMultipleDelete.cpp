@@ -11,7 +11,6 @@ void ActionMultipleDelete::Execute()
 {
 
 
-
 	int cx = 0;
 	int cy = 0;
 	UI* pUI = pManager->GetUI();
@@ -22,21 +21,6 @@ void ActionMultipleDelete::Execute()
 	
 	while (!(Cx < 25 && Cy<pUI->getHeight() - pUI->getStatusBarHeight() && Cy > pUI->getHeight() - pUI->getStatusBarHeight() - 40))
 	{
-		//if (pManager->GetComponentByCordinates(Cx, Cy))
-		//{
-			/*while (this)
-				pManager->GetConnectionByCordinates(Cx, Cy);*/
-
-			//for (int i = 0; i < (int)mDeletedComps.size(); i++) {
-				//pManager->deleteCompounent(comp);
-			//}
-
-
-		//}
-	
-		
-
-
 		pUI->PrintMsg("choose ALL compounents that you want to delete and then click the purple squere to end action");
 		
 		do
@@ -58,13 +42,7 @@ void ActionMultipleDelete::Execute()
 			conncountm=pManager->multipleStoreCon(connection,0);
 			connection = nullptr;
 		}
-		//GraphicsInfo* pGInfo = new GraphicsInfo(1);
-		//comp->DeleteImage(pGInfo, pUI);
-		//comp->removeTerm1Connection(connection);
-		//comp->removeTerm2Connection(connection);
-		//pManager->AddComponent(comp);
-		/*pManager->deleteCompounent(comp);
-		pManager->deleteConnection(connection);*/
+	
 		pUI->ClearStatusBar();
 
 	}

@@ -9,7 +9,7 @@ UI::UI()
 	DrawColor = BLACK;
 	SelectColor = BLUE;
 	ConnColor = RED;
-	MsgColor = BLUE;
+	MsgColor = BLACK;
 	BkGrndColor = WHITE;
 	
 	//Create the drawing window
@@ -20,6 +20,7 @@ UI::UI()
 
 	CreateDesignToolBar();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar
+	bool IsRealV = false;
 }
 void UI::CreateErrorWind(string s) {
 	window* pErWind;
@@ -32,6 +33,7 @@ void UI::CreateErrorWind(string s) {
 	pErWind->DrawString(width / 10, height / 10, s+"\npress any key");
 	pErWind->WaitKeyPress(key);
 	delete pErWind;
+
 }
 
 int UI::getCompWidth() const
@@ -143,16 +145,16 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
-			case ITM_MODU:	return MOD_MODE;
+			/*case ITM_REAL:  return ADD_REALISTIC;*/
 			/*case ITM_COPY:   return ADD_COPY;
 			case ITM_CUT:   return ADD_CUT;
 			case ITM_PASTE:   return ADD_PASTE;
 			case ITM_EDIT:  return EDIT_Label;*/
-			case ITM_LABEL: return ADD_Label;
+			case ITM_LABEL: return ADD_Label; 
 			//case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD;
 			case ITM_MOD:	return ADD_MOD;
-			//case ITM_ADD_MOD: return ADD_MODU;
+			//case ITM_MODU:	return MOD_MODE;
 			//case ITM_MDELETE:return MDEL;
 			case ITM_EXIT:	return EXIT;	
 			
@@ -166,14 +168,23 @@ ActionType UI::GetUserAction() const
 			if (v == 2)
 				DrawActionBar();
 			else
-				return SELECT;	//user wants to select/unselect a component
+			{
+				if (x < 25 && y<getHeight() - getStatusBarHeight() && y > getHeight() - getStatusBarHeight() - 40)
+				{
+					return ADD_REALISTIC;
+				}
+				return SELECT; //user wants to select/unselect a component
+			}
+					
 		}
 	
 		if (y >= ToolBarHeight && y < height - StatusBarHeight )
 		{
+		
 			int x1, y1;
 			PrintMsg("Click on action to execute");
 			pWind->WaitMouseClick(x1, y1);
+
 			pWind->SetPen(WHITE);
 			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
 			ClearStatusBar();
@@ -199,67 +210,7 @@ ActionType UI::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
-	else if (AppMode == MODULATION) {
-		if (y >= 0 && y < ToolBarHeight && v == 1)
-		{
-			//Check whick Menu item was clicked
-			//==> This assumes that menu items are lined up horizontally <==
-			int ClickedItemOrder = (x / ToolItemWidth);
-			//Divide x coord of the point clicked by the menu item width (int division)
-			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
-
-			switch (ClickedItemOrder)
-			{
-			case MITM_RES:	return ADD_RESISTOR;
-			case MITM_CON:   return ADD_CONNECTION;
-			case MITM_LOAD:	return LOAD;
-			case MITM_MOD:	return ADD_MOD;
-			case MITM_DSN:	return DSN_MODE;
-			case MITM_ADD_MOD: return ADD_MODU;
-			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
-			}
-		}
-
-		//[2] User clicks on the drawing area
-		if (y >= ToolBarHeight && y < height - StatusBarHeight)
-		{
-			if (v == 2)
-				DrawActionBar();
-			else
-				return SELECT;	//user wants to select/unselect a component
-		}
-
-		if (y >= ToolBarHeight && y < height - StatusBarHeight)
-		{
-			int x1, y1;
-			PrintMsg("Click on action to execute");
-			pWind->WaitMouseClick(x1, y1);
-			pWind->SetPen(WHITE);
-			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
-			ClearStatusBar();
-			int ClickedItemOrder = (y1 - ToolBarHeight) / 52;
-			if (x1 > width - ActionBarWidth && x1 < width)
-			{
-				switch (ClickedItemOrder)
-				{
-				case ITMA_Edit:		return EDIT_Label;
-				case ITMA_Move:		return MOVE;
-				case ITMA_MDel:		return MDEL;
-				case ITMA_Save:		return SAVE;
-				case ITMA_Undo:		return UNDO;
-				case ITMA_Redo:		return REDO;
-				case ITMA_Copy:		return ADD_COPY;
-				case ITMA_Cut:		return ADD_CUT;
-				case ITMA_Paste:	return ADD_PASTE;
-				case ITMA_Delete:	return DEL;
-				default:			return DSN_TOOL;
-				}
-			}
-		}
-		//[3] User clicks on the status bar
-		return STATUS_BAR;
-	}
-	else 	//Application is in Simulation mode
+	else	//Application is in Simulation mode
 	{
 		
 		if (y >= 0 && y < ToolBarHeight)
@@ -273,8 +224,6 @@ ActionType UI::GetUserAction() const
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_AMM:	return AMM;
-			case ITM_VOL:	return VOL;
 			case ITM_DSN:	return DSN_MODE;
 
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -394,9 +343,26 @@ void UI::DrawConfirm() const
 	pWind->SetPen(RED, 1);
 	pWind->SetBrush(PURPLE);
 	pWind->DrawRectangle(0, height - StatusBarHeight - 25, 25, height - StatusBarHeight);
-	
-    /*pWind->DrawImage("images\\Choice\\right.jpg" ,0, height - StatusBarHeight - 40, 25, 25);*/
+
 }
+////////////////////////////////////////////////////////////////////////////////////////
+void UI::DrawReal() const
+{
+	pWind->SetPen(RED, 1);
+	pWind->SetBrush(BLACK);
+	pWind->DrawRectangle(0, height - StatusBarHeight - 25, 25, height - StatusBarHeight);
+}
+////////////////////////////////////////////////////////////////////////////////////
+void UI::DrawRealistic() 
+{
+	if(IsRealV == false)
+	     IsRealV = true;
+	else
+	{
+		IsRealV = false;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -515,11 +481,16 @@ void UI::DrawActionBar()const
 void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 {
 	string ResImage;
-	if(selected)	
-		ResImage ="Images\\Comp\\Resistor_HI.jpg";	//use image of highlighted resistor
-	else  
-		ResImage = "Images\\Comp\\Resistor.jpg";	//use image of the normal resistor
-
+	if (IsRealV)
+	{
+		ResImage = "Images\\realistic\\resistor.jpeg";
+	}
+	else {
+		if (selected)
+			ResImage = "Images\\Comp\\Resistor_HI.jpg";	//use image of highlighted resistor
+		else
+			ResImage = "Images\\Comp\\Resistor.jpg";	//use image of the normal resistor
+	}
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
@@ -528,11 +499,17 @@ void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BulImage;
-	if (selected)
-		BulImage = "Images\\Comp\\Bulb_HI.jpg";	//use image of highlighted bulb
-	else
-		BulImage = "Images\\Comp\\Bulb.jpg";	//use image of the normal bulb
-
+	if (IsRealV)
+	{
+		BulImage = "Images\\realistic\\bulb.jpg";
+	}
+	else 
+	{
+		if (selected)
+			BulImage = "Images\\Comp\\Bulb_HI.jpg";	//use image of highlighted bulb
+		else
+			BulImage = "Images\\Comp\\Bulb.jpg";	//use image of the normal bulb
+	}
 	//Draw Bulb at Gfx_Info (1st corner)
 	pWind->DrawImage(BulImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
@@ -540,28 +517,41 @@ void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
-	if (selected)
-		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted switch
-	else
-		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal switch
-
+	if (IsRealV)
+	{
+		SwiImage = "Images\\realistic\\switch.jpg";
+	}
+	else 
+	{
+		if (selected)
+			SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted switch
+		else
+			SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal switch
+	}
 	//Draw switch at Gfx_Info (1st corner)        // Draw the image of the switch after adding the width and the height
 	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT); 
 }
 void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BatImage;
-	if (selected)
-		BatImage = "Images\\Comp\\Battery_HI.jpg";	//use image of highlighted battery
-	else
-		BatImage = "Images\\Comp\\Battery.jpg";	//use image of the normal battery
-
+	if (IsRealV)
+	{
+		BatImage = "Images\\realistic\\battery.jpg";
+	}
+	else 
+	{
+		if (selected)
+			BatImage = "Images\\Comp\\Battery_HI.jpg";	//use image of highlighted battery
+		else
+			BatImage = "Images\\Comp\\Battery.jpg";	//use image of the normal battery
+	}
 	//Draw battery at Gfx_Info (1st corner)
 	pWind->DrawImage(BatImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string GroImage;
+	
 	if (selected)
 		GroImage = "Images\\Comp\\Ground_HI.jpg";	//use image of highlighted ground
 	else
@@ -572,34 +562,46 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 }
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
-	string ResImage;
+	string BuzImage;
+	    if (IsRealV)
+	    {
+			BuzImage = "Images\\realistic\\buzzer.jpg";
+	    }
 	
-	
-		if (selected)
-		{
-			ResImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
-
-		}
 		else
 		{
-			ResImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
-
+			if (selected)
+			{
+				BuzImage = "Images\\Comp\\buzzer_HI.jpg";	//use image of highlighted buzzer
+			}
+			else
+			{
+				BuzImage = "Images\\Comp\\buzzer.jpg";	//use image of the normal buzzer
+			}
 		}
 	
 	//Draw Resistor at Gfx_Info (1st corner)
-	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+	pWind->DrawImage(BuzImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string ResImage;
-	if (selected)
+	if (IsRealV==true)
 	{
-		ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
+		ResImage = "Images\\realistic\\Fues.jpg";
 
 	}
-	else
-	{
-		ResImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
+	else {
+		if (selected)
+		{
+			ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
+
+		}
+		else
+		{
+			ResImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
+
+		}
 	}
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -621,11 +623,11 @@ void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const //bo
 		pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
 	}	
 }
-void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo) 
-{
-	pWind->SetPen(WHITE, 3);
-	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
-}
+//void UI::DeleteConnection(const GraphicsInfo& r_GfxInfo) 
+//{
+//	pWind->SetPen(WHITE, 3);
+//	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+//}
 
 void UI::DrawWhite(const GraphicsInfo& r_GfxInfo)
 {
@@ -645,6 +647,24 @@ void UI::DrawModule(const GraphicsInfo& r_GfxInfo, bool selected) const {
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
+
+//bool UI::IsReal()
+//{
+//	int x = 0;
+//	int y = 0;
+//	GetPointClicked(x, y);
+//	DrawRealistic();
+//		if (x < 25 && y<getHeight() - getStatusBarHeight() && y > getHeight() - getStatusBarHeight() - 40)
+//		{
+//			IsRealV = true;
+//			return true;
+//		}
+//		else
+//		{
+//			IsRealV = false;
+//			return false;
+//		}
+//}
 
 
 UI::~UI()

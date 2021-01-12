@@ -5,13 +5,15 @@
 #include "..\UI\UI.h"
 #include "..\Connections\Connection.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //Base class for all components (resistor, capacitor,....etc)//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Base class for all components (resistor, capacitor,....etc) .
 class Component
 {
-private:
-
-	
+private:	
 protected:
 	//bool mDeleted;                   
 	
@@ -24,6 +26,7 @@ protected:
 	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections (term1)
 	Connection *term2_conns[MAX_CONNS]; //list of pointers to connections (term2)
 
+	
 	struct demo
 	{
 		Connection* arr[MAX_CONNS]; 	   //array declared inside structure
@@ -43,7 +46,7 @@ public:
 	Component(GraphicsInfo *r_GfxInfo);    //constructor to intialize data of the class
 	
 	void setTerm1Volt(double v);		//sets the voltage at terminal1 tayil
-	//
+	
 	void setTerm2Volt(double v);		//sets the voltage at terminal2 tayil 
 	double getTerm1Volt();				//returns the voltage at terminal1
 	double getTerm2Volt();				//returns the voltage at terminal2
