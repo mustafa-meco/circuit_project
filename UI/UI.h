@@ -47,9 +47,11 @@ class UI
 		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,           //Buzzer item in menu 
 		ITM_FUE,
-		ITM_MOD,       
+		ITM_MOD,
+		//ITM_ADD_MOD,
 		ITM_CON,           //Connection item in menu
 		ITM_SIM,
+		ITM_MODU,
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
@@ -88,6 +90,21 @@ class UI
 		ITM_DSN,
 		ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
 	
+	};
+	
+	enum ModMenuItem {
+		MITM_RES,
+		MITM_BULB,
+		MITM_BUZ,
+		MITM_FUE,
+		MITM_MOD,
+		MITM_ADD_MOD,
+		MITM_CON,
+		
+		MITM_LOAD,
+		MITM_DSN,
+		ITM_MOD_CNT
+
 	};
 
 
@@ -145,6 +162,7 @@ public:
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
+	void CreateModulationToolBar();
 	void CreateStatusBar() const;	//Create Status bar
 	void ClearToolBar()const;
 	void ClearStatusBar() const;		//Clears the status bar

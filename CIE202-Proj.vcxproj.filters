@@ -73,9 +73,8 @@
     <ClCompile Include="Actions\ActionMultipleDelete.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Actions\ActionRedo.cpp" />
-    <ClCompile Include="ActionAddDesignedModule.cpp" />
-    <ClCompile Include="Actions\ActionAddDesignedModule.cpp" />
     <ClCompile Include="Actions\ActionSaveDesignedModule.cpp" />
+    <ClCompile Include="Actions\ActionAddDesignedModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -135,9 +134,8 @@
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionMultipleDelete.h" />
     <ClInclude Include="Actions\ActionRedo.h" />
-    <ClInclude Include="ActionAddDesignedModule.h" />
-    <ClInclude Include="Actions\ActionAddDesignedModule.h" />
     <ClInclude Include="Actions\ActionSaveDesignedModule.h" />
+    <ClInclude Include="Actions\ActionAddDesignedModule.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

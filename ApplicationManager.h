@@ -104,6 +104,7 @@ public:
 	void ToModulation();
 	double saveModule();
 	bool ValidateClear();
+	void DispCurrent() ;
 };
 
 #endif
