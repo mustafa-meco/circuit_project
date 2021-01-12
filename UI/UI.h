@@ -47,17 +47,19 @@ class UI
 		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,           //Buzzer item in menu 
 		ITM_FUE,
-		       
+		ITM_MOD,
+		//ITM_ADD_MOD,
 		ITM_CON,           //Connection item in menu
 		ITM_SIM,
+		ITM_MODU,
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
 		ITM_EDIT,*/
 		ITM_LABEL,
 		ITM_LOAD,           //Load item in menu
-		ITM_SAVE,
-		ITM_MDELETE,
+		//ITM_SAVE,
+		//ITM_MDELETE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -65,15 +67,15 @@ class UI
 	enum ActionsToolBarItem
 	{
 		ITMA_Edit, 
-		ITMA_Move, 
-		ITMA_Load,           //Load item in menu
+		ITMA_Move,     
 		ITMA_Save, 
 		ITMA_Undo, 
 		ITMA_Redo, 
 		ITMA_Copy,          //Copy item in menu 
 		ITMA_Cut,           //Cut item in menu 
 		ITMA_Paste,         //Paste item in menu 
-		ITMA_Delete, 
+		ITMA_Delete,
+		ITMA_MDel,
 		Itm_ACT_Num
 	};
 
@@ -88,6 +90,21 @@ class UI
 		ITM_DSN,
 		ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
 	
+	};
+	
+	enum ModMenuItem {
+		MITM_RES,
+		MITM_BULB,
+		MITM_BUZ,
+		MITM_FUE,
+		MITM_MOD,
+		MITM_ADD_MOD,
+		MITM_CON,
+		
+		MITM_LOAD,
+		MITM_DSN,
+		ITM_MOD_CNT
+
 	};
 
 
@@ -145,6 +162,7 @@ public:
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
+	void CreateModulationToolBar();
 	void CreateStatusBar() const;	//Create Status bar
 	void ClearToolBar()const;
 	void ClearStatusBar() const;		//Clears the status bar
@@ -182,7 +200,7 @@ public:
 	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
-
+	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	~UI();
 };
 

@@ -18,7 +18,8 @@ enum ActionType
 	ADD_FUES,
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
-
+	ADD_MOD,
+	ADD_MODU,
  	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
@@ -38,8 +39,12 @@ enum ActionType
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 	
+	AMM,
+	VOL,
+
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
+	MOD_MODE,
 
 	EXIT,		//Exit the application
 
@@ -51,7 +56,8 @@ enum ActionType
 enum  MODE	//Modes of operation
 {
 	DESIGN,
-	SIMULATION
+	SIMULATION,
+	MODULATION
 };
 enum BatPolarity 
 {

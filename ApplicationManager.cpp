@@ -19,6 +19,7 @@
 #include"Actions/ActionUndo.h"
 #include"Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
+#include "Actions/ActionAddModule.h"
 #include<Windows.h>
 #include <iostream>
 
@@ -33,6 +34,7 @@ ApplicationManager::ApplicationManager()
 	lineCount = 0;
 
 	IsSimulation = 0;
+	IsModulation = 0;
 	undoNum = 0;
 	redoNum = 0;
 
@@ -148,12 +150,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionAddFues(this);
 		AddToUndoList(pAct);
 		break;
+	case ADD_MOD:
+		pAct = new ActionAddModule(this);
+		break;
 	case UNDO:
 		pAct = new  ActionUndo(this);
-	break;
+		break;
 	case REDO:
 		pAct = new ActionRedo(this);
-	break;
+		break;
 	case EDIT_Label:
 		pAct = new ActionEdit(this);
 		break;
@@ -179,13 +184,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionMultipleDelete(this);
 		break;
 	case SAVE:
-		pAct = new ActionSave(this);
+		if (IsModulation)
+			saveModule();
+		else
+			pAct = new ActionSave(this);
 		break;
 	case SIM_MODE:
 		ToSimulation();
 		break;
 	case DSN_MODE:
 		ToDesign();
+		break;
+	case MOD_MODE:
+		ToModulation();
 		break;
 	case LOAD:
 		pAct = new ActionLoad(this);
@@ -200,6 +211,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ADD_PASTE:
 		pAct = new ActionAddPaste(this);
 		AddToUndoList(pAct);
+		break;
+	case AMM:
+		DispCurrent();
+		break;
+	case VOL:
+		
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -358,6 +375,7 @@ void ApplicationManager::ToSimulation() {
 }
 void ApplicationManager::ToDesign() {
 	this->IsSimulation = false;
+	this->IsModulation = false;
 	// Compute all needed voltages and current
 	pUI->CreateDesignToolBar();
 }
@@ -378,7 +396,7 @@ double ApplicationManager::CalculateCurrent() {
 		
 	}
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
-	return (SumVoltage / SumResistance);
+	return (abs(SumVoltage) / SumResistance);
 	
 }
 
@@ -536,6 +554,16 @@ void ApplicationManager::deleteConnection(Connection* delet)
 				{
 					if (delet->getOtherComponent(CompList[i]))
 					{
+						TerminalNum t = delet->getOtherComponent(CompList[i])->whichTerminal(delet);
+						if (t == TERM1)
+							delet->getOtherComponent(CompList[i])->removeTerm1Connection(delet);
+						else
+							delet->getOtherComponent(CompList[i])->removeTerm2Connection(delet);
+						t = CompList[i]->whichTerminal(delet);
+						if (t == TERM1)
+							CompList[i]->removeTerm1Connection(delet);
+						else
+							CompList[i]->removeTerm2Connection(delet);
 
 					}
 				}
@@ -649,6 +677,71 @@ void ApplicationManager::ExcuteRedo()
 	}
 	if (redoNum < 0)
 		redoNum = 0;
+}
+
+bool ApplicationManager::ValidateClear() {
+	if (CompCount != 0 || ConnCount != 0)
+		return false;
+	for (int i = 0; i < MaxCompCount; i++) {
+		if (CompList[i])
+			return false;
+	}
+	for (int i = 0; i < MaxConnCount; i++) {
+		if (ConnList[i])
+			return false;
+	}
+}
+
+bool ApplicationManager::ValidateModule() {
+	int c1, c2, cc = 0;
+	for (int i = 0; i < CompCount; i++) {
+		if (!dynamic_cast<Resistor*>(CompList[i]))
+			return false;
+		c1 = 0, c2 = 0;
+		c1 = CompList[i]->getTermConnCount(TERM1);
+		c2 = CompList[i]->getTermConnCount(TERM2);
+		if (c1 != 1 && c2 != 1) 
+			return false;
+		if (c1 != 1 || c2 != 1) 
+			cc++;
+		if (cc > 2)
+			return false;
+	}
+	return true;
+}
+
+
+double ApplicationManager::saveModule() {
+	if (!ValidateModule()) {
+		pUI->CreateErrorWind("error \n");
+	}
+	else {
+		double SumResistance = 0;
+		
+		for (int i = 0; i < CompCount; i++)
+		{
+			SumResistance = SumResistance + CompList[i]->getResistance();
+		}
+		return SumResistance;
+	}
+}
+
+void ApplicationManager::ToModulation() {
+	if (!ValidateClear())
+		pUI->CreateErrorWind("error \n");
+	else {
+		this->IsModulation = true;
+		pUI->CreateModulationToolBar();
+	}
+}
+
+void ApplicationManager::DispCurrent()  {
+	int ax=0, ay=0;
+	pUI->PrintMsg("Choose Component to show its current");
+	do {
+		pUI->GetPointClicked(ax, ay);	
+	} while (!GetComponentByCordinates(ax, ay));
+	pUI->PrintMsg("the current: " + to_string(CalculateCurrent()));
 }
 
 Component* ApplicationManager::getOne(Connection* con)

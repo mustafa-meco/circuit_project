@@ -9,7 +9,7 @@ Module::Module(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 void Module::Draw(UI* pUI)
 {
 	//Call output class and pass Module drawing info to it.
-	//pUI->DrawModule(*m_pGfxInfo, pcomp == this); //update to draw Module
+	pUI->DrawModule(*m_pGfxInfo, pcomp == this); //update to draw Module
 
 }
 
@@ -31,4 +31,12 @@ void Module::load(int id, string LABELi, double VALUE)        // load the resist
 	ID = id,                             // id for the resistance
 		m_Label = LABELi;                  //label for the resistance .
 	resistance = VALUE;                //the value of the resitance 
+}
+Component* Module::Copy()                                    //Copy the component information 
+{
+	Component* B;
+	B = new Resistor(m_pGfxInfo);                 // create a new Component and save the previous info in the new one
+	B->setResistance(resistance);
+	B->Setlabel(m_Label);
+	return B;
 }
