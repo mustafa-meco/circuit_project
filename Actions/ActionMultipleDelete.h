@@ -10,24 +10,27 @@
 class ActionMultipleDelete : public Action
 {
 private:
-	vector<Component*> mDeletedComps;
-	Component* comp1;
+
+	Component* comp1; //pointer to component 
 	Component* comp;
 	//Component* compDelete;
-	Connection* connection;
+	Connection* connection; //pointer to connection 
 	//Parameters for rectangular area to be occupied by the comp
 	int Cx, Cy;	//Center point of the comp
 	int x1, y1, x2, y2;	//Two corners of the rectangluar area
 public:
 
 
-	ActionMultipleDelete(ApplicationManager* pApp);
-	virtual ~ActionMultipleDelete(void);
+	ActionMultipleDelete(ApplicationManager* pApp); //constructor
+
+	virtual ~ActionMultipleDelete(void); //destructor
+
 
 	//Execute action (code depends on action type)
 	virtual void Execute();
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo();// undo for the multiple delete
+	virtual void Redo();//Redo for the multiple delete
 
 };
+

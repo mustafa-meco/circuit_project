@@ -143,6 +143,7 @@ ActionType UI::GetUserAction() const
 			case ITM_FUE:   return ADD_FUES;
 			case ITM_CON:   return ADD_CONNECTION;
 			case ITM_SIM:	return SIM_MODE;
+			case ITM_MODU:	return MOD_MODE;
 			/*case ITM_COPY:   return ADD_COPY;
 			case ITM_CUT:   return ADD_CUT;
 			case ITM_PASTE:   return ADD_PASTE;
@@ -151,6 +152,7 @@ ActionType UI::GetUserAction() const
 			//case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD;
 			case ITM_MOD:	return ADD_MOD;
+			//case ITM_ADD_MOD: return ADD_MODU;
 			//case ITM_MDELETE:return MDEL;
 			case ITM_EXIT:	return EXIT;	
 			
@@ -197,7 +199,67 @@ ActionType UI::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
-	else	//Application is in Simulation mode
+	else if (AppMode == MODULATION) {
+		if (y >= 0 && y < ToolBarHeight && v == 1)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / ToolItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case MITM_RES:	return ADD_RESISTOR;
+			case MITM_CON:   return ADD_CONNECTION;
+			case MITM_LOAD:	return LOAD;
+			case MITM_MOD:	return ADD_MOD;
+			case MITM_DSN:	return DSN_MODE;
+			case MITM_ADD_MOD: return ADD_MODU;
+			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= ToolBarHeight && y < height - StatusBarHeight)
+		{
+			if (v == 2)
+				DrawActionBar();
+			else
+				return SELECT;	//user wants to select/unselect a component
+		}
+
+		if (y >= ToolBarHeight && y < height - StatusBarHeight)
+		{
+			int x1, y1;
+			PrintMsg("Click on action to execute");
+			pWind->WaitMouseClick(x1, y1);
+			pWind->SetPen(WHITE);
+			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
+			ClearStatusBar();
+			int ClickedItemOrder = (y1 - ToolBarHeight) / 52;
+			if (x1 > width - ActionBarWidth && x1 < width)
+			{
+				switch (ClickedItemOrder)
+				{
+				case ITMA_Edit:		return EDIT_Label;
+				case ITMA_Move:		return MOVE;
+				case ITMA_MDel:		return MDEL;
+				case ITMA_Save:		return SAVE;
+				case ITMA_Undo:		return UNDO;
+				case ITMA_Redo:		return REDO;
+				case ITMA_Copy:		return ADD_COPY;
+				case ITMA_Cut:		return ADD_CUT;
+				case ITMA_Paste:	return ADD_PASTE;
+				case ITMA_Delete:	return DEL;
+				default:			return DSN_TOOL;
+				}
+			}
+		}
+		//[3] User clicks on the status bar
+		return STATUS_BAR;
+	}
+	else 	//Application is in Simulation mode
 	{
 		
 		if (y >= 0 && y < ToolBarHeight)
@@ -211,6 +273,8 @@ ActionType UI::GetUserAction() const
 
 			switch (ClickedItemOrder)
 			{
+			case ITM_AMM:	return AMM;
+			case ITM_VOL:	return VOL;
 			case ITM_DSN:	return DSN_MODE;
 
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -344,27 +408,29 @@ void UI::CreateDesignToolBar()
 
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
-	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
-	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";
+	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";         //Add image for Resistor
+	MenuItemImages[ITM_BULB] = "images\\Menu\\Menu_Bulb.jpg";            //Add image for Bulb
 	MenuItemImages[ITM_SWI] = "images\\Menu\\Menu_switch.jpeg";			 //Add image for switch
 	MenuItemImages[ITM_GRO] = "images\\Menu\\Menu_Ground.jpg"; 			 //Add image for ground 
-	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";
-	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";
-	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";
-	MenuItemImages[ITM_MOD] = "Images\\Menu\\Menu_Module.jpg";
+	MenuItemImages[ITM_BAT] = "images\\Menu\\Menu_Battery.jpg";          //Add image for Battery
+	MenuItemImages[ITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";           //Add image for buzzer
+	MenuItemImages[ITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";            //Add image for Fues
+	MenuItemImages[ITM_MOD] = "Images\\Menu\\Menu_Module.jpg";          //Add image for Module
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
-	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";
+	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";                  //Add image for simulation
+	MenuItemImages[ITM_MODU] = "Images\\Menu\\Menu_mod.jpg";             //Add image for modulation
+	//MenuItemImages[ITM_ADD_MOD] = "Images\\Menu\\Menu_Edit.jpg";
 	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	/*MenuItemImages[ITM_COPY] = "Images\\Menu\\Menu_Copy.jpeg";
 	MenuItemImages[ITM_CUT] = "Images\\Menu\\Menu_Cut.jpeg";
 	MenuItemImages[ITM_PASTE] = "Images\\Menu\\Menu_Paste.jpeg";	
 	MenuItemImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";*/
-	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
+	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg"; //Add image for label
 
 	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
 	//MenuItemImages[ITM_MDELETE] = "Images\\Menu\\Menu_MultipleDelete.jpeg";
-	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg"; //Add image for exit
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -386,30 +452,52 @@ void UI::CreateSimulationToolBar()
 	AppMode = SIMULATION;	//Simulation Mode
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
 	string MenuItemImages[ITM_SIM_CNT];
-	MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG";
-	MenuItemImages[ITM_AMM] = "images\\Menu\\ammeter.jpg";
-	MenuItemImages[ITM_VOL] = "images\\Menu\\voltmeter.jpg";
-	MenuItemImages[ITM_DSN] = "images\\Menu\\design.jpg";
+	MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG"; //Add image for simulatation
+	MenuItemImages[ITM_AMM] = "images\\Menu\\ammeter.jpg";       //Add image for ammeter
+	MenuItemImages[ITM_VOL] = "images\\Menu\\voltmeter.jpg";      //Add image for voltmeter
+	MenuItemImages[ITM_DSN] = "images\\Menu\\design.jpg";          //Add image for design
 
 	for (int i = 0; i < ITM_SIM_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
 
 	
 }
+void UI::CreateModulationToolBar()
+{
+
+	ClearToolBar();
+	AppMode = MODULATION;	//Modulation Mode
+	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
+	string MenuItemImages[ITM_MOD_CNT];
+	MenuItemImages[MITM_RES] = "images\\Menu\\Menu_Resistor.jpg";	 //Add image for Resistor
+	MenuItemImages[MITM_MOD] = "Images\\Menu\\Menu_Module.jpg";	 //Add image for Module
+	MenuItemImages[MITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
+	MenuItemImages[MITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
+	MenuItemImages[MITM_DSN] = "images\\Menu\\design.jpg";	 //Add image for design
+	MenuItemImages[MITM_BULB] = "images\\Menu\\Menu_Bulb.jpg"; //Add image for Bulb
+	MenuItemImages[MITM_BUZ] = "Images\\Menu\\Menu_buzzer.jpg";	 //Add image for buzzer
+	MenuItemImages[MITM_FUE] = "Images\\Menu\\Menu_Fues.jpg";	 //Add image for Fues
+	MenuItemImages[MITM_ADD_MOD] = "Images\\Menu\\Menu_Edit.jpg";	 //Add image for Edit
+
+	for (int i = 0; i < ITM_MOD_CNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
+
+
+}
 void UI::DrawActionBar()const
 {
 	//Delete, Num;
 	string ActionsImages[Itm_ACT_Num];
-	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";
-	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";
-	ActionsImages[ITMA_MDel] = "images\\Choice\\Menu_MultipleDelete.jpg";        //Add image for load
-	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";
-	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";
-	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";
+	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";        //Add image for edit
+	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";        //Add image for move
+	ActionsImages[ITMA_MDel] = "images\\Choice\\Menu_MultipleDelete.jpg";        //Add image for multipledelete
+	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";        //Add image for save
+	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";        //Add image for undo
+	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";        //Add image for redo
 	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";         //Add image for copy
 	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";           //Add image for cut 
 	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";       //Add image for paste
-	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";
+	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";        //Add image for delete
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Itm_ACT_Num; i++)
@@ -512,7 +600,6 @@ void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 	else
 	{
 		ResImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
-
 	}
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);

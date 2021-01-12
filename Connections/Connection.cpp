@@ -161,7 +161,6 @@ Connection* Connection::copyconnectionAndChange(Component* com)
 		&& Comp1->getm_pGfxInfo()->PointsList[0].x == com->getm_pGfxInfo()->PointsList[0].x
 		&& Comp1->getm_pGfxInfo()->PointsList[1].x == com->getm_pGfxInfo()->PointsList[1].x)
 	{
-		cout << 5;
 		Connection* con = new Connection(r_GfxInfo, com, Comp2);
 		return con;
 	}
@@ -171,7 +170,6 @@ Connection* Connection::copyconnectionAndChange(Component* com)
 		&& Comp2->getm_pGfxInfo()->PointsList[0].x == com->getm_pGfxInfo()->PointsList[0].x
 		&& Comp2->getm_pGfxInfo()->PointsList[1].x == com->getm_pGfxInfo()->PointsList[1].x)
 	{
-		cout << 5485;
 		Connection* con = new Connection(r_GfxInfo, Comp1, com);
 		return con;
 	}

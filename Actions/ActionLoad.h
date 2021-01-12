@@ -19,18 +19,21 @@ class ActionLoad : public Action
 {
 	string filename;    // name of the file which will be loaded
 	int ComID;          // id for the component 
-	string input; 
-	Component* comp01; 
+	string input;       // variable to take string 
+	Component* comp01;  // pointer to comp 
 	Component* comp02; 
 public :
-	ActionLoad(ApplicationManager* pApp);
+	ActionLoad(ApplicationManager* pApp); //constructor
 
-	~ActionLoad(void);
+
+	~ActionLoad(void);//destructor 
+	//Execute action (code depends on action type)
 	virtual void Execute();
 
-	virtual void Undo();
-	virtual void Redo();
-};
+	virtual void Undo(); //undo for the load
 
+	virtual void Redo(); //Redo for the load 
+
+};
 
 

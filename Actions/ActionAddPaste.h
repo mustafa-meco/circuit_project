@@ -12,17 +12,20 @@
 #include "../Components/Switch.h"
 class ActionAddPaste : public Action
 {
-	int Cx; 
+	int Cx; //Center point of the comp
 	int Cy;
-	Component* comp1;
+	Component* comp1; // pointer to components
 	Component* comp2;
 public:
-	ActionAddPaste(ApplicationManager* pApp);
-	~ActionAddPaste(void); 
+	ActionAddPaste(ApplicationManager* pApp); //constructor
+
+	~ActionAddPaste(void); //destructor 
+
 
 	//Execute action
 	virtual void Execute();
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for paste
+
+	virtual void Redo(); //Redo for paste
 };

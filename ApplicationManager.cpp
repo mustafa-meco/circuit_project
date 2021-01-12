@@ -195,6 +195,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DSN_MODE:
 		ToDesign();
 		break;
+	case MOD_MODE:
+		ToModulation();
+		break;
 	case LOAD:
 		pAct = new ActionLoad(this);
 		break;
@@ -208,6 +211,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ADD_PASTE:
 		pAct = new ActionAddPaste(this);
 		AddToUndoList(pAct);
+		break;
+	case AMM:
+		DispCurrent();
+		break;
+	case VOL:
+		
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -387,13 +396,52 @@ double ApplicationManager::CalculateCurrent() {
 		
 	}
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
-	return (SumVoltage / SumResistance);
+	return (abs(SumVoltage) / SumResistance);
 	
 }
 
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
-	// TODO
+	Component* G = nullptr;
+	Component** TemComp = new Component * [CompCount];
+	Connection* TempConn;
+	TerminalNum TM;
+	int z = 0;
+	double TotalV = 0;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (dynamic_cast<Ground*>(CompList[i]))
+		{
+			G = dynamic_cast<Ground*>(CompList[i]);
+			break;
+		}
+	}
+	TempConn = G->getTermConnections(TERM1)[0];
+	TemComp[0] = TempConn->getOtherComponent(G);
+	while (!dynamic_cast<Ground*>(CompList[z]))
+	{
+
+		TM = TemComp[z]->whichTerminal(TempConn);
+
+		if (TM == TERM1)
+		{
+			TemComp[z]->setTerm1Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() - TemComp[z]->getSourceVoltage();
+
+			TemComp[z]->setTerm2Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM2)[0];
+		}
+		else
+		{
+			TemComp[z]->setTerm2Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() + TemComp[z]->getSourceVoltage();
+			TemComp[z]->setTerm1Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM1)[0];
+		}
+		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
+	}
+
+
 }
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
@@ -545,6 +593,16 @@ void ApplicationManager::deleteConnection(Connection* delet)
 				{
 					if (delet->getOtherComponent(CompList[i]))
 					{
+						TerminalNum t = delet->getOtherComponent(CompList[i])->whichTerminal(delet);
+						if (t == TERM1)
+							delet->getOtherComponent(CompList[i])->removeTerm1Connection(delet);
+						else
+							delet->getOtherComponent(CompList[i])->removeTerm2Connection(delet);
+						t = CompList[i]->whichTerminal(delet);
+						if (t == TERM1)
+							CompList[i]->removeTerm1Connection(delet);
+						else
+							CompList[i]->removeTerm2Connection(delet);
 
 					}
 				}
@@ -649,7 +707,7 @@ void ApplicationManager::ExcuteUndo()
 }
 void ApplicationManager::ExcuteRedo()
 {
-	if (redoNum > 0 )
+	if (redoNum > 0)
 	{
 		redoNum--;
 		RedoList[redoNum]->Redo();
@@ -697,23 +755,85 @@ double ApplicationManager::saveModule() {
 		pUI->CreateErrorWind("error \n");
 	}
 	else {
-		double SumResistance=0;
+		double SumResistance = 0;
 		
 		for (int i = 0; i < CompCount; i++)
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		return SumResistance;
-		// Compute all needed voltages and current
-		
-
-		//pUI->CreateSimulationToolBar();
 	}
 }
 
 void ApplicationManager::ToModulation() {
-	if (!(CompCount ==0 || CompCount == 0))
-	this->IsModulation = true;
-
-	
+	if (!ValidateClear())
+		pUI->CreateErrorWind("error \n");
+	else {
+		this->IsModulation = true;
+		pUI->CreateModulationToolBar();
+	}
 }
+
+void ApplicationManager::DispCurrent()  {
+	int ax=0, ay=0;
+	pUI->PrintMsg("Choose Component to show its current");
+	do {
+		pUI->GetPointClicked(ax, ay);	
+	} while (!GetComponentByCordinates(ax, ay));
+	pUI->PrintMsg("the current: " + to_string(CalculateCurrent()));
+}
+
+Component* ApplicationManager::getOne(Connection* con)
+{
+	for (int zc = 0; zc < CompCount; zc++)
+	{
+		if (con->getOtherComponent(CompList[zc]) != nullptr)
+		{
+			return CompList[zc];
+		}
+	}
+}
+//void ApplicationManager::CalculateVoltages(double current)
+//{
+//	Component* G=nullptr;
+//	Component** TemComp=new Component*[CompCount];
+//	Connection* TempConn;
+//	TerminalNum TM;
+//	int z = 0;
+//	double TotalV=0;
+//	for (int i = 0; i < CompCount; i++) 
+//	{
+//		if (dynamic_cast<Ground*>(CompList[i]))
+//		{
+//			G = dynamic_cast<Ground*>(CompList[i]);
+//			break;
+//		}	
+//	}
+//	TempConn = G->getTermConnections(TERM1)[0];
+//	TemComp[0] = TempConn->getOtherComponent(G);
+//	while (!dynamic_cast<Ground*>(CompList[z]))
+//	{
+//		
+//		TM=TemComp[z]->whichTerminal(TempConn);
+//
+//		if (TM == TERM1)
+//		{
+//			TemComp[z]->setTerm1Volt(TotalV);
+//			TotalV += current * TemComp[z]->getResistance()+ TemComp[z]->getSourceVoltage() ;
+//
+//			TemComp[z]->setTerm2Volt(TotalV);
+//			TempConn = TemComp[z]->getTermConnections(TERM2)[0];
+//		}
+//		else
+//		{
+//			TemComp[z]->setTerm2Volt(TotalV);
+//			TotalV += current * TemComp[z]->getResistance()+TemComp[z]->getSourceVoltage();
+//			TemComp[z]->setTerm1Volt(TotalV);
+//			TempConn = TemComp[z]->getTermConnections(TERM1)[0];
+//		}
+//		TemComp[++z]= TempConn->getOtherComponent(TemComp[z-1]);
+//	}
+//
+//
+//
+//}

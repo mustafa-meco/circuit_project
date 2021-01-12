@@ -19,6 +19,7 @@ enum ActionType
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
 	ADD_MOD,            //Add modulation  
+	ADD_MODU,            //Add designed modulation  
 
  	ADD_PASTE,          //Add Paste 
 
@@ -39,8 +40,12 @@ enum ActionType
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 	
+	AMM,        //Ammeter
+	VOL,        //voltameter  
+
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
+	MOD_MODE,
 
 	EXIT,		//Exit the application
 
@@ -52,7 +57,8 @@ enum ActionType
 enum  MODE	//Modes of operation
 {
 	DESIGN,
-	SIMULATION
+	SIMULATION,
+	MODULATION
 };
 enum BatPolarity  //direction of the battery which will used to calculate the voltage   
 {

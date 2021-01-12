@@ -5,18 +5,29 @@
 class ActionAddCut : public Action
 {
 	int C1, C2;
-	int Cx;
+	int Cx; // points of centre
 	int Cy;
-	Component* comp2;
+
+	//undo redo for componnents
 	Component* temp1;
+	Connection* temp3[10];
+	Connection* temp4[10];
 	Connection* undo1[10];
 	Connection* undo2[10];
-public:
-	ActionAddCut(ApplicationManager* pApp);
+	TerminalNum tt1[10];
+	TerminalNum tt2[10];
 
-	~ActionAddCut(void);
+	Component* comp2;
+
+public:
+	ActionAddCut(ApplicationManager* pApp);//constructor
+
+
+	~ActionAddCut(void);//destructor 
+
 	virtual void Execute(); //Execute action
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for cut 
+
+	virtual void Redo();//Redo for cut
 };

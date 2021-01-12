@@ -73,7 +73,7 @@ public:
 	void ToSimulation();                               // Switches to simulation mode
 	void ToDesign();                                   //to get back to the design mode
 	double CalculateCurrent();                         // calculate the current throught the circuit 
-	void CalculateVoltages(double current);
+	void CalculateVoltages(double current);           // calculate the voltage start from the ground 
 	//void save(ActionType);
 	string* save(int&,int&) const;                     //save the date of the circuit components 
 	//destructor
@@ -104,6 +104,8 @@ public:
 	void ToModulation();                                           //Change the circuit from constrcution mode to modulation mode 
 	double saveModule();                                           //save the module info
 	bool ValidateClear();                                          // make sure that the design area is free for some tasks like load
+	void DispCurrent();
+	Component* getOne(Connection*);
 };
 
 #endif

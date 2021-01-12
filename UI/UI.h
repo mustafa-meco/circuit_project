@@ -49,7 +49,8 @@ class UI
 		ITM_FUE,           //fues item 
 	 	ITM_MOD,           //Modulation item 
 		ITM_CON,           //Connection item 
-		ITM_SIM,           //simulation item  
+		ITM_SIM,           //simulation item 
+		ITM_MODU,          //designed modulation item
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
@@ -88,6 +89,21 @@ class UI
 		ITM_DSN,          //design area item  
 		ITM_SIM_CNT		 //no. of simulation menu items ==> This should be the last line in this enum
 	
+	};
+	
+	enum ModMenuItem {
+		MITM_RES,
+		MITM_BULB,
+		MITM_BUZ,
+		MITM_FUE,
+		MITM_MOD,
+		MITM_ADD_MOD,
+		MITM_CON,
+		
+		MITM_LOAD,
+		MITM_DSN,
+		ITM_MOD_CNT
+
 	};
 
 
@@ -150,7 +166,7 @@ public:
 	void ClearStatusBar() const;		   //Clears the status bar
 	void ClearDrawingArea() const;	       //Clears the drawing area
 	void ClearAll()const;                  //Clear all 
-	
+	void CreateModulationToolBar();
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	//Draw a Bulb
