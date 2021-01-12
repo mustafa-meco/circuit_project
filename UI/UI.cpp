@@ -224,6 +224,8 @@ ActionType UI::GetUserAction() const
 
 			switch (ClickedItemOrder)
 			{
+			case ITM_AMM: return AMM;
+			case ITM_VOL: return VOL;
 			case ITM_DSN:	return DSN_MODE;
 
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
