@@ -2,11 +2,8 @@
 
 Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-
-	
-
-	//resistance = -1; 
-
+	resistance = 0;
+	sourceVoltage = 0;
 
 }
 

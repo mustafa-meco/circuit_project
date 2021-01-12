@@ -2,10 +2,10 @@
 
 Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo) 
 {
+	resistance = 0;
+	sourceVoltage = 0;
 
-
-	//resistance = 2; 
-
+	
 }
 
 void Fues::Draw(UI* pUI)

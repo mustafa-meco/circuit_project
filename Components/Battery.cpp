@@ -2,6 +2,9 @@
 
 Battery::Battery(GraphicsInfo* r_GfxInfo ) :Component(r_GfxInfo)
 {
+	resistance = 0;
+	sourceVoltage = 1;
+	
 	//if (!r_GfxInfo) {
 
 
