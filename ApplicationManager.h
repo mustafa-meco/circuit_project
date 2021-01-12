@@ -27,6 +27,7 @@ private:
 	int lineCount;
 	
 	bool IsSimulation; // True when in simulation mode
+	bool IsModulation;
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
 	Component* CopyComp;                // variable to save the component type
@@ -98,6 +99,11 @@ public:
 	void AddToRedoList(Action*);
 	void ExcuteUndo();
 	void ExcuteRedo();
+
+	bool ValidateModule();
+	void ToModulation();
+	double saveModule();
+	bool ValidateClear();
 };
 
 #endif

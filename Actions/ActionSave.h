@@ -8,9 +8,9 @@ public:
 	virtual ~ActionSave();
 	virtual void Execute();
 
-	void ActionSave::Undo();
+	void Undo();
 
-	void ActionSave::Redo();
+	void Redo();
 
 private:
 

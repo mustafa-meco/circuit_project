@@ -47,7 +47,7 @@ class UI
 		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,           //Buzzer item in menu 
 		ITM_FUE,
-		       
+		ITM_MOD,       
 		ITM_CON,           //Connection item in menu
 		ITM_SIM,
 		/*ITM_COPY,
@@ -56,8 +56,8 @@ class UI
 		ITM_EDIT,*/
 		ITM_LABEL,
 		ITM_LOAD,           //Load item in menu
-		ITM_SAVE,
-		ITM_MDELETE,
+		//ITM_SAVE,
+		//ITM_MDELETE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -65,15 +65,15 @@ class UI
 	enum ActionsToolBarItem
 	{
 		ITMA_Edit, 
-		ITMA_Move, 
-		ITMA_Load,           //Load item in menu
+		ITMA_Move,     
 		ITMA_Save, 
 		ITMA_Undo, 
 		ITMA_Redo, 
 		ITMA_Copy,          //Copy item in menu 
 		ITMA_Cut,           //Cut item in menu 
 		ITMA_Paste,         //Paste item in menu 
-		ITMA_Delete, 
+		ITMA_Delete,
+		ITMA_MDel,
 		Itm_ACT_Num
 	};
 
@@ -182,7 +182,7 @@ public:
 	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
-
+	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	~UI();
 };
 
