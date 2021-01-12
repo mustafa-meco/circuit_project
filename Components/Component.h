@@ -13,7 +13,7 @@ private:
 
 	
 protected:
-
+	bool mDeleted;
 	
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
@@ -96,6 +96,7 @@ public:
 	GraphicsInfo* getm_pGfxInfo() ;
 	//void DeleteImage(GraphicsInfo* m_pGfxInfo, UI*);
 	
-
+		/* Returns whether the component is deleted or not */
+	bool IsDeleted() const;
 };
 #endif

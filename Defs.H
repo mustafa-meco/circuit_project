@@ -21,16 +21,15 @@ enum ActionType
 
 	ADD_PASTE,
 
-
 	ADD_CONNECTION,		//Add Wire Connection 
 
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
 	FLIP_SWITCH,		//Change Switch status in Simulation Mode
-
+	DEL,        //Delete a Component OR Connection
 	SELECT,		//Select a Component, a Connection
-	DEL,		//Delete a Component, a Connection
+	MDEL,		//Multiple Delete a Component, a Connection
 	MOVE,		//Move a Component, a Connection
 
 	SAVE,		//Save the whole Circuit to a file

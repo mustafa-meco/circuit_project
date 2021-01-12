@@ -17,6 +17,7 @@
 #include "Actions/ActionAddCut.h"
 #include"Actions/ActionMove.h"
 #include "Actions/ActionDelete.h"
+#include "Actions/ActionMultipleDelete.h"
 #include<Windows.h>
 #include <iostream>
 
@@ -77,7 +78,7 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y)
 		{
 			return	CompList[i];
 		}
-
+		
 	}
 	return nullptr;
 }
@@ -149,6 +150,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DEL:
 		pAct = new ActionDelete(this);
+		break;
+	case MDEL:
+		pAct = new ActionMultipleDelete(this);
 		break;
 	case SAVE:
 		pAct = new ActionSave(this);
@@ -446,65 +450,137 @@ void ApplicationManager::deleteCompounent(Component* delet)
 {
 	int x1 = 0;
 	Component* T;
-	for (int i = 0; i < CompCount; i++)
+	if (delet)
 	{
-		if (CompList[i] == delet)
+		for (int i = 0; i < CompCount; i++)
 		{
-			x1 = i;
-			for (int j = x1; j < CompCount; j++)
+			if (CompList[i] == delet)
 			{
-				CompList[j] = CompList[j + 1];
+				x1 = i;
+				for (int j = x1; j < CompCount; j++)
+				{
+					CompList[j] = CompList[j + 1];
+				}
+				CompCount--;
+
+				int C1, C2;
+				C1 = delet->getTermConnCount(TERM1);
+				C2 = delet->getTermConnCount(TERM2);
+				Connection** c1;
+				Connection** c2;
+				/* c1 = nullptr;
+				 c2 = nullptr;*/
+				c1 = delet->getTermConnections(TERM1);
+
+				c2 = delet->getTermConnections(TERM2);
+
+				for (int y = 0; y < C1; y++)
+				{
+
+					deleteConnection(c1[0]);
+				}
+				for (int y = 0; y < C2; y++)
+				{
+					deleteConnection(c2[0]);
+				}
+				delete	delet;
+
 			}
-			CompCount--;
-
-			int C1, C2;
-			C1 = delet->getTermConnCount(TERM1);
-			C2 = delet->getTermConnCount(TERM2);
-			Connection** c1;
-			Connection** c2;
-			/* c1 = nullptr;
-			 c2 = nullptr;*/
-			c1 = delet->getTermConnections(TERM1);
-
-			c2 = delet->getTermConnections(TERM2);
-
-			for (int y = 0; y < C1; y++)
-			{
-
-				deleteConnection(c1[0]);
-			}
-			for (int y = 0; y < C2; y++)
-			{
-				deleteConnection(c2[0]);
-			}
-			delete	delet;
-
 		}
 	}
 
 }
 void ApplicationManager::deleteConnection(Connection* delet)
 {
-	int x1 = 0;
-	Component* T;
-	for (int i = 0; i < ConnCount; i++)
+	if (delet)
 	{
-		if (ConnList[i] == delet)
+		for (int i = 0; i < ConnCount; i++)
 		{
-			x1 = i;
-			for (int j = x1; j < ConnCount; j++)
+			if (ConnList[i] == delet)
 			{
-				ConnList[j] = ConnList[j + 1];
-			}
-			ConnCount--;
-			for (int zc = 0; zc < CompCount; zc++)
-			{
-				if (delet->getOtherComponent(CompList[i]))
+				int x1 = i;
+				for (int j = x1; j < ConnCount; j++)
 				{
-
+					ConnList[j] = ConnList[j + 1];
 				}
+				ConnCount--;
+				for (int zc = 0; zc < CompCount; zc++)
+				{
+					if (delet->getOtherComponent(CompList[i]))
+					{
+
+					}
+				}
+				delete	delet;
 			}
-			delete	delet;
 		}
 	}
+}
+Component* ApplicationManager::CompCountN()
+{
+
+	for (int i = 0; i < CompCount; i++)
+	{	
+		return	CompList[i];
+
+	}
+	
+}
+/* Counts and returns the number of selected components */
+int ApplicationManager::CountSelectedComponents() const {
+	int n = 0;
+	int x= 0;
+	int y= 0;
+	for (int i = 0; i < CompCount; i++) {
+		if (!CompList[i]->IsDeleted() && CompList[i]->isInRegion(x,y, pUI)==true) {
+			n++;
+		}
+	}
+
+	return n;
+}
+int  ApplicationManager::multipleStoreComp(Component* multi,int m)
+{
+	static int multiplecount = 0;
+	if (m != 0)
+	{
+		multiCompList = nullptr;
+		multiCompList = new Component * [CompCount];
+		multiplecount = 0;
+		return 0;
+	}
+	
+
+	multiCompList[multiplecount++]=multi;
+	return multiplecount;
+
+}
+int  ApplicationManager::multipleStoreCon(Connection* multi, int m)
+{
+	static int multiplecount = 0;
+	if (m != 0)
+	{
+		multiConnList = nullptr;
+		multiConnList = new Connection * [ConnCount];
+		multiplecount = 0;
+		return 0;
+		
+	}
+
+	
+	multiConnList[multiplecount++] = multi;
+	return multiplecount;
+
+}
+void ApplicationManager::MultipleDelete(int comp, int conn) 
+{
+	for(int i=0;i<comp;i++)
+    {
+		deleteCompounent(multiCompList[i]);
+    }
+
+	for (int j=0; j < conn; j++)
+    {
+		deleteConnection(multiConnList[j]);
+    }
 }

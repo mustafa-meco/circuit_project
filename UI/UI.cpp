@@ -150,7 +150,7 @@ ActionType UI::GetUserAction() const
 			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
-			/*case ITM_DELETE:return DEL;*/
+			case ITM_MDELETE:return MDEL;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -324,7 +324,14 @@ void UI::ClearAll()const
 	pWind->SetPen(WHITE,1000000);
 	pWind->DrawLine(0, height - StatusBarHeight, width, height - StatusBarHeight);
 }
-
+void UI::DrawConfirm() const
+{
+	pWind->SetPen(RED, 1);
+	pWind->SetBrush(PURPLE);
+	pWind->DrawRectangle(0, height - StatusBarHeight - 25, 25, height - StatusBarHeight);
+	
+    /*pWind->DrawImage("images\\Choice\\right.jpg" ,0, height - StatusBarHeight - 40, 25, 25);*/
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -354,7 +361,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
-	/*MenuItemImages[ITM_DELETE] = "Images\\Menu\\Menu_Delete.jpg";*/
+	MenuItemImages[ITM_MDELETE] = "Images\\Menu\\Menu_MultipleDelete.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list

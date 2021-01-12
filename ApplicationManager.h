@@ -22,6 +22,8 @@ class ApplicationManager
 
 
 private:
+	Component** multiCompList;
+	Connection** multiConnList;
 	int lineCount;
 	
 	bool IsSimulation; // True when in simulation mode
@@ -55,6 +57,7 @@ public:
 	
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
+
 	void AddConnection(Connection* pConn);
 
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
@@ -78,11 +81,15 @@ public:
 	Component* GetCopyComp() const;		 	   //TAYIL74
 	void SetCopyComp(Component* comp1);        //TAYIL74
 
-
+	
 	void deleteCompounent(Component*);
 	void deleteConnection(Connection*);
 	
-	
+	Component* CompCountN();
+	int CountSelectedComponents() const;
+	int multipleStoreComp(Component* multi,int m);
+	int multipleStoreCon(Connection* multi, int m);
+	void  MultipleDelete(int comp, int conn);
 };
 
 #endif

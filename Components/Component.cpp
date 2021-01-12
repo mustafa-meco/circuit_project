@@ -24,13 +24,14 @@ bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user click
 		pcomp = this;
 		return true;
 	}
-	else
+	/*else
 	{
 		pcomp = nullptr;
 		return false;
-	}
+	}*/
 }
 Component* Component::pcomp = nullptr;
+
 //Connection** getTermConnections(TerminalNum Term)
 //{
 //
@@ -193,4 +194,9 @@ double Component::getTerm1Volt()
 double Component::getTerm2Volt()
 {
 	return term2_volt;
+}
+
+bool Component::IsDeleted() const // Returns whether the component is deleted or not //
+{
+	return mDeleted;
 }

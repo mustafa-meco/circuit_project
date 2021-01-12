@@ -57,7 +57,7 @@ class UI
 		ITM_LABEL,
 		ITM_LOAD,
 		ITM_SAVE,
-		/*ITM_DELETE,*/
+		ITM_MDELETE,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -141,6 +141,7 @@ public:
 
 	void CreateErrorWind(string);
 	void DrawActionBar() const;
+	void DrawConfirm() const;
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode

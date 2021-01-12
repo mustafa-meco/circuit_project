@@ -13,9 +13,10 @@ void ActionDelete::Execute()
 	int cy = 0;
 	UI* pUI = pManager->GetUI();
 	pUI->PrintMsg("choose the compounent that you want to delete");
-	pUI->GetPointClicked(cx, cy);
+	
 	do
 	{
+		pUI->GetPointClicked(cx, cy);
 		comp = pManager->GetComponentByCordinates(cx, cy);
 
 		connection = pManager->GetConnectionByCordinates(cx, cy);
