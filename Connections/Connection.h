@@ -9,7 +9,7 @@ class Connection
 	Component* Comp1, *Comp2;
 	GraphicsInfo* pGfxInfo;	//The parameters required to draw a connection
 	static Connection* pconnection;
-	
+	string connLabel;
 
 public:
 	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr); //Constructor 
@@ -20,11 +20,14 @@ public:
 	virtual void load( Component * , Component * );  //load connection
 
 	void EditConnection(Component* component1, Component* component2, GraphicsInfo* pGInfo,UI*);
-
-
+	string SetConnectionlabel(string input);
 	Component* getOtherComponent(Component* Cmpnt);// Get component connected to the other end of the connection
 	
+	Connection* copyconnection();
+	Connection* copyconnectionAndChange(Component*);
 	~Connection();
+
+
 
 };
  

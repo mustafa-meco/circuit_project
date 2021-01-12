@@ -61,11 +61,20 @@ void ActionAddBul::Execute()
 	Bulb* pB = new Bulb(pGInfo/*, R*/);
 	pB->setResistance(R);
 	pManager->AddComponent(pB);
+	comp = pB;
+	undo1 = pGInfo;
+	undo2 = R;
 }
 
 void ActionAddBul::Undo()
-{}
+{
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddBul::Redo()
-{}
+{
+	Bulb* pR = new Bulb(undo1/*, undo2*/);
+	pR->setSourceVoltage(undo2);
+	pManager->AddComponent(pR);
+}
 

@@ -38,7 +38,10 @@ private:
 
 	UI* pUI; //pointer to the UI
 
-
+	Action* UndoList[10];
+	Action* RedoList[10];
+	int undoNum;
+	int redoNum;
 public:
 	ApplicationManager(); //constructor
 
@@ -87,11 +90,14 @@ public:
 	void deleteCompounent(Component*);
 	void deleteConnection(Connection*);
 	
-	Component* CompCountN();
 
 	int multipleStoreComp(Component* multi,int m);
 	int multipleStoreCon(Connection* multi, int m);
 	void  MultipleDelete(int comp, int conn);
+	void AddToUndoList(Action*);
+	void AddToRedoList(Action*);
+	void ExcuteUndo();
+	void ExcuteRedo();
 };
 
 #endif

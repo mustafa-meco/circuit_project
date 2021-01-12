@@ -9,7 +9,7 @@ UI::UI()
 	DrawColor = BLACK;
 	SelectColor = BLUE;
 	ConnColor = RED;
-	MsgColor = BLUE;
+	MsgColor = BLACK;
 	BkGrndColor = WHITE;
 	
 	//Create the drawing window

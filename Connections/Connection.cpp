@@ -1,4 +1,4 @@
-
+#include<iostream>
 #include "Connection.h"
 #include "..\UI\UI.h"
 #include "../Components/Component.h"
@@ -97,9 +97,9 @@ Component* Connection::getOtherComponent(Component* Cmpnt)
 	else {
 		return nullptr;
 	}
-	
-	
 }
+
+
 void Connection::EditConnection(Component* component1, Component* component2, GraphicsInfo* pGInfo,UI* pUI)
 {
 	pUI->DeleteConnection(*pGfxInfo);
@@ -134,5 +134,53 @@ Connection::~Connection()
 		Comp2->removeTerm1Connection(this);
 		Comp2->removeTerm2Connection(this);
 	}
+}
+
+Connection* Connection::copyconnection()
+{
+
+		GraphicsInfo* r_GfxInfo = new GraphicsInfo(2);
+		r_GfxInfo->PointsList[0].x = pGfxInfo->PointsList[0].x;
+		r_GfxInfo->PointsList[1].x = pGfxInfo->PointsList[1].x;
+		r_GfxInfo->PointsList[0].y = pGfxInfo->PointsList[0].y;
+		r_GfxInfo->PointsList[1].y = pGfxInfo->PointsList[1].y;
+		Connection* con = new Connection(r_GfxInfo, Comp1, Comp2);
+		return con;
+}
+
+Connection* Connection::copyconnectionAndChange(Component* com)
+{
+	GraphicsInfo* r_GfxInfo = new GraphicsInfo(2);
+	r_GfxInfo->PointsList[0].x = pGfxInfo->PointsList[0].x;
+	r_GfxInfo->PointsList[1].x = pGfxInfo->PointsList[1].x;
+	r_GfxInfo->PointsList[0].y = pGfxInfo->PointsList[0].y;
+	r_GfxInfo->PointsList[1].y = pGfxInfo->PointsList[1].y;
+
+	if (Comp1->getm_pGfxInfo()->PointsList[0].y == com->getm_pGfxInfo()->PointsList[0].y
+		&& Comp1->getm_pGfxInfo()->PointsList[1].y == com->getm_pGfxInfo()->PointsList[1].y
+		&& Comp1->getm_pGfxInfo()->PointsList[0].x == com->getm_pGfxInfo()->PointsList[0].x
+		&& Comp1->getm_pGfxInfo()->PointsList[1].x == com->getm_pGfxInfo()->PointsList[1].x)
+	{
+		cout << 5;
+		Connection* con = new Connection(r_GfxInfo, com, Comp2);
+		return con;
+	}
+
+	if (Comp2->getm_pGfxInfo()->PointsList[0].y == com->getm_pGfxInfo()->PointsList[0].y
+		&& Comp2->getm_pGfxInfo()->PointsList[1].y == com->getm_pGfxInfo()->PointsList[1].y
+		&& Comp2->getm_pGfxInfo()->PointsList[0].x == com->getm_pGfxInfo()->PointsList[0].x
+		&& Comp2->getm_pGfxInfo()->PointsList[1].x == com->getm_pGfxInfo()->PointsList[1].x)
+	{
+		cout << 5485;
+		Connection* con = new Connection(r_GfxInfo, Comp1, com);
+		return con;
+	}
+	
+	return nullptr;
+}
+string Connection::SetConnectionlabel(string input)
+{
+	connLabel = input;
+	return connLabel;
 }
 /* Deletes the component */

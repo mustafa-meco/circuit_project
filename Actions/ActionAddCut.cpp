@@ -41,6 +41,8 @@ void ActionAddCut::Execute() //Execute action
 	Switch* ptSwitch = dynamic_cast<Switch*>(ptrComp);
 	Ground* ptGround = dynamic_cast<Ground*>(ptrComp);
 	Fues* ptFues = dynamic_cast<Fues*>(ptrComp);*/
+	while(ptrComp == nullptr)
+	{
 
 	if (ptConnection != NULL)              // showing a message to prevent the user from cutting the connection
 	{
@@ -53,11 +55,40 @@ void ActionAddCut::Execute() //Execute action
 		pUI->PrintMsg("NO component is selected: ");
 	}
 	else								  // Cut the component 										
-	{
-		pManager->SetCopyComp(ptrComp); 
-
-		pManager->deleteCompounent(ptrComp);
+		if (ptrComp == nullptr)															//TAYIL74
+		{
+			pUI->PrintMsg("NO component is selected: ");
+		}
+		else if (ptConnection != nullptr)
+		{
+			pUI->PrintMsg("It is not allowed to cut a connection : ");					//TAYIL74
+		}
+		pUI->GetPointClicked(Cx, Cy);														//TAYIL74
+		ptrComp = pManager->GetComponentByCordinates(Cx, Cy);
+		ptConnection = dynamic_cast<Connection*>(ptrComp);
 	}
+	pUI->ClearStatusBar();
+	pManager->SetCopyComp(ptrComp);
+	comp2 = ptrComp->Copy();
+	C1 = ptrComp->getTermConnCount(TERM1);
+	C2 = ptrComp->getTermConnCount(TERM2);
+	for (int i = 0; i < 10; i++)
+	{
+		undo1[i] = nullptr;
+		undo2[i] = nullptr;
+	}
+	
+	for (int i = 0; i < C1; i++)
+	{
+		undo1[i] = ptrComp->getTermConnections(TERM1)[i]->copyconnection();;
+	}
+
+	for (int i = 0; i < C2; i++)
+	{
+		undo2[i] = ptrComp->getTermConnections(TERM2)[i]->copyconnection();
+	}
+	pManager->deleteCompounent(ptrComp);
+
 	//if (ptResistor != NULL)
 	//{
 	//	pManager->ComponentData.COMPNAME = "RES";
@@ -113,8 +144,24 @@ void ActionAddCut::Execute() //Execute action
 
 void ActionAddCut::Undo()
 {
+	if (comp2 != nullptr)
+	{
+		pManager->AddComponent(comp2);
+		for (int y = 0; y < C1; y++)
+		{
 
+			pManager->AddConnection(undo1[y]);
+		}
+		for (int y = 0; y < C2; y++)
+		{
+			pManager->AddConnection(undo2[y]);
+		}
+	}
 }
-void  ActionAddCut::Redo() {
-
+void  ActionAddCut::Redo() 
+{
+	if (comp2 != nullptr)
+		temp1 = comp2->Copy();
+	pManager->deleteCompounent(comp2);
+	comp2 = temp1;
 }

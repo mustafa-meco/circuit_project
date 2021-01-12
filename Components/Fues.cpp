@@ -37,6 +37,6 @@ Component* Fues::Copy()
 {
 	Component* B;
 	B = new Fues(m_pGfxInfo);
-	B->Setlabel(m_Label);
+	B->SetComponentlabel(m_Label);
 	return B;
 }

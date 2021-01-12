@@ -14,6 +14,8 @@ class ActionAddPaste : public Action
 {
 	int Cx; 
 	int Cy;
+	Component* comp1;
+	Component* comp2;
 public:
 	ActionAddPaste(ApplicationManager* pApp);
 	~ActionAddPaste(void); 

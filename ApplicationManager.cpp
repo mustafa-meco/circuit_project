@@ -7,7 +7,6 @@
 #include "Actions/ActionAddCon.h"
 #include "Actions/ActionEdit.h"
 #include "Actions/ActionSave.h"
-//#include "ActionLoad.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionAddCopy.h"
@@ -15,10 +14,11 @@
 #include "Actions/ActionLabel.h"
 #include "Actions/ActionAddPaste.h"
 #include "Actions/ActionAddCut.h"
-#include"Actions/ActionMove.h"
+#include "Actions/ActionMove.h"
 #include "Actions/ActionDelete.h"
+#include "Actions/ActionUndo.h"
+#include "Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
-#include<Windows.h>
 #include <iostream>
 
 using namespace std;
@@ -32,11 +32,17 @@ ApplicationManager::ApplicationManager()
 	lineCount = 0;
 
 	IsSimulation = 0;
+	undoNum = 0;
+	redoNum = 0;
 
 	for (int i = 0; i < MaxCompCount; i++)
 		CompList[i] = nullptr;
 	for (int i = 0; i < MaxCompCount; i++)
 		ConnList[i] = nullptr;
+	for (int i = 0; i < 10; i++)
+		UndoList[i] = nullptr;
+	for (int i = 0; i < 10; i++)
+		RedoList[i] = nullptr;
 
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
@@ -67,6 +73,7 @@ void ApplicationManager::AddComponent(Component* pComp)
 }
 void ApplicationManager::AddConnection(Connection* pConn)
 {
+	if(pConn!=nullptr)
 	ConnList[ConnCount++] = pConn;
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y)   //returns pointer to the component if (x,y) is in the component region  
@@ -95,7 +102,6 @@ Connection* ApplicationManager::GetConnectionByCordinates(int x, int y)
 		{
 			return	ConnList[i];
 		}
-
 	}
 	return nullptr;
 }
@@ -114,43 +120,59 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 	case ADD_RESISTOR:
 		pAct = new ActionAddRes(this);
+		AddToUndoList(pAct);
 		break;
 		// TODO: Add remaining actions
 	case ADD_BULB:
 		pAct = new ActionAddBul(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_SWITCH:
 		pAct = new ActionAddSwi(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_GROUND:
 		pAct = new ActionAddGro(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_BATTERY:
 		pAct = new ActionAddBat(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_BUZZER:
 		pAct = new ActionAddBuz(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_FUES:
 		pAct = new ActionAddFues(this);
+		AddToUndoList(pAct);
 		break;
+	case UNDO:
+		pAct = new  ActionUndo(this);
+	break;
+	case REDO:
+		pAct = new ActionRedo(this);
+	break;
 	case EDIT_Label:
 		pAct = new ActionEdit(this);
 		break;
 	case MOVE:
 		pAct = new ActionMove(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_Label:
 		pAct = new  ActionLabel(this);
 		break;
 	case ADD_CONNECTION:
 		pAct = new ActionAddCon(this);
+		AddToUndoList(pAct);
 		break;
 	case SELECT:
 		pAct = new ActionSelect(this);
 		break;
 	case DEL:
 		pAct = new ActionDelete(this);
+		AddToUndoList(pAct);
 		break;
 	case MDEL:
 		pAct = new ActionMultipleDelete(this);
@@ -172,9 +194,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case ADD_CUT:
 		pAct = new ActionAddCut(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_PASTE:
 		pAct = new ActionAddPaste(this);
+		AddToUndoList(pAct);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -184,8 +208,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		//save(ActType);
 		pAct->Execute();
-		delete pAct;
-		pAct = nullptr;
+		/*delete pAct;
+		pAct = nullptr;*/
 	}
 }
 ////////////////////////////////////////////////////////////////////
@@ -203,18 +227,16 @@ string* ApplicationManager::save(int& cp, int& cn) const {
 
 void ApplicationManager::UpdateInterface()
 {
+	cout << CompCount<<endl;
 	//if (CompCount) 
 	//{
 	pUI->ClearDrawingArea();
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->Draw(pUI);
 
-
-
-
 	for (int i = 0; i < ConnCount; i++)
 		ConnList[i]->Draw(pUI);
-	Sleep(50);
+	Sleep(100);
 	//}
 	//else
 //Exit()
@@ -235,13 +257,9 @@ bool ApplicationManager::ValidateCircuit() {
 	Component** compolist = new Component * [CompCount + 1];
 	compolist[j1++] = CompList[i1];
 	TerminalNum T = TERM2;
-	
 	if (CompCount < 3)
 		return false;
 	int cG = 0, tkrar = 0;
-	/*for (int i = 0; i < CompCount; i++) {
-
-	}*/
 
 	int c1, c2;
 	for (int i = 0; i < CompCount; i++) {
@@ -306,9 +324,6 @@ bool ApplicationManager::ValidateCircuit() {
 		pUI->PrintMsg("tkrar "+to_string(tkrar));
 		return false;
 	}
-
-
-
 	/*if (compolist[j1] != CompList[0]) {
 		pUI->PrintMsg(compolist[j1]->getlabel());
 		return false;
@@ -317,10 +332,9 @@ bool ApplicationManager::ValidateCircuit() {
 	return true;
 }
 
-
-
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
+
 	if (!ValidateCircuit()) {
 		pUI->CreateErrorWind("error \n");
 	}
@@ -337,7 +351,7 @@ void ApplicationManager::ToDesign() {
 	// Compute all needed voltages and current
 	pUI->CreateDesignToolBar();
 }
-////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {  
 	double SumResistance = 0;
@@ -349,13 +363,12 @@ double ApplicationManager::CalculateCurrent() {
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
-		
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
-		
 	}
+	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
 	return (SumVoltage / SumResistance);
+	
 }
-
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
@@ -375,12 +388,9 @@ ApplicationManager::~ApplicationManager()
 		delete ConnList[i];
 	for (int i = 0; i < CompCount; i++)
 		delete CompList[i];
-
 	ConnCount = 0;
 	CompCount = 0;
 	pUI->ClearAll();
-
-	// TODO
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -390,67 +400,52 @@ ApplicationManager::~ApplicationManager()
 //		delete ConnList[i];
 //	for (int i=0 ; i < CompCount; i++)
 //		delete CompList[i];
-//	
 //	ConnCount = 0;
 //	CompCount = 0;
-//	
 //	pUI->ClearAll();
 //	pUI->Dra
-//
-//
-//
-//
-//	
-//    CompList = nullptr;
-//    delete GetUI();
+//  CompList = nullptr;
+//  delete GetUI();
 //	GetUI() = nullptr;
-//    /*delete pConn;
+//  /*delete pConn;
 //	pConn = nullptr;
 //	delete pComp;
 //	pComp = nullptr;*/
 //	/*delete GetConnectionByCordinates();
 //	delete GetComponentByCordinates();*/
-//
 //}
 
  bool ApplicationManager::isAvalible()
  {
-	 
 		 if ( CompCount >= 2) 
 		 {
 			 return true;
 		 }
-		 
 		 return false;
-	 
-	
  } 
  void ApplicationManager::SetCopyComp(Component* comp1)            //Setter for the component + saving its values(copy). 
  {
+	 if(comp1!=nullptr)
 	 CopyComp = comp1->Copy();
  }
  Component* ApplicationManager::GetCopyComp() const				   //Getter for the component after coping or cutting the component.
  {
 	 return CopyComp->Copy();
  }
-
 ////if (CopyComp==nullptr)
    //		//{
    //		//	pUI->ClearStatusBar();
    //		//	//delete pAct;
    //		//	//pAct = nullptr;
    //		//	pUI->CreateErrorWind("error \n");
-
    //		//}
    //		//else {
 //pAct = new ActionAddPaste(this);
-
-///*	}*/
+//*	}*/
 //break;
 void ApplicationManager::deleteCompounent(Component* delet)
 {
 	int x1 = 0;
-	Component* T;
 	if (delet)
 	{
 		for (int i = 0; i < CompCount; i++)
@@ -469,8 +464,6 @@ void ApplicationManager::deleteCompounent(Component* delet)
 				C2 = delet->getTermConnCount(TERM2);
 				Connection** c1;
 				Connection** c2;
-				/* c1 = nullptr;
-				 c2 = nullptr;*/
 				c1 = delet->getTermConnections(TERM1);
 
 				c2 = delet->getTermConnections(TERM2);
@@ -563,4 +556,63 @@ void ApplicationManager::MultipleDelete(int comp, int conn)
     {
 		deleteConnection(multiConnList[j]);
     }
+}
+
+
+
+
+
+void ApplicationManager::AddToUndoList(Action* A)
+{
+	if (undoNum < 10)
+	{
+		UndoList[undoNum] = A;
+		undoNum++;
+	}
+	else
+	{
+		for (int i = 0; i < 9 ; i++)
+		{
+			UndoList[i] = UndoList[i++];
+		}
+		UndoList[9] = A;
+	}
+}
+void ApplicationManager::AddToRedoList(Action* A)
+{
+	if (redoNum < 10)
+	{
+		RedoList[redoNum] = A;
+		redoNum++;
+	}
+	else
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			RedoList[i] = RedoList[i++];
+		}
+		RedoList[9] = A;
+	}
+}
+void ApplicationManager::ExcuteUndo()
+{
+	if (undoNum > 0 )
+	{
+		undoNum--;
+		UndoList[undoNum]->Undo();
+		AddToRedoList(UndoList[undoNum]);
+		UndoList[undoNum] = nullptr;
+	} 
+}
+void ApplicationManager::ExcuteRedo()
+{
+	if (redoNum > 0 )
+	{
+		redoNum--;
+		RedoList[redoNum]->Redo();
+		AddToUndoList(RedoList[redoNum]);
+		RedoList[redoNum] = nullptr;
+	}
+	if (redoNum < 0)
+		redoNum = 0;
 }

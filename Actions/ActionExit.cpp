@@ -29,12 +29,10 @@ void ActionExit::Execute()
 	//}
 	////Clear Status Bar
 	//pUI->ClearStatusBar();
-
 	//Resistor* pR = new Resistor(pGInfo, pUI);
 	//pManager->AddComponent(pR);
 	//delete pManager;
-
-
+	//pManager->deleteCompounent(comp);
 	delete pManager;
 	pManager=nullptr;
 }

@@ -38,6 +38,6 @@ Component* Switch::Copy()    //Copy the component information
 {
 	Component* B;       
 	B = new Switch(m_pGfxInfo);      // create a new Component and save the previous info in the new one
-	B->Setlabel(m_Label);
+	B->SetComponentlabel(m_Label);
 	return B;
 }

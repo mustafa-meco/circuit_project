@@ -81,7 +81,7 @@ public:
 	void removeTerm1Connection(Connection* pConn);//  remove the list of pointers of connections from Term1 of connection
 	void removeTerm2Connection(Connection* pConn);// remove the list of pointers of connections from Term2 of connection
 	
-	string Setlabel(string input);
+	string SetComponentlabel(string input);
 	string getlabel();
 
 	void SetGinfo(GraphicsInfo* G); 

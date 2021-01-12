@@ -1,11 +1,11 @@
 #pragma once
 #include "Action.h"
-class ActionUndo :
+class ActionRedo :
     public Action
 {
 public:
-    ActionUndo(ApplicationManager* pApp);
-    virtual ~ActionUndo(void);
+    ActionRedo(ApplicationManager* pApp);
+    virtual ~ActionRedo(void);
     virtual void Execute();
 
     virtual void Undo();

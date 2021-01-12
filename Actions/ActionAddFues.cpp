@@ -17,7 +17,7 @@ void ActionAddFues::Execute()
 
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new Fues: Click anywhere to add");
+	pUI->PrintMsg("Adding a new Fues: to add");
 	//Get a Pointer to the user Interfaces
 	
 	//Get Center point of the area where the Comp should be drawn
@@ -62,11 +62,19 @@ void ActionAddFues::Execute()
 	Fues* pR = new Fues(pGInfo/*, R*/);
 	pR->setResistance(R);
 	pManager->AddComponent(pR);
-	
+	comp = pR;
+	undo1 = pGInfo;
+	undo2 = R;
 }
 
 void ActionAddFues::Undo()
-{}
+{
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddFues::Redo()
-{}
+{
+	Fues* pR = new Fues(undo1/*, undo2*/);
+	pR->setResistance(undo2);
+	pManager->AddComponent(pR);
+}

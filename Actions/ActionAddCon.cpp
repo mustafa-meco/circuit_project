@@ -20,10 +20,6 @@ void ActionAddCon::Execute()
 
 	}
 	else {
-
-
-
-
 		//Get a Pointer to the user Interfaces
 
 		pUI->PrintMsg(" choose two points for connection : "); 
@@ -96,11 +92,21 @@ void ActionAddCon::Execute()
 			comp2->addTerm2Connection(pCON);
 		//pUI->DrawConnection(*pGInfo);
 		pManager->AddConnection(pCON);
+
+		con = pCON;
+		compA = comp1;
+		comp2 = comp2;
+		undo1 = pGInfo;
 	}
 }
  
 void ActionAddCon::Undo()
-{}
+{
+	pManager->deleteConnection(con);
+}
 
 void ActionAddCon::Redo()
-{}
+{
+	Connection* pCON = new Connection(undo1, compA, compB);
+	pManager->AddConnection(pCON);
+}

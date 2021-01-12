@@ -52,6 +52,6 @@ Component* Buzzer::Copy()
 {
 	Component* B;
 	B = new Buzzer(m_pGfxInfo);
-	B->Setlabel(m_Label);
+	B->SetComponentlabel(m_Label);
 	return B;
 }

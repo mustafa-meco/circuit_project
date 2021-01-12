@@ -72,6 +72,7 @@
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionMultipleDelete.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
+    <ClCompile Include="Actions\ActionRedo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionMultipleDelete.h" />
+    <ClInclude Include="Actions\ActionRedo.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

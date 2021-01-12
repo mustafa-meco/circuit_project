@@ -38,6 +38,6 @@ Component* Resistor::Copy()                                    //Copy the compon
 	Component* B;
 	B = new Resistor(m_pGfxInfo);                 // create a new Component and save the previous info in the new one
 	B->setResistance(resistance);
-	B->Setlabel(m_Label);
+	B->SetComponentlabel(m_Label);
 	return B;
 }
