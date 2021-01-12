@@ -47,11 +47,11 @@ class UI
 		ITM_GRO,           //Ground item in menu
 		ITM_BUZ,           //Buzzer item in menu 
 		ITM_FUE,
-		ITM_MOD,
-		//ITM_ADD_MOD,
+		ITM_MOD,       
 		ITM_CON,           //Connection item in menu
 		ITM_SIM,
 		ITM_MODU,
+		//ITM_REAL,
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
@@ -79,6 +79,7 @@ class UI
 		Itm_ACT_Num
 	};
 
+
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in menu
@@ -91,7 +92,7 @@ class UI
 		ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
 	
 	};
-	
+
 	enum ModMenuItem {
 		MITM_RES,
 		MITM_BULB,
@@ -100,13 +101,12 @@ class UI
 		MITM_MOD,
 		MITM_ADD_MOD,
 		MITM_CON,
-		
+
 		MITM_LOAD,
 		MITM_DSN,
 		ITM_MOD_CNT
 
 	};
-
 
 	MODE AppMode;		//Application Mode (design or simulation)
 	
@@ -130,7 +130,7 @@ class UI
 	color MsgColor;			//Messages color
 	color BkGrndColor;		//Back ground color
 
-
+	bool IsRealV;
 	window *pWind;
 	
 public:
@@ -159,7 +159,8 @@ public:
 	void CreateErrorWind(string);
 	void DrawActionBar() const;
 	void DrawConfirm() const;
-
+	void DrawReal() const;
+	void DrawRealistic() ;
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateModulationToolBar();
@@ -191,16 +192,14 @@ public:
 	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
-	void DeleteConnection(const GraphicsInfo& r_GfxInfo); 
+	void DeleteConnection(const GraphicsInfo& r_GfxInfo);
 	
 	void DrawWhite(const GraphicsInfo& r_GfxInfo);
-
-
-
 	//void PrintLabel(string msg)const;
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
 	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	bool IsReal();
 	~UI();
 };
 

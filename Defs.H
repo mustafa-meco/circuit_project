@@ -19,11 +19,12 @@ enum ActionType
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
 	ADD_MOD,
-	ADD_MODU,
+	MOD_MODE,
+	
  	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
-
+	ADD_REALISTIC,
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -44,7 +45,6 @@ enum ActionType
 
 	DSN_MODE,	//Switc	h to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-	MOD_MODE,
 
 	EXIT,		//Exit the application
 

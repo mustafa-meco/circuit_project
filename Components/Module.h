@@ -1,8 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Resistor.h"
-class Module :
-    public Component
+class Module :public Component
 {
 public:
 	Module(GraphicsInfo* r_GfxInfo);

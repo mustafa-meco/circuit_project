@@ -12,7 +12,6 @@ class ActionDelete : public Action
 private:
 
 	Component* comp;
-	//Component* compDelete;
 	Connection* connection;
 	//Parameters for rectangular area to be occupied by the comp
 	int Cx, Cy;	//Center point of the comp

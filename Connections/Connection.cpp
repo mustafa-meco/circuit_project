@@ -176,5 +176,9 @@ Connection* Connection::copyconnectionAndChange(Component* com)
 	
 	return nullptr;
 }
-
+string Connection::SetConnectionlabel(string input)
+{
+	connLabel = input;
+	return connLabel;
+}
 /* Deletes the component */

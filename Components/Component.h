@@ -5,46 +5,47 @@
 #include "..\UI\UI.h"
 #include "..\Connections\Connection.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //Base class for all components (resistor, capacitor,....etc)//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Base class for all components (resistor, capacitor,....etc) .
 class Component
 {
-private:
-
-	
+private:	
 protected:
-	bool mDeleted;
-	
+
 	//Each component has two ending terminals (term1, term2)
-	double term1_volt, term2_volt;	//voltage at terminals 1&2
-	double resistance, sourceVoltage; // internal resistance and voltage jump introduced by source
+	double term1_volt, term2_volt;	              //voltage at terminals 1&2
+	double resistance, sourceVoltage;            // internal resistance and voltage jump introduced by source
 	bool status;
 	bool polarity;
-	//Each terminal is connected to set of connections
-	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections
-	Connection *term2_conns[MAX_CONNS];
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	//Each terminal is connected to set of connections
+	Connection *term1_conns[MAX_CONNS];             //list of pointers to connections
+	Connection *term2_conns[MAX_CONNS];            // list of pointers to connections
 	struct demo
 	{
 		//array declared inside structure
 		Connection* arr[MAX_CONNS];
 	};
 
-	int term1_conn_count;	//actual no. of connections to each terminal
-	int term2_conn_count;
-
+	int term1_conn_count;	                      //actual no. of connections to each terminal
+	int term2_conn_count;                        // actual no. of connections to each terminal
 	int ID;
 	static int gID;
-	string m_Label;
+	string m_Label;                               //get string from the user 
 	int choose;
-	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
-	static Component* pcomp;
+	GraphicsInfo *m_pGfxInfo;                	// The parameters required to draw a component
+	static Component* pcomp;                   // 
 public:
 	
 	Component(GraphicsInfo *r_GfxInfo);
 	
 	void setTerm1Volt(double v);		//sets the voltage at terminal1 tayil
-	//
+	
 	void setTerm2Volt(double v);		//sets the voltage at terminal2 tayil 
 	double getTerm1Volt();				//returns the voltage at terminal1
 	double getTerm2Volt();				//returns the voltage at terminal2
@@ -74,11 +75,11 @@ public:
 	int getID() const;  
 
 	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
-	void addTerm1Connection(Connection* pConn); 
-	void addTerm2Connection(Connection* pConn);
+	void addTerm1Connection(Connection* pConn); // return the list of pointers to connections at Term1 of components
+	void addTerm2Connection(Connection* pConn);// return the list of pointers to connections at Term2 of components
 
-	void removeTerm1Connection(Connection* pConn);
-	void removeTerm2Connection(Connection* pConn);
+	void removeTerm1Connection(Connection* pConn);//  remove the list of pointers of connections from Term1 of connection
+	void removeTerm2Connection(Connection* pConn);// remove the list of pointers of connections from Term2 of connection
 	
 	string Setlabel(string input);
 	string getlabel();

@@ -1,10 +1,8 @@
 #include "ActionEdit.h"
 #include "../ApplicationManager.h"
 
-
 ActionEdit::ActionEdit(ApplicationManager * pApp) :Action(pApp)
 {
-
 }
 
 ActionEdit::~ActionEdit(void)
@@ -14,11 +12,9 @@ ActionEdit::~ActionEdit(void)
 void ActionEdit::Execute()
 {
 	int x = 0;
-	int y = 0;
-	
+	int y = 0;	
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
-
 	//Print Action Message
 	pUI->PrintMsg("Edit");
 	
@@ -85,9 +81,7 @@ void ActionEdit::Execute()
 	pGInfo->PointsList[0].x = Cx - compWidth / 2;
 	pGInfo->PointsList[0].y = Cy - compHeight / 2;
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
-	pGInfo->PointsList[1].y = Cy + compHeight / 2;
-
-	
+	pGInfo->PointsList[1].y = Cy + compHeight / 2;	
 }
 
 void ActionEdit::Undo()
