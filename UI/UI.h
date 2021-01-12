@@ -45,17 +45,17 @@ class UI
 		ITM_SWI,           //Switch item in menu
 		ITM_BAT,
 		ITM_GRO,           //Ground item in menu
-		ITM_BUZ,
+		ITM_BUZ,           //Buzzer item in menu 
 		ITM_FUE,
-		       //Load item 
-		ITM_CON,         //connection item 
+		       
+		ITM_CON,           //Connection item in menu
 		ITM_SIM,
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
 		ITM_EDIT,*/
 		ITM_LABEL,
-		ITM_LOAD,
+		ITM_LOAD,           //Load item in menu
 		ITM_SAVE,
 		ITM_MDELETE,
 		ITM_EXIT,		//Exit item
@@ -66,13 +66,13 @@ class UI
 	{
 		ITMA_Edit, 
 		ITMA_Move, 
-		ITMA_Load, 
+		ITMA_Load,           //Load item in menu
 		ITMA_Save, 
 		ITMA_Undo, 
 		ITMA_Redo, 
-		ITMA_Copy,
-		ITMA_Cut,
-		ITMA_Paste, 
+		ITMA_Copy,          //Copy item in menu 
+		ITMA_Cut,           //Cut item in menu 
+		ITMA_Paste,         //Paste item in menu 
 		ITMA_Delete, 
 		Itm_ACT_Num
 	};
@@ -181,8 +181,7 @@ public:
 
 	//void PrintLabel(string msg)const;
 
-	// Draws Connection
-	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   
+	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
 
 	~UI();
 };

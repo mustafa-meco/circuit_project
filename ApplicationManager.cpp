@@ -69,10 +69,11 @@ void ApplicationManager::AddConnection(Connection* pConn)
 {
 	ConnList[ConnCount++] = pConn;
 }
-Component* ApplicationManager::GetComponentByCordinates(int x, int y)
+Component* ApplicationManager::GetComponentByCordinates(int x, int y)   //returns pointer to the component if (x,y) is in the component region  
+                                                                        //through this function you can know the component type. 
 {
 
-	for (int i = 0; i < CompCount; i++)
+	for (int i = 0; i < CompCount; i++)                                 // looping on the all components and find the selected component 
 	{
 		if (CompList[i]->isInRegion(x, y, pUI) == true)
 		{
@@ -338,19 +339,19 @@ void ApplicationManager::ToDesign() {
 }
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
-double ApplicationManager::CalculateCurrent() {
+double ApplicationManager::CalculateCurrent() {  
 	double SumResistance = 0;
 	double SumVoltage = 0;
-	for (int i = 0; i < CompCount; i++)
+	for (int i = 0; i < CompCount; i++) 
 	{
-		if (CompList[i]->getResistance() != -1)
+		if (CompList[i]->getResistance() != -1 )
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
-		if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
-		{
+		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
+		
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
-		}
+		
 	}
 	return (SumVoltage / SumResistance);
 }
@@ -359,12 +360,12 @@ double ApplicationManager::CalculateCurrent() {
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
 }
-void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the connection 
+void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
 	for (int i = 0; i < CompCount; i++)
-		CompList[i]->load(i + 1, labeli[i], valueI[i]);
+		CompList[i]->load(i + 1, labeli[i], valueI[i]);    // load the components 
 	for (int i = 0; i < ConnCount; i++)
-		ConnList[i]->load(comp001[i], comp002[i]);
+		ConnList[i]->load(comp001[i], comp002[i]);         // load the connections 
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -424,11 +425,11 @@ ApplicationManager::~ApplicationManager()
 	 
 	
  } 
- void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
+ void ApplicationManager::SetCopyComp(Component* comp1)            //Setter for the component + saving its values(copy). 
  {
 	 CopyComp = comp1->Copy();
  }
- Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
+ Component* ApplicationManager::GetCopyComp() const				   //Getter for the component after coping or cutting the component.
  {
 	 return CopyComp->Copy();
  }

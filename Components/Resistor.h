@@ -8,8 +8,7 @@ public:
 	virtual void Draw(UI*);	//Draws the resistor
 	virtual void Operate();
 	string save() const;
-	void load(int id,string LABELi, double VALUE);
-
-	Component* Copy();
+	void load(int id,string LABELi, double VALUE);   //Load the Resistor 
+	Component* Copy();                               //Copy the component information 
 };
 

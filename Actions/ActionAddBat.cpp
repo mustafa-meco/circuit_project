@@ -46,13 +46,29 @@ void ActionAddBat::Execute()
 			}
 		}*/
 
-	 
+
+	string sS;                          // determine the polarity direction 
+	bool isBool;
+	bool SP;
+	do {
+		pUI->PrintMsg("Enter the value of the battery (0: rightToLeft, 1: LeftToRight)");
+		sS = pUI->GetSrting();
+		isBool = false;
+		if (sS == "0" || sS == "1") {
+			isBool = true;
+			SP = static_cast<bool>(stoi(sS));
+		}
+	} while (!isBool);
+
+	//Clear Status Bar
+	pUI->ClearStatusBar();
+
 
 
 
 
 	string sV;
-	bool isNumber;
+	bool isNumber;                    // putting a value for the battery 
 	do {
 		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
 		sV = pUI->GetSrting();
@@ -80,8 +96,15 @@ void ActionAddBat::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Battery* pR = new Battery(pGInfo/*, V*/);
-	pR->setSourceVoltage(V);
+	Battery* pR = new Battery(pGInfo/*, V*/);     // the voltage value depends on the direction of the battery 
+	if (SP==LTR) 
+	{
+		pR->setSourceVoltage(V);
+    }
+	else 
+	{
+		pR->setSourceVoltage(-V);
+	}
 	pManager->AddComponent(pR);
 }
 

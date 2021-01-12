@@ -16,10 +16,10 @@ enum ActionType
 	ADD_BATTERY,
 	ADD_BUZZER,
 	ADD_FUES,
-	ADD_COPY,
-	ADD_CUT,
+	ADD_COPY,           //Add Copy
+	ADD_CUT,            //Add Cut
 
-	ADD_PASTE,
+ 	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
 
@@ -53,11 +53,14 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
-
-	
-enum BatPolarity {
+enum BatPolarity 
+{
 	RTL, LTR
 };
+	
+//enum BatPolarity {
+//	RTL, LTR
+//};
 
 ////////////////////////////////////////////////////////////////
 //Maximum number of connections that can be connected to any output components

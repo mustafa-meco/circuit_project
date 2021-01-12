@@ -16,8 +16,9 @@ class ActionAddPaste : public Action
 	int Cy;
 public:
 	ActionAddPaste(ApplicationManager* pApp);
-
 	~ActionAddPaste(void); 
+
+	//Execute action
 	virtual void Execute();
 
 	virtual void Undo();

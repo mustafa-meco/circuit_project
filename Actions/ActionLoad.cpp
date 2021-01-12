@@ -13,14 +13,14 @@ ActionLoad::~ActionLoad(void)
 void ActionLoad::Execute()
 {
 	UI* pUI = pManager->GetUI();
-	fstream inFile;
+	fstream inFile;                   // the file which will be read from
 	
 	pUI->PrintMsg("Enter the file name : ");
-	filename = pUI->GetSrting();
+	filename = pUI->GetSrting();      // save the file name 
 	 
 
-	inFile.open(filename);
-	while (!inFile)
+	inFile.open(filename);            // open the file 
+	while (!inFile)                   // if the file isnot existed print a message and take the file name again 
 	{
 		pUI->PrintMsg("Enter the file name : ");
 		filename = pUI->GetSrting();
@@ -31,7 +31,7 @@ void ActionLoad::Execute()
 	int x = stoi(input);
 
 	
-	string* arr = new string[x];
+	string* arr = new string[x];            //creating some arrays to take the data from the file and correct it (string-->int)
 	string* arrName = new string[x];
 	string* arrID = new string[x];
 	int* arrIdCorr = new int[x];
@@ -77,47 +77,47 @@ void ActionLoad::Execute()
 		pGInfo5->PointsList[0].y = stoi(arrCOORDINATES2[j]);
 		pGInfo5->PointsList[1].x = pGInfo5->PointsList[0].x + pUI->getCompWidth();
 		pGInfo5->PointsList[1].y = pGInfo5->PointsList[0].y + pUI->getCompHeight();
-		if (arrName[j] == "RES")
+		if (arrName[j] == "RES")           //checking if there is a resistance in the loaded circuit 
 		{
 		
 			Resistor* pR = new Resistor(pGInfo5/*, pUI*/);
 			pManager->AddComponent(pR);
-		}
-		else if (arrName[j] == "SWT")
+		} 
+		else if (arrName[j] == "SWT")        //checking if there is a switch in the loaded circuit 
 		{
 
 			Switch* pR = new Switch(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
-		else if (arrName[j] == "BAT")
+		else if (arrName[j] == "BAT")         //checking if there is a battery in the loaded circuit 
 		{
 
 			Battery* pR = new Battery(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
-		else if (arrName[j] == "BLB")
+		else if (arrName[j] == "BLB")         //checking if there is a balb in the loaded circuit 
 		{
 
 			Bulb* pR = new Bulb(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
-		else if (arrName[j] == "GND")
+		else if (arrName[j] == "GND")         //checking if there is a ground in the loaded circuit 
 		{
 
 			Ground* pR = new Ground(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
-		else if (arrName[j] == "FUS")
+		else if (arrName[j] == "FUS")        //checking if there is a fuse in the loaded circuit 
 		{
 			Fues* pR = new Fues(pGInfo5);
 			pManager->AddComponent(pR);
 
 		}
-		else 
+		else                                 //checking if there is a bazzer in the loaded circuit 
 		{
 			Buzzer* pR = new Buzzer(pGInfo5);
 			pManager->AddComponent(pR);
@@ -130,7 +130,7 @@ void ActionLoad::Execute()
 	input = "";
 	getline(inFile, input);
 	int y = stoi(input);
-	int* arr11 = new int[y];
+	int* arr11 = new int[y];           // creating arrays to save the data of the connection 
 	int* arr22 = new int[y];
 	int* arr33 = new int[y];
 	int* arr44 = new int[y];
@@ -204,7 +204,7 @@ void ActionLoad::Execute()
 		}
 
 
-		if (comp1conn == TERM1)
+		if (comp1conn == TERM1)          // increasing the number of terms 
 			comp01->addTerm1Connection(pCON);
 		else
 			comp01->addTerm2Connection(pCON);
