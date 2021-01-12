@@ -85,7 +85,7 @@ public:
 
 	void setm_pGfxInfo(int cx, int cy);
 
-	//TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
+	TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 	virtual string save() const;
 	//Destructor must be virtual
 	virtual ~Component();

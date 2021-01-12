@@ -5,9 +5,9 @@ class Module :
     public Component
 {
 private:
-    Resistor** ResArr;
+	double r[4];
 public:
-	Module(GraphicsInfo* r_GfxInfo, Resistor**);
+	Module(GraphicsInfo* r_GfxInfo);
 	virtual void Draw(UI*);	//Draws the resistor
 	virtual void Operate();
 	string save() const;

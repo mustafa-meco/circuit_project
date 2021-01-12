@@ -55,7 +55,9 @@ enum  MODE	//Modes of operation
 };
 
 	
-
+enum BatPolarity {
+	RTL, LTR
+};
 
 ////////////////////////////////////////////////////////////////
 //Maximum number of connections that can be connected to any output components

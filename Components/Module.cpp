@@ -1,9 +1,9 @@
 #include "Module.h"
 #include <string>
 
-Module::Module(GraphicsInfo* r_GfxInfo, Resistor** r) :Component(r_GfxInfo)
+Module::Module(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	ResArr = r;
+
 }
 
 void Module::Draw(UI* pUI)

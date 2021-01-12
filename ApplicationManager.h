@@ -7,7 +7,7 @@
 #include "Components\Component.h"
 #include "Actions/ActionAddGro.h"
 #include "Actions/ActionAddBat.h"
-#include<vector>
+
 
 
 //Main class that manages everything in the application.
@@ -86,7 +86,7 @@ public:
 	void deleteConnection(Connection*);
 	
 	Component* CompCountN();
-	int CountSelectedComponents() const;
+
 	int multipleStoreComp(Component* multi,int m);
 	int multipleStoreCon(Connection* multi, int m);
 	void  MultipleDelete(int comp, int conn);

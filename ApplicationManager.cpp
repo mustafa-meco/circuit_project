@@ -233,8 +233,8 @@ bool ApplicationManager::ValidateCircuit() {
 	Connection** conno;
 	Component** compolist = new Component * [CompCount + 1];
 	compolist[j1++] = CompList[i1];
-	conno = CompList[i1]->getTermConnections(TERM1);
-	compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+	TerminalNum T = TERM2;
+	
 	if (CompCount < 3)
 		return false;
 	int cG = 0, tkrar = 0;
@@ -260,15 +260,14 @@ bool ApplicationManager::ValidateCircuit() {
 			pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
 			return false;
 		}
-		if (i != 0) {
+		
+		if (T == TERM1)
+			conno = CompList[i1]->getTermConnections(TERM2);
+		else
 			conno = CompList[i1]->getTermConnections(TERM1);
-			compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
-			if (compolist[j1] == compolist[j1 - 1]) {
-				conno = CompList[i1]->getTermConnections(TERM2);
-				compolist[j1] = nullptr;
-				compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
-			}
-		}
+		compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+		T = compolist[j1]->whichTerminal(conno[0]);
+		
 		for (int k = 0; k < CompCount; k++) {
 			if (compolist[j1] == compolist[k] && j1 != k)
 				tkrar++;
@@ -298,11 +297,12 @@ bool ApplicationManager::ValidateCircuit() {
 
 	if (compolist[j1 -1] == CompList[0] && (j1 -1 ) != CompCount) {
 			pUI->PrintMsg(to_string(j1)+  " end " + to_string(CompCount) + " end " );
+			pUI->PrintMsg(to_string(j1)+  " end " + to_string(CompCount) + " end " );
 			return false;
 	}*/
 
-	if (cG != 1 || tkrar > 2) {
-		pUI->PrintMsg(to_string(tkrar));
+	if (cG != 1 || tkrar > 1) {
+		pUI->PrintMsg("tkrar "+to_string(tkrar));
 		return false;
 	}
 
@@ -430,7 +430,7 @@ ApplicationManager::~ApplicationManager()
  }
  Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
  {
-	 return CopyComp;
+	 return CopyComp->Copy();
  }
 
 ////if (CopyComp==nullptr)
@@ -516,29 +516,8 @@ void ApplicationManager::deleteConnection(Connection* delet)
 		}
 	}
 }
-Component* ApplicationManager::CompCountN()
-{
 
-	for (int i = 0; i < CompCount; i++)
-	{	
-		return	CompList[i];
 
-	}
-	
-}
-/* Counts and returns the number of selected components */
-int ApplicationManager::CountSelectedComponents() const {
-	int n = 0;
-	int x= 0;
-	int y= 0;
-	for (int i = 0; i < CompCount; i++) {
-		if (!CompList[i]->IsDeleted() && CompList[i]->isInRegion(x,y, pUI)==true) {
-			n++;
-		}
-	}
-
-	return n;
-}
 int  ApplicationManager::multipleStoreComp(Component* multi,int m)
 {
 	static int multiplecount = 0;

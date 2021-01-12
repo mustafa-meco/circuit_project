@@ -3,7 +3,8 @@
 
 Resistor::Resistor(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	
+	resistance = 1;
+	sourceVoltage = 0;
 }
 
 void Resistor::Draw(UI* pUI)

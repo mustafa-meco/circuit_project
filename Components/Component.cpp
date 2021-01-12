@@ -8,6 +8,7 @@ Component::Component(GraphicsInfo *r_GfxInfo)
 	term1_volt = term2_volt = 0;
 	term1_conn_count = term2_conn_count = 0;
 	ID = ++gID;
+	
 }
 
 
@@ -24,11 +25,11 @@ bool Component::isInRegion(int x, int y, UI* pUI)   //checking if the user click
 		pcomp = this;
 		return true;
 	}
-	/*else
+	else
 	{
 		pcomp = nullptr;
 		return false;
-	}*/
+	}
 }
 Component* Component::pcomp = nullptr;
 
@@ -196,7 +197,15 @@ double Component::getTerm2Volt()
 	return term2_volt;
 }
 
-bool Component::IsDeleted() const // Returns whether the component is deleted or not //
-{
-	return mDeleted;
+
+TerminalNum Component::whichTerminal(Connection* Conn) {
+	for (int i = 0; i < term1_conn_count; i++) {
+		if (Conn == term1_conns[i])
+			return TERM1;
+	}
+	for (int i = 0; i < term2_conn_count; i++) {
+		if (Conn == term2_conns[i])
+			return TERM2;
+	}
+
 }
