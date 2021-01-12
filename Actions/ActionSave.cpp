@@ -30,8 +30,8 @@ void ActionSave::Execute() {
 	outFile << ConnCount << endl;
 	for (int i = 0; i < ConnCount; i++)
 		outFile << data[i+ConnCount] << endl;
-
 	outFile.close();
+	
 }
 
 void ActionSave::Undo()

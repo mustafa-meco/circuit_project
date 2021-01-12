@@ -150,7 +150,7 @@ ActionType UI::GetUserAction() const
 			case ITM_LABEL: return ADD_Label;
 			case ITM_SAVE:  return SAVE;
 			case ITM_LOAD:	return LOAD; 
-			/*case ITM_DELETE:return DEL;*/
+			case ITM_MDELETE:return MDEL;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -174,7 +174,7 @@ ActionType UI::GetUserAction() const
 			pWind->SetPen(WHITE);
 			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
 			ClearStatusBar();
-			int ClickedItemOrder = (y1 - 80) / 50;
+			int ClickedItemOrder = (y1 - ToolBarHeight) / 50;
 			if (x1 > width - ActionBarWidth && x1 < width)
 			{
 				switch (ClickedItemOrder)
@@ -324,7 +324,14 @@ void UI::ClearAll()const
 	pWind->SetPen(WHITE,1000000);
 	pWind->DrawLine(0, height - StatusBarHeight, width, height - StatusBarHeight);
 }
-
+void UI::DrawConfirm() const
+{
+	pWind->SetPen(RED, 1);
+	pWind->SetBrush(PURPLE);
+	pWind->DrawRectangle(0, height - StatusBarHeight - 25, 25, height - StatusBarHeight);
+	
+    /*pWind->DrawImage("images\\Choice\\right.jpg" ,0, height - StatusBarHeight - 40, 25, 25);*/
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -354,7 +361,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 
 	MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
-	/*MenuItemImages[ITM_DELETE] = "Images\\Menu\\Menu_Delete.jpg";*/
+	MenuItemImages[ITM_MDELETE] = "Images\\Menu\\Menu_MultipleDelete.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -393,13 +400,13 @@ void UI::DrawActionBar()const
 	string ActionsImages[Itm_ACT_Num];
 	ActionsImages[ITMA_Edit] = "images\\Choice\\Edit.jpg";
 	ActionsImages[ITMA_Move] = "images\\Choice\\Move.jpg";
-	ActionsImages[ITMA_Load] = "images\\Choice\\Load.jpg";
+	ActionsImages[ITMA_Load] = "images\\Choice\\Load.jpg";        //Add image for load
 	ActionsImages[ITMA_Save] = "images\\Choice\\Save.jpg";
 	ActionsImages[ITMA_Undo] = "images\\Choice\\Undo.jpg";
 	ActionsImages[ITMA_Redo] = "images\\Choice\\Redo.jpg";
-	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";
-	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";
-	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";
+	ActionsImages[ITMA_Copy] = "images\\Choice\\Copy.jpg";         //Add image for copy
+	ActionsImages[ITMA_Cut] = "images\\Choice\\Cut.jpg";           //Add image for cut 
+	ActionsImages[ITMA_Paste] = "images\\Choice\\Paste.jpg";       //Add image for paste
 	ActionsImages[ITMA_Delete] = "images\\Choice\\Delete.jpg";
 
 	//Draw menu item one image at a time
@@ -444,12 +451,12 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwiImage;
 	if (selected)
-		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted bulb
+		SwiImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted switch
 	else
-		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal bulb
+		SwiImage = "Images\\Comp\\Switch.jpeg";	//use image of the normal switch
 
-	//Draw Bulb at Gfx_Info (1st corner)
-	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+	//Draw switch at Gfx_Info (1st corner)        // Draw the image of the switch after adding the width and the height
+	pWind->DrawImage(SwiImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT); 
 }
 void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
@@ -470,7 +477,7 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 	else
 		GroImage = "Images\\Comp\\Ground.jpg";	//use image of the normal 
 
-	//Draw ground at Gfx_Info (1st corner)
+	//Draw ground at Gfx_Info (1st corner)       // Draw the image of the ground after adding the width and the height
 	pWind->DrawImage(GroImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const

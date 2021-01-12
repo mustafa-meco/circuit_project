@@ -16,11 +16,10 @@ enum ActionType
 	ADD_BATTERY,
 	ADD_BUZZER,
 	ADD_FUES,
-	ADD_COPY,
-	ADD_CUT,
+	ADD_COPY,           //Add Copy
+	ADD_CUT,            //Add Cut
 
-	ADD_PASTE,
-
+ 	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
 
@@ -28,9 +27,9 @@ enum ActionType
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
 	FLIP_SWITCH,		//Change Switch status in Simulation Mode
-
+	DEL,        //Delete a Component OR Connection
 	SELECT,		//Select a Component, a Connection
-	DEL,		//Delete a Component, a Connection
+	MDEL,		//Multiple Delete a Component, a Connection
 	MOVE,		//Move a Component, a Connection
 
 	SAVE,		//Save the whole Circuit to a file
@@ -54,9 +53,14 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
-
+enum BatPolarity 
+{
+	RTL, LTR
+};
 	
-
+//enum BatPolarity {
+//	RTL, LTR
+//};
 
 ////////////////////////////////////////////////////////////////
 //Maximum number of connections that can be connected to any output components

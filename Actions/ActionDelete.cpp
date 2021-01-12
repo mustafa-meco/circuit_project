@@ -13,8 +13,8 @@ void ActionDelete::Execute()
 	int cx = 0;
 	int cy = 0;
 	UI* pUI = pManager->GetUI();
-	pUI->PrintMsg("choose the compounent that you want to delet");
-	pUI->GetPointClicked(cx, cy);
+	pUI->PrintMsg("choose the compounent that you want to delete");
+	
 	do
 	{
 		pUI->GetPointClicked(cx, cy);

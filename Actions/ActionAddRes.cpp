@@ -36,7 +36,7 @@ void ActionAddRes::Execute()
 		sR = pUI->GetSrting();
 		isNumber = true;
 		for (int i = 0; i < sR.length(); i++)
-			if (isdigit(sR[i]) == false)
+			if (isdigit(sR[i]) == false )
 				isNumber = false;
 	} while (!isNumber);
 

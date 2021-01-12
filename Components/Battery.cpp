@@ -2,6 +2,9 @@
 
 Battery::Battery(GraphicsInfo* r_GfxInfo ) :Component(r_GfxInfo)
 {
+	resistance = 0;
+	sourceVoltage = 1;
+	
 	//if (!r_GfxInfo) {
 
 
@@ -60,3 +63,11 @@ Component* Battery::Copy()
 	B->Setlabel(m_Label);
 	return B;
 }
+//void Battery::setPolarity(BatPolarity p)
+//{
+//	polarity = p;
+//} 
+//BatPolarity Battery::GetPolarity()
+//{
+//	return static_cast<BatPolarity>(polarity);
+//}

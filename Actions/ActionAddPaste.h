@@ -18,8 +18,9 @@ class ActionAddPaste : public Action
 	Component* comp2;
 public:
 	ActionAddPaste(ApplicationManager* pApp);
-
 	~ActionAddPaste(void); 
+
+	//Execute action
 	virtual void Execute();
 
 	virtual void Undo();

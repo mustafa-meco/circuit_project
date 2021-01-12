@@ -15,10 +15,16 @@ void ActionAddBat::Execute()
 
 	UI* pUI = pManager->GetUI();
 
-	pUI->PrintMsg("Adding a new battery: Click anywhere to add");
+	//Print Action Message
+	pUI->PrintMsg("Adding a new resistor: Click anywhere to add");
 
 	pUI->GetPointClicked(Cx, Cy);
-	
+	//pManager->GetComponentByCordinates(Cx, Cy);
+
+	/*int compWidth = pUI->getCompWidth();
+	int compHeight = pUI->getCompHeight();*/
+	//pGInfo->PointsList[0].y = comp->getCompCentery(pUI);
+	//pGInfo->PointsList[1].y = comp->getCompCentery(pUI);
 
 	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
 		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
@@ -28,9 +34,38 @@ void ActionAddBat::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
+	//pManager->GetComponentByCordinates(Cx, Cy);
+
+	/*	for (int i = 0; i < ; i++)
+		{
+			if ()
+			{
+			}
+		}*/
+
+
+	string sS;                          // determine the polarity direction 
+	bool isBool;
+	bool SP;
+	do {
+		pUI->PrintMsg("Enter the value of the battery (0: rightToLeft, 1: LeftToRight)");
+		sS = pUI->GetSrting();
+		isBool = false;
+		if (sS == "0" || sS == "1") {
+			isBool = true;
+			SP = static_cast<bool>(stoi(sS));
+		}
+	} while (!isBool);
+
+	//Clear Status Bar
+	pUI->ClearStatusBar();
+
+
+
+
 
 	string sV;
-	bool isNumber;
+	bool isNumber;                    // putting a value for the battery 
 	do {
 		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
 		sV = pUI->GetSrting();
@@ -58,8 +93,15 @@ void ActionAddBat::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Battery* pR = new Battery(pGInfo/*, V*/);
-	pR->setSourceVoltage(V);
+	Battery* pR = new Battery(pGInfo/*, V*/);     // the voltage value depends on the direction of the battery 
+	if (SP==LTR) 
+	{
+		pR->setSourceVoltage(V);
+    }
+	else 
+	{
+		pR->setSourceVoltage(-V);
+	}
 	pManager->AddComponent(pR);
 	comp = pR;
 	undo1 = pGInfo;

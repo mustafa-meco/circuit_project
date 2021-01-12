@@ -12,7 +12,7 @@ class Connection
 	
 
 public:
-	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr);
+	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr); //Constructor 
 	virtual void Draw(UI*);	//for connection to Draw itself
 
 	bool IsInRegion(int x, int y, UI* pUI);

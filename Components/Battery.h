@@ -10,4 +10,6 @@ public:
 	string save() const;
 	void load(int id, string LABELi, double VALUE);        //load the battery
 	Component* Copy();
+	//virtual void setPolarity(BatPolarity p); 
+	//virtual BatPolarity GetPolarity();
 };

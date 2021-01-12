@@ -18,6 +18,7 @@
 #include "Actions/ActionDelete.h"
 #include"Actions/ActionUndo.h"
 #include"Actions/ActionRedo.h"
+#include "Actions/ActionMultipleDelete.h"
 #include<Windows.h>
 #include <iostream>
 
@@ -76,16 +77,17 @@ void ApplicationManager::AddConnection(Connection* pConn)
 	if(pConn!=nullptr)
 	ConnList[ConnCount++] = pConn;
 }
-Component* ApplicationManager::GetComponentByCordinates(int x, int y)
+Component* ApplicationManager::GetComponentByCordinates(int x, int y)   //returns pointer to the component if (x,y) is in the component region  
+                                                                        //through this function you can know the component type. 
 {
 
-	for (int i = 0; i < CompCount; i++)
+	for (int i = 0; i < CompCount; i++)                                 // looping on the all components and find the selected component 
 	{
 		if (CompList[i]->isInRegion(x, y, pUI) == true)
 		{
 			return	CompList[i];
 		}
-
+		
 	}
 	return nullptr;
 }
@@ -173,6 +175,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionDelete(this);
 		AddToUndoList(pAct);
 		break;
+	case MDEL:
+		pAct = new ActionMultipleDelete(this);
+		break;
 	case SAVE:
 		pAct = new ActionSave(this);
 		break;
@@ -252,8 +257,8 @@ bool ApplicationManager::ValidateCircuit() {
 	Connection** conno;
 	Component** compolist = new Component * [CompCount + 1];
 	compolist[j1++] = CompList[i1];
-	conno = CompList[i1]->getTermConnections(TERM1);
-	compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+	TerminalNum T = TERM2;
+	
 	if (CompCount < 3)
 		return false;
 	int cG = 0, tkrar = 0;
@@ -279,15 +284,14 @@ bool ApplicationManager::ValidateCircuit() {
 			pUI->PrintMsg(to_string(c1) + " at " + to_string(c2));
 			return false;
 		}
-		if (i != 0) {
+		
+		if (T == TERM1)
+			conno = CompList[i1]->getTermConnections(TERM2);
+		else
 			conno = CompList[i1]->getTermConnections(TERM1);
-			compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
-			if (compolist[j1] == compolist[j1 - 1]) {
-				conno = CompList[i1]->getTermConnections(TERM2);
-				compolist[j1] = nullptr;
-				compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
-			}
-		}
+		compolist[j1] = conno[0]->getOtherComponent(CompList[i1]);
+		T = compolist[j1]->whichTerminal(conno[0]);
+		
 		for (int k = 0; k < CompCount; k++) {
 			if (compolist[j1] == compolist[k] && j1 != k)
 				tkrar++;
@@ -317,11 +321,12 @@ bool ApplicationManager::ValidateCircuit() {
 
 	if (compolist[j1 -1] == CompList[0] && (j1 -1 ) != CompCount) {
 			pUI->PrintMsg(to_string(j1)+  " end " + to_string(CompCount) + " end " );
+			pUI->PrintMsg(to_string(j1)+  " end " + to_string(CompCount) + " end " );
 			return false;
 	}*/
 
-	if (cG != 1 || tkrar > 2) {
-		pUI->PrintMsg(to_string(tkrar));
+	if (cG != 1 || tkrar > 1) {
+		pUI->PrintMsg("tkrar "+to_string(tkrar));
 		return false;
 	}
 
@@ -358,19 +363,19 @@ void ApplicationManager::ToDesign() {
 }
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
-double ApplicationManager::CalculateCurrent() {
+double ApplicationManager::CalculateCurrent() {  
 	double SumResistance = 0;
 	double SumVoltage = 0;
-	for (int i = 0; i < CompCount; i++)
+	for (int i = 0; i < CompCount; i++) 
 	{
-		if (CompList[i]->getResistance() != -1)
+		if (CompList[i]->getResistance() != -1 )
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
-		if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
-		{
+		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
+		
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
-		}
+		
 	}
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
 	return (SumVoltage / SumResistance);
@@ -381,12 +386,12 @@ double ApplicationManager::CalculateCurrent() {
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
 }
-void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the connection 
+void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
 	for (int i = 0; i < CompCount; i++)
-		CompList[i]->load(i + 1, labeli[i], valueI[i]);
+		CompList[i]->load(i + 1, labeli[i], valueI[i]);    // load the components 
 	for (int i = 0; i < ConnCount; i++)
-		ConnList[i]->load(comp001[i], comp002[i]);
+		ConnList[i]->load(comp001[i], comp002[i]);         // load the connections 
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -446,14 +451,14 @@ ApplicationManager::~ApplicationManager()
 	 
 	
  } 
- void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
+ void ApplicationManager::SetCopyComp(Component* comp1)            //Setter for the component + saving its values(copy). 
  {
 	 if(comp1!=nullptr)
 	 CopyComp = comp1->Copy();
  }
- Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
+ Component* ApplicationManager::GetCopyComp() const				   //Getter for the component after coping or cutting the component.
  {
-	 return CopyComp;
+	 return CopyComp->Copy();
  }
 
 ////if (CopyComp==nullptr)
@@ -473,67 +478,118 @@ void ApplicationManager::deleteCompounent(Component* delet)
 {
 	int x1 = 0;
 	Component* T;
-	for (int i = 0; i < CompCount; i++)
+	if (delet)
 	{
-		if (CompList[i] == delet)
+		for (int i = 0; i < CompCount; i++)
 		{
-			x1 = i;
-			for (int j = x1; j < CompCount; j++)
+			if (CompList[i] == delet)
 			{
-				CompList[j] = CompList[j + 1];
+				x1 = i;
+				for (int j = x1; j < CompCount; j++)
+				{
+					CompList[j] = CompList[j + 1];
+				}
+				CompCount--;
+
+				int C1, C2;
+				C1 = delet->getTermConnCount(TERM1);
+				C2 = delet->getTermConnCount(TERM2);
+				Connection** c1;
+				Connection** c2;
+				/* c1 = nullptr;
+				 c2 = nullptr;*/
+				c1 = delet->getTermConnections(TERM1);
+
+				c2 = delet->getTermConnections(TERM2);
+
+				for (int y = 0; y < C1; y++)
+				{
+
+					deleteConnection(c1[0]);
+				}
+				for (int y = 0; y < C2; y++)
+				{
+					deleteConnection(c2[0]);
+				}
+				delete	delet;
+
 			}
-			CompCount--;
-
-			int C1, C2;
-			C1 = delet->getTermConnCount(TERM1);
-			C2 = delet->getTermConnCount(TERM2);
-			Connection** c1;
-			Connection** c2;
-			/* c1 = nullptr;
-			 c2 = nullptr;*/
-			c1 = delet->getTermConnections(TERM1);
-
-			c2 = delet->getTermConnections(TERM2);
-
-			for (int y = 0; y < C1; y++)
-			{
-
-				deleteConnection(c1[0]);
-			}
-			for (int y = 0; y < C2; y++)
-			{
-				deleteConnection(c2[0]);
-			}
-			delete	delet;
-
 		}
 	}
-	cout << "wefq";
+
 }
 void ApplicationManager::deleteConnection(Connection* delet)
 {
-	int x1 = 0;
-	Component* T;
-	for (int i = 0; i < ConnCount; i++)
+	if (delet)
 	{
-		if (ConnList[i] == delet)
+		for (int i = 0; i < ConnCount; i++)
 		{
-			x1 = i;
-			for (int j = x1; j < ConnCount; j++)
+			if (ConnList[i] == delet)
 			{
-				ConnList[j] = ConnList[j + 1];
-			}
-			ConnCount--;
-			for (int zc = 0; zc < CompCount; zc++)
-			{
-				if (delet->getOtherComponent(CompList[i]))
+				int x1 = i;
+				for (int j = x1; j < ConnCount; j++)
 				{
-
+					ConnList[j] = ConnList[j + 1];
 				}
+				ConnCount--;
+				for (int zc = 0; zc < CompCount; zc++)
+				{
+					if (delet->getOtherComponent(CompList[i]))
+					{
+
+					}
+				}
+				delete	delet;
 			}
-			delete	delet;
 		}
 	}
+}
+
+
+int  ApplicationManager::multipleStoreComp(Component* multi,int m)
+{
+	static int multiplecount = 0;
+	if (m != 0)
+	{
+		multiCompList = nullptr;
+		multiCompList = new Component * [CompCount];
+		multiplecount = 0;
+		return 0;
+	}
+	
+
+	multiCompList[multiplecount++]=multi;
+	return multiplecount;
+
+}
+int  ApplicationManager::multipleStoreCon(Connection* multi, int m)
+{
+	static int multiplecount = 0;
+	if (m != 0)
+	{
+		multiConnList = nullptr;
+		multiConnList = new Connection * [ConnCount];
+		multiplecount = 0;
+		return 0;
+		
+	}
+
+	
+	multiConnList[multiplecount++] = multi;
+	return multiplecount;
+
+}
+void ApplicationManager::MultipleDelete(int comp, int conn) 
+{
+	for(int i=0;i<comp;i++)
+    {
+		deleteCompounent(multiCompList[i]);
+    }
+
+	for (int j=0; j < conn; j++)
+    {
+		deleteConnection(multiConnList[j]);
+    }
 }
 
 

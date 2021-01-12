@@ -10,15 +10,18 @@ ActionAddPaste::~ActionAddPaste(void)
 {
 
 }
-void ActionAddPaste::Execute()
+void ActionAddPaste::Execute() //Execute action
 {
 
 	UI* pUI = pManager->GetUI(); 
-	pUI->PrintMsg("Select a place to paste your component : ");
-	while (!(Cy > 80 + 50 / 2 &&
-		Cy < 650 - 50 - 50 / 2 &&
-		Cx>50 / 2 &&
-		Cx < 1200 - 80 / 2))
+	pUI->PrintMsg("Select a place to paste your component : ");     
+	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
+		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
+		&& Cx>pUI->getCompWidth() / 2
+		&& Cx < pUI->getWidth() - pUI->getToolItemWidth() / 2))// (!(Cy > 80 + 50 / 2 &&                                // Check if the place between the boundary or not 
+	//	Cy < 650 - 50 - 50 / 2 &&
+	//	Cx>50 / 2 &&
+	//	Cx < 1200 - 80 / 2))
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
@@ -28,24 +31,24 @@ void ActionAddPaste::Execute()
 	int compWidth = pUI->getCompWidth();
 	int compHeight = pUI->getCompHeight();
 	
-	pGInfo->PointsList[0].x = Cx - compWidth / 2; 
+	pGInfo->PointsList[0].x = Cx - compWidth / 2;                // Creating a graphics info for the new place
 	pGInfo->PointsList[0].y = Cy - compHeight / 2;
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Component* ptrCOMP=nullptr; 					   	   //TAYIL74
+	Component* ptrCOMP=nullptr; 					   	
 	/*pManager->GetCopyComp()->Copy(ptrCOMP);*/
 //	ptrCOMP->SetGinfo(pGInfo);
 	
-	if (pManager->GetCopyComp() ==nullptr)
+	if (pManager->GetCopyComp() ==nullptr)                        // showing a window if there is no comp to paste
 	{
 		pUI->ClearStatusBar();
 		pUI->CreateErrorWind("error \n");
 	}
 	else
 	{
-		ptrCOMP = pManager->GetCopyComp()/*->Copy(ptrCOMP)*/;
-		//Component* ptrCOMP=nullptr; 					   	   //TAYIL74
+		ptrCOMP = pManager->GetCopyComp()/*->Copy(ptrCOMP)*/;     // Paste the component after taking its graphics info 
+		//Component* ptrCOMP=nullptr; 					   	  
         //pManager->GetCopyComp()->Copy(ptrCOMP);
 		ptrCOMP->SetGinfo(pGInfo);
 		pManager->AddComponent(ptrCOMP);
@@ -118,6 +121,7 @@ void ActionAddPaste::Execute()
 
 void ActionAddPaste::Undo()
 {
+	//ln
 	comp2 = comp1->Copy();
 	pManager->deleteCompounent(comp1);
 }

@@ -8,7 +8,7 @@ ActionSelect::~ActionSelect(void)
 
 void ActionSelect::Execute()
 {
-	UI* pUI = pManager->GetUI();
+    UI* pUI = pManager->GetUI();
 	pUI->PrintMsg("select a component");
 	pUI->GetPointClicked(cx,cy);
 	comp = pManager->GetComponentByCordinates(cx, cy);

@@ -29,7 +29,7 @@ void ActionAddSwi::Execute()
 		pUI->GetPointClicked(Cx, Cy);
 	}
 
-	string sS;
+	string sS;             // Checking if the switch is open or closed. 
 	bool isBool;
 	bool S;
 	do {
@@ -52,7 +52,7 @@ void ActionAddSwi::Execute()
 	int compWidth = pUI->getCompWidth();
 	int compHeight = pUI->getCompHeight();
 
-	pGInfo->PointsList[0].x = Cx - compWidth / 2;
+	pGInfo->PointsList[0].x = Cx - compWidth / 2;           // Creating a Graphics info for the new switch 
 	pGInfo->PointsList[0].y = Cy - compHeight / 2;
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
