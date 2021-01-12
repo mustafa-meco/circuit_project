@@ -13,7 +13,7 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 
 void Connection::Draw(UI* pUI) //draw the connection between two points 
 {
-	pUI->DrawConnection(*pGfxInfo, pconnection == this);
+	pUI->DrawConnection(*pGfxInfo, pconnection == this); 
 	
 }
 

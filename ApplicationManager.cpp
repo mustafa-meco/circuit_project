@@ -697,7 +697,7 @@ double ApplicationManager::saveModule() {
 		pUI->CreateErrorWind("error \n");
 	}
 	else {
-		double SumResistance;
+		double SumResistance=0;
 		
 		for (int i = 0; i < CompCount; i++)
 		{

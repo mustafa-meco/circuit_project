@@ -73,7 +73,6 @@
     <ClCompile Include="Actions\ActionMultipleDelete.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="Actions\ActionRedo.cpp" />
-    <ClCompile Include="ActionAddDesignedModule.cpp" />
     <ClCompile Include="Actions\ActionAddDesignedModule.cpp" />
     <ClCompile Include="Actions\ActionSaveDesignedModule.cpp" />
   </ItemGroup>
@@ -135,7 +134,6 @@
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionMultipleDelete.h" />
     <ClInclude Include="Actions\ActionRedo.h" />
-    <ClInclude Include="ActionAddDesignedModule.h" />
     <ClInclude Include="Actions\ActionAddDesignedModule.h" />
     <ClInclude Include="Actions\ActionSaveDesignedModule.h" />
   </ItemGroup>

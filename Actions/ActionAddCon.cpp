@@ -56,7 +56,7 @@ void ActionAddCon::Execute()
 		pGInfo->PointsList[0].y = comp1->getCompCentery(pUI);
 		pGInfo->PointsList[1].y = comp2->getCompCentery(pUI);
 		TerminalNum comp1conn, comp2conn;
-		if (Cx1 < comp1->getCompCenterx(pUI))                                        //checks from where the connection will start
+		if (Cx1 < comp1->getCompCenterx(pUI))                        //checks from where the connection will start from right or the left 
 		{
 			pGInfo->PointsList[0].x = comp1->getCompCenterx(pUI) - compWidth / 2;
 

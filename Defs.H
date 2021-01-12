@@ -12,13 +12,13 @@ enum ActionType
 	ADD_RESISTOR,		//Add Resistor
 	ADD_SWITCH,			//Add Switch
 	ADD_BULB,			//Add Bulb
-	ADD_GROUND,
-	ADD_BATTERY,
-	ADD_BUZZER,
-	ADD_FUES,
+	ADD_GROUND,         //Add Ground 
+	ADD_BATTERY,        //Add Battery 
+	ADD_BUZZER,         //Add Buzzer  
+	ADD_FUES,           //Add fues
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
-	ADD_MOD,
+	ADD_MOD,            //Add modulation  
 
  	ADD_PASTE,          //Add Paste 
 
@@ -54,7 +54,7 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
-enum BatPolarity 
+enum BatPolarity  //direction of the battery which will used to calculate the voltage   
 {
 	RTL, LTR
 };
