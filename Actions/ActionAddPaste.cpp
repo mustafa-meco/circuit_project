@@ -50,6 +50,9 @@ void ActionAddPaste::Execute()
 		ptrCOMP->SetGinfo(pGInfo);
 		pManager->AddComponent(ptrCOMP);
 		pUI->ClearStatusBar();
+
+
+		comp1 = ptrCOMP;
 	}
 	
 	
@@ -115,10 +118,12 @@ void ActionAddPaste::Execute()
 
 void ActionAddPaste::Undo()
 {
-
+	comp2 = comp1->Copy();
+	pManager->deleteCompounent(comp1);
 }
 
 void ActionAddPaste::Redo()
 {
-
+	comp1 = comp2;
+	pManager->AddComponent(comp1);
 }

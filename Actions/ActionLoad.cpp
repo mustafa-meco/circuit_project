@@ -49,11 +49,7 @@ void ActionLoad::Execute()
 
 	for (int j = 0; j < x; j++)
 	{
-		
-
-
 		getline(inFile, arrName[j], ' ');
-
 
 		getline(inFile, arrID[j], ' ');
 		
@@ -69,9 +65,7 @@ void ActionLoad::Execute()
 		arrVALUEcorr[j] = stod(arrVALUE[j]);
 		arrCOORDINATES1corr[j] = stoi(arrCOORDINATES1[j]);
 		arrCOORDINATES2corr[j] = stoi(arrCOORDINATES2[j]);
-
-		
-		
+	
 		GraphicsInfo* pGInfo5 = new GraphicsInfo(2);
 		pGInfo5->PointsList[0].x = stoi(arrCOORDINATES1[j]);
 		pGInfo5->PointsList[0].y = stoi(arrCOORDINATES2[j]);

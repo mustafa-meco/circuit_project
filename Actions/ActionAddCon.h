@@ -13,6 +13,10 @@ private:
 	//int x1, y1, x2, y2;	//Two corners of the rectangluar area
 	Component* comp1;
 	Component* comp2;
+	Connection* con;
+	Component* compA;
+	Component* compB;
+	GraphicsInfo* undo1;
 public:
 	ActionAddCon(ApplicationManager* pApp);
 	virtual ~ActionAddCon(void);

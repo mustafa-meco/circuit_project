@@ -28,10 +28,10 @@ void ActionSave::Execute() {
 		outFile << data[i] << endl;
 	outFile << "Connections" << endl;
 	outFile << ConnCount << endl;
-	for (int i = 0; i < CompCount; i++)
-		outFile << data[i+CompCount] << endl;
+	for (int i = 0; i < ConnCount; i++)
+		outFile << data[i+ConnCount] << endl;
 
-	
+	outFile.close();
 }
 
 void ActionSave::Undo()

@@ -17,7 +17,7 @@ void ActionAddSwi::Execute()
 	UI* pUI = pManager->GetUI();
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new switch: Click anywhere to add");
+	pUI->PrintMsg("Adding a new switch: Cli");
 
 	//Get Center point of the area where the Comp should be drawn
 	pUI->GetPointClicked(Cx, Cy);
@@ -60,11 +60,21 @@ void ActionAddSwi::Execute()
 	Switch* pS = new Switch(pGInfo/*, S*/);
 	pS->setStatus(S);
 	pManager->AddComponent(pS);
+
+	comp = pS;
+	undo1 = pGInfo;
+	undo2 = S;
 }
 
 void ActionAddSwi::Undo()
-{}
+{
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddSwi::Redo()
-{}
+{
+	Switch* pS = new Switch(undo1/*, undo2*/);
+	pS->setStatus(undo2);
+	pManager->AddComponent(pS);
+}
 

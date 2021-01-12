@@ -17,7 +17,7 @@ void ActionAddRes::Execute()
 	UI* pUI = pManager->GetUI();
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new resistor: Click anywhere to add");
+	pUI->PrintMsg("Adding a new resistor: Click to add");
 
 	//Get Center point of the area where the Comp should be drawn
 	pUI->GetPointClicked(Cx, Cy);
@@ -59,12 +59,22 @@ void ActionAddRes::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight/2;
 
 	Resistor* pR = new Resistor(pGInfo);
+	pR->setResistance(R);
 	pManager->AddComponent(pR);
+	comp = pR;
+	undo1 = pGInfo;
+	undo2 = R;
 }
 
 void ActionAddRes::Undo()
-{}
+{
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddRes::Redo()
-{}
+{
+	Resistor* pR = new Resistor(undo1);
+	pR->setResistance(undo2);
+	pManager->AddComponent(pR);
+}
 

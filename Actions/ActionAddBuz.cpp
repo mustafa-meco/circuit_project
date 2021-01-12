@@ -45,10 +45,17 @@ void ActionAddBuz::Execute()
 
 	Buzzer* pR = new Buzzer(pGInfo);
 	pManager->AddComponent(pR);
+	comp = pR;
+	undo1 = pGInfo;
 }
 
 void ActionAddBuz::Undo()
-{}
+{
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddBuz::Redo()
-{}
+{
+	Battery* pR = new Battery(undo1);
+	pManager->AddComponent(pR);
+}

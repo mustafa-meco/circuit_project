@@ -13,21 +13,12 @@ ActionAddBat::~ActionAddBat(void)
 void ActionAddBat::Execute()
 {
 
-	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
 
-	//Print Action Message
 	pUI->PrintMsg("Adding a new battery: Click anywhere to add");
 
-	//Get Center point of the area where the Comp should be drawn
-	
 	pUI->GetPointClicked(Cx, Cy);
-	//pManager->GetComponentByCordinates(Cx, Cy);
 	
-	/*int compWidth = pUI->getCompWidth();
-	int compHeight = pUI->getCompHeight();*/
-	//pGInfo->PointsList[0].y = comp->getCompCentery(pUI);
-	//pGInfo->PointsList[1].y = comp->getCompCentery(pUI);
 
 	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
 		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
@@ -37,19 +28,6 @@ void ActionAddBat::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
-	//pManager->GetComponentByCordinates(Cx, Cy);
-
-	/*	for (int i = 0; i < ; i++)
-		{
-			if ()
-			{
-			}
-		}*/
-
-	 
-
-
-
 
 	string sV;
 	bool isNumber;
@@ -83,10 +61,20 @@ void ActionAddBat::Execute()
 	Battery* pR = new Battery(pGInfo/*, V*/);
 	pR->setSourceVoltage(V);
 	pManager->AddComponent(pR);
+	comp = pR;
+	undo1 = pGInfo;
+	undo2 = V;
 }
 
 void ActionAddBat::Undo()
-{}
+{
+
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddBat::Redo()
-{}
+{
+	Battery* pR = new Battery(undo1/*, undo2*/);
+	pR->setSourceVoltage(undo2);
+	pManager->AddComponent(pR);
+}

@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\ActionRedo.cpp" />
     <ClCompile Include="Actions\ActionAddBat.cpp" />
     <ClCompile Include="Actions\ActionAddBul.cpp" />
     <ClCompile Include="Actions\ActionAddBuz.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions\ActionRedo.h" />
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddBat.h" />
     <ClInclude Include="Actions\ActionAddBul.h" />

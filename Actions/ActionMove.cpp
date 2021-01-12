@@ -20,6 +20,7 @@ void ActionMove::Execute()
 
 	pUI->ClearStatusBar();
 	comp = pManager->GetComponentByCordinates(cx, cy);
+	undo1=comp->getm_pGfxInfo();
 	int x = cy, y = cx;
 	buttonstate c;
 	if (comp != nullptr)
@@ -35,7 +36,15 @@ void ActionMove::Execute()
 }
 
 void ActionMove::Undo()
-{}
+{
+	GraphicsInfo* temp= comp->getm_pGfxInfo();
+	comp->setm_pGfxInfo((undo1->PointsList[1].x + undo1->PointsList[0].x)/2, (undo1->PointsList[1].y + undo1->PointsList[0].y)/2);
+	undo1 = temp;
+}
 
 void ActionMove::Redo()
-{}
+{
+	GraphicsInfo* temp = comp->getm_pGfxInfo();
+	comp->setm_pGfxInfo((undo1->PointsList[1].x + undo1->PointsList[0].x) / 2, (undo1->PointsList[1].y + undo1->PointsList[0].y) / 2);
+	undo1 = temp;
+}

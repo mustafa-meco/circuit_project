@@ -7,7 +7,6 @@
 #include "Actions/ActionAddCon.h"
 #include "Actions/ActionEdit.h"
 #include "Actions/ActionSave.h"
-//#include "ActionLoad.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionAddCopy.h"
@@ -17,6 +16,8 @@
 #include "Actions/ActionAddCut.h"
 #include"Actions/ActionMove.h"
 #include "Actions/ActionDelete.h"
+#include"Actions/ActionUndo.h"
+#include"Actions/ActionRedo.h"
 #include<Windows.h>
 #include <iostream>
 
@@ -31,11 +32,17 @@ ApplicationManager::ApplicationManager()
 	lineCount = 0;
 
 	IsSimulation = 0;
+	undoNum = 0;
+	redoNum = 0;
 
 	for (int i = 0; i < MaxCompCount; i++)
 		CompList[i] = nullptr;
 	for (int i = 0; i < MaxCompCount; i++)
 		ConnList[i] = nullptr;
+	for (int i = 0; i < 10; i++)
+		UndoList[i] = nullptr;
+	for (int i = 0; i < 10; i++)
+		RedoList[i] = nullptr;
 
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
@@ -66,6 +73,7 @@ void ApplicationManager::AddComponent(Component* pComp)
 }
 void ApplicationManager::AddConnection(Connection* pConn)
 {
+	if(pConn!=nullptr)
 	ConnList[ConnCount++] = pConn;
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y)
@@ -93,7 +101,6 @@ Connection* ApplicationManager::GetConnectionByCordinates(int x, int y)
 		{
 			return	ConnList[i];
 		}
-
 	}
 	return nullptr;
 }
@@ -112,43 +119,59 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 	case ADD_RESISTOR:
 		pAct = new ActionAddRes(this);
+		AddToUndoList(pAct);
 		break;
 		// TODO: Add remaining actions
 	case ADD_BULB:
 		pAct = new ActionAddBul(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_SWITCH:
 		pAct = new ActionAddSwi(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_GROUND:
 		pAct = new ActionAddGro(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_BATTERY:
 		pAct = new ActionAddBat(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_BUZZER:
 		pAct = new ActionAddBuz(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_FUES:
 		pAct = new ActionAddFues(this);
+		AddToUndoList(pAct);
 		break;
+	case UNDO:
+		pAct = new  ActionUndo(this);
+	break;
+	case REDO:
+		pAct = new ActionRedo(this);
+	break;
 	case EDIT_Label:
 		pAct = new ActionEdit(this);
 		break;
 	case MOVE:
 		pAct = new ActionMove(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_Label:
 		pAct = new  ActionLabel(this);
 		break;
 	case ADD_CONNECTION:
 		pAct = new ActionAddCon(this);
+		AddToUndoList(pAct);
 		break;
 	case SELECT:
 		pAct = new ActionSelect(this);
 		break;
 	case DEL:
 		pAct = new ActionDelete(this);
+		AddToUndoList(pAct);
 		break;
 	case SAVE:
 		pAct = new ActionSave(this);
@@ -167,9 +190,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case ADD_CUT:
 		pAct = new ActionAddCut(this);
+		AddToUndoList(pAct);
 		break;
 	case ADD_PASTE:
 		pAct = new ActionAddPaste(this);
+		AddToUndoList(pAct);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -179,8 +204,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		//save(ActType);
 		pAct->Execute();
-		delete pAct;
-		pAct = nullptr;
+		/*delete pAct;
+		pAct = nullptr;*/
 	}
 }
 ////////////////////////////////////////////////////////////////////
@@ -198,18 +223,16 @@ string* ApplicationManager::save(int& cp, int& cn) const {
 
 void ApplicationManager::UpdateInterface()
 {
+	cout << CompCount<<endl;
 	//if (CompCount) 
 	//{
 	pUI->ClearDrawingArea();
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->Draw(pUI);
 
-
-
-
 	for (int i = 0; i < ConnCount; i++)
 		ConnList[i]->Draw(pUI);
-	Sleep(50);
+	Sleep(100);
 	//}
 	//else
 //Exit()
@@ -316,6 +339,7 @@ bool ApplicationManager::ValidateCircuit() {
 
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
+
 	if (!ValidateCircuit()) {
 		pUI->CreateErrorWind("error \n");
 	}
@@ -348,7 +372,9 @@ double ApplicationManager::CalculateCurrent() {
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
 		}
 	}
+	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
 	return (SumVoltage / SumResistance);
+	
 }
 
 // Calculates voltage at each component terminal
@@ -422,6 +448,7 @@ ApplicationManager::~ApplicationManager()
  } 
  void ApplicationManager::SetCopyComp(Component* comp1)            //TAYIL74
  {
+	 if(comp1!=nullptr)
 	 CopyComp = comp1->Copy();
  }
  Component* ApplicationManager::GetCopyComp() const				   //TAYIL74
@@ -481,7 +508,7 @@ void ApplicationManager::deleteCompounent(Component* delet)
 
 		}
 	}
-
+	cout << "wefq";
 }
 void ApplicationManager::deleteConnection(Connection* delet)
 {
@@ -507,4 +534,63 @@ void ApplicationManager::deleteConnection(Connection* delet)
 			delete	delet;
 		}
 	}
+}
+
+
+
+
+
+void ApplicationManager::AddToUndoList(Action* A)
+{
+	if (undoNum < 10)
+	{
+		UndoList[undoNum] = A;
+		undoNum++;
+	}
+	else
+	{
+		for (int i = 0; i < 9 ; i++)
+		{
+			UndoList[i] = UndoList[i++];
+		}
+		UndoList[9] = A;
+	}
+}
+void ApplicationManager::AddToRedoList(Action* A)
+{
+	if (redoNum < 10)
+	{
+		RedoList[redoNum] = A;
+		redoNum++;
+	}
+	else
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			RedoList[i] = RedoList[i++];
+		}
+		RedoList[9] = A;
+	}
+}
+void ApplicationManager::ExcuteUndo()
+{
+	if (undoNum > 0 )
+	{
+		undoNum--;
+		UndoList[undoNum]->Undo();
+		AddToRedoList(UndoList[undoNum]);
+		UndoList[undoNum] = nullptr;
+	} 
+}
+void ApplicationManager::ExcuteRedo()
+{
+	if (redoNum > 0 )
+	{
+		redoNum--;
+		RedoList[redoNum]->Redo();
+		AddToUndoList(RedoList[redoNum]);
+		RedoList[redoNum] = nullptr;
+	}
+	if (redoNum < 0)
+		redoNum = 0;
 }

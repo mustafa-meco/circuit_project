@@ -46,10 +46,17 @@ void ActionAddGro::Execute()
 
 	Ground* pR = new Ground(pGInfo);
 	pManager->AddComponent(pR);
+	comp = pR;
+	undo1 = pGInfo;
 }
 
 void ActionAddGro::Undo()
-{}
+{
+	pManager->deleteCompounent(comp);
+}
 
 void ActionAddGro::Redo()
-{}
+{
+	Ground* pR = new Ground(undo1);
+	pManager->AddComponent(pR);
+}

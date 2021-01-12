@@ -194,3 +194,28 @@ double Component::getTerm2Volt()
 {
 	return term2_volt;
 }
+
+
+GraphicsInfo* Component::getm_pGfxInfo()
+{
+	GraphicsInfo* m=new GraphicsInfo(2
+	);
+	m->PointsList[0].x = m_pGfxInfo->PointsList[0].x;
+	m->PointsList[1].x = m_pGfxInfo->PointsList[1].x;
+	m->PointsList[0].y = m_pGfxInfo->PointsList[0].y;
+	m->PointsList[1].y = m_pGfxInfo->PointsList[1].y;
+	return m;
+
+}
+
+
+TerminalNum Component::whichTerminal(Connection* Conn) {
+	for (int i = 0; i < term1_conn_count; i++) {
+		if (Conn == term1_conns[i])
+			return TERM1;
+	}
+	for (int i = 0; i < term2_conn_count; i++) {
+		if (Conn == term2_conns[i])
+			return TERM2;
+	}
+}

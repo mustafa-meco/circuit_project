@@ -22,6 +22,7 @@ protected:
 	//Each terminal is connected to set of connections
 	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections
 	Connection *term2_conns[MAX_CONNS];
+
 	struct demo
 	{
 		//array declared inside structure
@@ -95,7 +96,7 @@ public:
 	//static void selection();
 	GraphicsInfo* getm_pGfxInfo() ;
 	//void DeleteImage(GraphicsInfo* m_pGfxInfo, UI*);
-	
+	TerminalNum whichTerminal(Connection* Conn);
 
 };
 #endif

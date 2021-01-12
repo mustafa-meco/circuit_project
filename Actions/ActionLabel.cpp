@@ -20,10 +20,7 @@ void ActionLabel::Execute()
 	pUI->GetPointClicked(x, y);
 	Component* comp = pManager->GetComponentByCordinates(x, y);
 	
-	
 	pUI->ClearStatusBar();
-
-
 
 	if (comp != nullptr)
 	{	//comp->selection();
