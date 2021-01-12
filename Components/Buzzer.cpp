@@ -1,6 +1,5 @@
-
 #include "Buzzer.h"
-
+#include<Windows.h>
 Buzzer::Buzzer(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 
@@ -31,8 +30,11 @@ void Buzzer::Draw(UI* pUI)
 }
 void Buzzer::Operate()
 {
-
-
+	if (this->GetOutStatus() == 1)
+	{
+		Beep(500, 500);
+		Sleep(100);
+	}
 }
 
 string Buzzer::save() const {
@@ -54,4 +56,21 @@ Component* Buzzer::Copy()
 	B = new Buzzer(m_pGfxInfo);
 	B->Setlabel(m_Label);
 	return B;
+}
+
+int Buzzer::GetOutStatus()
+{
+	if (term1_volt == term2_volt)
+		return 0;
+	else
+		return 1;
+
+}
+int Buzzer::GetInputStatus()
+{
+	return -1;
+}
+
+void Buzzer::setInputStatus(STATUS s)
+{
 }

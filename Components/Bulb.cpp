@@ -2,6 +2,7 @@
 
 Bulb::Bulb(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
+	x = 0;
 	resistance = 1;
 	sourceVoltage = 0;
 	//pUI->PrintMsg("Enter the value of the resistace: ");
@@ -30,13 +31,15 @@ Bulb::Bulb(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 void Bulb::Draw(UI* pUI)
 {
 	//Call output class and pass bulb drawing info to it.
-	pUI->DrawBulb(*m_pGfxInfo, pcomp == this); //update to draw bulb
-
+	if (x == 0)
+		pUI->DrawBulb(*m_pGfxInfo, pcomp == this); //update to draw bulb
+	else
+		pUI->DrawON(*m_pGfxInfo, pcomp == this);
 }
 
 void Bulb::Operate()
 {
-
+	x = this->GetOutStatus();
 }
 
 string Bulb::save() const {
@@ -59,4 +62,20 @@ Component* Bulb::Copy()
 	B->setResistance(this->resistance);
 	B->Setlabel(m_Label);
 	return B;
+}
+int Bulb::GetOutStatus()
+{
+	if (term1_volt == term2_volt)
+		return 0;
+	else
+		return 1;
+
+}
+int Bulb::GetInputStatus()
+{
+	return-1;
+}
+
+void Bulb::setInputStatus(STATUS s)
+{
 }

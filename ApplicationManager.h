@@ -46,6 +46,7 @@ private:
 public:
 	ApplicationManager(); //constructor
 
+	bool isSim();
 	//Reads the required action from the user and returns the corresponding action type
 	ActionType GetUserAction();
 

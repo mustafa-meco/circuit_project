@@ -75,6 +75,7 @@
     <ClCompile Include="Actions\ActionRedo.cpp" />
     <ClCompile Include="Actions\ActionSaveDesignedModule.cpp" />
     <ClCompile Include="Actions\ActionAddDesignedModule.cpp" />
+    <ClCompile Include="Actions\ActionTestSwi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Actions\ActionRedo.h" />
     <ClInclude Include="Actions\ActionSaveDesignedModule.h" />
     <ClInclude Include="Actions\ActionAddDesignedModule.h" />
+    <ClInclude Include="Actions\ActionTestSwi.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

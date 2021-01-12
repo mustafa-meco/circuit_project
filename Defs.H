@@ -9,6 +9,7 @@ enum TerminalNum { TERM1, TERM2 };
 //All possible actions
 enum ActionType 
 {
+
 	ADD_RESISTOR,		//Add Resistor
 	ADD_SWITCH,			//Add Switch
 	ADD_BULB,			//Add Bulb
@@ -47,7 +48,7 @@ enum ActionType
 	MOD_MODE,
 
 	EXIT,		//Exit the application
-
+	TestSwitch,
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 
@@ -63,6 +64,15 @@ enum BatPolarity
 {
 	RTL, LTR
 };
+
+enum STATUS
+{
+	open,
+	close,
+
+};
+
+
 	
 //enum BatPolarity {
 //	RTL, LTR

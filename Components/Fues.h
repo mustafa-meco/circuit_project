@@ -11,4 +11,9 @@ public:
 	string save() const;
 	void load(int id,string LABELi, double VALUE ); //load fues
 	Component* Copy();
+	int GetOutStatus();	//returns status of output if BULB/BUZZER, return -1
+	int GetInputStatus();	//returns status of SWITCH, return -1
+
+	void setInputStatus(STATUS s);	//set status of SWITCH
 };
+

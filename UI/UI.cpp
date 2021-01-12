@@ -284,7 +284,8 @@ ActionType UI::GetUserAction() const
 		//[2] User clicks on the drawing area
 		if (y >= ToolBarHeight && y < height - StatusBarHeight)
 		{
-			return SELECT;	//user wants to select/unselect a component
+			return TestSwitch;	//user wants to select/unselect a component
+
 		}
 
 		//[3] User clicks on the status bar
@@ -535,6 +536,15 @@ void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 
 	//Draw Bulb at Gfx_Info (1st corner)
 	pWind->DrawImage(BulImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+
+void UI::DrawON(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string ONImage;
+		ONImage = "Images\\Comp\\ON.jpg";	
+
+
+	pWind->DrawImage(ONImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
 void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const

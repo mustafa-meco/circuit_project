@@ -20,7 +20,9 @@
 #include"Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
 #include "Actions/ActionAddModule.h"
+#include"Actions/ActionTestSwi.h"
 #include<Windows.h>
+
 #include <iostream>
 
 using namespace std;
@@ -115,6 +117,10 @@ ActionType ApplicationManager::GetUserAction()
 	return pUI->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////
+bool ApplicationManager::isSim()
+{
+	return IsSimulation;
+}
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
@@ -153,6 +159,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ADD_MOD:
 		pAct = new ActionAddModule(this);
 		break;
+	case TestSwitch:
+		pAct = new ActionTestSwi(this);
+		break;
+
 	case UNDO:
 		pAct = new  ActionUndo(this);
 		break;
@@ -371,6 +381,11 @@ void ApplicationManager::ToSimulation() {
 		double current = CalculateCurrent();
 		CalculateVoltages(current);
 		pUI->CreateSimulationToolBar();
+
+			for (int i = 0; i < CompCount; i++)
+			{
+				CompList[i]->Operate();
+			}
 	}
 }
 void ApplicationManager::ToDesign() {

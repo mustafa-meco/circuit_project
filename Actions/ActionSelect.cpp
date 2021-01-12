@@ -1,6 +1,8 @@
 #include "Action.h"
 #include"ActionSelect.h"
 
+#include<iostream>
+
 ActionSelect::ActionSelect(ApplicationManager* pApp) :Action(pApp)
 {}
 ActionSelect::~ActionSelect(void)
@@ -18,10 +20,8 @@ void ActionSelect::Execute()
 		pUI->PrintMsg("label: " + comp->getlabel());
 		//comp->selection();
 		/*pUI->ClearStatusBar();*/
-
-
+	
 	}
-
 }
 
 

@@ -16,7 +16,7 @@ void ActionAddBat::Execute()
 	UI* pUI = pManager->GetUI();
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new resistor: Click anywhere to add");
+	pUI->PrintMsg("Adding a new Battery: Click anywhere to add");
 
 	pUI->GetPointClicked(Cx, Cy);
 	//pManager->GetComponentByCordinates(Cx, Cy);

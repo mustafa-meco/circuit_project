@@ -221,3 +221,6 @@ TerminalNum Component::whichTerminal(Connection* Conn) {
 			return TERM2;
 	}
 }
+
+
+

@@ -40,3 +40,16 @@ Component* Fues::Copy()
 	B->Setlabel(m_Label);
 	return B;
 }
+
+int Fues::GetOutStatus()
+{
+	return -1;
+}
+int Fues::GetInputStatus()
+{
+	return -1;
+}
+
+void Fues::setInputStatus(STATUS s)
+{
+}

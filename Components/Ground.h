@@ -14,4 +14,9 @@ public:
 	void load(int id, string LABELi, double VALUE); // load ground component
 	Component* Copy();                              //Copy the component information 
 
+	int GetOutStatus();	//returns status of output if BULB/BUZZER, return -1
+	int GetInputStatus();	//returns status of SWITCH, return -1
+
+	void setInputStatus(STATUS s);	//set status of SWITCH
 };
+

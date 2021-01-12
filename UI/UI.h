@@ -182,7 +182,7 @@ public:
 	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	//Draws a fues
 	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
-
+	void DrawON(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	//void DrawEdit(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	// Draws Connection
 	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
@@ -198,6 +198,7 @@ public:
 
 
 	//void PrintLabel(string msg)const;
+
 
 	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
 	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
