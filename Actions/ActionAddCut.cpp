@@ -55,15 +55,15 @@ void ActionAddCut::Execute() //Execute action
 		pUI->PrintMsg("NO component is selected: ");
 	}
 	else								  // Cut the component 										
-		if (ptrComp == nullptr)															//TAYIL74
+		if (ptrComp == nullptr)															
 		{
 			pUI->PrintMsg("NO component is selected: ");
 		}
 		else if (ptConnection != nullptr)
 		{
-			pUI->PrintMsg("It is not allowed to cut a connection : ");					//TAYIL74
+			pUI->PrintMsg("It is not allowed to cut a connection : ");					
 		}
-		pUI->GetPointClicked(Cx, Cy);														//TAYIL74
+		pUI->GetPointClicked(Cx, Cy);														
 		ptrComp = pManager->GetComponentByCordinates(Cx, Cy);
 		ptConnection = dynamic_cast<Connection*>(ptrComp);
 	}
