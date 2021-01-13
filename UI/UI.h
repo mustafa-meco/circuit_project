@@ -34,6 +34,7 @@ struct GraphicsInfo
 
 class UI
 {
+	
 
 	enum DsgnMenuItem //The items of the design menu (you should add more items)
 	{
@@ -41,43 +42,43 @@ class UI
 		//If you want to change the menu items order, just change the order here
 		ITM_RES,		//Resistor item in menu
 		//TODO: Add more items names here
-		ITM_BULB,
-		ITM_SWI,           //Switch item in menu
-		ITM_BAT,
-		ITM_GRO,           //Ground item in menu
-		ITM_BUZ,           //Buzzer item in menu 
-		ITM_FUE,
-		ITM_MOD,
-		//ITM_ADD_MOD,
-		ITM_CON,           //Connection item in menu
-		ITM_SIM,
-		ITM_MODU,
+		ITM_BULB,          //Bulb item in menu
+		ITM_SWI,           //Switch item
+		ITM_BAT,           //Battery item 
+		ITM_GRO,           //Ground item
+		ITM_BUZ,           //Buzzer item 
+		ITM_FUE,           //fues item 
+	 	ITM_MOD,           //Modulation item 
+		ITM_CON,           //Connection item 
+		ITM_SIM,           //simulation item 
+		ITM_MODU,          //designed modulation item
 		/*ITM_COPY,
 		ITM_CUT,
 		ITM_PASTE,
 		ITM_EDIT,*/
-		ITM_LABEL,
-		ITM_LOAD,           //Load item in menu
+		ITM_LABEL,         // label item  
+		ITM_LOAD,          //Load item
 		//ITM_SAVE,
 		//ITM_MDELETE,
 		ITM_EXIT,		//Exit item
 	
-		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
+		ITM_DSN_CNT	    //no. of design menu items ==> This should be the last line in this enum
 	};
 	enum ActionsToolBarItem
 	{
-		ITMA_Edit, 
-		ITMA_Move,     
-		ITMA_Save, 
-		ITMA_Undo, 
-		ITMA_Redo, 
-		ITMA_Copy,          //Copy item in menu 
-		ITMA_Cut,           //Cut item in menu 
-		ITMA_Paste,         //Paste item in menu 
-		ITMA_Delete,
-		ITMA_MDel,
-		Itm_ACT_Num
+		ITMA_Edit,          //Edit item in the menu  
+		ITMA_Move,          //move item 
+		ITMA_Save,          //save item
+		ITMA_Undo,          //undo item
+		ITMA_Redo,          //Redo item 
+		ITMA_Copy,          //Copy item 
+		ITMA_Cut,           //Cut item  
+		ITMA_Paste,         //Paste item 
+		ITMA_Delete,        //Delete item 
+		ITMA_MDel,          // Modul item
+		Itm_ACT_Num        
 	};
+
 
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
@@ -85,13 +86,12 @@ class UI
 		ITM_CIRC_SIM,	//Circuit Simulate menu item
 		
 		//TODO:Add more items names here
-		ITM_AMM,
-		ITM_VOL,
-		ITM_DSN,
-		ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
+		ITM_AMM,          // Ammeter item
+		ITM_VOL,          //voltmeter item
+		ITM_DSN,          //design area item  
+		ITM_SIM_CNT		 //no. of simulation menu items ==> This should be the last line in this enum
 	
 	};
-	
 	enum ModMenuItem {
 		MITM_RES,
 		MITM_BULB,
@@ -100,29 +100,27 @@ class UI
 		MITM_MOD,
 		MITM_ADD_MOD,
 		MITM_CON,
-		
+
 		MITM_LOAD,
 		MITM_DSN,
 		ITM_MOD_CNT
 
 	};
-
-
-	MODE AppMode;		//Application Mode (design or simulation)
+		MODE AppMode;		//Application Mode (design or simulation)
 	
 	static const int	width = 1200, height = 650,	//Window width and height
-						wx = 15 , wy = 15,			//Window starting coordinates
-						StatusBarHeight = 50,	//Status Bar Height
-						ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-						ToolItemWidth = 80,		//Width of each item in toolbar menu
-						
-						
-						ActionBarWidth = 65,
-						
+		wx = 15, wy = 15,			//Window starting coordinates
+		StatusBarHeight = 50,	//Status Bar Height
+		ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+		ToolItemWidth = 80,		//Width of each item in toolbar menu
 
-						//Arbitrary values, you can change as you wish
-						COMP_WIDTH = 50,		//Component Image width
-						COMP_HEIGHT = 50;		//Component Image height
+
+		ActionBarWidth = 65,
+
+
+		//Arbitrary values, you can change as you wish
+		COMP_WIDTH = 50,		//Component Image width
+		COMP_HEIGHT = 50;		//Component Image height
 
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color
@@ -130,19 +128,19 @@ class UI
 	color MsgColor;			//Messages color
 	color BkGrndColor;		//Back ground color
 
-
-	window *pWind;
+	bool IsRealV;
+	window* pWind;
 	
 public:
 	
 	UI();
-	int getWidth()const;
-	int getHeight()const;
-	int getCompWidth() const;	//returns Component width
-	int getCompHeight() const;	//returns Component height
-	int getStatusBarHeight() const;
-	int getToolBarHeight() const;
-	int getToolItemWidth() const;
+	int getWidth()const;            //returns window width
+	int getHeight()const;           //returns Component width
+	int getCompWidth() const;	    //returns Component width
+	int getCompHeight() const;	    //returns Component height
+	int getStatusBarHeight() const; //returns Status Bar Height
+	int getToolBarHeight() const;   //returns Tool Bar Height
+	int getToolItemWidth() const;   //returns Tool Item Width
 	
 
 	
@@ -151,27 +149,28 @@ public:
 	string GetSrting();		//Returns a string entered by the user
 
 	ActionType GetUserAction() const; //Reads the user click and maps it to an action
-	void detectMouse(int&, int&);
-	buttonstate getbuttonstate(button b, int& x, int& y);
+	void detectMouse(int&, int&);      //detect the mouse click
+	buttonstate getbuttonstate(button b, int& x, int& y); //Getter where the user clicks
 	// Output Functions  ---------------------------
-	void ChangeTitle(string Title) const;
+	void ChangeTitle(string Title) const; //change the title of the window
 
-	void CreateErrorWind(string);
-	void DrawActionBar() const;
-	void DrawConfirm() const;
+	void CreateErrorWind(string);          // create a window to show a message
+	void DrawActionBar() const;            //draw a tool bar
+	void DrawConfirm() const;              //
 
-	void CreateDesignToolBar();	//Tool bar of the design mode
-	void CreateSimulationToolBar();//Tool bar of the simulation mode
+	void CreateDesignToolBar();	           //Tool bar of the design mode
+	void CreateSimulationToolBar();        //Tool bar of the simulation mode
+	void CreateStatusBar() const;	       //Create Status bar
+	void ClearToolBar()const;              // clear the tool bar
+	void ClearStatusBar() const;		   //Clears the status bar
+	void ClearDrawingArea() const;	       //Clears the drawing area
+	void ClearAll()const;                  //Clear all 
 	void CreateModulationToolBar();
-	void CreateStatusBar() const;	//Create Status bar
-	void ClearToolBar()const;
-	void ClearStatusBar() const;		//Clears the status bar
-	void ClearDrawingArea() const;	//Clears the drawing area
-	void ClearAll()const;  //Clear all 
-	
+	void DrawReal() const;
+	void DrawRealistic();
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
-	///TODO: Make similar functions for drawing all other components, connections, .. etc
+	//Draw a Bulb
 	void DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	// Draw a switch
 	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
@@ -189,19 +188,18 @@ public:
 	//void DrawConnection1(const GraphicsInfo& r_GfxInfo, bool selected = false) const; 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
 	//void PrintLabel(string msg)const;
-
+	//Draw A connection
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const;   //,bool selected
-	void DeleteConnection(const GraphicsInfo& r_GfxInfo); 
+ 
 	
 	void DrawWhite(const GraphicsInfo& r_GfxInfo);
-
-
-
 	//void PrintLabel(string msg)const;
-
-
-	void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
+    // Draws Connection
+	//void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;      //Mustafa Mahmoud Tayel 
+    //void DrawConnection(const GraphicsInfo& r_GfxInfo ) const;   	// Draws Connection
+	//Draw a Module 
 	void DrawModule(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	bool IsReal();
 	~UI();
 };
 

@@ -5,15 +5,20 @@
 //#include "../circuit_project/Actions/Action.h" 
 class ActionAddCopy : public Action
 {
-	int Cx;
+	int Cx; //center points of the components
 	int Cy;
 public:
-	ActionAddCopy(ApplicationManager* pApp);
+	ActionAddCopy(ApplicationManager* pApp);//constructor
+
 	
 
-	~ActionAddCopy(void); 
+	~ActionAddCopy(void); //destructor 
+
 	virtual void Execute();              //Execute action
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for copy
+
+	virtual void Redo(); //Redo for the copy 
+
 };
+

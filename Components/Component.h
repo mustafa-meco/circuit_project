@@ -5,57 +5,59 @@
 #include "..\UI\UI.h"
 #include "..\Connections\Connection.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //Base class for all components (resistor, capacitor,....etc)//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Base class for all components (resistor, capacitor,....etc) .
 class Component
 {
-private:
-
-	
+private:	
 protected:
-	bool mDeleted;
+	//bool mDeleted;                   
 	
 	//Each component has two ending terminals (term1, term2)
-	double term1_volt, term2_volt;	//voltage at terminals 1&2
+	double term1_volt, term2_volt;	  //voltage at terminals 1&2
 	double resistance, sourceVoltage; // internal resistance and voltage jump introduced by source
-	bool status;
-	bool polarity;
+	bool status;                      //check the status of wssome components
+	bool polarity;                    //check the polarity of the circuit 
 	//Each terminal is connected to set of connections
-	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections
-	Connection *term2_conns[MAX_CONNS];
+	Connection *term1_conns[MAX_CONNS]; //list of pointers to connections (term1)
+	Connection *term2_conns[MAX_CONNS]; //list of pointers to connections (term2)
 
+	
 	struct demo
 	{
-		//array declared inside structure
-		Connection* arr[MAX_CONNS];
+		Connection* arr[MAX_CONNS]; 	   //array declared inside structure
 	};
 
-	int term1_conn_count;	//actual no. of connections to each terminal
+	int term1_conn_count;          	       //actual no. of connections to each terminal
 	int term2_conn_count;
 
-	int ID;
-	static int gID;
-	string m_Label;
-	int choose;
-	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
-	static Component* pcomp;
+	int ID;                                // variable to take id for component
+	static int gID;                        //counter for the id
+	string m_Label;                        // variable to take the label
+	//int choose;                         
+	GraphicsInfo *m_pGfxInfo;              //The parameters required to draw a component
+	static Component* pcomp;               //pointer to a component
 public:
 	
-	Component(GraphicsInfo *r_GfxInfo);
+	Component(GraphicsInfo *r_GfxInfo);    //constructor to intialize data of the class
 	
 	void setTerm1Volt(double v);		//sets the voltage at terminal1 tayil
-	//
+	
 	void setTerm2Volt(double v);		//sets the voltage at terminal2 tayil 
 	double getTerm1Volt();				//returns the voltage at terminal1
 	double getTerm2Volt();				//returns the voltage at terminal2
-	double getResistance();
-	double getSourceVoltage();
+	double getResistance();             //getter for the resistance 
+	double getSourceVoltage();          //getter for the voltage value 
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
 	Connection** getTermConnections(TerminalNum Term); 
 	
-	void setResistance(double);
-	void setSourceVoltage(double);
-	void setStatus(bool);
+	void setResistance(double);         // Setter for the resistance 
+	void setSourceVoltage(double);      // getter for the source voltage value 
+	void setStatus(bool);               //Setter for the status of some components 
 	//double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
 	virtual void Operate() = 0; // activates components such as bulb and buzzer
 
@@ -69,34 +71,33 @@ public:
 
 	virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
-	int getTermConnCount(TerminalNum) const;
+	int getTermConnCount(TerminalNum) const;    //return the number of connection in the term
 
-	int getID() const;  
+	int getID() const;                          //return the component id 
 
-	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
-	void addTerm1Connection(Connection* pConn); 
-	void addTerm2Connection(Connection* pConn);
+	bool isInRegion(int x, int y, UI* pUI);     // whether this point lies inside the component
+	void addTerm1Connection(Connection* pConn); //icrease the number of connections (term 1)
+	void addTerm2Connection(Connection* pConn); //icrease the number of connections (term 2)
 
-	void removeTerm1Connection(Connection* pConn);
-	void removeTerm2Connection(Connection* pConn);
+	void removeTerm1Connection(Connection* pConn);  //decrease the number of connections (term 1)
+	void removeTerm2Connection(Connection* pConn);  //decrease the number of connections (term 2)
 	
-	string Setlabel(string input);
-	string getlabel();
+	string Setlabel(string input);                  //setter for the component label 
+	string getlabel();                              //getter for the component label 
 
-	void SetGinfo(GraphicsInfo* G); 
+	void SetGinfo(GraphicsInfo* G);                 //setter for the graphics info     
 
-	void setm_pGfxInfo(int cx, int cy);
+	void setm_pGfxInfo(int cx, int cy);             //change the graphics info of the component to use it for moving 
 
-	TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
-	virtual string save() const;
+	TerminalNum whichTerminal(Connection* Conn);    //returns the terminal to which a connection is connected
+	virtual string save() const;                    //save function 
 	//Destructor must be virtual
-	virtual ~Component();
-	virtual void load( int, string, double ); 
-	virtual Component* Copy() = 0;
+	virtual ~Component();                           //destructor 
+	virtual void load( int, string, double );       //load function 
+	virtual Component* Copy() = 0;                  //pure virtual copy function
 	
 	//static void selection();
-	GraphicsInfo* getm_pGfxInfo() ;
-
+	GraphicsInfo* getm_pGfxInfo() ;                 //Getter for the new graphics info to use it for moving
 	//void DeleteImage(GraphicsInfo* m_pGfxInfo, UI*);
 	//virtual void setPolarity(BatPolarity p)= 0 ;
 	//virtual BatPolarity GetPolarity() = 0;

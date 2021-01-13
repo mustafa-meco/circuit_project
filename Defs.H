@@ -13,18 +13,19 @@ enum ActionType
 	ADD_RESISTOR,		//Add Resistor
 	ADD_SWITCH,			//Add Switch
 	ADD_BULB,			//Add Bulb
-	ADD_GROUND,
-	ADD_BATTERY,
-	ADD_BUZZER,
-	ADD_FUES,
+	ADD_GROUND,         //Add Ground 
+	ADD_BATTERY,        //Add Battery 
+	ADD_BUZZER,         //Add Buzzer  
+	ADD_FUES,           //Add fues
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
 	ADD_MOD,
-	ADD_MODU,
+	MOD_MODE,
+	
  	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
-
+	ADD_REALISTIC,
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -40,17 +41,16 @@ enum ActionType
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 	
-	AMM,
-	VOL,
+	AMM,        //Ammeter
+	VOL,        //voltameter  
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-	MOD_MODE,
 
 	EXIT,		//Exit the application
 	TestSwitch,
 	STATUS_BAR,		//A click on the status bar
-	DSN_TOOL,	//A click on an empty place in the design tool bar
+	DSN_TOOL	//A click on an empty place in the design tool bar
 
 };
 
@@ -60,7 +60,7 @@ enum  MODE	//Modes of operation
 	SIMULATION,
 	MODULATION
 };
-enum BatPolarity 
+enum BatPolarity  //direction of the battery which will used to calculate the voltage   
 {
 	RTL, LTR
 };

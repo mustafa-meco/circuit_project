@@ -4,13 +4,15 @@ class ActionSaveDesignedModule :
     public Action
 {
 public: 
-	ActionSaveDesignedModule(ApplicationManager* pApp);
-	virtual ~ActionSaveDesignedModule();
+	ActionSaveDesignedModule(ApplicationManager* pApp);//constructor
+	virtual ~ActionSaveDesignedModule();//destructor
 	virtual void Execute();
 
-	void Undo();
+	void Undo(); // undo for save designed module
 
-	void Redo();
+	void Redo(); //Redo for save designed module
+
 
 };
+
 

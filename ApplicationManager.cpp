@@ -14,12 +14,16 @@
 #include "Actions/ActionLabel.h"
 #include "Actions/ActionAddPaste.h"
 #include "Actions/ActionAddCut.h"
-#include"Actions/ActionMove.h"
+#include "Actions/ActionMove.h"
 #include "Actions/ActionDelete.h"
-#include"Actions/ActionUndo.h"
-#include"Actions/ActionRedo.h"
+#include "Actions/ActionUndo.h"
+#include "Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
+
 #include "Actions/ActionAddModule.h"
+#include "Actions/ActionAddDesignedModule.h"
+#include "Actions/ActionSaveDesignedModule.h"
+#include "Actions/ActionAmmeter.h"
 #include"Actions/ActionTestSwi.h"
 #include<Windows.h>
 
@@ -195,7 +199,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SAVE:
 		if (IsModulation)
-			saveModule();
+			pAct = new ActionSaveDesignedModule(this);
 		else
 			pAct = new ActionSave(this);
 		break;
@@ -206,7 +210,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		ToDesign();
 		break;
 	case MOD_MODE:
-		ToModulation();
+		pAct = new ActionAddDesignedModule(this);
 		break;
 	case LOAD:
 		pAct = new ActionLoad(this);
@@ -222,11 +226,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionAddPaste(this);
 		AddToUndoList(pAct);
 		break;
+	case ADD_REALISTIC:
+		pUI->DrawRealistic();
+		break;
 	case AMM:
-		DispCurrent();
+		pAct = new ActionAmmeter(this);
 		break;
 	case VOL:
-		
+		//pAct = new ActionVotlmeter(this);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -258,14 +265,20 @@ void ApplicationManager::UpdateInterface()
 	cout << CompCount<<endl;
 	//if (CompCount) 
 	//{
+
+
 	pUI->ClearDrawingArea();
+	pUI->DrawReal();
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->Draw(pUI);
 
 	for (int i = 0; i < ConnCount; i++)
 		ConnList[i]->Draw(pUI);
+
 	Sleep(100);
+
 	//}
+
 	//else
 //Exit()
 }
@@ -285,13 +298,9 @@ bool ApplicationManager::ValidateCircuit() {
 	Component** compolist = new Component * [CompCount + 1];
 	compolist[j1++] = CompList[i1];
 	TerminalNum T = TERM2;
-	
 	if (CompCount < 3)
 		return false;
 	int cG = 0, tkrar = 0;
-	/*for (int i = 0; i < CompCount; i++) {
-
-	}*/
 
 	int c1, c2;
 	for (int i = 0; i < CompCount; i++) {
@@ -356,9 +365,6 @@ bool ApplicationManager::ValidateCircuit() {
 		pUI->PrintMsg("tkrar "+to_string(tkrar));
 		return false;
 	}
-
-
-
 	/*if (compolist[j1] != CompList[0]) {
 		pUI->PrintMsg(compolist[j1]->getlabel());
 		return false;
@@ -366,8 +372,6 @@ bool ApplicationManager::ValidateCircuit() {
 	pUI->PrintMsg(to_string(j1));
 	return true;
 }
-
-
 
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::ToSimulation() {
@@ -389,12 +393,13 @@ void ApplicationManager::ToSimulation() {
 	}
 }
 void ApplicationManager::ToDesign() {
+	CalculateVoltages(0);
 	this->IsSimulation = false;
 	this->IsModulation = false;
 	// Compute all needed voltages and current
 	pUI->CreateDesignToolBar();
 }
-////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {  
 	double SumResistance = 0;
@@ -406,18 +411,54 @@ double ApplicationManager::CalculateCurrent() {
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
-		
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
-		
 	}
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
-	return (abs(SumVoltage) / SumResistance);
+	return (SumVoltage / SumResistance);
 	
 }
-
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
-	// TODO
+	Component* G = nullptr;
+	Component** TemComp = new Component * [CompCount];
+	Connection* TempConn;
+	TerminalNum TM;
+	int z = 0;
+	double TotalV = 0;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (dynamic_cast<Ground*>(CompList[i]))
+		{
+			G = dynamic_cast<Ground*>(CompList[i]);
+			break;
+		}
+	}
+	TempConn = G->getTermConnections(TERM1)[0];
+	TemComp[0] = TempConn->getOtherComponent(G);
+	while (!dynamic_cast<Ground*>(CompList[z]))
+	{
+
+		TM = TemComp[z]->whichTerminal(TempConn);
+
+		if (TM == TERM1)
+		{
+			TemComp[z]->setTerm1Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() - TemComp[z]->getSourceVoltage();
+
+			TemComp[z]->setTerm2Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM2)[0];
+		}
+		else
+		{
+			TemComp[z]->setTerm2Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() + TemComp[z]->getSourceVoltage();
+			TemComp[z]->setTerm1Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM1)[0];
+		}
+		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
+	}
+
+
 }
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
@@ -434,12 +475,9 @@ ApplicationManager::~ApplicationManager()
 		delete ConnList[i];
 	for (int i = 0; i < CompCount; i++)
 		delete CompList[i];
-
 	ConnCount = 0;
 	CompCount = 0;
 	pUI->ClearAll();
-
-	// TODO
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -449,40 +487,28 @@ ApplicationManager::~ApplicationManager()
 //		delete ConnList[i];
 //	for (int i=0 ; i < CompCount; i++)
 //		delete CompList[i];
-//	
 //	ConnCount = 0;
 //	CompCount = 0;
-//	
 //	pUI->ClearAll();
 //	pUI->Dra
-//
-//
-//
-//
-//	
-//    CompList = nullptr;
-//    delete GetUI();
+//  CompList = nullptr;
+//  delete GetUI();
 //	GetUI() = nullptr;
-//    /*delete pConn;
+//  /*delete pConn;
 //	pConn = nullptr;
 //	delete pComp;
 //	pComp = nullptr;*/
 //	/*delete GetConnectionByCordinates();
 //	delete GetComponentByCordinates();*/
-//
 //}
 
  bool ApplicationManager::isAvalible()
  {
-	 
 		 if ( CompCount >= 2) 
 		 {
 			 return true;
 		 }
-		 
 		 return false;
-	 
-	
  } 
  void ApplicationManager::SetCopyComp(Component* comp1)            //Setter for the component + saving its values(copy). 
  {
@@ -493,24 +519,20 @@ ApplicationManager::~ApplicationManager()
  {
 	 return CopyComp->Copy();
  }
-
 ////if (CopyComp==nullptr)
    //		//{
    //		//	pUI->ClearStatusBar();
    //		//	//delete pAct;
    //		//	//pAct = nullptr;
    //		//	pUI->CreateErrorWind("error \n");
-
    //		//}
    //		//else {
 //pAct = new ActionAddPaste(this);
-
-///*	}*/
+//*	}*/
 //break;
 void ApplicationManager::deleteCompounent(Component* delet)
 {
 	int x1 = 0;
-	Component* T;
 	if (delet)
 	{
 		for (int i = 0; i < CompCount; i++)
@@ -529,8 +551,6 @@ void ApplicationManager::deleteCompounent(Component* delet)
 				C2 = delet->getTermConnCount(TERM2);
 				Connection** c1;
 				Connection** c2;
-				/* c1 = nullptr;
-				 c2 = nullptr;*/
 				c1 = delet->getTermConnections(TERM1);
 
 				c2 = delet->getTermConnections(TERM2);
@@ -569,16 +589,6 @@ void ApplicationManager::deleteConnection(Connection* delet)
 				{
 					if (delet->getOtherComponent(CompList[i]))
 					{
-						TerminalNum t = delet->getOtherComponent(CompList[i])->whichTerminal(delet);
-						if (t == TERM1)
-							delet->getOtherComponent(CompList[i])->removeTerm1Connection(delet);
-						else
-							delet->getOtherComponent(CompList[i])->removeTerm2Connection(delet);
-						t = CompList[i]->whichTerminal(delet);
-						if (t == TERM1)
-							CompList[i]->removeTerm1Connection(delet);
-						else
-							CompList[i]->removeTerm2Connection(delet);
 
 					}
 				}
@@ -683,7 +693,7 @@ void ApplicationManager::ExcuteUndo()
 }
 void ApplicationManager::ExcuteRedo()
 {
-	if (redoNum > 0)
+	if (redoNum > 0 )
 	{
 		redoNum--;
 		RedoList[redoNum]->Redo();
@@ -731,13 +741,17 @@ double ApplicationManager::saveModule() {
 		pUI->CreateErrorWind("error \n");
 	}
 	else {
-		double SumResistance = 0;
+		double SumResistance=0;
 		
 		for (int i = 0; i < CompCount; i++)
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		return SumResistance;
+		// Compute all needed voltages and current
+		
+
+		//pUI->CreateSimulationToolBar();
 	}
 }
 
@@ -750,14 +764,7 @@ void ApplicationManager::ToModulation() {
 	}
 }
 
-void ApplicationManager::DispCurrent()  {
-	int ax=0, ay=0;
-	pUI->PrintMsg("Choose Component to show its current");
-	do {
-		pUI->GetPointClicked(ax, ay);	
-	} while (!GetComponentByCordinates(ax, ay));
-	pUI->PrintMsg("the current: " + to_string(CalculateCurrent()));
-}
+
 
 Component* ApplicationManager::getOne(Connection* con)
 {

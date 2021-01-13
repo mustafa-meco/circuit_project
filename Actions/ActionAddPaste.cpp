@@ -14,11 +14,12 @@ void ActionAddPaste::Execute() //Execute action
 {
 
 	UI* pUI = pManager->GetUI(); 
-	pUI->PrintMsg("Select a place to paste your component : ");     
+	pUI->PrintMsg("Select a place to paste your component : ");         // Check if the place between the boundary or not
 	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
 		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
 		&& Cx>pUI->getCompWidth() / 2
-		&& Cx < pUI->getWidth() - pUI->getToolItemWidth() / 2))// (!(Cy > 80 + 50 / 2 &&                                // Check if the place between the boundary or not 
+		&& Cx < pUI->getWidth() - pUI->getToolItemWidth() / 2))
+		// (!(Cy > 80 + 50 / 2 && 
 	//	Cy < 650 - 50 - 50 / 2 &&
 	//	Cx>50 / 2 &&
 	//	Cx < 1200 - 80 / 2))

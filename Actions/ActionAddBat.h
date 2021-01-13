@@ -14,16 +14,15 @@ private:
 	int Cx, Cy;	//Center point of the comp
 	int x1, y1, x2, y2;	//Two corners of the rectangluar area
 	Component* comp;
-	GraphicsInfo* undo1;
-	double undo2;
+	GraphicsInfo* undo1; //save the graphics info to do undo or redo 
+	double undo2;        // to store value of the component
 public:
-	ActionAddBat(ApplicationManager* pApp);
-	virtual ~ActionAddBat(void);
+	ActionAddBat(ApplicationManager* pApp); //constructor 
+	virtual ~ActionAddBat(void); //destructor 
 
 	//Execute action (code depends on action type)
 	virtual void Execute();
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for the Battery 
+	virtual void Redo(); //Redo for the Battery 
 };
-
