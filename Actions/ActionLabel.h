@@ -11,12 +11,14 @@ private:
 	int Cx, Cy;	//Center point of the comp
 	int x1, y1, x2, y2;	//Two corners of the rectangluar area
 public:
-	ActionLabel(ApplicationManager* pApp);
-	virtual ~ActionLabel (void);
+	ActionLabel(ApplicationManager* pApp);//constructor
+
+	virtual ~ActionLabel (void);//destructor 
+
 
 	//Execute action (code depends on action type)
 	virtual void Execute();
 
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo();//undo for the label
+	virtual void Redo();  //Redo for the label 
 };

@@ -159,21 +159,21 @@ string Component::Setlabel(string input)
 	return m_Label;
 }
 
-double Component::getValue()
-{
-	if (this != nullptr)
-	{
-		return Value;
-	}
-}
-double Component::setValue(double input)
-{
-	if (this != nullptr)
-	{
-		Value = input;
-		return Value;
-	}
-}
+//double Component::getValue()
+//{
+//	if (this != nullptr)
+//	{
+//		return Value;
+//	}
+//}
+//double Component::setValue(double input)
+//{
+//	if (this != nullptr)
+//	{
+//		Value = input;
+//		return Value;
+//	}
+//}
 //double Component::getVoltage()
 //{
 //	if (this != nullptr)
@@ -249,3 +249,6 @@ TerminalNum Component::whichTerminal(Connection* Conn) {
 			return TERM2;
 	}
 }
+
+
+

@@ -40,3 +40,16 @@ Component* Module::Copy()                                    //Copy the componen
 	B->Setlabel(m_Label);
 	return B;
 }
+
+int Module::GetOutStatus()
+{
+	return -1;
+}
+int Module::GetInputStatus()
+{
+	return -1;
+}
+
+void Module::setInputStatus(STATUS s)
+{
+}

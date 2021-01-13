@@ -38,13 +38,18 @@ private:
 public:
 
 
-	ActionDelete(ApplicationManager* pApp);
-	virtual ~ActionDelete(void);
+	ActionDelete(ApplicationManager* pApp);//constructor
+
+	virtual ~ActionDelete(void);//destructor 
+
 	
 	//Execute action (code depends on action type)
 	virtual void Execute();
 	
-	virtual void Undo();
-	virtual void Redo();
+	virtual void Undo(); //undo for delete
+
+	virtual void Redo(); //Redo for delete 
+
 	
 };
+

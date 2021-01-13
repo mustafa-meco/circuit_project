@@ -21,6 +21,10 @@
 #include "Actions/ActionMultipleDelete.h"
 
 #include "Actions/ActionAddModule.h"
+#include "Actions/ActionAddDesignedModule.h"
+#include "Actions/ActionSaveDesignedModule.h"
+#include "Actions/ActionAmmeter.h"
+#include"Actions/ActionTestSwi.h"
 #include<Windows.h>
 
 #include <iostream>
@@ -117,6 +121,10 @@ ActionType ApplicationManager::GetUserAction()
 	return pUI->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////
+bool ApplicationManager::isSim()
+{
+	return IsSimulation;
+}
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
@@ -155,6 +163,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ADD_MOD:
 		pAct = new ActionAddModule(this);
 		break;
+	case TestSwitch:
+		pAct = new ActionTestSwi(this);
+		break;
+
 	case UNDO:
 		pAct = new  ActionUndo(this);
 		break;
@@ -187,7 +199,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SAVE:
 		if (IsModulation)
-			saveModule();
+			pAct = new ActionSaveDesignedModule(this);
 		else
 			pAct = new ActionSave(this);
 		break;
@@ -196,6 +208,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DSN_MODE:
 		ToDesign();
+		break;
+	case MOD_MODE:
+		pAct = new ActionAddDesignedModule(this);
 		break;
 	case LOAD:
 		pAct = new ActionLoad(this);
@@ -213,6 +228,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case ADD_REALISTIC:
 		pUI->DrawRealistic();
+		break;
+	case AMM:
+		pAct = new ActionAmmeter(this);
+		break;
+	case VOL:
+		//pAct = new ActionVotlmeter(this);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -364,9 +385,15 @@ void ApplicationManager::ToSimulation() {
 		double current = CalculateCurrent();
 		CalculateVoltages(current);
 		pUI->CreateSimulationToolBar();
+
+			for (int i = 0; i < CompCount; i++)
+			{
+				CompList[i]->Operate();
+			}
 	}
 }
 void ApplicationManager::ToDesign() {
+	CalculateVoltages(0);
 	this->IsSimulation = false;
 	this->IsModulation = false;
 	// Compute all needed voltages and current
@@ -392,7 +419,46 @@ double ApplicationManager::CalculateCurrent() {
 }
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
-	// TODO
+	Component* G = nullptr;
+	Component** TemComp = new Component * [CompCount];
+	Connection* TempConn;
+	TerminalNum TM;
+	int z = 0;
+	double TotalV = 0;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (dynamic_cast<Ground*>(CompList[i]))
+		{
+			G = dynamic_cast<Ground*>(CompList[i]);
+			break;
+		}
+	}
+	TempConn = G->getTermConnections(TERM1)[0];
+	TemComp[0] = TempConn->getOtherComponent(G);
+	while (!dynamic_cast<Ground*>(CompList[z]))
+	{
+
+		TM = TemComp[z]->whichTerminal(TempConn);
+
+		if (TM == TERM1)
+		{
+			TemComp[z]->setTerm1Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() - TemComp[z]->getSourceVoltage();
+
+			TemComp[z]->setTerm2Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM2)[0];
+		}
+		else
+		{
+			TemComp[z]->setTerm2Volt(TotalV);
+			TotalV += current * TemComp[z]->getResistance() + TemComp[z]->getSourceVoltage();
+			TemComp[z]->setTerm1Volt(TotalV);
+			TempConn = TemComp[z]->getTermConnections(TERM1)[0];
+		}
+		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
+	}
+
+
 }
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
@@ -690,11 +756,16 @@ double ApplicationManager::saveModule() {
 }
 
 void ApplicationManager::ToModulation() {
-	if (!(CompCount ==0 || CompCount == 0))
-	this->IsModulation = true;
-
-	
+	if (!ValidateClear())
+		pUI->CreateErrorWind("error \n");
+	else {
+		this->IsModulation = true;
+		pUI->CreateModulationToolBar();
+	}
 }
+
+
+
 Component* ApplicationManager::getOne(Connection* con)
 {
 	for (int zc = 0; zc < CompCount; zc++)

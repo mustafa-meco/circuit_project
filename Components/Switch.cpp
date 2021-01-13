@@ -41,3 +41,19 @@ Component* Switch::Copy()    //Copy the component information
 	B->Setlabel(m_Label);
 	return B;
 }
+
+int Switch::GetOutStatus()
+{
+	return -1;
+}
+int Switch::GetInputStatus()
+{
+	if (status == 1)
+		return 1;
+	else
+		return 0;
+}
+
+void Switch::setInputStatus(STATUS s)
+{
+}

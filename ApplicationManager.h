@@ -22,30 +22,31 @@ class ApplicationManager
 
 
 private:
-	Component** multiCompList;
-	Connection** multiConnList;
+	Component** multiCompList;           // store the selected components to do multiple delete
+	Connection** multiConnList;          // store the selected connections to do multiple delete
 	int lineCount;
 	
-	bool IsSimulation; // True when in simulation mode
-	bool IsModulation;
-	int CompCount;		//Actual number of Components
-	int ConnCount;		//Actual number of Connections
-	Component* CopyComp;                // variable to save the component type
-	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers) 
-	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers) 
+	bool IsSimulation;                   // True when in simulation mode
+	bool IsModulation;                   // checks if the situation is modulation or not 
+	int CompCount;		                 //Actual number of Components
+	int ConnCount;		                 //Actual number of Connections
+	Component* CopyComp;                 // variable to save the component type
+	Component* CompList[MaxCompCount];	 //List of all Components (Array of pointers) 
+	Connection* ConnList[MaxConnCount];	 //List of all Connections (Array of pointers) 
 
-	string compLineList[MaxCompCount + MaxConnCount + 3];
-	string connLineList[MaxCompCount + MaxConnCount + 3];
+	string compLineList[MaxCompCount + MaxConnCount + 3]; //
+	string connLineList[MaxCompCount + MaxConnCount + 3]; //
 
-	UI* pUI; //pointer to the UI
+	UI* pUI;                             //pointer to the UI
 
-	Action* UndoList[10];
-	Action* RedoList[10];
-	int undoNum;
-	int redoNum;
+	Action* UndoList[10];                //array to store the last ten actions to undo them
+	Action* RedoList[10];                //array to store the last ten actions to redo them
+	int undoNum;                         // counter
+	int redoNum;                         // counter  
 public:
 	ApplicationManager(); //constructor
 
+	bool isSim();
 	//Reads the required action from the user and returns the corresponding action type
 	ActionType GetUserAction();
 
@@ -60,22 +61,22 @@ public:
 	///int getCircuit() const;
 	
 	//Adds a new component to the list of components
-	void AddComponent(Component* pComp);
+	void AddComponent(Component* pComp);               //increase the number of components in comp list
 
-	void AddConnection(Connection* pConn);
+	void AddConnection(Connection* pConn);              //increase the number of connection in comp list
 
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region  
                                                        //through this function you can know the component type. 
 
-	Connection* GetConnectionByCordinates(int x, int y);
+	Connection* GetConnectionByCordinates(int x, int y); //find the connection in the required conn list to edit them 
 	// Simulation Mode Functions
-	bool ValidateCircuit();
-	void ToSimulation(); // Switches to simulation mode
-	void ToDesign();
-	double CalculateCurrent();                         // Mustafa Mahmoud Tayil 
-	void CalculateVoltages(double current);
+	bool ValidateCircuit();                            //chech if  the circuit validate or not and doesn't break some rules like (two grounds) 
+	void ToSimulation();                               // Switches to simulation mode
+	void ToDesign();                                   //to get back to the design mode
+	double CalculateCurrent();                         // calculate the current throught the circuit 
+	void CalculateVoltages(double current);           // calculate the voltage start from the ground 
 	//void save(ActionType);
-	string* save(int&,int&) const;
+	string* save(int&,int&) const;                     //save the date of the circuit components 
 	//destructor
 	~ApplicationManager();
 
@@ -83,30 +84,29 @@ public:
 
 	void load( string * , double* , Component**, Component** );     //load the	Circuit. 
 
-	bool isAvalible();   // to check if the user create two components before connect them or not
-	Component* GetCopyComp() const;		 	   //Getter for the component after coping or cutting the component.
-	void SetCopyComp(Component* comp1);        //Setter for the component   
+	bool isAvalible();                                              // to check if the user create two components before connect them or not
+	Component* GetCopyComp() const;		 	                        //Getter for the component after coping or cutting the component.
+	void SetCopyComp(Component* comp1);                             //Setter for the component   
 
 	
-	void deleteCompounent(Component*);
-	void deleteConnection(Connection*);
+	void deleteCompounent(Component*);                              // delete the component 
+	void deleteConnection(Connection*);                             // delete the connection which connected to the components
 	
 
-	int multipleStoreComp(Component* multi,int m);
-	int multipleStoreCon(Connection* multi, int m);
-	void  MultipleDelete(int comp, int conn);
-	void AddToUndoList(Action*);
-	void AddToRedoList(Action*);
-	void ExcuteUndo();
-	void ExcuteRedo();
+	int multipleStoreComp(Component* multi,int m);                 //storing multiple components to delete them 
+	int multipleStoreCon(Connection* multi, int m);                //storing multiple connections to delete them 
+	void  MultipleDelete(int comp, int conn);                      // delete multiple components  
+	void AddToUndoList(Action*);                                   //storing the last ten actions done the user to undo them one by one  
+	void AddToRedoList(Action*);                                   //storing the last ten actions done the user to redo them one by one
+	void ExcuteUndo();                                             // excute the action of undo 
+	void ExcuteRedo();                                             // excute the action of redo 
 
 	bool ValidateModule();
 	void ToModulation();
 	double saveModule();
 	bool ValidateClear();
-	void DispCurrent() ;
+	
 	Component* getOne(Connection*);
-
 };
 
 #endif

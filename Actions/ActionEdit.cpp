@@ -50,7 +50,7 @@ void ActionEdit::Execute()
 				}
 			} while (!isNumber);
 			double intCheck = stoi(Check);
-			comp->setValue(intCheck);
+			//comp->setValue(intCheck);
 			pUI->ClearStatusBar();
 		}
     }

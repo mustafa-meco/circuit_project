@@ -4,8 +4,8 @@ class ActionUndo :
     public Action
 {
 public:
-    ActionUndo(ApplicationManager* pApp);
-    virtual ~ActionUndo(void);
+    ActionUndo(ApplicationManager* pApp); //constructor
+    virtual ~ActionUndo(void); //destructor
     virtual void Execute();
 
     virtual void Undo();

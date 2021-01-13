@@ -16,7 +16,7 @@ void ActionAddBat::Execute()
 	UI* pUI = pManager->GetUI();
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new battery: Click anywhere to add");
+	pUI->PrintMsg("Adding a new Battery: Click anywhere to add");
 
 	pUI->GetPointClicked(Cx, Cy);
 	//pManager->GetComponentByCordinates(Cx, Cy);
@@ -69,7 +69,7 @@ void ActionAddBat::Execute()
 		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
 		sV = pUI->GetSrting();
 		isNumber = true;
-		comp->setValue(stod(sV));
+		//comp->setValue(stod(sV));
 		for (int i = 0; i < sV.length(); i++)
 			if (isdigit(sV[i]) == false)
 				isNumber = false;
