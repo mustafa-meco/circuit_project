@@ -409,62 +409,59 @@ void ApplicationManager::ToDesign() {
 }
 ///////////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
-double ApplicationManager::CalculateCurrent() {  
+double ApplicationManager::CalculateCurrent() {
 	for (int i = 0; i < CompCount; i++)
 	{
-		cout <<"m"<< CompList[i]->GetInputStatus()<<"m";
-		if (CompList[i]->GetInputStatus() == 0 || IsSimulation==false)
+		cout << "m" << CompList[i]->GetInputStatus() << "m";
+		if (CompList[i]->GetInputStatus() == 0 || IsSimulation == false)
 			return 0;
 	}
 
 	double SumResistance = 0;
 	double SumVoltage = 0;
 	int Battery1 = 0;
-	for (int i = 0; i < CompCount; i++) 
+	Component* Bat = nullptr;
+	for (int i = 0; i < CompCount; i++)
 	{
-		if (CompList[i]->getSourceVoltage() != 0 && Battery1 == 0)
-		{
-			Battery1 = i;
-		}
-		if (CompList[i]->getResistance() != -1 )
+
+
+		if (CompList[i]->getResistance() != -1)
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
 			/*SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();*/
 	}
-	TerminalNum TM;
-	Connection* TempConn = CompList[Battery1]->getTermConnections(TERM1)[0];
-	Component** TermComp = new Component * [CompCount];
-	TermComp[0] = TempConn->getOtherComponent(CompList[Battery1]);
+
 	int j = 0;
-	while (TermComp[j] != CompList[Battery1])
+	TerminalNum TM;
+	Connection* TempConn = CompList[0]->getTermConnections(TERM1)[0];
+	Component** TermComp = new Component * [CompCount + 1];
+	TermComp[j] = TempConn->getOtherComponent(CompList[0]);
+
+	while (TermComp[j] != CompList[0])
 	{
-		j++;
-		if (TermComp[j]->getSourceVoltage() == 0)
-		{
-			TermComp[j] = TempConn->getOtherComponent(TermComp[j - 1]);
-			continue;
-		}
+
+
 		TM = TermComp[j]->whichTerminal(TempConn);
 
 		if (TM == TERM1)
 		{
-			SumVoltage = SumVoltage + TermComp[j]->getSourceVoltage();
+			SumVoltage = SumVoltage - TermComp[j]->getSourceVoltage();
 			TempConn = TermComp[j]->getTermConnections(TERM2)[0];
 		}
 		else
 		{
-			SumVoltage = SumVoltage - TermComp[j]->getSourceVoltage();
+			SumVoltage = SumVoltage + TermComp[j]->getSourceVoltage();
 			TempConn = TermComp[j]->getTermConnections(TERM1)[0];
 		}
-		TermComp[j] = TempConn->getOtherComponent(TermComp[j - 1]);
+
+
+		TermComp[++j] = TempConn->getOtherComponent(TermComp[j - 1]);
 	}
-	
-	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
-	
+
+	cout << (SumVoltage / SumResistance) << endl << SumVoltage << endl << SumResistance;
 	return abs(SumVoltage / SumResistance);
-	
 }
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
@@ -533,7 +530,8 @@ void ApplicationManager::load(string* labeli, double* valueI, Component** comp00
 ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < ConnCount; i++)
-		delete ConnList[i];
+		delete ConnList[i
+		];
 	for (int i = 0; i < CompCount; i++)
 		delete CompList[i];
 	ConnCount = 0;
@@ -719,6 +717,7 @@ void ApplicationManager::AddToUndoList(Action* A)
 	}
 	else
 	{
+		delete UndoList[0];
 		for (int i = 0; i < 9 ; i++)
 		{
 			UndoList[i] = UndoList[i++];
@@ -735,8 +734,10 @@ void ApplicationManager::AddToRedoList(Action* A)
 	}
 	else
 	{
+		delete RedoList[0];
 		for (int i = 0; i < 9; i++)
 		{
+			
 			RedoList[i] = RedoList[i++];
 		}
 		RedoList[9] = A;
