@@ -1,6 +1,0 @@
-3
-GND 1  0 277 86
-GND 2  0 353 223
-GND 3  0 547 170
-Connections
-0

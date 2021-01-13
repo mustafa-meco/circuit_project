@@ -25,6 +25,10 @@
 #include "Actions/ActionSaveDesignedModule.h"
 #include "Actions/ActionAmmeter.h"
 #include"Actions/ActionTestSwi.h"
+#include "Actions/ActionSimulate.h"
+#include "Actions/ActionVoltmeter.h"
+#include "Actions/ActionRealistic.h"
+#include "Actions/ActionDesign.h"
 #include<Windows.h>
 
 #include <iostream>
@@ -138,27 +142,21 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		// TODO: Add remaining actions
 	case ADD_BULB:
 		pAct = new ActionAddBul(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_SWITCH:
 		pAct = new ActionAddSwi(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_GROUND:
 		pAct = new ActionAddGro(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_BATTERY:
 		pAct = new ActionAddBat(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_BUZZER:
 		pAct = new ActionAddBuz(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_FUES:
 		pAct = new ActionAddFues(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_MOD:
 		pAct = new ActionAddModule(this);
@@ -178,21 +176,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case MOVE:
 		pAct = new ActionMove(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_Label:
 		pAct = new  ActionLabel(this);
 		break;
 	case ADD_CONNECTION:
 		pAct = new ActionAddCon(this);
-		AddToUndoList(pAct);
 		break;
 	case SELECT:
 		pAct = new ActionSelect(this);
 		break;
 	case DEL:
 		pAct = new ActionDelete(this);
-		AddToUndoList(pAct);
 		break;
 	case MDEL:
 		pAct = new ActionMultipleDelete(this);
@@ -204,10 +199,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ActionSave(this);
 		break;
 	case SIM_MODE:
-		ToSimulation();
+		pAct = new ActionSimulate(this);
 		break;
 	case DSN_MODE:
-		ToDesign();
+		pAct = new ActionDesign(this);
 		break;
 	case MOD_MODE:
 		pAct = new ActionAddDesignedModule(this);
@@ -220,20 +215,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case ADD_CUT:
 		pAct = new ActionAddCut(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_PASTE:
 		pAct = new ActionAddPaste(this);
-		AddToUndoList(pAct);
 		break;
 	case ADD_REALISTIC:
-		pUI->DrawRealistic();
+		pAct = new ActionRealistic(this);
 		break;
 	case AMM:
 		pAct = new ActionAmmeter(this);
 		break;
 	case VOL:
-		//pAct = new ActionVotlmeter(this);
+		pAct = new ActionVoltmeter(this);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -242,6 +235,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if (pAct)
 	{
 		//save(ActType);
+		AddToUndoList(pAct);
 		pAct->Execute();
 		/*delete pAct;
 		pAct = nullptr;*/
@@ -401,7 +395,14 @@ void ApplicationManager::ToSimulation() {
 	}
 }
 void ApplicationManager::ToDesign() {
-	CalculateVoltages(0);
+	//CalculateVoltages(0);
+	if (IsModulation) {
+		if (ValidateModule()) {
+			Action* a = new ActionSaveDesignedModule(this);
+			delete a;
+		}
+		deleteAll();
+	}
 	this->IsSimulation = false;
 	this->IsModulation = false;
 	// Compute all needed voltages and current
@@ -409,49 +410,55 @@ void ApplicationManager::ToDesign() {
 }
 ///////////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
-double ApplicationManager::CalculateCurrent() {  
+double ApplicationManager::CalculateCurrent() {
+	for (int i = 0; i < CompCount; i++)
+	{
+		{
+			cout << "m" << CompList[i]->GetInputStatus() << "m";			
+			cout << "m" << CompList[i]->GetInputStatus() << "m";
+			if (CompList[i]->GetInputStatus() == 0 || IsSimulation == false)
+				return 0;
+		}
+	}
 	double SumResistance = 0;
 	double SumVoltage = 0;
-	int Battery1 = 0;
-	for (int i = 0; i < CompCount; i++) 
+	for (int i = 0; i < CompCount; i++)
 	{
-		if (CompList[i]->getSourceVoltage() != 0 && Battery1 == 0)
-		{
-			Battery1 = i;
-		}
-		if (CompList[i]->getResistance() != -1 )
+
+
+		if (CompList[i]->getResistance() != -1)
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
 			/*SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();*/
 	}
-	TerminalNum TM;
-	Connection* TempConn = CompList[Battery1]->getTermConnections(TERM1)[0];
-	Component** TermComp = new Component * [CompCount];
-	TermComp[0] = TempConn->getOtherComponent(CompList[Battery1]);
+
 	int j = 0;
-	while (TermComp[j] != CompList[Battery1])
+	TerminalNum TM;
+	Connection* TempConn =CompList[0]->getTermConnections(TERM1)[0];
+	Component** TermComp = new Component * [CompCount+1];
+	TermComp[j] = TempConn->getOtherComponent(CompList[0]);
+	
+	while (TermComp[j] != CompList[0])
 	{
-		j++;
-		if (TermComp[j]->getSourceVoltage() == 0)
-		{
-			TermComp[j] = TempConn->getOtherComponent(TermComp[j - 1]);
-			continue;
-		}
-		TM = TermComp[j]->whichTerminal(TempConn);
+		
+		
+			TM = TermComp[j]->whichTerminal(TempConn);
 
-		if (TM == TERM1)
-		{
-			SumVoltage = SumVoltage + TermComp[j]->getSourceVoltage();
-			TempConn = TermComp[j]->getTermConnections(TERM2)[0];
-		}
-		else
-		{
-			SumVoltage = SumVoltage - TermComp[j]->getSourceVoltage();
-			TempConn = TermComp[j]->getTermConnections(TERM1)[0];
-		}
-
+			if (TM == TERM1)
+			{
+				SumVoltage = SumVoltage - TermComp[j]->getSourceVoltage();
+				TempConn = TermComp[j]->getTermConnections(TERM2)[0];
+			}
+			else
+			{
+				SumVoltage = SumVoltage + TermComp[j]->getSourceVoltage();
+				TempConn = TermComp[j]->getTermConnections(TERM1)[0];
+			}
+		
+		
+		TermComp[++j] = TempConn->getOtherComponent(TermComp[j - 1]);
 	}
 	
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
@@ -515,6 +522,7 @@ void ApplicationManager::load(string* labeli, double* valueI, Component** comp00
 ////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()
 {
+	//deleteAll();
 	for (int i = 0; i < ConnCount; i++)
 		delete ConnList[i];
 	for (int i = 0; i < CompCount; i++)
@@ -615,6 +623,16 @@ void ApplicationManager::deleteCompounent(Component* delet)
 	}
 
 }
+
+void ApplicationManager::operation()
+{
+	cout << "opp";
+	for (int i = 0; i < CompCount; i++)
+	{
+		CompList[i]->Operate();
+	}
+}
+
 void ApplicationManager::deleteConnection(Connection* delet)
 {
 	if (delet)
@@ -633,7 +651,10 @@ void ApplicationManager::deleteConnection(Connection* delet)
 				{
 					if (delet->getOtherComponent(CompList[i]))
 					{
-
+						CompList[i]->removeTerm1Connection(delet);
+						CompList[i]->removeTerm2Connection(delet);
+						delet->getOtherComponent(CompList[i])->removeTerm1Connection(delet);
+						delet->getOtherComponent(CompList[i])->removeTerm2Connection(delet);
 					}
 				}
 				delete	delet;
@@ -692,16 +713,18 @@ void ApplicationManager::MultipleDelete(int comp, int conn)
 
 
 
-
 void ApplicationManager::AddToUndoList(Action* A)
 {
 	if (undoNum < 10)
 	{
+
 		UndoList[undoNum] = A;
 		undoNum++;
 	}
 	else
 	{
+		delete UndoList[0];
+		UndoList[0] = nullptr;
 		for (int i = 0; i < 9 ; i++)
 		{
 			UndoList[i] = UndoList[i++];
@@ -718,6 +741,8 @@ void ApplicationManager::AddToRedoList(Action* A)
 	}
 	else
 	{
+		delete RedoList[0];
+		RedoList[0] = nullptr;
 		for (int i = 0; i < 9; i++)
 		{
 			RedoList[i] = RedoList[i++];
@@ -819,5 +844,13 @@ Component* ApplicationManager::getOne(Connection* con)
 		{
 			return CompList[zc];
 		}
+	}
+}
+
+
+void ApplicationManager::deleteAll()
+{
+	for (int i = 0; i < CompCount; i++) {
+		deleteCompounent(CompList[i]);
 	}
 }

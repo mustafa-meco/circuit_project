@@ -33,7 +33,7 @@ void ActionAddBul::Execute()
 	string sR;
 	bool isNumber;
 	do {
-		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
+		pUI->PrintMsg("Enter the value of the resistance(enter a number): ");
 		sR = pUI->GetSrting();
 		isNumber = true;
 		for (int i = 0; i < sR.length(); i++)

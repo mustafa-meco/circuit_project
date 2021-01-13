@@ -2,7 +2,7 @@
 
 Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo) 
 {
-	resistance = 0;
+	resistance = 1;
 	sourceVoltage = 0;
 	m_Label = "fues" + to_string(ID);
 }

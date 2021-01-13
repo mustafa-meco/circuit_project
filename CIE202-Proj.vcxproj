@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actions\ActionAddDesignedModule.cpp" />
+    <ClCompile Include="Actions\ActionDesign.cpp" />
     <ClCompile Include="Actions\ActionRealistic.cpp" />
     <ClCompile Include="Actions\ActionAmmeter.cpp" />
     <ClCompile Include="Actions\ActionRedo.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Actions\ActionMultipleDelete.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
+    <ClCompile Include="Actions\ActionSimulate.cpp" />
     <ClCompile Include="Actions\ActionUndo.cpp" />
     <ClCompile Include="Actions\ActionSaveDesignedModule.cpp" />
     <ClCompile Include="Actions\ActionTestSwi.cpp" />
@@ -191,6 +193,8 @@
   <ItemGroup>
     <ClInclude Include="Actions\ActionAddDesignedModule.h" />
     <ClInclude Include="Actions\ActionAmmeter.h" />
+    <ClInclude Include="Actions\ActionDesign.h" />
+    <ClInclude Include="Actions\ActionRealistic.h" />
     <ClInclude Include="Actions\ActionRedo.h" />
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddBat.h" />
@@ -214,6 +218,7 @@
     <ClInclude Include="Actions\ActionMultipleDelete.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
+    <ClInclude Include="Actions\ActionSimulate.h" />
     <ClInclude Include="Actions\ActionUndo.h" />
     <ClInclude Include="Actions\ActionSaveDesignedModule.h" />
     <ClInclude Include="Actions\ActionTestSwi.h" />

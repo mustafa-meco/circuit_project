@@ -31,6 +31,18 @@ void ActionAddBuz::Execute()
 	//Clear Status Bar
 	pUI->ClearStatusBar();
 
+	string sR;
+	bool isNumber;
+	do {
+		pUI->PrintMsg("Enter the value of the resistance(enter a number): ");
+		sR = pUI->GetSrting();
+		isNumber = true;
+		for (int i = 0; i < sR.length(); i++)
+			if (isdigit(sR[i]) == false)
+				isNumber = false;
+	} while (!isNumber);
+	double R = stod(sR);
+
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 
@@ -45,6 +57,7 @@ void ActionAddBuz::Execute()
 
 	Buzzer* pR = new Buzzer(pGInfo);
 	pManager->AddComponent(pR);
+	pR->setResistance(R);
 	comp = pR;
 	undo1 = pGInfo;
 }

@@ -95,7 +95,7 @@ public:
 
 	int multipleStoreComp(Component* multi,int m);                 //storing multiple components to delete them 
 	int multipleStoreCon(Connection* multi, int m);                //storing multiple connections to delete them 
-	void  MultipleDelete(int comp, int conn);                      // delete multiple components  
+	void MultipleDelete(int comp, int conn);                      // delete multiple components  
 	void AddToUndoList(Action*);                                   //storing the last ten actions done the user to undo them one by one  
 	void AddToRedoList(Action*);                                   //storing the last ten actions done the user to redo them one by one
 	void ExcuteUndo();                                             // excute the action of undo 
@@ -107,6 +107,8 @@ public:
 	bool ValidateClear();                                          // make sure that the design area is clear 
 	
 	Component* getOne(Connection*);                                //return one of the components which was connected to before deleting it
+	void deleteAll();											   //delete all the components and connections in the program
+	void operation();
 };
 
 #endif

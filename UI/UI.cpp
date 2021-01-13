@@ -210,6 +210,83 @@ ActionType UI::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
+	else if (AppMode == MODULATION) {
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < ToolBarHeight && v == 1)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / ToolItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case MITM_RES:	return ADD_RESISTOR;
+			case MITM_BULB:	return ADD_BULB;
+			case MITM_BUZ:   return ADD_BUZZER;
+			case MITM_FUE:   return ADD_FUES;
+			case MITM_CON:   return ADD_CONNECTION;
+			case MITM_LOAD:	return LOAD;
+			case MITM_MOD:	return ADD_MOD;
+
+			case MITM_DSN:	return DSN_MODE;
+			//case ITM_MODU:	return MOD_MODE;
+				//case ITM_MDELETE:return MDEL;
+			
+
+			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= ToolBarHeight && y < height - StatusBarHeight)
+		{
+			if (v == 2)
+				DrawActionBar();
+			else
+			{
+				if (x < 25 && y<getHeight() - getStatusBarHeight() && y > getHeight() - getStatusBarHeight() - 40)
+				{
+					return ADD_REALISTIC;
+				}
+				return SELECT; //user wants to select/unselect a component
+			}
+
+		}
+
+		if (y >= ToolBarHeight && y < height - StatusBarHeight)
+		{
+
+			int x1, y1;
+			PrintMsg("Click on action to execute");
+			pWind->WaitMouseClick(x1, y1);
+
+			pWind->SetPen(WHITE);
+			pWind->DrawRectangle(1135, 80, 1200, 600, FILLED);
+			ClearStatusBar();
+			int ClickedItemOrder = (y1 - ToolBarHeight) / 52;
+			if (x1 > width - ActionBarWidth && x1 < width)
+			{
+				switch (ClickedItemOrder)
+				{
+				case ITMA_Edit:		return EDIT_Label;
+				case ITMA_Move:		return MOVE;
+				case ITMA_MDel:		return MDEL;
+				case ITMA_Save:		return SAVE;
+				case ITMA_Undo:		return UNDO;
+				case ITMA_Redo:		return REDO;
+				case ITMA_Copy:		return ADD_COPY;
+				case ITMA_Cut:		return ADD_CUT;
+				case ITMA_Paste:	return ADD_PASTE;
+				case ITMA_Delete:	return DEL;
+				default:			return DSN_TOOL;
+				}
+			}
+		}
+		//[3] User clicks on the status bar
+		return STATUS_BAR;
+	}
 	else	//Application is in Simulation mode
 	{
 		

@@ -34,6 +34,8 @@ void ActionTestSwi::Execute()
 		} while (!isBool);
 
 		test->setStatus(S);
+		pManager->CalculateVoltages(pManager->CalculateCurrent());
+		pManager->operation();
 	}
 }
 
