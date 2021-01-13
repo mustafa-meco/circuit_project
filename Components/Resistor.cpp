@@ -5,12 +5,7 @@ Resistor::Resistor(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 1;
 	sourceVoltage = 0;
-<<<<<<< HEAD
 	m_Label = "resistor" + to_string(ID);
-
-=======
-	m_Label = ("Resistor");
->>>>>>> 70605905df7a6307e3be91bb9811eba560d59971
 }
 
 void Resistor::Draw(UI* pUI)
