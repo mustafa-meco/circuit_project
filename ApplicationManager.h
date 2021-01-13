@@ -46,6 +46,7 @@ private:
 public:
 	ApplicationManager(); //constructor
 
+	bool isSim();
 	//Reads the required action from the user and returns the corresponding action type
 	ActionType GetUserAction();
 
@@ -100,11 +101,11 @@ public:
 	void ExcuteUndo();                                             // excute the action of undo 
 	void ExcuteRedo();                                             // excute the action of redo 
 
-	bool ValidateModule();                                         //Chech if  the Module validate or not 
-	void ToModulation();                                           //Change the circuit from constrcution mode to modulation mode 
-	double saveModule();                                           //save the module info
-	bool ValidateClear();                                          // make sure that the design area is free for some tasks like load
-	void DispCurrent();
+	bool ValidateModule();
+	void ToModulation();
+	double saveModule();
+	bool ValidateClear();
+	
 	Component* getOne(Connection*);
 };
 

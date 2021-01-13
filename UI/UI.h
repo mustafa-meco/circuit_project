@@ -60,7 +60,6 @@ class UI
 		ITM_LOAD,          //Load item
 		//ITM_SAVE,
 		//ITM_MDELETE,
-		//ITM_MODU,
 		ITM_EXIT,		//Exit item
 	
 		ITM_DSN_CNT	    //no. of design menu items ==> This should be the last line in this enum
@@ -79,6 +78,7 @@ class UI
 		ITMA_MDel,          // Modul item
 		Itm_ACT_Num        
 	};
+
 
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
@@ -106,22 +106,21 @@ class UI
 		ITM_MOD_CNT  //counter 
 
 	};
-
-	MODE AppMode;		//Application Mode (design or simulation)
+		MODE AppMode;		//Application Mode (design or simulation)
 	
 	static const int	width = 1200, height = 650,	//Window width and height
-						wx = 15 , wy = 15,			//Window starting coordinates
-						StatusBarHeight = 50,	//Status Bar Height
-						ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-						ToolItemWidth = 80,		//Width of each item in toolbar menu
-						
-						
-						ActionBarWidth = 65,
-						
+		wx = 15, wy = 15,			//Window starting coordinates
+		StatusBarHeight = 50,	//Status Bar Height
+		ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+		ToolItemWidth = 80,		//Width of each item in toolbar menu
 
-						//Arbitrary values, you can change as you wish
-						COMP_WIDTH = 50,		//Component Image width
-						COMP_HEIGHT = 50;		//Component Image height
+
+		ActionBarWidth = 65,
+
+
+		//Arbitrary values, you can change as you wish
+		COMP_WIDTH = 50,		//Component Image width
+		COMP_HEIGHT = 50;		//Component Image height
 
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color
@@ -130,7 +129,7 @@ class UI
 	color BkGrndColor;		//Back ground color
 
 	bool IsRealV;
-	window *pWind;
+	window* pWind;
 	
 public:
 	
@@ -182,7 +181,7 @@ public:
 	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	//Draws a fues
 	void DrawFues(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
-
+	void DrawON(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	//void DrawEdit(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	// Draws Connection
 	//void DrawConnection1(const GraphicsInfo &r_GfxInfo, bool selected = false) const;

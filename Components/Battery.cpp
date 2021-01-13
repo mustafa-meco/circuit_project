@@ -37,7 +37,6 @@ void Battery::Draw(UI* pUI)
 
 void Battery::Operate()
 {
-
 }
 
 string Battery::save() const {
@@ -63,6 +62,24 @@ Component* Battery::Copy()
 	B->Setlabel(m_Label);
 	return B;
 }
+
+
+
+
+int Battery::GetOutStatus()
+{
+	return -1;
+}
+int Battery::GetInputStatus()
+{
+	return-1;
+}
+
+void Battery::setInputStatus(STATUS s)
+{
+}
+
+
 //void Battery::setPolarity(BatPolarity p)
 //{
 //	polarity = p;

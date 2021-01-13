@@ -10,5 +10,10 @@ public:
 	virtual void Operate();
 	string save() const;                           //Save and return the Buzzer info
 	void load(int id,string LABELi, double VALUE); //load the buzzer 
-	Component* Copy();                             //Copy the component information 
+	Component* Copy();
+	int GetOutStatus();	//returns status of output if BULB/BUZZER, return -1
+	int GetInputStatus();	//returns status of SWITCH, return -1
+
+	void setInputStatus(STATUS s);	//set status of SWITCH
 };
+

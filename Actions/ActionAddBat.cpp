@@ -16,11 +16,10 @@ void ActionAddBat::Execute()
 	UI* pUI = pManager->GetUI();
 
 	//Print Action Message
-	pUI->PrintMsg("Adding a new resistor: Click anywhere to add");
+	pUI->PrintMsg("Adding a new Battery: Click anywhere to add");
 
 	pUI->GetPointClicked(Cx, Cy);
 	//pManager->GetComponentByCordinates(Cx, Cy);
-
 	/*int compWidth = pUI->getCompWidth();
 	int compHeight = pUI->getCompHeight();*/
 	//pGInfo->PointsList[0].y = comp->getCompCentery(pUI);
@@ -70,11 +69,12 @@ void ActionAddBat::Execute()
 		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
 		sV = pUI->GetSrting();
 		isNumber = true;
+		//comp->setValue(stod(sV));
 		for (int i = 0; i < sV.length(); i++)
 			if (isdigit(sV[i]) == false)
 				isNumber = false;
 	} while (!isNumber);
-
+	
 	double V = stod(sV);
 	
 
@@ -110,7 +110,6 @@ void ActionAddBat::Execute()
 
 void ActionAddBat::Undo()
 {
-
 	pManager->deleteCompounent(comp);
 }
 

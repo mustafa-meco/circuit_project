@@ -41,3 +41,15 @@ Component* Resistor::Copy()                                    //Copy the compon
 	B->Setlabel(m_Label);
 	return B;
 }
+int Resistor::GetOutStatus()
+{
+	return -1;
+}
+int Resistor::GetInputStatus()
+{
+	return -1;
+}
+
+void Resistor::setInputStatus(STATUS s)
+{
+}

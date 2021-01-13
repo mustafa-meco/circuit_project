@@ -42,3 +42,16 @@ Component* Ground::Copy()                                    //Copy the componen
 	return B;
 
 }
+
+int Ground::GetOutStatus()
+{
+	return -1;
+}
+int Ground::GetInputStatus()
+{
+	return -1;
+}
+
+void Ground::setInputStatus(STATUS s)
+{
+}

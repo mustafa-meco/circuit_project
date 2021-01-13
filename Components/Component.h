@@ -66,10 +66,10 @@ public:
 	int getCompCenterx(UI*); // get horizontal/vertical centers of the component
 	int getCompCentery(UI*);
 	
-	//virtual int GetOutStatus()=0;	//returns status of output if BULB/BUZZER, return -1
-	//virtual int GetInputStatus()=0;	//returns status of SWITCH, return -1
+	virtual int GetOutStatus()=0;	//returns status of output if BULB/BUZZER, return -1
+	virtual int GetInputStatus()=0;	//returns status of SWITCH, return -1
 
-	//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
+	virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
 	int getTermConnCount(TerminalNum) const;    //return the number of connection in the term
 

@@ -9,6 +9,7 @@ enum TerminalNum { TERM1, TERM2 };
 //All possible actions
 enum ActionType 
 {
+
 	ADD_RESISTOR,		//Add Resistor
 	ADD_SWITCH,			//Add Switch
 	ADD_BULB,			//Add Bulb
@@ -18,9 +19,9 @@ enum ActionType
 	ADD_FUES,           //Add fues
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
-	ADD_MOD,            //Add modulation  
-	ADD_MODU,            //Add designed modulation  
-
+	ADD_MOD,
+	MOD_MODE,
+	
  	ADD_PASTE,          //Add Paste 
 
 	ADD_CONNECTION,		//Add Wire Connection 
@@ -47,7 +48,7 @@ enum ActionType
 	SIM_MODE,	//Switch to Simulatiom mode
 
 	EXIT,		//Exit the application
-
+	TestSwitch,
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL	//A click on an empty place in the design tool bar
 
@@ -57,12 +58,21 @@ enum  MODE	//Modes of operation
 {
 	DESIGN,
 	SIMULATION,
-	MODULATION 
+	MODULATION
 };
 enum BatPolarity  //direction of the battery which will used to calculate the voltage   
 {
 	RTL, LTR
 };
+
+enum STATUS
+{
+	open,
+	close,
+
+};
+
+
 	
 //enum BatPolarity {
 //	RTL, LTR

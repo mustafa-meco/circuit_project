@@ -25,7 +25,7 @@ void ActionDelete::Execute()
 		comp2 = comp->Copy();
 		C1 = comp->getTermConnCount(TERM1);
 		C2 = comp->getTermConnCount(TERM2);
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < C2; i++)
 		{
 			undo1[i] = nullptr;
 			undo2[i] = nullptr;

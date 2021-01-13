@@ -13,27 +13,45 @@ void ActionEdit::Execute()
 {
 	int x = 0;
 	int y = 0;	
+
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
-	//Print Action Message
-	pUI->PrintMsg("Edit");
-	
-	/*pUI->PrintMsg("select a component");*/
+
+	                                                     
+	pUI->PrintMsg("Choose to Edit");   //Print Action Message
 	pUI->GetPointClicked(x,y);
     Component* comp= pManager->GetComponentByCordinates(x, y);
 	Connection* connection = pManager->GetConnectionByCordinates(x, y);
-	if (comp != nullptr)
-	{	//comp->selection();
 
+	if (comp)
+	{	
 		pUI->PrintMsg("Choose 1 to Edit the label or choose 2 to Edit the value");
 		string r = pUI->GetSrting();
 		if (r == ("1"))
 		{
 			pUI->PrintMsg("enter the new label");
 			comp->Setlabel(pUI->GetSrting());
-
 			pUI->ClearStatusBar();
-
+		}
+		if (r == ("2"))
+		{
+			string Check;
+			bool isNumber;                    // putting a value for the battery 
+			do {
+				pUI->PrintMsg("Enter the value");
+				Check = pUI->GetSrting();
+				isNumber = true;
+				for (int i = 0; i < Check.length(); i++)
+				{
+					if (isdigit(Check[i]) == false)
+					{
+						isNumber = false;
+					}
+				}
+			} while (!isNumber);
+			double intCheck = stoi(Check);
+			//comp->setValue(intCheck);
+			pUI->ClearStatusBar();
 		}
     }
 	else if(connection!=nullptr)
@@ -69,7 +87,7 @@ void ActionEdit::Execute()
 
 
 
-	//pUI->PrintMsg(Component::Setlabel());
+	
 	
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
