@@ -561,26 +561,26 @@ void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 }
 void UI::DrawFues(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
-	string ResImage;
+	string FueImage;
 	if (IsRealV==true)
 	{
-		ResImage = "Images\\realistic\\Fues.jpg";
+		FueImage = "Images\\realistic\\Fues.jpg";
 
 	}
 	else {
 		if (selected)
 		{
-			ResImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
+			FueImage = "Images\\Comp\\Fues_HI.jpg";	//use image of highlighted fues
 
 		}
 		else
 		{
-			ResImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
+			FueImage = "Images\\Comp\\Fues.jpg";	//use image of the normal fues
 
 		}
 	}
 	//Draw Resistor at Gfx_Info (1st corner)
-	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+	pWind->DrawImage(FueImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
 
@@ -622,25 +622,6 @@ void UI::DrawModule(const GraphicsInfo& r_GfxInfo, bool selected) const {
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
-
-
-//bool UI::IsReal()
-//{
-//	int x = 0;
-//	int y = 0;
-//	GetPointClicked(x, y);
-//	DrawRealistic();
-//		if (x < 25 && y<getHeight() - getStatusBarHeight() && y > getHeight() - getStatusBarHeight() - 40)
-//		{
-//			IsRealV = true;
-//			return true;
-//		}
-//		else
-//		{
-//			IsRealV = false;
-//			return false;
-//		}
-//}
 
 
 UI::~UI()

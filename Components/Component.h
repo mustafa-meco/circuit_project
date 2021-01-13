@@ -37,6 +37,7 @@ protected:
 	int ID;
 	static int gID;
 	string m_Label;                               //get string from the user 
+	long Value;                                  //get value from the user 
 	int choose;
 	GraphicsInfo *m_pGfxInfo;                	// The parameters required to draw a component
 	static Component* pcomp;                   // 
@@ -83,6 +84,8 @@ public:
 	
 	string Setlabel(string input);
 	string getlabel();
+	double setValue(double input);
+	double getValue();
 
 	void SetGinfo(GraphicsInfo* G); 
 

@@ -13,13 +13,11 @@ void ActionSelect::Execute()
 	pUI->GetPointClicked(cx,cy);
 	comp = pManager->GetComponentByCordinates(cx, cy);
 	connection = pManager->GetConnectionByCordinates(cx, cy);
+	double intValue = comp->getValue();
+	std::string striValue = std::to_string(intValue);
 	if (comp)
 	{
-		pUI->PrintMsg("label: " + comp->getlabel());
-		//comp->selection();
-		/*pUI->ClearStatusBar();*/
-
-
+		pUI->PrintMsg("label: " + comp->getlabel() + "              Value is: " + striValue);
 	}
 
 }
