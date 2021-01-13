@@ -32,8 +32,13 @@ void Buzzer::Operate()
 {
 	if (this->GetOutStatus() == 1)
 	{
-		Beep(500, 500);
-		Sleep(100);
+		Beep(220, 250);
+		Beep(247, 250);
+		Beep(261, 250);
+		Beep(294, 250);
+		Beep(329, 250);
+		Beep(350, 250);
+		Beep(392, 250);
 	}
 }
 
