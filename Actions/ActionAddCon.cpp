@@ -48,15 +48,15 @@ void ActionAddCon::Execute()
 
 
 
-		GraphicsInfo* pGInfo = new GraphicsInfo(2);      //Gfx info to be used to construct the Comp
+		GraphicsInfo* pGInfo = new GraphicsInfo(2);                //Gfx info to be used to construct the Comp
 
-		                                           //Calculate the rectangle Corners
+	                   	                                           //Calculate the rectangle Corners
 		int compWidth = pUI->getCompWidth();
 		int compHeight = pUI->getCompHeight();
 		pGInfo->PointsList[0].y = comp1->getCompCentery(pUI);
 		pGInfo->PointsList[1].y = comp2->getCompCentery(pUI);
 
-		if (Cx1 < comp1->getCompCenterx(pUI))                                        //checks from where the connection will start
+		if (Cx1 < comp1->getCompCenterx(pUI))                      //checks from where the connection will start
 		{
 			pGInfo->PointsList[0].x = comp1->getCompCenterx(pUI) - compWidth / 2;
 
