@@ -35,7 +35,6 @@ void ActionAddDesignedModule::Execute()
 			pUI->PrintMsg("Enter the file name : ");
 			string filename = pUI->GetSrting();      // save the file name 
 
-
 			inFile.open(filename);            // open the file 
 			while (!inFile)                   // if the file isnot existed print a message and take the file name again 
 			{
@@ -101,15 +100,24 @@ void ActionAddDesignedModule::Execute()
 				double Re = stod(input);
 				pR->setResistance(Re);
 				pManager->AddComponent(pR);
+				comp = pR;
+				undo1 = pGInfo;
+				undo2 = Re;
+				pManager->AddToUndoList(this);
+
 			}
 			inFile.close();
 		}
 }
 
 
-void ActionAddDesignedModule::Undo() {
-
+void ActionAddDesignedModule::Undo() 
+{
+	pManager->deleteCompounent(comp);
 }
-void ActionAddDesignedModule::Redo() {
-
+void ActionAddDesignedModule::Redo() 
+{
+	Module* pR = new Module(undo1/*, undo2*/);
+	pR->setResistance(undo2);
+	pManager->AddComponent(pR);
 }

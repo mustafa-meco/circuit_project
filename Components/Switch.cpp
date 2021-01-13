@@ -1,6 +1,6 @@
 #include "Switch.h"
 #include <string>
-
+#include<iostream>
 Switch::Switch(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 0;
@@ -12,7 +12,7 @@ void Switch::Draw(UI* pUI)
 {
 	//Call output class and pass resistor drawing info to it.
 	pUI->DrawSwitch(*m_pGfxInfo, pcomp == this); //update to draw switchS
-	status = 0; 
+	//status = 0; 
 }
 
 void Switch::Operate()

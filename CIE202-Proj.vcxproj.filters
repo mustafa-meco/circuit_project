@@ -81,6 +81,7 @@
     <ClCompile Include="Actions\ActionTestSwi.cpp" />
     <ClCompile Include="Actions\ActionSimulate.cpp" />
     <ClCompile Include="Actions\ActionDesign.cpp" />
+    <ClCompile Include="Actions\operate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Actions\ActionSimulate.h" />
     <ClInclude Include="Actions\ActionDesign.h" />
     <ClInclude Include="Actions\ActionRealistic.h" />
+    <ClInclude Include="Actions\operate.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

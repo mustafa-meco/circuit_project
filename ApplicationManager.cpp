@@ -19,7 +19,8 @@
 #include "Actions/ActionUndo.h"
 #include "Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
-
+#include"Actions/operate.h"
+#include"Actions/ActionVoltmeter.h"
 #include "Actions/ActionAddModule.h"
 #include "Actions/ActionAddDesignedModule.h"
 #include "Actions/ActionSaveDesignedModule.h"
@@ -160,6 +161,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case ADD_MOD:
 		pAct = new ActionAddModule(this);
+		AddToUndoList(pAct);
 		break;
 	case TestSwitch:
 		pAct = new ActionTestSwi(this);
@@ -234,6 +236,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 	if (pAct)
 	{
+		pUI->DrawLight();
 		//save(ActType);
 		AddToUndoList(pAct);
 		pAct->Execute();
@@ -387,11 +390,6 @@ void ApplicationManager::ToSimulation() {
 		double current = CalculateCurrent();
 		CalculateVoltages(current);
 		pUI->CreateSimulationToolBar();
-
-			for (int i = 0; i < CompCount; i++)
-			{
-				CompList[i]->Operate();
-			}
 	}
 }
 void ApplicationManager::ToDesign() {
@@ -460,10 +458,9 @@ double ApplicationManager::CalculateCurrent() {
 		
 		TermComp[++j] = TempConn->getOtherComponent(TermComp[j - 1]);
 	}
-	
-	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
+
+	cout << (SumVoltage / SumResistance) << endl << SumVoltage << endl << SumResistance;
 	return abs(SumVoltage / SumResistance);
-	
 }
 // Calculates voltage at each component terminal
 void ApplicationManager::CalculateVoltages(double current) {
@@ -508,9 +505,18 @@ void ApplicationManager::CalculateVoltages(double current) {
 		}
 		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
 	}
-
-
 }
+
+void ApplicationManager::operation()
+{
+	cout << "opp";
+	for (int i = 0; i < CompCount; i++)
+	{
+		CompList[i]->Operate();
+		cout << CompList[i]->getTerm1Volt() << " ww " << CompList[i]->getTerm2Volt() << endl;
+	}
+}
+
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
 	for (int i = 0; i < CompCount; i++)
@@ -524,7 +530,8 @@ ApplicationManager::~ApplicationManager()
 {
 	//deleteAll();
 	for (int i = 0; i < ConnCount; i++)
-		delete ConnList[i];
+		delete ConnList[i
+		];
 	for (int i = 0; i < CompCount; i++)
 		delete CompList[i];
 	ConnCount = 0;
@@ -623,15 +630,15 @@ void ApplicationManager::deleteCompounent(Component* delet)
 	}
 
 }
-
-void ApplicationManager::operation()
-{
-	cout << "opp";
-	for (int i = 0; i < CompCount; i++)
-	{
-		CompList[i]->Operate();
-	}
-}
+//
+//void ApplicationManager::operation()
+//{
+//	cout << "opp";
+//	for (int i = 0; i < CompCount; i++)
+//	{
+//		CompList[i]->Operate();
+//	}
+//}
 
 void ApplicationManager::deleteConnection(Connection* delet)
 {
@@ -745,6 +752,7 @@ void ApplicationManager::AddToRedoList(Action* A)
 		RedoList[0] = nullptr;
 		for (int i = 0; i < 9; i++)
 		{
+			
 			RedoList[i] = RedoList[i++];
 		}
 		RedoList[9] = A;

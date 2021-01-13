@@ -83,7 +83,7 @@ public:
 		//void Exit();
 
 	void load( string * , double* , Component**, Component** );     //load the	Circuit. 
-
+	//void operation();
 	bool isAvalible();                                              // to check if the user create two components before connect them or not
 	Component* GetCopyComp() const;		 	                        //Getter for the component after coping or cutting the component.
 	void SetCopyComp(Component* comp1);                             //Setter for the component   

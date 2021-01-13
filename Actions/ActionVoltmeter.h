@@ -16,9 +16,9 @@ public:
 	virtual ~ActionVoltmeter(void);
 
 	//Execute action (code depends on action type)
-	virtual void Execute();
+void Execute();
 
-	virtual void Undo();
-	virtual void Redo();
+	void Undo();
+	void Redo();
 };
 

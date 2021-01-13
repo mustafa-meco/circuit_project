@@ -87,7 +87,9 @@ void Component::setSourceVoltage(double V) {         //set a voltage value
 	sourceVoltage = V;
 }
 void Component::setStatus(bool S) {
+	
 	status = S;
+	
 }
 
 int Component::getCompCenterx(UI*)         //get the center of the component area on the x axis 
