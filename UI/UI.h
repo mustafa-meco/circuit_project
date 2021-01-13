@@ -8,7 +8,7 @@
 #include <vector>
 using namespace std;
 
-struct Point
+struct Point   // the location on the x axis and y axis for the point 
 {
 	int x,y;
 };
