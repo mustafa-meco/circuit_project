@@ -3,6 +3,7 @@
 
 Module::Module(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
+	m_Label = "module" + to_string(ID);
 
 }
 

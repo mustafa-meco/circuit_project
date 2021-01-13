@@ -249,15 +249,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 }
 ////////////////////////////////////////////////////////////////////
 
-string* ApplicationManager::save(int& cp, int& cn) const {
+string* ApplicationManager::save(int& cp, int& cn) {
+
 	cp = CompCount;
 	cn = ConnCount;
-	string* compData = new string[CompCount + ConnCount];
-	for (int i = 0; i < CompCount; i++)
-		compData[i] = CompList[i]->save();
-	for (int i = 0; i < ConnCount; i++)
-		compData[i + CompCount] = ConnList[i]->save();
-	return compData;
+	if (IsModulation) {
+		double ResistanceT = saveModule();
+		string ModData = "MOD " + to_string(ResistanceT);
+	}
+	else {
+		string* compData = new string[CompCount + ConnCount];
+		for (int i = 0; i < CompCount; i++)
+			compData[i] = CompList[i]->save();
+		for (int i = 0; i < ConnCount; i++)
+			compData[i + CompCount] = ConnList[i]->save();
+		return compData;
+	}
+
 }
 
 void ApplicationManager::UpdateInterface()
@@ -414,7 +422,7 @@ double ApplicationManager::CalculateCurrent() {
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
 	}
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
-	return (SumVoltage / SumResistance);
+	return abs(SumVoltage / SumResistance);
 	
 }
 // Calculates voltage at each component terminal
@@ -434,24 +442,27 @@ void ApplicationManager::CalculateVoltages(double current) {
 		}
 	}
 	TempConn = G->getTermConnections(TERM1)[0];
-	TemComp[0] = TempConn->getOtherComponent(G);
+	TemComp[z] = TempConn->getOtherComponent(G);
+	G->setTerm1Volt(TotalV);
+	G->setTerm2Volt(TotalV);
 	while (!dynamic_cast<Ground*>(CompList[z]))
 	{
-
 		TM = TemComp[z]->whichTerminal(TempConn);
-
 		if (TM == TERM1)
 		{
 			TemComp[z]->setTerm1Volt(TotalV);
+			cout << " comp "<< z << " term1 "<< TotalV << " term2 ";
 			TotalV += current * TemComp[z]->getResistance() - TemComp[z]->getSourceVoltage();
-
+			cout << TotalV << endl;
 			TemComp[z]->setTerm2Volt(TotalV);
 			TempConn = TemComp[z]->getTermConnections(TERM2)[0];
 		}
 		else
-		{
+		{	
 			TemComp[z]->setTerm2Volt(TotalV);
+			cout << "e comp " << z << " term1 " << TotalV << " term2 ";
 			TotalV += current * TemComp[z]->getResistance() + TemComp[z]->getSourceVoltage();
+			cout << TotalV << endl;
 			TemComp[z]->setTerm1Volt(TotalV);
 			TempConn = TemComp[z]->getTermConnections(TERM1)[0];
 		}
@@ -760,6 +771,7 @@ void ApplicationManager::ToModulation() {
 		pUI->CreateErrorWind("error \n");
 	else {
 		this->IsModulation = true;
+		this->IsSimulation = false;
 		pUI->CreateModulationToolBar();
 	}
 }

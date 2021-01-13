@@ -5,7 +5,8 @@ Switch::Switch(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 0;
 	sourceVoltage = 0;
-	
+	m_Label = "switch" + to_string(ID);
+
 }
 
 void Switch::Draw(UI* pUI)

@@ -5,6 +5,8 @@ Buzzer::Buzzer(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 
 	resistance = 0; // TODO: Take resistance from user
 	sourceVoltage = 0;
+	m_Label = "buzzer" + to_string(ID);
+
 	//pUI->PrintMsg("Enter the label: ");
 	//m_Label = pUI->GetSrting();
 	//pUI->ClearStatusBar();

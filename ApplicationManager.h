@@ -76,7 +76,7 @@ public:
 	double CalculateCurrent();                         // calculate the current throught the circuit 
 	void CalculateVoltages(double current);           // calculate the voltage start from the ground 
 	//void save(ActionType);
-	string* save(int&,int&) const;                     //save the date of the circuit components 
+	string* save(int&,int&);                     //save the date of the circuit components 
 	//destructor
 	~ApplicationManager();
 

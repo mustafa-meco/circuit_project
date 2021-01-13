@@ -387,7 +387,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_MOD] = "Images\\Menu\\Menu_Module.jpg";          //Add image for Module
 	MenuItemImages[ITM_CON] = "Images\\Menu\\Menu_Connection.jpg";		 //Add image for connection
 	MenuItemImages[ITM_LOAD] = "Images\\Menu\\Menu_Load.jpg";			 //Add image for Load
-	MenuItemImages[ITM_SIM] = "Images\\Menu\\sim.jpg";                  //Add image for simulation
+	MenuItemImages[ITM_SIM] = "images\\Menu\\simulate.jPG";                  //Add image for simulation
 	MenuItemImages[ITM_MODU] = "Images\\Menu\\Menu_mod.jpg";             //Add image for modulation
 	//MenuItemImages[ITM_ADD_MOD] = "Images\\Menu\\Menu_Edit.jpg";
 	//MenuItemImages[ITM_SAVE] = "Images\\Menu\\save.jpg";
@@ -421,7 +421,7 @@ void UI::CreateSimulationToolBar()
 	AppMode = SIMULATION;	//Simulation Mode
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
 	string MenuItemImages[ITM_SIM_CNT];
-	MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG"; //Add image for simulatation
+	//MenuItemImages[ITM_CIRC_SIM] = "images\\Menu\\simulate.jPG"; //Add image for simulatation
 	MenuItemImages[ITM_AMM] = "images\\Menu\\ammeter.jpg";       //Add image for ammeter
 	MenuItemImages[ITM_VOL] = "images\\Menu\\voltmeter.jpg";      //Add image for voltmeter
 	MenuItemImages[ITM_DSN] = "images\\Menu\\design.jpg";          //Add image for design

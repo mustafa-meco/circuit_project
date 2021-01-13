@@ -50,7 +50,7 @@ void ActionAddDesignedModule::Execute()
 				pUI->CreateErrorWind("invalid file (must start with (MOD))");
 			else {
 				getline(inFile, input);
-				pUI->PrintMsg("Adding a new resistor: Click to add");
+				pUI->PrintMsg("Adding a new MOD: Click to add");
 
 				//Get Center point of the area where the Comp should be drawn
 				pUI->GetPointClicked(Cx, Cy);

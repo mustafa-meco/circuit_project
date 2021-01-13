@@ -68,7 +68,7 @@ void ActionAddCon::Execute()
 			pGInfo->PointsList[0].x = comp1->getCompCenterx(pUI) + compWidth / 2;
 			comp1conn = TERM2;
 		}
-		if (Cx1 < comp2->getCompCenterx(pUI))
+		if (Cx2 < comp2->getCompCenterx(pUI))
 		{
 			pGInfo->PointsList[1].x = comp2->getCompCenterx(pUI) - compWidth / 2;
 			comp2conn = TERM1;
