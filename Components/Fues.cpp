@@ -4,8 +4,7 @@ Fues::Fues(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 0;
 	sourceVoltage = 0;
-
-	
+	m_Label = "fues" + to_string(ID);
 }
 
 void Fues::Draw(UI* pUI)

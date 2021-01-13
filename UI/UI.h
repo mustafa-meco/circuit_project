@@ -8,7 +8,7 @@
 #include <vector>
 using namespace std;
 
-struct Point
+struct Point   // the location on the x axis and y axis for the point 
 {
 	int x,y;
 };
@@ -83,7 +83,7 @@ class UI
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in menu
-		ITM_CIRC_SIM,	//Circuit Simulate menu item
+		//ITM_CIRC_SIM,	//Circuit Simulate menu item
 		
 		//TODO:Add more items names here
 		ITM_AMM,          // Ammeter item
@@ -92,18 +92,18 @@ class UI
 		ITM_SIM_CNT		 //no. of simulation menu items ==> This should be the last line in this enum
 	
 	};
-	enum ModMenuItem {
-		MITM_RES,
-		MITM_BULB,
-		MITM_BUZ,
-		MITM_FUE,
-		MITM_MOD,
-		MITM_ADD_MOD,
-		MITM_CON,
+	enum ModMenuItem { // items in modulation 
+		MITM_RES,  //Resistance item 
+		MITM_BULB, //Bulb item 
+		MITM_BUZ,  //Buzzeer item 
+		MITM_FUE,  //fues item
+		MITM_MOD,  //the saved module item
+		MITM_ADD_MOD, // Modulation item
+		MITM_CON,   //connection item
 
-		MITM_LOAD,
-		MITM_DSN,
-		ITM_MOD_CNT
+		MITM_LOAD,  // laod item 
+		MITM_DSN,   // design item
+		ITM_MOD_CNT  //counter 
 
 	};
 		MODE AppMode;		//Application Mode (design or simulation)

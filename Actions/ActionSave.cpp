@@ -15,7 +15,7 @@ void ActionSave::Execute() {
 	int CompCount, ConnCount;
 	string* data = pManager->save(CompCount, ConnCount);
 
-	
+	if (data )
 
 	pUI->PrintMsg("Enter the name of the file to be saved into");
 	string folder = pUI->GetSrting();

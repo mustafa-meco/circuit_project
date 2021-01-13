@@ -62,7 +62,7 @@ void ActionAddCopy::Execute()                       //Execute action
 	 {
 		pManager->SetCopyComp(ptrComp);            
 	 }
-	 //ptrComp->Copy(ptrComp);
+		 //ptrComp->Copy(ptrComp);
 	 //if (ptResistor!=NULL)
 	 //{
 		// pManager->ComponentData.COMPNAME = "RES";

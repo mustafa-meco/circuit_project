@@ -161,33 +161,6 @@ string Component::Setlabel(string input)
 	return m_Label;
 }
 
-//double Component::getValue()
-//{
-//	if (this != nullptr)
-//	{
-//		return Value;
-//	}
-//}
-//double Component::setValue(double input)
-//{
-//	if (this != nullptr)
-//	{
-//		Value = input;
-//		return Value;
-//	}
-//}
-//double Component::getVoltage()
-//{
-//	if (this != nullptr)
-//	{
-//		return Value;
-//	}
-//}
-//double Component::set(double input)
-//{
-//	Value = input;
-//	return Value;
-//}
 void Component::SetGinfo(GraphicsInfo* G)
 {
 	m_pGfxInfo = G;

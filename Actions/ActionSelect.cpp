@@ -15,11 +15,24 @@ void ActionSelect::Execute()
 	pUI->GetPointClicked(cx,cy);
 	comp = pManager->GetComponentByCordinates(cx, cy);
 	connection = pManager->GetConnectionByCordinates(cx, cy);
-	//double intValue = comp->getValue();
-	//std::string striValue = std::to_string(intValue);
+	
 	if (comp)
 	{
-		pUI->PrintMsg("label: " + comp->getlabel());// + "              Value is: " + striValue);
+		
+		/*std::string striValue = std::to_string(comp->getValue());*/
+		double Value = -1;
+		if (comp->getResistance() !=0)
+		{
+			comp->getResistance();
+			 Value = comp->getResistance();
+		}
+		else if ( comp->getSourceVoltage()!=0)
+		{
+			comp->getSourceVoltage();
+		    Value = comp->getSourceVoltage();
+		}
+		std::string striValue = std::to_string(Value);
+		pUI->PrintMsg("label: " + comp->getlabel() + "              Value is: " + striValue );
 	}
 }
 

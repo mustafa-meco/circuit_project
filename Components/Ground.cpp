@@ -4,7 +4,7 @@ Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 0;
 	sourceVoltage = 0;
-
+	m_Label = "ground" + to_string(ID);
 }
 
 
@@ -25,7 +25,7 @@ string Ground::save() const {
 	Point p;
 	p.x = m_pGfxInfo->PointsList[0].x;
 	p.y = m_pGfxInfo->PointsList[0].y;
-	string row =  "GND " + to_string(ID) + " " + m_Label + " " + to_string((int)sourceVoltage) + " " + to_string(p.x) + " " + to_string(p.y);
+	string row =  "GND " + to_string(ID) + " " + m_Label + " " + "-1" + " " + to_string(p.x) + " " + to_string(p.y);
 	return row;
 }
 void Ground::load(int id,string LABELi, double VALUE)         //load if there is a Ground in the saved file 

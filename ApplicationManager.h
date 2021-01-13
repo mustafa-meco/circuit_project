@@ -14,11 +14,11 @@
 class ApplicationManager
 {
 
-	enum 
+	enum //Max no of components and connectors
 	{
 		MaxCompCount = 200,
 		MaxConnCount = 1000
-	};	//Max no of components and connectors
+	};	
 
 
 private:
@@ -76,7 +76,7 @@ public:
 	double CalculateCurrent();                         // calculate the current throught the circuit 
 	void CalculateVoltages(double current);           // calculate the voltage start from the ground 
 	//void save(ActionType);
-	string* save(int&,int&) const;                     //save the date of the circuit components 
+	string* save(int&,int&);                     //save the date of the circuit components 
 	//destructor
 	~ApplicationManager();
 
@@ -101,12 +101,12 @@ public:
 	void ExcuteUndo();                                             // excute the action of undo 
 	void ExcuteRedo();                                             // excute the action of redo 
 
-	bool ValidateModule();
-	void ToModulation();
-	double saveModule();
-	bool ValidateClear();
+	bool ValidateModule();                                         //checking if the module valid to be drawn or not 
+	void ToModulation();                                           //moving from thr design mode to the modulation mode
+	double saveModule();                                           //save the designed module
+	bool ValidateClear();                                          // make sure that the design area is clear 
 	
-	Component* getOne(Connection*);
+	Component* getOne(Connection*);                                //return one of the components which was connected to before deleting it
 };
 
 #endif

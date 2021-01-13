@@ -19,8 +19,8 @@ enum ActionType
 	ADD_FUES,           //Add fues
 	ADD_COPY,           //Add Copy
 	ADD_CUT,            //Add Cut
-	ADD_MOD,
-	MOD_MODE,
+	ADD_MOD,            //Add module
+	MOD_MODE,           //Add modulation  
 	
  	ADD_PASTE,          //Add Paste 
 
