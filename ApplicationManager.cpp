@@ -718,6 +718,7 @@ void ApplicationManager::AddToUndoList(Action* A)
 	else
 	{
 		delete UndoList[0];
+		UndoList[0] = nullptr;
 		for (int i = 0; i < 9 ; i++)
 		{
 			UndoList[i] = UndoList[i++];
@@ -735,6 +736,7 @@ void ApplicationManager::AddToRedoList(Action* A)
 	else
 	{
 		delete RedoList[0];
+		RedoList[0] = nullptr;
 		for (int i = 0; i < 9; i++)
 		{
 			
