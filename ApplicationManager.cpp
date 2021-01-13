@@ -412,14 +412,46 @@ void ApplicationManager::ToDesign() {
 double ApplicationManager::CalculateCurrent() {  
 	double SumResistance = 0;
 	double SumVoltage = 0;
+	int Battery1 = 0;
 	for (int i = 0; i < CompCount; i++) 
 	{
+		if (CompList[i]->getSourceVoltage() != 0 && Battery1 == 0)
+		{
+			Battery1 = i;
+		}
 		if (CompList[i]->getResistance() != -1 )
 		{
 			SumResistance = SumResistance + CompList[i]->getResistance();
 		}
 		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
-			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
+			/*SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();*/
+	}
+	TerminalNum TM;
+	Connection* TempConn = CompList[Battery1]->getTermConnections(TERM1)[0];
+	Component** TermComp = new Component * [CompCount];
+	TermComp[0] = TempConn->getOtherComponent(CompList[Battery1]);
+	int j = 0;
+	while (TermComp[j] != CompList[Battery1])
+	{
+		j++;
+		if (TermComp[j]->getSourceVoltage() == 0)
+		{
+			TermComp[j] = TempConn->getOtherComponent(TermComp[j - 1]);
+			continue;
+		}
+		TM = TermComp[j]->whichTerminal(TempConn);
+
+		if (TM == TERM1)
+		{
+			SumVoltage = SumVoltage + TermComp[j]->getSourceVoltage();
+			TempConn = TermComp[j]->getTermConnections(TERM2)[0];
+		}
+		else
+		{
+			SumVoltage = SumVoltage - TermComp[j]->getSourceVoltage();
+			TempConn = TermComp[j]->getTermConnections(TERM1)[0];
+		}
+
 	}
 	
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
