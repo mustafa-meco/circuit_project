@@ -17,13 +17,8 @@ void ActionAddBat::Execute()
 
 	//Print Action Message
 	pUI->PrintMsg("Adding a new Battery: Click anywhere to add");
-
 	pUI->GetPointClicked(Cx, Cy);
-	//pManager->GetComponentByCordinates(Cx, Cy);
-	/*int compWidth = pUI->getCompWidth();
-	int compHeight = pUI->getCompHeight();*/
-	//pGInfo->PointsList[0].y = comp->getCompCentery(pUI);
-	//pGInfo->PointsList[1].y = comp->getCompCentery(pUI);
+	
 
 	while (!(Cy > pUI->getToolBarHeight() + pUI->getCompHeight() / 2
 		&& Cy < pUI->getHeight() - pUI->getStatusBarHeight() - pUI->getCompHeight() / 2
@@ -33,14 +28,7 @@ void ActionAddBat::Execute()
 	{
 		pUI->GetPointClicked(Cx, Cy);
 	}
-	//pManager->GetComponentByCordinates(Cx, Cy);
 
-	/*	for (int i = 0; i < ; i++)
-		{
-			if ()
-			{
-			}
-		}*/
 
 
 	string sS;                          // determine the polarity direction 
@@ -69,12 +57,10 @@ void ActionAddBat::Execute()
 		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
 		sV = pUI->GetSrting();
 		isNumber = true;
-		//comp->setValue(stod(sV));
 		for (int i = 0; i < sV.length(); i++)
 			if (isdigit(sV[i]) == false)
 				isNumber = false;
 	} while (!isNumber);
-	
 	double V = stod(sV);
 	
 
@@ -93,6 +79,8 @@ void ActionAddBat::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
+	
+	
 	Battery* pR = new Battery(pGInfo/*, V*/);     // the voltage value depends on the direction of the battery 
 	if (SP==LTR) 
 	{

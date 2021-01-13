@@ -4,7 +4,7 @@ Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 0;
 	sourceVoltage = 0;
-
+	m_Label = ("Ground");
 }
 
 

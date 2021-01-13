@@ -38,7 +38,7 @@ protected:
 	int ID;                                // variable to take id for component
 	static int gID;                        //counter for the id
 	string m_Label;                        // variable to take the label
-	//int choose;                         
+	double Value;
 	GraphicsInfo *m_pGfxInfo;              //The parameters required to draw a component
 	static Component* pcomp;               //pointer to a component
 public:

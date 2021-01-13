@@ -8,13 +8,13 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 	pGfxInfo = r_GfxInfo;
 	Comp1 = cmp1;
 	Comp2 = cmp2;
+	
 }
 
 
 void Connection::Draw(UI* pUI) //draw the connection between two points 
 {
 	pUI->DrawConnection(*pGfxInfo, pconnection == this); 
-	
 }
 
 bool Connection::IsInRegion(int x, int y, UI* pUI)
