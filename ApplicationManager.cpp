@@ -421,6 +421,7 @@ double ApplicationManager::CalculateCurrent() {
 		//if (CompList[i]->getSourceVoltage() != 0 || CompList[i]->getSourceVoltage() != -1)
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
 	}
+	
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
 	return abs(SumVoltage / SumResistance);
 	

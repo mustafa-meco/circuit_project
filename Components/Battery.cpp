@@ -4,7 +4,12 @@ Battery::Battery(GraphicsInfo* r_GfxInfo ) :Component(r_GfxInfo)
 {
 	resistance = 0;
 	sourceVoltage = 1;
+<<<<<<< HEAD
 	m_Label = "battery" + to_string(ID);
+=======
+	m_Label = ("battery");
+	
+>>>>>>> 70605905df7a6307e3be91bb9811eba560d59971
 	//if (!r_GfxInfo) {
 
 

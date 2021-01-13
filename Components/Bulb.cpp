@@ -5,8 +5,12 @@ Bulb::Bulb(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 	x = 0;
 	resistance = 1;
 	sourceVoltage = 0;
+<<<<<<< HEAD
 	m_Label = "bulb" + to_string(ID);
 
+=======
+	m_Label = ("Bulb");
+>>>>>>> 70605905df7a6307e3be91bb9811eba560d59971
 	//pUI->PrintMsg("Enter the value of the resistace: ");
 	//resistance = stod(pUI->GetSrting()); // TODO: Take resistance from user
 	//pUI->ClearStatusBar();

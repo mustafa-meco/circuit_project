@@ -4,8 +4,12 @@ Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 	resistance = 0;
 	sourceVoltage = 0;
+<<<<<<< HEAD
 	m_Label = "ground" + to_string(ID);
 
+=======
+	m_Label = ("Ground");
+>>>>>>> 70605905df7a6307e3be91bb9811eba560d59971
 }
 
 

@@ -39,7 +39,7 @@ void ActionAddBul::Execute()
 		for (int i = 0; i < sR.length(); i++)
 			if (isdigit(sR[i]) == false)
 				isNumber = false;
-	} while (!isNumber);
+	} while (!isNumber || stod(sR) <= 0););
 
 	
 	double R = stod(sR);

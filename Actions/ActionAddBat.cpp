@@ -65,15 +65,16 @@ void ActionAddBat::Execute()
 
 	string sV;
 	bool isNumber;                    // putting a value for the battery 
-	do {
-		pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
-		sV = pUI->GetSrting();
-		isNumber = true;
-		//comp->setValue(stod(sV));
-		for (int i = 0; i < sV.length(); i++)
-			if (isdigit(sV[i]) == false)
-				isNumber = false;
-	} while (!isNumber);
+
+		do {
+			pUI->PrintMsg("Enter the value of the source voltage(enter a number): ");
+			sV = pUI->GetSrting();
+			isNumber = true;
+			//comp->setValue(stod(sV));
+			for (int i = 0; i < sV.length(); i++)
+				if (isdigit(sV[i]) == false)
+					isNumber = false;
+		} while (!isNumber || stod(sV) <= 0);
 	
 	double V = stod(sV);
 	

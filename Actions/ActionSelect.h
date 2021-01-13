@@ -11,6 +11,7 @@ private:
 	Connection* connection; // pointer to connection
 	int cx, cy;	//center point of the comp
 	int x1, y1, x2, y2;	//two corners of the rectangluar area
+	double Value;        // to store the voltege or resistance of the component
 public:
 	ActionSelect(ApplicationManager* pApp); //constructor
 
