@@ -3,7 +3,7 @@
 Buzzer::Buzzer(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
 
-	resistance = 0; // TODO: Take resistance from user
+	resistance = 1; // TODO: Take resistance from user
 	sourceVoltage = 0;
 	//pUI->PrintMsg("Enter the label: ");
 	//m_Label = pUI->GetSrting();

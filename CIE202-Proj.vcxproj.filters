@@ -79,6 +79,7 @@
     <ClCompile Include="Actions\ActionAmmeter.cpp" />
     <ClCompile Include="Actions\ActionVoltmeter.cpp" />
     <ClCompile Include="Actions\ActionTestSwi.cpp" />
+    <ClCompile Include="Actions\operate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
@@ -142,9 +143,9 @@
     <ClInclude Include="Actions\ActionSaveDesignedModule.h" />
     <ClInclude Include="Actions\ActionAddDesignedModule.h" />
     <ClInclude Include="Actions\ActionTestSwi.h" />
-    
     <ClInclude Include="Actions\ActionAmmeter.h" />
     <ClInclude Include="Actions\ActionVoltmeter.h" />
+    <ClInclude Include="Actions\operate.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

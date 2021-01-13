@@ -40,6 +40,7 @@ void Bulb::Draw(UI* pUI)
 void Bulb::Operate()
 {
 	x = this->GetOutStatus();
+	
 }
 
 string Bulb::save() const {
@@ -65,6 +66,7 @@ Component* Bulb::Copy()
 }
 int Bulb::GetOutStatus()
 {
+	
 	if (term1_volt == term2_volt)
 		return 0;
 	else

@@ -129,6 +129,7 @@ class UI
 	color BkGrndColor;		//Back ground color
 
 	bool IsRealV;
+	bool light;
 	window* pWind;
 	
 public:
@@ -168,6 +169,7 @@ public:
 	void CreateModulationToolBar();
 	void DrawReal() const;
 	void DrawRealistic();
+	void DrawLight();
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	//Draw a Bulb

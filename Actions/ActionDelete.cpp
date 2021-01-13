@@ -46,7 +46,7 @@ void ActionDelete::Execute()
 	}
 
 
-	if (connection != nullptr)
+	if (connection != nullptr && comp==nullptr)
 	{
 		connection2 = connection->copyconnection();
 		Comp1 = pManager->getOne(connection2);

@@ -186,6 +186,7 @@
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Actions\operate.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +250,7 @@
     <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />
     <ClInclude Include="Defs.H" />
+    <ClInclude Include="Actions\operate.h" />
     <ClInclude Include="UI\UI.h" />
   </ItemGroup>
   <ItemGroup>

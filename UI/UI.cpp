@@ -21,6 +21,7 @@ UI::UI()
 	CreateDesignToolBar();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar
 	bool IsRealV = false;
+	light = false;
 }
 void UI::CreateErrorWind(string s) {
 	window* pErWind;
@@ -366,6 +367,14 @@ void UI::DrawRealistic()
 	}
 }
 
+void UI::DrawLight()
+{
+	if (AppMode == SIMULATION)
+		light = true;
+	else
+		light = false;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -483,6 +492,7 @@ void UI::DrawActionBar()const
 
 void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 {
+	
 	string ResImage;
 	if (IsRealV)
 	{

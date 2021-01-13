@@ -19,7 +19,8 @@
 #include "Actions/ActionUndo.h"
 #include "Actions/ActionRedo.h"
 #include "Actions/ActionMultipleDelete.h"
-
+#include"Actions/operate.h"
+#include"Actions/ActionVoltmeter.h"
 #include "Actions/ActionAddModule.h"
 #include "Actions/ActionAddDesignedModule.h"
 #include "Actions/ActionSaveDesignedModule.h"
@@ -162,6 +163,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case ADD_MOD:
 		pAct = new ActionAddModule(this);
+		AddToUndoList(pAct);
 		break;
 	case TestSwitch:
 		pAct = new ActionTestSwi(this);
@@ -205,8 +207,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SIM_MODE:
 		ToSimulation();
+		pAct = new Actionoperate(this);
 		break;
 	case DSN_MODE:
+		pAct = new Actionoperate(this);
 		ToDesign();
 		break;
 	case MOD_MODE:
@@ -233,7 +237,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionAmmeter(this);
 		break;
 	case VOL:
-		//pAct = new ActionVotlmeter(this);
+		pAct = new ActionVoltmeter(this);
 		break;
 	case EXIT:
 		pAct = new ActionExit(this);           //TODO: create ExitAction here
@@ -241,6 +245,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 	if (pAct)
 	{
+		pUI->DrawLight();
 		//save(ActType);
 		pAct->Execute();
 		/*delete pAct;
@@ -385,11 +390,6 @@ void ApplicationManager::ToSimulation() {
 		double current = CalculateCurrent();
 		CalculateVoltages(current);
 		pUI->CreateSimulationToolBar();
-
-			for (int i = 0; i < CompCount; i++)
-			{
-				CompList[i]->Operate();
-			}
 	}
 }
 void ApplicationManager::ToDesign() {
@@ -402,6 +402,13 @@ void ApplicationManager::ToDesign() {
 ///////////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {  
+	for (int i = 0; i < CompCount; i++)
+	{
+		cout <<"m"<< CompList[i]->GetInputStatus()<<"m";
+		if (CompList[i]->GetInputStatus() == 0 || IsSimulation==false)
+			return 0;
+	}
+
 	double SumResistance = 0;
 	double SumVoltage = 0;
 	for (int i = 0; i < CompCount; i++) 
@@ -414,7 +421,10 @@ double ApplicationManager::CalculateCurrent() {
 			SumVoltage = SumVoltage + CompList[i]->getSourceVoltage();
 	}
 	cout << (SumVoltage / SumResistance)<<endl<< SumVoltage << endl << SumResistance;
+	if((SumVoltage / SumResistance)>0)
 	return (SumVoltage / SumResistance);
+	else
+		return -(SumVoltage / SumResistance);
 	
 }
 // Calculates voltage at each component terminal
@@ -457,9 +467,18 @@ void ApplicationManager::CalculateVoltages(double current) {
 		}
 		TemComp[++z] = TempConn->getOtherComponent(TemComp[z - 1]);
 	}
-
-
 }
+
+void ApplicationManager::operation()
+{
+	cout << "opp";
+	for (int i = 0; i < CompCount; i++)
+	{
+		CompList[i]->Operate();
+		cout << CompList[i]->getTerm1Volt() << " ww " << CompList[i]->getTerm2Volt() << endl;
+	}
+}
+
 void ApplicationManager::load(string* labeli, double* valueI, Component** comp001, Component** comp002) //load the circuit  
 {
 	for (int i = 0; i < CompCount; i++)

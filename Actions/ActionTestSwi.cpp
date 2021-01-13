@@ -34,6 +34,7 @@ void ActionTestSwi::Execute()
 		} while (!isBool);
 
 		test->setStatus(S);
+		pManager->operation();
 	}
 }
 
